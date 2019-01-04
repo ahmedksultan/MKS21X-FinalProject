@@ -3,7 +3,7 @@ import java.io.*; //file, filenotfoundexception
 
 public class Pokemon{
   private String name, type1, type2;
-  private String attack, speed, defense, hp;
+  private int attack, speed, defense, hp;
   private ArrayList<String> attacks, typeWeakness, typeResistance;
 
   public Pokemon(String name1){
@@ -12,7 +12,10 @@ public class Pokemon{
       if (data[x] == name){
         type1 = data[2];
         type2 = data[3];
-        
+        hp = data[5];
+        attack = data[6].parseInt();
+        defense = data[7].parseInt();
+        speed = data[11].parseInt();
       }
     }
   }

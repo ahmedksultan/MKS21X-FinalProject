@@ -2,20 +2,22 @@ import java.util.*; //scanner, ArrayList, Map
 import java.io.*; //file, filenotfoundexception
 
 public class Pokemon{
+  private String[][] data;
   private String name, type1, type2;
   private int attack, speed, defense, hp;
   private ArrayList<String> attacks, typeWeakness, typeResistance;
 
   public Pokemon(String name1){
     name = name1;
-    for (int x = 0; data[x] < != name; x++){
-      if (data[x] == name){
-        type1 = data[2];
-        type2 = data[3];
-        hp = data[5];
-        attack = data[6].parseInt();
-        defense = data[7].parseInt();
-        speed = data[11].parseInt();
+
+    for (int x = 0; data[x][2] != name; x++){
+      if (data[x][2] == name){
+        type1 = data[x][2];
+        type2 = data[x][3];
+        hp = Integer.parseInt(data[x][5]);
+        attack = Integer.parseInt(data[x][6]);
+        defense = Integer.parseInt(data[x][7]);
+        speed = Integer.parseInt(data[x][11]);
       }
     }
   }
@@ -48,7 +50,7 @@ public class Pokemon{
     return typeWeakness;
   }
 
-  public ArrayList<String> getTypeWeakness(){
-    return typeWeakness;
+  public ArrayList<String> getTypeResistance(){
+    return typeResistance;
   }
 }

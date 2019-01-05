@@ -4,22 +4,16 @@ import java.io.*; //file, filenotfoundexception
 public class Pokemon{
 
   public static void main(String[] args) {
-    Pokemon test = new Pokemon("Zekrom");
-    System.out.println("Defense: " + test.getDefense());
+    Pokemon bulb = new Pokemon("Bulbasaur");
+    Pokemon ivy = new Pokemon("Ivysaur");
 
-    System.out.println();
 
-    Pokemon test1 = new Pokemon("Bulbasaur");
+    System.out.println("Testing Bulbasaur properties");
+    System.out.println(bulb.getHP());
+    System.out.println(bulb.getAttack());
+    System.out.println(bulb.getDefense());
+    System.out.println(bulb.getSpeed());
 
-    System.out.println("HP: " + test.getHP());
-
-    System.out.println();
-
-    Move move = new Move("bubble-gun");
-    System.out.println("Power:" + move.getPower());
-
-    test1.dealDamage(new Move("razor-leaf"), test);
-    System.out.println("HP at End: " + test.getHP());
   }
 
   private String name, type1, type2;
@@ -40,7 +34,7 @@ public class Pokemon{
     hp = Integer.parseInt(data[5]);
     attack = Integer.parseInt(data[6]);
     defense = Integer.parseInt(data[7]);
-    speed = Integer.parseInt(data[11]);
+    speed = Integer.parseInt(data[10]);
   }
 
   private String[] organizeData(String name1){
@@ -105,6 +99,10 @@ public class Pokemon{
   public ArrayList<String> getTypeResistance(){
     return typeResistance;
   }
+
+  public int getSpeed(){
+    return speed;
+  }
   /////////////////////////////////
 
   // Mutator Methods
@@ -152,12 +150,6 @@ public class Pokemon{
     if (mod == 0) mod = 1;
     if (mod == 1) mod = 2;
     if (mod == 2) mod = 4;
-
-
-    System.out.println("test: ");
-    System.out.println(enemy.getHP() - ((42 * move.getPower()) *
-           (attack / enemy.getDefense()+2) // Formula found online -
-           / 50 * mod));
 
     enemy.setHP(enemy.getHP() - ((42 * move.getPower()) *
            (attack / enemy.getDefense()+2) // Formula found online -

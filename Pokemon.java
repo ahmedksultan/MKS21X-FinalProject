@@ -12,7 +12,6 @@ public class Pokemon{
     System.out.println(test.getHP());
   }
 
-  private String[] data;
   private String name, type1, type2;
   private int attack, speed, defense;
   private double hp;
@@ -21,7 +20,8 @@ public class Pokemon{
 
   public Pokemon(String name1){
     name = name1;
-    organizeData(name1);
+
+    String[] data = organizeData(name1);
 
     type1 = data[2];
     type2 = data[3];
@@ -31,21 +31,30 @@ public class Pokemon{
     speed = Integer.parseInt(data[11]);
   }
 
-  private void organizeData(String name1){
+  private String[] organizeData(String name1){
     try{
-      File f = new File("moves.csv");
+
+      File f = new File("Pokemon.csv");
       Scanner in = new Scanner(f);
 
       while (in.hasNext()){
         String line = in.nextLine();
         String[] stats = line.split(",");
 
-        if (stats[1] == name) data = line.split(",");
+        // for (int x = 0; x < stats.length; x++){
+          // System.out.println(stats[1]);
+        // }
+
+        if (stats[1].equals(name)) {
+          return stats;
+        }
       }
     }
     catch (FileNotFoundException e){
       System.out.println("Error");
     }
+
+    throw new Error();
   }
 
   public boolean isDead(){

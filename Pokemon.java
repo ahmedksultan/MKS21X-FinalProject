@@ -2,7 +2,7 @@ import java.util.*; //scanner, ArrayList, Map
 import java.io.*; //file, filenotfoundexception
 
 public class Pokemon{
-  private String[][] data;
+  private String[] data;
   private String name, type1, type2;
   private int attack, speed, defense, hp;
   private ArrayList<Move> attacks;
@@ -10,16 +10,30 @@ public class Pokemon{
 
   public Pokemon(String name1){
     name = name1;
+    organizeData(name1);
 
-    for (int x = 0; data[x][2] != name; x++){
-      if (data[x][2] == name){
-        type1 = data[x][2];
-        type2 = data[x][3];
-        hp = Integer.parseInt(data[x][5]);
-        attack = Integer.parseInt(data[x][6]);
-        defense = Integer.parseInt(data[x][7]);
-        speed = Integer.parseInt(data[x][11]);
+    type1 = data[2];
+    type2 = data[3];
+    hp = Integer.parseInt(data[5]);
+    attack = Integer.parseInt(data[6]);
+    defense = Integer.parseInt(data[7]);
+    speed = Integer.parseInt(data[11]);
+  }
+
+  private void organizeData(String name1){
+    try{
+      File f = new File("moves.csv");
+      Scanner in = new Scanner(f);
+
+      while (in.hasNext()){
+        String line = in.nextLine();
+        String[] stats = line.split(",");
+
+        if (stats[1] == name) data = line.split(",");
       }
+    }
+    catch (FileNotFoundException e){
+      System.out.println("Error");
     }
   }
 

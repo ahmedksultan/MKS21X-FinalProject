@@ -17,7 +17,7 @@ public class Move{
 
   public Move(String moveName){
     try{
-      File f = new File("moves.csv.txt");
+      File f = new File("moves.csv");
       Scanner in = new Scanner(f);
 
       while (in.hasNext()){
@@ -27,6 +27,7 @@ public class Move{
           name = moveName;
           typeID = Integer.parseInt(stats[3]);
           power = Integer.parseInt(stats[4]);
+          break;
         }
       }
     }

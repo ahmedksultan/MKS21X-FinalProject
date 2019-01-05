@@ -128,8 +128,8 @@ public class Pokemon{
 
   ///////////////////////////////
 
-  private int modifier(Move move, Pokemon enemy){
-    int x = 0;
+  private double modifier(Move move, Pokemon enemy){
+    double x = 0;
     for (int i = 0; i < enemy.getTypeWeakness().size(); i++){
       if (enemy.getTypeWeakness().get(i) == move.getType()){
         x++;
@@ -140,19 +140,25 @@ public class Pokemon{
         x--;
       }
     }
+
+    if (x == -2) x = .25;
+    if (x == -1) x = .5;
+    if (x == 0) x = 1;
+    if (x == 1) x = 2;
+    if (x == 2) x = 4;
+
     return x;
   }
 
   public void dealDamage(Move move, Pokemon enemy){
     double mod = modifier(move, enemy);
-    if (mod == -2) mod = .25;
-    if (mod == -1) mod = .5;
-    if (mod == 0) mod = 1;
-    if (mod == 1) mod = 2;
-    if (mod == 2) mod = 4;
 
-    enemy.setHP(enemy.getHP() - ((42 * move.getPower()) *
-           (attack / enemy.getDefense()+2) // Formula found online -
-           / 50 * mod)); // it's the actual formula used to calculate damage )
+    double dmg = ((42 * move.getPower()) *
+           (attack / enemy.getDefense()+2) // Formula found online - it's the actual formula used to calculate damage )
+           / 50 * mod);
+
+    System.out.println("Attack was" + dmg + "x effective. " + enemy + "took " + dmg + "damage!");
+
+    enemy.setHP(enemy.getHP() - dmg);
   }
 }

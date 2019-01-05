@@ -10,6 +10,10 @@ public class move{
 
   private String name, type;
   private int power, typeID;
+  private String[] types =
+  {"normal", "fighting", "flying", "poison", "ground",
+   "rock", "bug", "ghost", "steel", "fire", "water",    //Have to convert this way
+   "grass", "electric", "psychic", "ice"};     //Because CSV file gives IDs for types, not names
 
   public move(String moveName){
     try{
@@ -32,5 +36,15 @@ public class move{
     }
   }
 
-  // public String getPower
+  // Accessor Methods////////////////////
+  public int getPower(){
+    return power;
+  }
+
+  public String getType(){
+    if (typeID < 0 || typeID > 15) return "Special";
+    else {
+      return types[typeID - 1];
+    }
+  }
 }

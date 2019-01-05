@@ -61,7 +61,7 @@ public class Pokemon{
   }
   /////////////////////////////////
 
-  private int modifier(String move){
+  private int modifier(Move move){
     int x = 0;
     for (int i = 0; i < typeWeakness.size(); i++){
       if (typeWeakness.get(i) == move.getType()){
@@ -75,7 +75,7 @@ public class Pokemon{
     }
   }
 
-  public int dealDamage(String attackname, String move, Pokemon enemy){
+  public int dealDamage(String attackname, Move move, Pokemon enemy){
     double mod = modifier(move);
     if (mod == -2) mod = .25;
     if (mod == -1) mod = .5;

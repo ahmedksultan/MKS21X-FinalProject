@@ -1,10 +1,10 @@
 import java.util.Scanner;
 import java.io.*; //file, filenotfoundexception
 
-public class move{
+public class Move{
 
   public static void main(String[] args) {
-    move test = new move("pound");
+    Move test = new Move("pound");
     System.out.println(test);
   }
 
@@ -15,7 +15,7 @@ public class move{
    "rock", "bug", "ghost", "steel", "fire", "water",    //Have to convert this way
    "grass", "electric", "psychic", "ice"};     //Because CSV file gives IDs for types, not names
 
-  public move(String moveName){
+  public Move(String moveName){
     try{
       File f = new File("moves.csv.txt");
       Scanner in = new Scanner(f);

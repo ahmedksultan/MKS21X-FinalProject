@@ -5,7 +5,6 @@ public class Move{
 
   public static void main(String[] args) {
     Move test = new Move("pound");
-    System.out.println(test);
   }
 
   private String name, type;
@@ -23,7 +22,8 @@ public class Move{
       while (in.hasNext()){
         String line = in.nextLine();
         String[] stats = line.split(",");
-        if (stats[1] == moveName){
+
+        if (stats[1].equals(moveName)){
           name = moveName;
           typeID = Integer.parseInt(stats[3]);
           power = Integer.parseInt(stats[4]);
@@ -45,7 +45,7 @@ public class Move{
   public String getType(){
     if (typeID < 0 || typeID > 15) return "Special";
     else {
-      return types[typeID - 1];
+      return types[typeID];
     }
   }
 }

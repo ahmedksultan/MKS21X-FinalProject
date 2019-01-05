@@ -4,12 +4,22 @@ import java.io.*; //file, filenotfoundexception
 public class Pokemon{
 
   public static void main(String[] args) {
-    Pokemon test = new Pokemon("Charmander");
-    System.out.println(test.getDefense());
+    Pokemon test = new Pokemon("Zekrom");
+    System.out.println("Defense: " + test.getDefense());
+
+    System.out.println();
+
     Pokemon test1 = new Pokemon("Bulbasaur");
-    Move water = new Move("water-gun");
-    test1.dealDamage(water, test);
-    System.out.println(test.getHP());
+
+    System.out.println("HP: " + test.getHP());
+
+    System.out.println();
+
+    Move move = new Move("bubble-gun");
+    System.out.println("Power:" + move.getPower());
+
+    test1.dealDamage(new Move("razor-leaf"), test);
+    System.out.println("HP at End: " + test.getHP());
   }
 
   private String name, type1, type2;
@@ -21,6 +31,8 @@ public class Pokemon{
   public Pokemon(String name1){
     name = name1;
 
+    setWeaknesses();
+    setResistances();
     String[] data = organizeData(name1);
 
     type1 = data[2];
@@ -95,9 +107,28 @@ public class Pokemon{
   }
   /////////////////////////////////
 
+  // Mutator Methods
+
   private void setHP(double num){
     hp -= num;
   }
+
+  private void setWeaknesses(){
+    typeWeakness = new ArrayList<String>(10);
+
+    // if (type1.equals("fire") || type2.equals("fire")){    // DUMMY VALUES - REPLACE WITH ACTUAL VALUES
+      typeWeakness.add("water");
+    // }
+  }
+
+  private void setResistances(){
+    typeResistance = new ArrayList<String>(10);
+    // if (type1.equals("fire") || type2.equals("fire")){  // DUMMY VALUES - REPLACE WITH ACTUAL VALUES
+      typeResistance.add("grass");
+    // }
+  }
+
+  ///////////////////////////////
 
   private int modifier(Move move, Pokemon enemy){
     int x = 0;
@@ -121,6 +152,12 @@ public class Pokemon{
     if (mod == 0) mod = 1;
     if (mod == 1) mod = 2;
     if (mod == 2) mod = 4;
+
+
+    System.out.println("test: ");
+    System.out.println(enemy.getHP() - ((42 * move.getPower()) *
+           (attack / enemy.getDefense()+2) // Formula found online -
+           / 50 * mod));
 
     enemy.setHP(enemy.getHP() - ((42 * move.getPower()) *
            (attack / enemy.getDefense()+2) // Formula found online -

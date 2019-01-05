@@ -5,7 +5,7 @@ public class Pokemon{
   private String[][] data;
   private String name, type1, type2;
   private int attack, speed, defense, hp;
-  private ArrayList<move> attacks;
+  private ArrayList<Move> attacks;
   private ArrayList<String> typeWeakness, typeResistance;
 
   public Pokemon(String name1){
@@ -48,7 +48,7 @@ public class Pokemon{
     return defense;
   }
 
-  public ArrayList<String> getAttacks(){
+  public ArrayList<Move> getAttacks(){
     return attacks;
   }
 
@@ -61,22 +61,23 @@ public class Pokemon{
   }
   /////////////////////////////////
 
-  private int modifier(Move move){
+  private int modifier(Move move, Pokemon enemy){
     int x = 0;
-    for (int i = 0; i < typeWeakness.size(); i++){
-      if (typeWeakness.get(i) == move.getType()){
+    for (int i = 0; i < enemy.getTypeWeakness().size(); i++){
+      if (enemy.getTypeWeakness().get(i) == move.getType()){
         x++;
       }
     }
-    for (int i = 0; i < typeResistance.size(); i++){
-      if (typeResistance.get(i) == move.getType()){
+    for (int i = 0; i < enemy.getTypeResistance().size(); i++){
+      if (enemy.getTypeResistance().get(i) == move.getType()){
         x--;
       }
     }
+    return x;
   }
 
-  public int dealDamage(String attackname, Move move, Pokemon enemy){
-    double mod = modifier(move);
+  public double dealDamage(String attackname, Move move, Pokemon enemy){
+    double mod = modifier(move, enemy);
     if (mod == -2) mod = .25;
     if (mod == -1) mod = .5;
     if (mod == 0) mod = 1;
@@ -88,7 +89,7 @@ public class Pokemon{
            / 50 * mod);
   }
 
-  public void takeDamage(String attackname, String move, Pokemon enemy){
+  public void takeDamage(String attackname, Move move, Pokemon enemy){
     hp -= dealDamage(attackname, move, enemy);
   }
 }

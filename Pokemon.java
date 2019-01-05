@@ -21,7 +21,7 @@ public class Pokemon{
       }
     }
   }
-  //Accessor Methods
+  //Accessor Methods///////////////////
   public String getType1(){
     return type1;
   }
@@ -42,20 +42,6 @@ public class Pokemon{
     return defense;
   }
 
-  private int modifier(String move){
-    int x = 0;
-    for (int i = 0; i < typeWeakness; i++){
-      if (typeWeakness.get(i) == move.getType()){
-        x++;
-      }
-    }
-    for (int i = 0; i < typeResistance; i++){
-      if (typeResistance.get(i) == move.getType()){
-        x--;
-      }
-    }
-  }
-
   public ArrayList<String> getAttacks(){
     return attacks;
   }
@@ -67,8 +53,23 @@ public class Pokemon{
   public ArrayList<String> getTypeResistance(){
     return typeResistance;
   }
+  /////////////////////////////////
 
-  public int dealDamage(String attackname, String move, String enemy){
+  private int modifier(String move){
+    int x = 0;
+    for (int i = 0; i < typeWeakness.size(); i++){
+      if (typeWeakness.get(i) == move.getType()){
+        x++;
+      }
+    }
+    for (int i = 0; i < typeResistance.size(); i++){
+      if (typeResistance.get(i) == move.getType()){
+        x--;
+      }
+    }
+  }
+
+  public int dealDamage(String attackname, String move, Pokemon enemy){
     double mod = modifier(move);
     if (mod == -2) mod = .25;
     if (mod == -1) mod = .5;
@@ -76,8 +77,12 @@ public class Pokemon{
     if (mod == 1) mod = 2;
     if (mod == 2) mod = 4;
 
-    return (((42 * data.getPower(move) *
-           (attack / enemy.getDefense())+2)
+    return ((42 * move.getPower()) * // For when move class is implemented
+           (attack / enemy.getDefense()+2)
            / 50 * mod);
+  }
+
+  public void takeDamage(String attackname, String move, Pokemon enemy){
+    hp -= dealDamage(attackname, move, enemy);
   }
 }

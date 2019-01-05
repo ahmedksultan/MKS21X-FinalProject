@@ -84,12 +84,12 @@ public class Pokemon{
     if (mod == 1) mod = 2;
     if (mod == 2) mod = 4;
 
-    return ((42 * move.getPower()) * // For when move class is implemented
-           (attack / enemy.getDefense()+2)
-           / 50 * mod);
+    return ((42 * move.getPower()) *
+           (attack / enemy.getDefense()+2) // Formula found online -
+           / 50 * mod); // it's the actual formula used to calculate damage
   }
 
-  public void takeDamage(String attackname, Move move, Pokemon enemy){
+  public void takeDamage(String attackname, Move move, Pokemon enemy){ // The enemy will take da
     hp -= dealDamage(attackname, move, enemy);
   }
 }

@@ -2,9 +2,20 @@ import java.util.*; //scanner, ArrayList, Map
 import java.io.*; //file, filenotfoundexception
 
 public class Pokemon{
+
+  public static void main(String[] args) {
+    Pokemon test = new Pokemon("Charmander");
+    System.out.println(test.getDefense());
+    Pokemon test1 = new Pokemon("Bulbasaur");
+    Move water = new Move("water-gun");
+    test1.dealDamage(water, test);
+    System.out.println(test.getHP());
+  }
+
   private String[][] data;
   private String name, type1, type2;
-  private int attack, speed, defense, hp;
+  private int attack, speed, defense;
+  private double hp;
   private ArrayList<Move> attacks;
   private ArrayList<String> typeWeakness, typeResistance;
 
@@ -36,7 +47,7 @@ public class Pokemon{
     return type2;
   }
 
-  public int getHP(){
+  public double getHP(){
     return hp;
   }
 
@@ -61,6 +72,10 @@ public class Pokemon{
   }
   /////////////////////////////////
 
+  private void setHP(double num){
+    hp -= num;
+  }
+
   private int modifier(Move move, Pokemon enemy){
     int x = 0;
     for (int i = 0; i < enemy.getTypeWeakness().size(); i++){
@@ -76,7 +91,7 @@ public class Pokemon{
     return x;
   }
 
-  public double dealDamage(String attackname, Move move, Pokemon enemy){
+  public void dealDamage(Move move, Pokemon enemy){
     double mod = modifier(move, enemy);
     if (mod == -2) mod = .25;
     if (mod == -1) mod = .5;
@@ -84,12 +99,8 @@ public class Pokemon{
     if (mod == 1) mod = 2;
     if (mod == 2) mod = 4;
 
-    return ((42 * move.getPower()) *
+    enemy.setHP(enemy.getHP() - ((42 * move.getPower()) *
            (attack / enemy.getDefense()+2) // Formula found online -
-           / 50 * mod); // it's the actual formula used to calculate damage
-  }
-
-  public void takeDamage(String attackname, Move move, Pokemon enemy){ // The enemy will take da
-    hp -= dealDamage(attackname, move, enemy);
+           / 50 * mod)); // it's the actual formula used to calculate damage )
   }
 }

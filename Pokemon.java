@@ -14,6 +14,14 @@ public class Pokemon{
     System.out.println(bulb.getDefense());
     System.out.println(bulb.getSpeed());
 
+    Move razor = new Move("razor-leaf");
+
+    // while (!bulb.isDead() || !ivy.isDead()){
+      // bulb.attack(ivy, razor);
+      // ivy.attack(bulb, razor);
+      // ig
+    // }
+
   }
 
   private String name, type1, type2;
@@ -150,7 +158,7 @@ public class Pokemon{
     return x;
   }
 
-  public void dealDamage(Move move, Pokemon enemy){
+  public void attack(Pokemon enemy, Move move){
     double mod = modifier(move, enemy);
 
     double dmg = ((42 * move.getPower()) *

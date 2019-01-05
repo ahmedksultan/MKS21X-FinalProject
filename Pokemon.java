@@ -5,7 +5,8 @@ public class Pokemon{
   private String[][] data;
   private String name, type1, type2;
   private int attack, speed, defense, hp;
-  private ArrayList<String> attacks, typeWeakness, typeResistance;
+  private ArrayList<move> attacks;
+  private ArrayList<String> typeWeakness, typeResistance;
 
   public Pokemon(String name1){
     name = name1;
@@ -21,6 +22,11 @@ public class Pokemon{
       }
     }
   }
+
+  public boolean isDead(){
+    return hp <= 0;
+  }
+
   //Accessor Methods///////////////////
   public String getType1(){
     return type1;

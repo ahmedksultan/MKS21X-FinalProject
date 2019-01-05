@@ -92,36 +92,4 @@ public class Pokemon{
   public void takeDamage(String attackname, Move move, Pokemon enemy){ // The enemy will take da
     hp -= dealDamage(attackname, move, enemy);
   }
-  //Accessor Methods
-  public String getType1(){
-    return type1;
-  }
-
-  public String getType2(){
-    return type2;
-  }
-
-  public int getHP(){
-    return hp;
-  }
-
-  public int getAttack(){
-    return attack;
-  }
-
-  public int getDefense(){
-    return defense;
-  }
-
-  public ArrayList<String> getAttacks(){
-    return attacks;
-  }
-
-  public ArrayList<String> getTypeWeakness(){
-    return typeWeakness;
-  }
-
-  public ArrayList<String> getTypeResistance(){
-    return typeResistance;
-  }
 }

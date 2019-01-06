@@ -48,4 +48,8 @@ public class Move{
       return types[typeID];
     }
   }
+
+  public int gettypeID(){
+    return typeID;
+  }
 }

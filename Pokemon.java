@@ -9,6 +9,9 @@ public class Pokemon{
     Pokemon zekrom = new Pokemon("zekrom");
 
 
+    System.out.println(bulb.getTypeWeakness());
+    System.out.println();
+
     System.out.println("Testing Bulbasaur properties");
     System.out.println(bulb.getHP());
     System.out.println(bulb.getAttack());
@@ -147,11 +150,11 @@ public class Pokemon{
     typeWeakness = new ArrayList<String>(10);
     typeResistance = new ArrayList<String>(10);
     try{
-      File f = new File("type_efficacy.csv.txt");
+      File f = new File("type_efficacy");
       Scanner in = new Scanner(f);
-
+      String line = in.nextLine(); // To skip the first row that just has labels
       while (in.hasNext()){
-        String line = in.nextLine();
+        line = in.nextLine();
         String[] stats = line.split(",");
 
         if (typeID1 == Integer.parseInt(stats[1])) {

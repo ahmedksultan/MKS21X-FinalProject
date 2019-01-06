@@ -49,7 +49,7 @@ public class Move{
     }
   }
 
-  public int gettypeID(){
+  public int getTypeID(){
     return typeID;
   }
 }

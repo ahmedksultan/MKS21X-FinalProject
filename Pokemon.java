@@ -7,6 +7,7 @@ public class Pokemon {
     Pokemon bulb = new Pokemon("Bulbasaur");
     Pokemon ivy = new Pokemon("Ivysaur");
 
+/*
     System.out.println("Testing Bulbasaur properties");
     System.out.println(bulb.getHP());
     System.out.println(bulb.getAttack());
@@ -16,13 +17,12 @@ public class Pokemon {
     System.out.println(bulb.getTypeID1());
     System.out.println(bulb.getType2());
     System.out.println(bulb.getTypeID2());
-
     System.out.println(ivy.getTypeWeakness());
     System.out.println(ivy.getTypeResistance());
-
+*/
     System.out.println();
     System.out.println(ivy.getHP());
-    bulb.attack(ivy, "razor-leaf");
+    bulb.attack(ivy, "absorb");
     System.out.println(ivy.getHP());
   }
 
@@ -192,30 +192,53 @@ public class Pokemon {
         }
       }
 
+      removeRepeats();
+
+    }
+
+    private void removeRepeats(){
+      int count = 0;
+      for (int x = 0; x < typeResistance.size(); x++){
+        if (typeWeakness.contains(typeResistance.get(x))){
+          typeWeakness.remove(typeResistance.get(x));
+          typeResistance.remove(x);
+        }
+      }
     }
 
   ///////////////////////////////
 
   private double modifier(Move move, Pokemon enemy){
     double x = 0;
-    for (int i = 0; i < enemy.getTypeWeakness().size(); i++){
-      if (enemy.getTypeWeakness().get(i).equals(move.getType())){
-        x++;
+
+    int typeID = move.getTypeID();
+
+    if (typeWeakness.contains(typeID + "")){
+      int count = 0;
+      for (int i = 0; i < typeWeakness.size(); i++){
+        if (Integer.parseInt(typeWeakness.get(i)) == typeID){
+          count++;
+        }
       }
-    }
-    for (int i = 0; i < enemy.getTypeResistance().size(); i++){
-      if (enemy.getTypeResistance().get(i).equals(move.getType())){
-        x--;
-      }
+      x = count;
+      return x;
     }
 
-    if (x == -2) x = .25;
-    if (x == -1) x = .5;
-    if (x == 0) x = 1;
-    if (x == 1) x = 2;
-    if (x == 2) x = 4;
+    else if (typeResistance.contains(typeID + "")){
+      int count = 0;
+      for (int i = 0; i < typeResistance.size(); i++){
+        if (Integer.parseInt(typeResistance.get(i)) == typeID){
+          count++;
+        }
+      }
+      if (count == 2) x = .25;
+      if (count == 1) x = .5;
+      return x;
+    }
 
-    return x;
+    else{
+      return 1;
+    }
   }
 
   public void attack(Pokemon enemy, String move1){
@@ -228,7 +251,7 @@ public class Pokemon {
 
     System.out.println("Attack was " + mod + "x effective. " + enemy.getName() + " took " + dmg + " damage!");
 
-    if (enemy.getHP() - dmg > 0) setHP(enemy.getHP() - dmg);
+    if (enemy.getHP() - dmg > 0) enemy.setHP(enemy.getHP() - dmg);
     else enemy.setHP(0);
   }
 }

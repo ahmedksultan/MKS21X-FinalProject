@@ -1,12 +1,11 @@
 import java.util.*; //scanner, ArrayList, Map
 import java.io.*; //file, filenotfoundexception
 
-public class Pokemon{
+public class Pokemon {
 
   public static void main(String[] args) {
     Pokemon bulb = new Pokemon("Bulbasaur");
     Pokemon ivy = new Pokemon("Ivysaur");
-
 
     System.out.println("Testing Bulbasaur properties");
     System.out.println(bulb.getHP());
@@ -15,7 +14,6 @@ public class Pokemon{
     System.out.println(bulb.getSpeed());
     System.out.println(bulb.getType1());
     System.out.println(bulb.getType2());
-
 
     System.out.println(ivy.getTypeWeakness());
 

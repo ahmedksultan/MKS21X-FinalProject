@@ -12,7 +12,7 @@ public class Move{
   private String[] types =
   {"normal", "fighting", "flying", "poison", "ground",
    "rock", "bug", "ghost", "steel", "fire", "water",    //Have to convert this way
-   "grass", "electric", "psychic", "ice"};     //Because CSV file gives IDs for types, not names
+   "grass", "electric", "psychic", "ice", "dragon", "dark", "fairy"};     //Because CSV file gives IDs for types, not names
 
   public Move(String moveName){
     try{

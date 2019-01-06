@@ -6,6 +6,7 @@ public class Pokemon{
   public static void main(String[] args) {
     Pokemon bulb = new Pokemon("Bulbasaur");
     Pokemon ivy = new Pokemon("Ivysaur");
+    Pokemon zekrom = new Pokemon("zekrom");
 
 
     System.out.println("Testing Bulbasaur properties");
@@ -18,24 +19,42 @@ public class Pokemon{
 
     bulb.attack(ivy, razor);
     System.out.println(bulb.getHP());
+    bulb.attack(ivy, razor);
+    System.out.println(bulb.getHP());
 
+    bulb.attack(zekrom, razor);
+    System.out.println(zekrom.getHP());
+    System.out.println();
+
+    bulb.attack(zekrom, razor);
+    System.out.println(zekrom.getHP());
+    System.out.println();
   }
 
   private String name, type1, type2;
-  private int attack, speed, defense;
+  private int attack, speed, defense, typeID1, typeID2;
   private double hp;
   private ArrayList<Move> attacks;
   private ArrayList<String> typeWeakness, typeResistance;
+  private String[] types =
+  {"normal", "fighting", "flying", "poison", "ground",
+   "rock", "bug", "ghost", "steel", "fire", "water",    //Have to convert this way
+   "grass", "electric", "psychic", "ice", "dragon", "dark", "fairy"};
 
   public Pokemon(String name1){
     name = name1;
 
-    setWeaknesses();
-    setResistances();
+    setWeakandRes();
     String[] data = organizeData(name1);
 
     type1 = data[2];
     type2 = data[3];
+
+    for (int x = 0; x < types.length; x++){
+      if (types[x] == type1) typeID1 = x+1;
+      if (types[x] == type2) typeID2 = x+1;
+    }
+
     hp = Integer.parseInt(data[5]);
     attack = Integer.parseInt(data[6]);
     defense = Integer.parseInt(data[7]);
@@ -120,20 +139,22 @@ public class Pokemon{
     hp -= num;
   }
 
-  private void setWeaknesses(){
+  private void setWeakandRes(){
     typeWeakness = new ArrayList<String>(10);
-
-    // if (type1.equals("fire") || type2.equals("fire")){    // DUMMY VALUES - REPLACE WITH ACTUAL VALUES
-      typeWeakness.add("water");
-    // }
-  }
-
-  private void setResistances(){
     typeResistance = new ArrayList<String>(10);
-    // if (type1.equals("fire") || type2.equals("fire")){  // DUMMY VALUES - REPLACE WITH ACTUAL VALUES
-      typeResistance.add("grass");
-    // }
+    try{
+      File f = new File("type_efficacy.csv.txt");
+      Scanner in = new Scanner(f);
+
+      while (in.hasNext()){
+        String line = in.nextLine();
+        String[] stats = line.split(",");
+    }
   }
+    catch(FileNotFoundException e){
+
+    }
+    }
 
   ///////////////////////////////
 

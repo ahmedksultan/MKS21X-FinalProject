@@ -10,9 +10,9 @@ public class Move{
   private String name, type;
   private int power, typeID;
   private String[] types =
-  {"normal", "fighting", "flying", "poison", "ground",
-   "rock", "bug", "ghost", "steel", "fire", "water",    //Have to convert this way
-   "grass", "electric", "psychic", "ice", "dragon", "dark", "fairy"};     //Because CSV file gives IDs for types, not names
+  {"Normal", "Fighting", "Flying", "Poison", "Ground",
+   "Rock", "Bug", "Ghost", "Steel", "Fire", "Water",    //Have to convert this way
+   "Grass", "Electric", "Psychic", "Ice", "Dragon", "Dark", "Fairy"};     //Because CSV file gives IDs for types, not names
 
   public Move(String moveName){
     try{

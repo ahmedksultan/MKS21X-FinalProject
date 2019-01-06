@@ -13,6 +13,11 @@ public class Pokemon{
     System.out.println(bulb.getAttack());
     System.out.println(bulb.getDefense());
     System.out.println(bulb.getSpeed());
+    System.out.println(bulb.getType1());
+    System.out.println(bulb.getType2());
+
+
+    System.out.println(ivy.getTypeWeakness());
 
     System.out.println();
     System.out.println(ivy.getHP());
@@ -26,23 +31,24 @@ public class Pokemon{
   private ArrayList<Move> attacks;
   private ArrayList<String> typeWeakness, typeResistance;
   private String[] types =
-  {"normal", "fighting", "flying", "poison", "ground",
-   "rock", "bug", "ghost", "steel", "fire", "water",    //Have to convert this way
-   "grass", "electric", "psychic", "ice", "dragon", "dark", "fairy"};
+  {"Normal", "Fighting", "Flying", "Poison", "Ground",
+   "Rock", "Bug", "Ghost", "Steel", "Fire", "Water",    //Have to convert this way
+   "Grass", "Electric", "Psychic", "Ice", "Dragon", "Dark", "Fairy"};
 
   public Pokemon(String name1){
     name = name1;
 
-    setWeakandRes();
     String[] data = organizeData(name1);
 
     type1 = data[2];
     type2 = data[3];
 
     for (int x = 0; x < types.length; x++){
-      if (types[x] == type1) typeID1 = x+1;
-      if (types[x] == type2) typeID2 = x+1;
+      if (types[x].equals(type1)) typeID1 = x+1;
+      if (types[x].equals(type2)) typeID2 = x+1;
     }
+
+    setWeakandRes();
 
     hp = Integer.parseInt(data[5]);
     attack = Integer.parseInt(data[6]);
@@ -120,6 +126,15 @@ public class Pokemon{
   public int getSpeed(){
     return speed;
   }
+
+  public int getTypeID1(){
+    return typeID1;
+  }
+
+  public int getTypeID2(){
+    return typeID2;
+  }
+
   /////////////////////////////////
 
   // Mutator Methods
@@ -180,12 +195,12 @@ public class Pokemon{
   private double modifier(Move move, Pokemon enemy){
     double x = 0;
     for (int i = 0; i < enemy.getTypeWeakness().size(); i++){
-      if (enemy.getTypeWeakness().get(i) == move.getType()){
+      if (enemy.getTypeWeakness().get(i).equals(move.getType())){
         x++;
       }
     }
     for (int i = 0; i < enemy.getTypeResistance().size(); i++){
-      if (enemy.getTypeResistance().get(i) == move.getType()){
+      if (enemy.getTypeResistance().get(i).equals(move.getType())){
         x--;
       }
     }

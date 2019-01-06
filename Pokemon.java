@@ -14,10 +14,13 @@ public class Pokemon{
     System.out.println(bulb.getDefense());
     System.out.println(bulb.getSpeed());
     System.out.println(bulb.getType1());
+    System.out.println(bulb.getTypeID1());
     System.out.println(bulb.getType2());
+    System.out.println(bulb.getTypeID2());
 
 
     System.out.println(ivy.getTypeWeakness());
+    System.out.println(ivy.getTypeResistance());
 
     System.out.println();
     System.out.println(ivy.getHP());
@@ -150,29 +153,32 @@ public class Pokemon{
   private void setWeakandRes(){
     typeWeakness = new ArrayList<String>(10);
     typeResistance = new ArrayList<String>(10);
+
     try{
       File f = new File("type_efficacy");
       Scanner in = new Scanner(f);
       String line = in.nextLine(); // To skip the first row that just has labels
+
       while (in.hasNext()){
         line = in.nextLine();
         String[] stats = line.split(",");
 
-        if (typeID1 == Integer.parseInt(stats[1])) {
-          if (Integer.parseInt(stats[2]) == 200){
-            typeWeakness.add(types[Integer.parseInt(stats[1]) - 1]);
-          }
-          else if (Integer.parseInt(stats[2]) == 50) {
-            typeResistance.add(types[Integer.parseInt(stats[1]) - 1]);
-          }                                                                 // CAN BE CUT DOWN SIGNIFICANTLY BY USING HELPER FXN
 
-          if (typeID2 == Integer.parseInt(stats[1])) {
-            if (Integer.parseInt(stats[2]) == 200){
-              typeWeakness.add(types[Integer.parseInt(stats[1]) - 1]);
-            }
-            else if (Integer.parseInt(stats[2]) == 50) {
-              typeResistance.add(types[Integer.parseInt(stats[1]) - 1]);
-            }
+        if (typeID1 == Integer.parseInt(stats[1])){
+          if (Integer.parseInt(stats[2]) == 200){
+            typeWeakness.add(stats[0]);
+          }
+          if (Integer.parseInt(stats[2]) == 50){
+            typeResistance.add(stats[0]);
+          }
+        }
+
+        if (typeID2 == Integer.parseInt(stats[1])){
+          if (Integer.parseInt(stats[2]) == 200){
+            typeWeakness.add(stats[0]);
+          }
+          if (Integer.parseInt(stats[2]) == 50){
+            typeResistance.add(stats[0]);
           }
         }
       }

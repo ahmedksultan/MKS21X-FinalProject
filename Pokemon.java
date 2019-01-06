@@ -18,25 +18,32 @@ public class Pokemon{
     System.out.println(ivy.getHP());
     bulb.attack(ivy, "razor-leaf");
     System.out.println(ivy.getHP());
-
-
   }
 
   private String name, type1, type2;
-  private int attack, speed, defense;
+  private int attack, speed, defense, typeID1, typeID2;
   private double hp;
   private ArrayList<Move> attacks;
   private ArrayList<String> typeWeakness, typeResistance;
+  private String[] types =
+  {"normal", "fighting", "flying", "poison", "ground",
+   "rock", "bug", "ghost", "steel", "fire", "water",    //Have to convert this way
+   "grass", "electric", "psychic", "ice", "dragon", "dark", "fairy"};
 
   public Pokemon(String name1){
     name = name1;
 
-    setWeaknesses();
-    setResistances();
+    setWeakandRes();
     String[] data = organizeData(name1);
 
     type1 = data[2];
     type2 = data[3];
+
+    for (int x = 0; x < types.length; x++){
+      if (types[x] == type1) typeID1 = x+1;
+      if (types[x] == type2) typeID2 = x+1;
+    }
+
     hp = Integer.parseInt(data[5]);
     attack = Integer.parseInt(data[6]);
     defense = Integer.parseInt(data[7]);
@@ -74,6 +81,10 @@ public class Pokemon{
   }
 
   //Accessor Methods///////////////////
+  public String getName(){
+    return name;
+  }
+
   public String getType1(){
     return type1;
   }
@@ -114,23 +125,55 @@ public class Pokemon{
   // Mutator Methods
 
   private void setHP(double num){
-    hp -= num;
+    hp = num;
   }
 
-  private void setWeaknesses(){
+  private void checkFile(int ID){
+
+  }
+
+  private void setWeakandRes(){
     typeWeakness = new ArrayList<String>(10);
-
-    // if (type1.equals("fire") || type2.equals("fire")){    // DUMMY VALUES - REPLACE WITH ACTUAL VALUES
-      typeWeakness.add("water");
-    // }
-  }
-
-  private void setResistances(){
     typeResistance = new ArrayList<String>(10);
-    // if (type1.equals("fire") || type2.equals("fire")){  // DUMMY VALUES - REPLACE WITH ACTUAL VALUES
-      typeResistance.add("grass");
-    // }
-  }
+    try{
+      File f = new File("type_efficacy");
+      Scanner in = new Scanner(f);
+      String line = in.nextLine(); // To skip the first row that just has labels
+      while (in.hasNext()){
+        line = in.nextLine();
+        String[] stats = line.split(",");
+
+        if (typeID1 == Integer.parseInt(stats[1])) {
+          if (Integer.parseInt(stats[2]) == 200){
+            typeWeakness.add(types[Integer.parseInt(stats[1]) - 1]);
+          }
+          else if (Integer.parseInt(stats[2]) == 50) {
+            typeResistance.add(types[Integer.parseInt(stats[1]) - 1]);
+          }                                                                 // CAN BE CUT DOWN SIGNIFICANTLY BY USING HELPER FXN
+
+          if (typeID2 == Integer.parseInt(stats[1])) {
+            if (Integer.parseInt(stats[2]) == 200){
+              typeWeakness.add(types[Integer.parseInt(stats[1]) - 1]);
+            }
+            else if (Integer.parseInt(stats[2]) == 50) {
+              typeResistance.add(types[Integer.parseInt(stats[1]) - 1]);
+            }
+          }
+        }
+      }
+    }
+      catch(FileNotFoundException e){
+        System.out.println("error");
+      }
+
+      for (int x = 0; x < typeWeakness.size() && x < typeResistance.size(); x++){
+        if (typeResistance.contains(typeWeakness.get(x))){
+          typeResistance.remove(typeWeakness.get(x));
+          typeWeakness.remove(x);
+        }
+      }
+
+    }
 
   ///////////////////////////////
 
@@ -164,8 +207,9 @@ public class Pokemon{
            (attack / enemy.getDefense()+2) // Formula found online - it's the actual formula used to calculate damage )
            / 50 * mod);
 
-    System.out.println("Attack was " + mod + "x effective. " + enemy + "took " + dmg + "damage!");
+    System.out.println("Attack was " + mod + "x effective. " + enemy.getName() + " took " + dmg + " damage!");
 
-    enemy.setHP(enemy.getHP() - dmg);
+    if (enemy.getHP() - dmg > 0) setHP(enemy.getHP() - dmg);
+    else enemy.setHP(0);
   }
 }

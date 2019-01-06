@@ -139,6 +139,10 @@ public class Pokemon{
     hp -= num;
   }
 
+  private void checkFile(int ID){
+
+  }
+
   private void setWeakandRes(){
     typeWeakness = new ArrayList<String>(10);
     typeResistance = new ArrayList<String>(10);
@@ -149,11 +153,37 @@ public class Pokemon{
       while (in.hasNext()){
         String line = in.nextLine();
         String[] stats = line.split(",");
-    }
-  }
-    catch(FileNotFoundException e){
 
+        if (typeID1 == Integer.parseInt(stats[1])) {
+          if (Integer.parseInt(stats[2]) == 200){
+            typeWeakness.add(types[Integer.parseInt(stats[1]) - 1]);
+          }
+          else if (Integer.parseInt(stats[2]) == 50) {
+            typeResistance.add(types[Integer.parseInt(stats[1]) - 1]);
+          }                                                                 // CAN BE CUT DOWN SIGNIFICANTLY BY USING HELPER FXN
+
+          if (typeID2 == Integer.parseInt(stats[1])) {
+            if (Integer.parseInt(stats[2]) == 200){
+              typeWeakness.add(types[Integer.parseInt(stats[1]) - 1]);
+            }
+            else if (Integer.parseInt(stats[2]) == 50) {
+              typeResistance.add(types[Integer.parseInt(stats[1]) - 1]);
+            }
+          }
+        }
+      }
     }
+      catch(FileNotFoundException e){
+        System.out.println("error");
+      }
+
+      for (int x = 0; x < typeWeakness.size() && x < typeResistance.size(); x++){
+        if (typeResistance.contains(typeWeakness.get(x))){
+          typeResistance.remove(typeWeakness.get(x));
+          typeWeakness.remove(x);
+        }
+      }
+
     }
 
   ///////////////////////////////

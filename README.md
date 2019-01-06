@@ -24,4 +24,4 @@ Added corresponding accessor methods for aforementioned properties.
 
 Edited the modifier calculator so that it would calculate damage based on the move, rather than the opponent.
 
-Now that the move class was created, We added a type_efficacy csv file so that the damageCalcutor could be calculated based on the effectivety of the move type against the type of the opponent. Also got rid of the takeDamage function and simply encompassed it within the previously named dealDamage function, and renamed it attack.
+Added a type_efficacy .csv file so that the damageCalculator could be calculated based on the effectiveness of the move type against the type of the opponent. Also got rid of the takeDamage function and simply encompassed it within the previously named dealDamage function, and renamed it attack.

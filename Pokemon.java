@@ -16,11 +16,8 @@ public class Pokemon{
 
     Move razor = new Move("razor-leaf");
 
-    // while (!bulb.isDead() || !ivy.isDead()){
-      // bulb.attack(ivy, razor);
-      // ivy.attack(bulb, razor);
-      // ig
-    // }
+    bulb.attack(ivy, razor);
+    System.out.println(bulb.getHP());
 
   }
 
@@ -76,6 +73,10 @@ public class Pokemon{
   }
 
   //Accessor Methods///////////////////
+  public String getName(){
+    return name;
+  }
+
   public String getType1(){
     return type1;
   }
@@ -165,7 +166,7 @@ public class Pokemon{
            (attack / enemy.getDefense()+2) // Formula found online - it's the actual formula used to calculate damage )
            / 50 * mod);
 
-    System.out.println("Attack was" + dmg + "x effective. " + enemy + "took " + dmg + "damage!");
+    System.out.println("Attack was " + mod + "x effective. " + enemy.getName() + " took " + dmg + " damage!");
 
     enemy.setHP(enemy.getHP() - dmg);
   }

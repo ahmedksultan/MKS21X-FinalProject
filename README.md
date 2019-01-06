@@ -14,3 +14,12 @@ Also added a moves.csv to be used in calculating damage.
 Added a takeDamage function to work in tandem with the dealDamage function.
 
 Added another helper function to check if a Pokemon has fainted (hp < 0)
+
+Jan 5, 2019-
+Added move class in order to more efficiently manage Pokemon attacks. Began by working on the move constructor. Made it so that it effectively assigns values of move properties (power and type) by reading in the text file.
+
+Added corresponding accessor methods for aforementioned properties.
+
+Edited the modifier calculator so that it would calculate damage based on the move, rather than the opponent.
+
+Now that the move class was created, We added a type_efficacy csv file so that the damageCalcutor could be calculated based on the effectivety of the move type against the type of the opponent. Also got rid of the takeDamage function and simply encompassed it within the previously named dealDamage function, and renamed it attack.

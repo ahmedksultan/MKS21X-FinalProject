@@ -1,4 +1,4 @@
-import java.util.Scanner;
+import java.util.Scanner; //scanner for .csv files
 import java.io.*; //file, filenotfoundexception
 
 public class Move{
@@ -37,7 +37,7 @@ public class Move{
     }
   }
 
-  // Accessor Methods////////////////////
+  //Accessor Methods//
   public int getPower(){
     return power;
   }

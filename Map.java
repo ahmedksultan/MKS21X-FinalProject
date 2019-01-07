@@ -8,11 +8,16 @@ public class Map {
     mapaaa - test map 1 (matrix of ".")
     mapbbb - test map 2 (borders)
     mapccc - test map 3 (testing of map elements)
+    mapddd - test map 4 (testing makeBorders)
     */
 
     /*creates an arraylist of 2d string arrays, which will cycle through
     depending on player's progression in the RPG*/
     ArrayList<String[][]> maplist = new ArrayList<String[][]>();
+
+    //TESTING BEGINS
+
+    ArrayList<String[][]> testmaplist = new ArrayList<String[][]>();
 
     // mapaaa - test map 1 (matrix of ".")
     //creating a map for testing purposes
@@ -58,13 +63,15 @@ public class Map {
 
     /*BEGINNING TESTING ARRAYLIST OF MAPS FEATURE*/
     //WORKS!
-    maplist.add(mapaaa);
-    maplist.add(mapbbb);
-    maplist.add(mapccc);
-    maplist.add(mapddd);
+    testmaplist.add(mapaaa);
+    testmaplist.add(mapbbb);
+    testmaplist.add(mapccc);
+    testmaplist.add(mapddd);
     for (int i = 0; i < maplist.size(); i++) {
       System.out.println(toString(maplist.get(i)));
     }
+
+    //TESTING ENDS
 
   }
 

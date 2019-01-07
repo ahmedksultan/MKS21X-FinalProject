@@ -26,4 +26,10 @@ Edited the modifier calculator so that it would calculate damage based on the mo
 
 Added a type_efficacy .csv file so that the damageCalculator could be calculated based on the effectiveness of the move type against the type of the opponent. Also got rid of the takeDamage function and simply encompassed it within the previously named dealDamage function, and renamed it attack.
 
+**Jan 6, 2019** -
+
 Began creating map data for the RPG to take place in.
+
+**Jan 7, 2019** -
+
+Continued to work on map-making. Created a "makeBorders" method to simplify creating map borders.

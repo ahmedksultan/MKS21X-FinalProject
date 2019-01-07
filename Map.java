@@ -16,7 +16,6 @@ public class Map {
     ArrayList<String[][]> maplist = new ArrayList<String[][]>();
 
     //TESTING BEGINS
-
     ArrayList<String[][]> testmaplist = new ArrayList<String[][]>();
 
     // mapaaa - test map 1 (matrix of ".")

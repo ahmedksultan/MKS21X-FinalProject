@@ -1,6 +1,4 @@
-
-
-//API : http://mabe02.github.io/lanterna/apidocs/2.1/
+ //API : http://mabe02.github.io/lanterna/apidocs/2.1/
 import com.googlecode.lanterna.terminal.Terminal.SGR;
 import com.googlecode.lanterna.TerminalFacade;
 import com.googlecode.lanterna.input.Key;
@@ -61,7 +59,7 @@ public class TerminalDemo {
 			terminal.applySGR(Terminal.SGR.ENTER_BOLD);
 			terminal.putCharacter(' ');
 			terminal.putCharacter(' ');
-			terminal.putCharacter('\u262d');
+			terminal.putCharacter('\uFE0F');
 			terminal.putCharacter(' ');
 			terminal.moveCursor(size.getColumns()-5,6);
 			terminal.putCharacter(' ');

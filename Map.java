@@ -18,6 +18,7 @@ public class Map {
     //TESTING BEGINS
     ArrayList<String[][]> testmaplist = new ArrayList<String[][]>();
 
+    /*
     // mapaaa - test map 1 (matrix of ".")
     //creating a map for testing purposes
     String[][] mapaaa = new String[20][20];
@@ -27,9 +28,11 @@ public class Map {
         mapaaa[i][j] = ".";
       }
     }
-    //printing out test map
-    System.out.println(toString(mapaaa));
 
+    //printing out test map
+    //System.out.println(toString(mapaaa)); */
+
+    /*
     //mapbbb - test map 2 (borders)
     String[][] mapbbb = new String[20][20];
     for (int i = 0; i < mapbbb.length; i++) {
@@ -45,8 +48,9 @@ public class Map {
         }
       }
     }
-    System.out.println(toString(mapbbb));
+    System.out.println(toString(mapbbb));*/
 
+    /*
     //mapccc - test map 3 (testing of map elements)
     //mapddd - testing method makeBorders();
     String[][] mapccc = new String[20][20];
@@ -60,7 +64,7 @@ public class Map {
     mapccc[2][4] = "!"; //denotes trainer
     mapccc[2][6] = "?"; //denotes NPC
 
-    /*BEGINNING TESTING ARRAYLIST OF MAPS FEATURE*/
+    BEGINNING TESTING ARRAYLIST OF MAPS FEATURE
     //WORKS!
     testmaplist.add(mapaaa);
     testmaplist.add(mapbbb);
@@ -71,6 +75,7 @@ public class Map {
     }
 
     //TESTING ENDS
+    */
 
   }
 

@@ -24,6 +24,9 @@ public class Pokemon {
     System.out.println(ivy.getHP());
     bulb.attack(ivy, "absorb");
     System.out.println(ivy.getHP());
+
+    bulb.attack(ivy, "flamethrower");
+    System.out.println(ivy.getHP());
   }
 
   private String name, type1, type2;
@@ -209,7 +212,7 @@ public class Pokemon {
   ///////////////////////////////
 
   private double modifier(Move move, Pokemon enemy){
-    double x = 0;
+    double x = 1;
 
     int typeID = move.getTypeID();
 
@@ -220,7 +223,7 @@ public class Pokemon {
           count++;
         }
       }
-      x = count;
+      x += count;
       return x;
     }
 

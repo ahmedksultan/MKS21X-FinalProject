@@ -11,7 +11,7 @@ public abstract class Player{
     }
     party = new ArrayList<Pokemon>(6);
     for (int x = 0; x < party.size(); x++){
-      party.set(x) = pa
+      //party.set(x) = pa
     }
 
   }

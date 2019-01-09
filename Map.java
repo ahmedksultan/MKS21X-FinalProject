@@ -70,12 +70,16 @@ public class Map {
     //TESTING ENDS
     */
 
+    String[][] map1 = new String[30][30];
+    makeBorders(map1);
+    System.out.println(toString(map1));
+
 
   }
 
   //note: why is toString being weird?
   public static String toString(String[][] x) {
-    String result = "";
+    String result = "\n";
 
     for (int i = 0; i < x.length; i++) {
       for (int j = 0; j < x[i].length; j++) {
@@ -103,6 +107,10 @@ public class Map {
         }
       }
     }
+  }
+
+  public static String[][] getMap(String[][] x) {
+    return x;
   }
 
 }

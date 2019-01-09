@@ -33,7 +33,9 @@ public class tl {
     boolean running = true;
 
     while (running) {
-
+      String[][] tmapaaa;
+      tmapaaa = Map.getMap(mapaaa);
+      System.out.println(tmapaaa);
 
     }
 

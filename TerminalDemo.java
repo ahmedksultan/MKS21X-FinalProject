@@ -53,7 +53,6 @@ public class TerminalDemo {
 			terminal.applyForegroundColor(Terminal.Color.DEFAULT);
 			terminal.applySGR(Terminal.SGR.RESET_ALL);
 
-
 			terminal.moveCursor(size.getColumns()-5,5);
 			terminal.applyBackgroundColor(Terminal.Color.BLUE);
 			terminal.applyForegroundColor(Terminal.Color.WHITE);

@@ -16,7 +16,26 @@ import com.googlecode.lanterna.input.KeyMappingProfile;
 public class tl {
   //this is just a file for testing lanterna stuff
 
+  public static void putString(int r, int c,Terminal t, String s){
+    t.moveCursor(r,c);
+    for(int i = 0; i < s.length();i++){
+      t.putCharacter(s.charAt(i));
+    }
+  }
+
   public static void main (String[] args) {
+    Terminal terminal = TerminalFacade.createTextTerminal();
+		terminal.enterPrivateMode();
+
+		TerminalSize size = terminal.getTerminalSize();
+		terminal.setCursorVisible(false);
+
+    boolean running = true;
+
+    while (running) {
+
+
+    }
 
   }
 

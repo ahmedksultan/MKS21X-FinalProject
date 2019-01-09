@@ -22,11 +22,12 @@ public class TerminalDemo {
 			t.putCharacter(s.charAt(i));
 		}
 	}
+
 	public static void main(String[] args) {
 
 
-		int x = 10;
-		int y = 10;
+		int x = 20;
+		int y = 20;
 
 		Terminal terminal = TerminalFacade.createTextTerminal();
 		terminal.enterPrivateMode();
@@ -46,7 +47,7 @@ public class TerminalDemo {
 			terminal.applyForegroundColor(Terminal.Color.BLACK);
 			//applySGR(a,b) for multiple modifiers (bold,blink) etc.
 			terminal.applySGR(Terminal.SGR.ENTER_UNDERLINE);
-			terminal.putCharacter('\u00a4');
+			terminal.putCharacter('b');
 			//terminal.putCharacter(' ');
 			terminal.applyBackgroundColor(Terminal.Color.DEFAULT);
 			terminal.applyForegroundColor(Terminal.Color.DEFAULT);
@@ -59,7 +60,7 @@ public class TerminalDemo {
 			terminal.applySGR(Terminal.SGR.ENTER_BOLD);
 			terminal.putCharacter(' ');
 			terminal.putCharacter(' ');
-			terminal.putCharacter('\u262d');
+			terminal.putCharacter('\u200d');
 			terminal.putCharacter(' ');
 			terminal.moveCursor(size.getColumns()-5,6);
 			terminal.putCharacter(' ');

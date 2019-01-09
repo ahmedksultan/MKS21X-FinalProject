@@ -28,6 +28,23 @@ Edited the modifier calculator so that it would calculate damage based on the mo
 
 Added a type_efficacy .csv file so that the damageCalculator could be calculated based on the effectiveness of the move type against the type of the opponent. Also got rid of the takeDamage function and simply encompassed it within the previously named dealDamage function, and renamed it attack.
 
-**Jan 6, 2019** - Began creating map data for the RPG to take place in.
+**Jan 6, 2019** -
+Edited the function that calculates typeWeaknesses by parsing through the file and checking for the corresponding type to add to the ArrayList.
+
+Fixed a bug that caused an error to be thrown by a helper function for the calculate typeWeaknesses and Resistances function. Fixed it by ignoring the first line, which were strings and therefore you could not parseInt them.
+
+Edited the attack function so that it uses an String name rather than a Move.
+
+Properly assigned typeIDs by editing the function that assigns them, and added accessor methods for them.
+
+Fixed an error in the modifier function that caused it to use the wrong list to calculate the modifier.
+
+Began creating map data for the RPG to take place in.
 
 **Jan 7, 2019** - Continued to work on map-making. Created a "makeBorders" method to simplify creating map borders.
+
+Fixed an error that caused a 2x effective move to return 1x effective.
+
+Began working on the Player abstract class that will be used for the main character themselves as well as the NPCs.
+
+Added a file full of Pokemon sprites to be used for the battleSystem. Also trimmed the Pokemon.csv file to only have Pokemon that we have the sprites for.

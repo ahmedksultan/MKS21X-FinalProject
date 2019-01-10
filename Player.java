@@ -25,15 +25,12 @@ public abstract class Player{
     }
     return x;
   }
-<<<<<<< HEAD
 
   public boolean outofMons(){
     return pokemonLeft() > 0;
   }
-=======
->>>>>>> Trainer
 
-  public boolean outofMons(){
-    return pokemonLeft() > 0;
+  public Pokemon getMon(int index){
+    return party.get(index);
   }
 }

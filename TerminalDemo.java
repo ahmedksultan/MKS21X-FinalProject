@@ -43,7 +43,7 @@ public class TerminalDemo {
 		while(running){
 
 			terminal.moveCursor(x,y);
-			terminal.applyBackgroundColor(Terminal.Color.WHITE);
+			terminal.applyBackgroundColor(Terminal.Color.GREEN);
 			terminal.applyForegroundColor(Terminal.Color.BLACK);
 			//applySGR(a,b) for multiple modifiers (bold,blink) etc.
 			terminal.applySGR(Terminal.SGR.ENTER_UNDERLINE);

@@ -16,6 +16,10 @@ public abstract class Player{
 
   }
 
+  public ArrayList<Pokemon> getParty(){
+    return party;
+  }
+
   public int pokemonLeft(){
     int x = 0;
     for (int i = 0; x < party.size(); i++){

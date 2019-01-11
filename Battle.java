@@ -1,25 +1,41 @@
+import java.util.*; //scanner, ArrayList, Map
+import java.io.*; //file, filenotfoundexception
+
 public class Battle{
-  private int start, turnCount;
-  private boolean turn; // True for player 1's turn, false for player two's turn
   private Player one;
   private Player two;
+  private Pokemon active1, active2;
 
   public Battle(Player one1, Player two2){
     one = one1;
     two = two2;
+    active1 = one.getMon(0);
+    active2 = two.getMon(0);
+
   }
 
-  public void updateTurn(){
-    turn = !turn; // Simplest way to flip the value of a boolean
-    turnCount++;
+  public void chooseSwitch(int x, int index){
+    if (x == 1){
+      active1 = one.getMon(index);
+    }
+    else{
+      active2 = two.getMon(index);
+    }
   }
 
-  public boolean getTurn(){
-    return turn;
+  public ifDead(){
+    Console console = System.console();
+    String input = console.readLine("Enter input:");
   }
 
-  public boolean whosFirst(int x, int y){ // x and y represent pokemon in Player 1 and Player 2's parties, respecitvely.
-    turn = one.getMon(x).getSpeed() > two.getMon(x).getSpeed();
+  public void move(String a, String b){
+      if (active1.getSpeed() > active2.getSpeed()){
+        active1.attack(active2, a);
+      }
+      else{
+        active2.attack(active1, b);
+      }
+
   }
 
 }

@@ -23,9 +23,21 @@ public class Battle{
     }
   }
 
-  public ifDead(){
+  public void ifDead(){
     Console console = System.console();
-    String input = console.readLine("Enter input:");
+
+    if (active1.getHP() <= 0){
+      String input = console.readLine("Your pokemon has fainted! Choose a number from 1-6 corresponding to the next Pokemon you wish to use");
+      active1 = one.getMon(Integer.parseInt(input));
+    }
+
+    if (active2.getHP() <= 0){
+      for (int x = 0; x < 6; x++){     // COULD EDIT THIS SO THAT IT'S RANDOM
+        if (!(two.getMon(x).isDead())){
+          active2 = two.getMon(x);
+        }
+      }
+    }
   }
 
   public void move(String a, String b){

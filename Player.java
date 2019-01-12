@@ -37,4 +37,6 @@ public abstract class Player{
   public Pokemon getMon(int index){
     return party.get(index);
   }
+
+  public abstract boolean canCatch();
 }

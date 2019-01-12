@@ -9,4 +9,7 @@ public class Trainer extends Player{
     catchable = false;
   }
 
+  public boolean canCatch(){
+    return catchable;
+  }
 }

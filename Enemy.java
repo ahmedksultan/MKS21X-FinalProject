@@ -14,4 +14,8 @@ public class Enemy extends Player{
     catchable = true;
   }
 
+  public boolean canCatch(){
+    return catchable;
+  }
+
 }

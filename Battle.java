@@ -4,9 +4,31 @@ import java.io.*; //file, filenotfoundexception
 public class Battle{
   public static void main(String[] args) {
 
-    // Begin work on driver
-    // Player one = Trainer("Al", )
-    // Battle()
+    ArrayList<Pokemon> team = new ArrayList<Pokemon>();
+
+    Pokemon bulb = new Pokemon("Bulbasaur");
+    Pokemon chari = new Pokemon("Charizard");
+    Pokemon mew2 = new Pokemon("Mewtwo");
+    Pokemon mew = new Pokemon("Mew");
+
+    team.add(bulb);
+    team.add(chari);
+    team.add(mew2);
+
+    ArrayList<Pokemon> team1 = new ArrayList<Pokemon>();
+    team1.add(mew);
+
+    Player one = new Trainer("Al", team);
+    Player enemy = new Enemy("Jo", team1);
+    Battle battle = new Battle(one, enemy);
+
+    while (!battle.isOver()){
+      Console console = System.console();
+      String input = console.readLine("Choose your next move!");
+
+      battle.move(input, "fire-punch");
+
+    }
   }
 
   private Player one, two, winner;
@@ -20,6 +42,12 @@ public class Battle{
     active2 = two.getMon(0);
     over = false;
   }
+
+  // public boolean run(){
+  //   while (!run){
+  //
+  //   }
+  // }
 
   public boolean escape(){
     if (one.allDead()){
@@ -79,12 +107,15 @@ public class Battle{
   public boolean canCatch(){
     Random rand = new Random();
     if (two.canCatch()){
-      if (rand.nextInt(100) == 0){
+      if (rand.nextInt(100) >= 70){
         if (one.getParty().size() < 6){
           System.out.println("Congratulations! You have caught " + active2.getName() + "!");
           one.getParty().add(active2);
           over = true;
         }
+      }
+      else{
+        System.out.println("Aw! You have not caught it! Try again!");
       }
     }
   }

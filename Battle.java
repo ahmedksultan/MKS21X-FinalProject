@@ -4,7 +4,7 @@ import java.io.*; //file, filenotfoundexception
 public class Battle{
   public static void main(String[] args) {
 
-    ArrayList<Pokemon> team = new ArrayList<Pokemon>();
+    ArrayList<Pokemon> team = new ArrayList<Pokemon>(3);
 
     Pokemon bulb = new Pokemon("Bulbasaur");
     Pokemon chari = new Pokemon("Charizard");
@@ -15,7 +15,7 @@ public class Battle{
     team.add(chari);
     team.add(mew2);
 
-    ArrayList<Pokemon> team1 = new ArrayList<Pokemon>();
+    ArrayList<Pokemon> team1 = new ArrayList<Pokemon>(1);
     team1.add(mew);
 
     Player one = new Trainer("Al", team);
@@ -29,6 +29,7 @@ public class Battle{
       battle.move(input, "fire-punch");
 
     }
+    System.out.println("The Battle is over! " + battle.getWinner().getName() + " has won!");
   }
 
   private Player one, two, winner;
@@ -38,18 +39,25 @@ public class Battle{
   public Battle(Player one1, Player two2){
     one = one1;
     two = two2;
-    active1 = one.getMon(0);
-    active2 = two.getMon(0);
+
+    ArrayList<Pokemon> par = one.getParty();
+    ArrayList<Pokemon> par1 = two.getParty();
+
+    System.out.println(par);
+    System.out.println(par1);
+
+    active1 = par.get(0);
+    active2 = par1.get(0);
     over = false;
   }
 
   // public boolean run(){
-  //   while (!run){
   //
   //   }
   // }
+  //   while (!run){
 
-  public boolean escape(){
+  public void escape(){
     if (one.allDead()){
       over = true;
       winner = two;
@@ -58,6 +66,10 @@ public class Battle{
       over = true;
       winner = one;
     }
+  }
+
+  public Player getWinner(){
+    return winner;
   }
 
   public void chooseSwitch(int x, int index){
@@ -112,12 +124,15 @@ public class Battle{
           System.out.println("Congratulations! You have caught " + active2.getName() + "!");
           one.getParty().add(active2);
           over = true;
+          return true;
         }
       }
       else{
         System.out.println("Aw! You have not caught it! Try again!");
+        return false;
       }
     }
+    return false;
   }
 
 }

@@ -3,15 +3,27 @@ import java.io.*; //file, filenotfoundexception
 
 public class Enemy extends Player{
   private ArrayList<Pokemon> party;
+  private Pokemon poke;
   private boolean catchable;
   private String name;
 
   public Enemy(String name1, ArrayList<Pokemon> party1){
-    super(name1, party1);
-    if (party1.size() > 1){
+
+    if (party1.size() != 1){
+      System.out.println("LENGTH ERROR CHECK ENEMY CONSTRUCTOR");
       throw new Error();
     }
-    catchable = true;
+
+    ArrayList<Pokemon> party = new ArrayList<Pokemon>(party1.size());
+    for (int i = 0; i < party1.size(); i++){
+      party.add(party1.get(i));
+    }
+    poke = party.get(0);
+  }
+
+
+  public ArrayList<Pokemon> getParty(){
+    return party;
   }
 
   public boolean canCatch(){
@@ -20,6 +32,26 @@ public class Enemy extends Player{
 
   public boolean allDead(){
     return party.get(0).isDead();
+  }
+
+  public int pokemonLeft(){
+    if (poke.isDead()){
+      return 0;
+    }
+    return 1;
+  }
+
+  public Pokemon getMon(int index){
+    if (party.size() > 0){
+      return party.get(0);
+    }
+    else{
+      throw new IndexOutOfBoundsException();
+    }
+  }
+
+  public boolean outofMons(){
+    return allDead();
   }
 
 }

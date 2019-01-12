@@ -39,4 +39,6 @@ public abstract class Player{
   }
 
   public abstract boolean canCatch();
+
+  public abstract boolean allDead();
 }

@@ -12,4 +12,13 @@ public class Trainer extends Player{
   public boolean canCatch(){
     return catchable;
   }
+
+  public boolean allDead(){
+    for (int i = 0; i < party.size(); i++){
+      if (!party.get(i).isDead()){
+        return false;
+      }
+    }
+    return false;
+  }
 }

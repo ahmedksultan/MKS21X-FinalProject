@@ -18,4 +18,8 @@ public class Enemy extends Player{
     return catchable;
   }
 
+  public boolean allDead(){
+    return party.get(0).isDead();
+  }
+
 }

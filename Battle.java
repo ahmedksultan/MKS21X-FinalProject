@@ -4,10 +4,12 @@ import java.io.*; //file, filenotfoundexception
 public class Battle{
   public static void main(String[] args) {
 
+    // Begin work on driver
+    // Player one = Trainer("Al", )
+    // Battle()
   }
 
-  private Player one;
-  private Player two;
+  private Player one, two, winner;
   private Pokemon active1, active2;
   private boolean over;
 
@@ -17,6 +19,17 @@ public class Battle{
     active1 = one.getMon(0);
     active2 = two.getMon(0);
     over = false;
+  }
+
+  public boolean escape(){
+    if (one.allDead()){
+      over = true;
+      winner = two;
+    }
+    if (two.allDead()){
+      over = true;
+      winner = one;
+    }
   }
 
   public void chooseSwitch(int x, int index){

@@ -2,7 +2,6 @@ import java.util.*; //scanner, ArrayList, Map
 
 
 public abstract class Player{
-  private String name;
 
   // public Player(String name, ArrayList<Pokemon> party1){
   //   if (party1.size() > 6 || party1.size() < 1){
@@ -23,9 +22,7 @@ public abstract class Player{
   //   return party;
   // }
 
-  public String getName(){
-    return name;
-  }
+  public abstract String getName();
 
   public abstract int pokemonLeft();
 
@@ -44,10 +41,6 @@ public abstract class Player{
   // public boolean outofMons(){
   //   return pokemonLeft() > 0;
   // }
-
-  public String toString(){
-    return name;
-  }
 
   public abstract Pokemon getMon(int index);
 

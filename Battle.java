@@ -40,15 +40,16 @@ public class Battle{
     while (!battle.isOver()){
       System.out.println("Choose next move");
       firstname = user_input.next();
-      battle.move(firstname, "fire-punch");
+      battle.move(firstname, "absorb");
       battle.forceSwitch();
     }
-    System.out.println("The Battle is over! " + battle.getWinner().getName() + " has won!");
+    System.out.println("The Battle is over! " + battle.getWinner()  + " has won!");
   }
 
-  private Player one, two, winner;
+  private Player one, two;
   private Pokemon active1, active2;
   private boolean over;
+  private String winner;
 
   public Battle(Player one1, Player two2){
     one = one1;
@@ -65,27 +66,27 @@ public class Battle{
   // }
   //   while (!run){
 
-  public Pokemon getActive1(){
-    return active1;
+  public String getActive1(){
+    return active1.toString();
   }
 
-  public Pokemon getActive2(){
-    return active2;
+  public String getActive2(){
+    return active2.toString();
   }
 
   public void escape(){
     if (one.allDead()){
       over = true;
-      winner = two;
+      winner = two.getName();
     }
     if (two.allDead()){
       over = true;
-      winner = one;
+      winner = one.getName();
     }
   }
 
-  public Player getWinner(){
-    return winner;
+  public String getWinner(){
+    return winner.toString();
   }
 
   public void chooseSwitch(int x, int index){
@@ -103,11 +104,11 @@ public class Battle{
 
     if (one.outofMons()){
       over = true;
-      winner = two;
+      winner = two.getName();
     }
     else if(two.outofMons()){
       over = true;
-      winner = one;
+      winner = one.getName();
     }
 
     if (active1.isDead() && over != true){

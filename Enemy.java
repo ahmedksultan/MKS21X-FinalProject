@@ -27,8 +27,12 @@ public class Enemy extends Player{
     // System.out.println("3here");
     poke = party.get(0);
     // System.out.println("4here");
+    name = name1;
   }
 
+  public String getName(){
+    return name;
+  }
 
   public ArrayList<Pokemon> getParty(){
     return party;

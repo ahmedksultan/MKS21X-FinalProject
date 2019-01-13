@@ -37,6 +37,9 @@ public class Battle{
     String firstname;
     // System.out.println("Here");
     System.out.println("Your enemy is " + enemy.getName() + "! Their first pokemon is " + battle.getActive1());
+    System.out.println(one.getParty());
+    System.out.println(battle.gettwo.getParty());
+
     while (!battle.isOver()){
       System.out.println("Choose next move");
       firstname = user_input.next();
@@ -85,6 +88,14 @@ public class Battle{
       over = true;
       winner = one.getName();
     }
+  }
+
+  public Player getOne(){
+    return one;
+  }
+
+  public Player getTwo(){
+    return two;
   }
 
   public String getWinner(){

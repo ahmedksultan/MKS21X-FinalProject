@@ -53,6 +53,8 @@ Added a file full of Pokemon sprites to be used for the battleSystem. Also trimm
 
 Begun creating processes to put the maps in Java.
 
+**Jan 9, 2019** - practiced lanterna to get a better understanding of how it works.
+
 **Jan 10, 2019** - restarted maps, as we were not getting anywhere with the current version.
 
 Created a method we would stick to when creating maps.

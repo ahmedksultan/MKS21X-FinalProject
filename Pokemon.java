@@ -6,6 +6,7 @@ public class Pokemon {
   public static void main(String[] args) {
     Pokemon bulb = new Pokemon("Bulbasaur");
     Pokemon ivy = new Pokemon("Ivysaur");
+    Pokemon weeze = new Pokemon("Weezing");
 
 /*
     System.out.println("Testing Bulbasaur properties");
@@ -20,10 +21,13 @@ public class Pokemon {
     System.out.println(ivy.getTypeWeakness());
     System.out.println(ivy.getTypeResistance());
 */
+
+    bulb.attack(weeze, "earthquake");
     System.out.println();
     System.out.println(ivy.getHP());
     bulb.attack(ivy, "absorb");
     System.out.println(ivy.getHP());
+    bulb.attack(ivy, "fly");
 
     bulb.attack(ivy, "flamethrower");
     System.out.println(ivy.getHP());

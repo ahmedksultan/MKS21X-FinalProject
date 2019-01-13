@@ -5,48 +5,59 @@ public class Battle{
   public static void main(String[] args) {
 
     ArrayList<Pokemon> team = new ArrayList<Pokemon>(3);
+    ArrayList<Pokemon> team1 = new ArrayList<Pokemon>(1);
     // System.out.println("here1");
 
 
-    Pokemon bulb = new Pokemon("Bulbasaur");
-    Pokemon chari = new Pokemon("Charizard");
-    Pokemon mew2 = new Pokemon("Mewtwo");
-    Pokemon mew = new Pokemon("Mew");
-    Pokemon venusaur = new Pokemon("Venusaur");
-    // System.out.println("here2");
+    Pokemon Bulb = new Pokemon("Bulbasaur");
+    Pokemon Chari = new Pokemon("Charizard");
+    Pokemon Mew2 = new Pokemon("Mewtwo");
+    Pokemon Mew = new Pokemon("Mew");
+    Pokemon Venusaur = new Pokemon("Venusaur");
+    Pokemon Rattata = new Pokemon("Rattata");
+    Pokemon Tentacruel = new Pokemon("Tentacruel");
+    Pokemon Weezing = new Pokemon("Weezing");
+    Pokemon Starmie = new Pokemon("Starmie");
+    Pokemon Electabuzz = new Pokemon("Electabuzz");
+    Pokemon Lapras = new Pokemon("Lapras");
 
-    team.add(bulb);
-    team.add(chari);
-    team.add(mew2);
-    // System.out.println("here3");
+    team.add(Bulb);
+    team.add(Chari);
+    team.add(Mew2);
+    team.add(Venusaur);
+    team.add(Rattata);
+    team.add(Tentacruel);
 
-    ArrayList<Pokemon> team1 = new ArrayList<Pokemon>(1);
-    // System.out.println("here4");
-    team1.add(venusaur);
+    team1.add(Weezing);
+    team1.add(Starmie);
+    team1.add(Electabuzz);
+    team1.add(Lapras);
 
-
-// System.out.println("here5");
     Player one = new Trainer("Al", team);
-    // System.out.println("here6");
-    Player enemy = new Enemy("Jo", team1);
-    // System.out.println("here7");
+    Player enemy = new Trainer("Jo", team1);
+
     Battle battle = new Battle(one, enemy);
-    // System.out.println("here8");
 
 
     Scanner user_input = new Scanner( System.in );
     String firstname;
-    // System.out.println("Here");
+
     System.out.println("Your enemy is " + enemy.getName() + "! Their first pokemon is " + battle.getActive2());
     System.out.println(battle.getOne().getParty());
     System.out.println(battle.getTwo().getParty());
 
     while (!battle.isOver()){
-      System.out.println(battle.getActive1() + " and " + battle.getActive2() + " are battling!");
-      System.out.println("Choose next move");
+      // System.out.println(battle.getActive1().getTypeWeakness());
+      // System.out.println(battle.getActive2().getTypeWeakness());
+      // System.out.println(battle.getOne().getParty().get(1).getTypeWeakness());
+      // System.out.println(battle.getTwo().getParty().get(1).getTypeWeakness());
+
+      System.out.println(battle.getActive1().toString() + " and " + battle.getActive2() + " are battling!");
+      System.out.println("Choose your move");
       firstname = user_input.next();
       // System.out.println(firstname);
       battle.move(firstname, "absorb");
+      System.out.println("You used " + firstname + "! Your opponent used absorb");
       battle.forceSwitch();
     }
     System.out.println("The Battle is over! " + battle.getWinner()  + " has won!");
@@ -72,12 +83,12 @@ public class Battle{
   // }
   //   while (!run){
 
-  public String getActive1(){
-    return active1.toString();
+  public Pokemon getActive1(){
+    return active1;
   }
 
-  public String getActive2(){
-    return active2.toString();
+  public Pokemon getActive2(){
+    return active2;
   }
 
   public void escape(){
@@ -115,6 +126,7 @@ public class Battle{
         active2 = two.getParty().get(x);
       }
     }
+    System.out.println(two.getName() + " has switched to " + active2);
   }
 
   public void forceSwitch(){

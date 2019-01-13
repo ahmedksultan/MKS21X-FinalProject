@@ -60,6 +60,10 @@ public class Pokemon {
     speed = Integer.parseInt(data[10]);
   }
 
+  public String toString(){
+    return name;
+  }
+
   private String[] organizeData(String name1){
     try{
 

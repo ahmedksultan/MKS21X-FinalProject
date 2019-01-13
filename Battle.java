@@ -176,7 +176,7 @@ public class Battle{
       else{
         active2.attack(active1, b);
         if (!active1.isDead()){
-          active1.attack(active2, b);
+          active1.attack(active2, a);
         }
         else if (active2.isDead()) {
           Scanner user_input = new Scanner( System.in );

@@ -65,6 +65,14 @@ public class Battle{
   // }
   //   while (!run){
 
+  public Pokemon getActive1(){
+    return active1;
+  }
+
+  public Pokemon getActive2(){
+    return active2;
+  }
+
   public void escape(){
     if (one.allDead()){
       over = true;

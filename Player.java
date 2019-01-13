@@ -45,6 +45,9 @@ public abstract class Player{
   //   return pokemonLeft() > 0;
   // }
 
+  public String toString(){
+    return name;
+  }
 
   public abstract Pokemon getMon(int index);
 

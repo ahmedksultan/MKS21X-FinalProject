@@ -191,16 +191,15 @@ public class Pokemon {
       catch(FileNotFoundException e){
         System.out.println("error");
       }
-
-      for (int x = 0; x < typeWeakness.size() && x < typeResistance.size(); x++){
-        if (typeResistance.contains(typeWeakness.get(x))){
-          typeResistance.remove(typeWeakness.get(x));
-          typeWeakness.remove(x);
-        }
-      }
+      //
+      // for (int x = 0; x < typeWeakness.size() && x < typeResistance.size(); x++){
+      //   if (typeResistance.contains(typeWeakness.get(x))){
+      //     typeResistance.remove(typeWeakness.get(x));
+      //     typeWeakness.remove(x);
+      //   }
+      // }
 
       removeRepeats();
-
     }
 
     private void removeRepeats(){
@@ -209,6 +208,7 @@ public class Pokemon {
         if (typeWeakness.contains(typeResistance.get(x))){
           typeWeakness.remove(typeResistance.get(x));
           typeResistance.remove(x);
+          typeResistance.remove(typeResistance.get(x));
         }
       }
     }
@@ -220,7 +220,7 @@ public class Pokemon {
 
     int typeID = move.getTypeID();
 
-    if (typeWeakness.contains(typeID + "")){
+    if (typeWeakness.contains(String.valueOf(typeID))) {
       int count = 0;
       for (int i = 0; i < typeWeakness.size(); i++){
         if (Integer.parseInt(typeWeakness.get(i)) == typeID){
@@ -231,7 +231,7 @@ public class Pokemon {
       return x;
     }
 
-    else if (typeResistance.contains(typeID + "")){
+    else if (typeResistance.contains(String.valueOf(typeID))) {
       int count = 0;
       for (int i = 0; i < typeResistance.size(); i++){
         if (Integer.parseInt(typeResistance.get(i)) == typeID){

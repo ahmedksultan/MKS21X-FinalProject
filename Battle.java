@@ -12,6 +12,7 @@ public class Battle{
     Pokemon chari = new Pokemon("Charizard");
     Pokemon mew2 = new Pokemon("Mewtwo");
     Pokemon mew = new Pokemon("Mew");
+    Pokemon venusaur = new Pokemon("Venusaur");
     // System.out.println("here2");
 
     team.add(bulb);
@@ -21,7 +22,7 @@ public class Battle{
 
     ArrayList<Pokemon> team1 = new ArrayList<Pokemon>(1);
     // System.out.println("here4");
-    team1.add(mew);
+    team1.add(venusaur);
 
 
 // System.out.println("here5");
@@ -36,10 +37,15 @@ public class Battle{
     Scanner user_input = new Scanner( System.in );
     String firstname;
     // System.out.println("Here");
-    System.out.println("Your enemy is " + enemy.getName() + "! Their first pokemon is " + battle.getActive1());
+    System.out.println("Your enemy is " + enemy.getName() + "! Their first pokemon is " + battle.getActive2());
+    System.out.println(battle.getOne().getParty());
+    System.out.println(battle.getTwo().getParty());
+
     while (!battle.isOver()){
+      System.out.println(battle.getActive1() + " and " + battle.getActive2() + " are battling!");
       System.out.println("Choose next move");
       firstname = user_input.next();
+      // System.out.println(firstname);
       battle.move(firstname, "absorb");
       battle.forceSwitch();
     }
@@ -87,16 +93,27 @@ public class Battle{
     }
   }
 
+  public Player getOne(){
+    return one;
+  }
+
+  public Player getTwo(){
+    return two;
+  }
+
   public String getWinner(){
     return winner.toString();
   }
 
-  public void chooseSwitch(int x, int index){
-    if (x == 1){
-      active1 = one.getMon(index);
-    }
-    else{
-      active2 = two.getMon(index);
+  public void chooseSwitch(int index){
+    active1 = one.getMon(index);
+  }
+
+  public void autoSwitch(){
+    for (int x = 0; x < two.getParty().size(); x++){
+      if (!two.getParty().get(x).isDead()){
+        active2 = two.getParty().get(x);
+      }
     }
   }
 
@@ -105,24 +122,23 @@ public class Battle{
     String firstname;
 
     if (one.allDead()){
+      System.out.println("Your pokemon, " + active1 + " has fainted!");
       over = true;
       winner = two.getName();
     }
     else if(two.allDead()){
+      System.out.println("Enemy pokemon, " + active2 + " has fainted!");
       over = true;
       winner = one.getName();
     }
 
     if (active1.isDead() && over != true){
-      System.out.println("Your pokemon has fainted! Choose your next pokemon!");
-      chooseSwitch(1, user_input.nextInt());
+      System.out.println("Your pokemon," + active1 + " has fainted! Choose your next pokemon!");
+      chooseSwitch(user_input.nextInt());
     }
     if (active2.isDead() && over != true){
-      for (int x = 0; x < two.getParty().size(); x++){
-        if (!two.getParty().get(x).isDead()){
-          chooseSwitch(2, x);
-        }
-      }
+      System.out.println("Enemy pokemon, " + active2 + " has fainted!");
+      autoSwitch();
     }
   }
 
@@ -146,11 +162,27 @@ public class Battle{
 
   public void move(String a, String b){
     if (!active1.isDead() && !active2.isDead()){
+      System.out.println(active1.getName() + " " + active1.getSpeed());
+      System.out.println(active2.getName() + " " + active2.getSpeed());
       if (active1.getSpeed() > active2.getSpeed()){
         active1.attack(active2, a);
+        if (!active2.isDead()){
+          active2.attack(active1, b);
+        }
+        else if (active2.isDead()){
+          autoSwitch();
+        }
       }
       else{
         active2.attack(active1, b);
+        if (!active1.isDead()){
+          active1.attack(active2, b);
+        }
+        else if (active2.isDead()) {
+          Scanner user_input = new Scanner( System.in );
+          String firstname;
+          chooseSwitch(user_input.nextInt());
+        }
       }
     }
   }

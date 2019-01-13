@@ -1,4 +1,5 @@
 //importing lanterna stuff
+import java.util.Arrays;
 import com.googlecode.lanterna.terminal.Terminal.SGR;
 import com.googlecode.lanterna.TerminalFacade;
 import com.googlecode.lanterna.input.Key;
@@ -32,10 +33,37 @@ public class tl {
 
     boolean running = true;
 
+    String[][] tmapa;
+    Map.initTest();
+    tmapa = Map.getTest();
+    System.out.println(Map.toString(tmapa));
+
     while (running) {
-      String[][] tmapaaa;
-      tmapaaa = Map.getTest();
-      System.out.println(tmapaaa);
+
+      //System.out.println();
+
+      terminal.moveCursor(size.getColumns()9,5);
+      terminal.applyBackgroundColor(Terminal.Color.BLUE);
+      terminal.applyForegroundColor(Terminal.Color.WHITE);
+      terminal.applySGR(Terminal.SGR.ENTER_BOLD);
+      terminal.putCharacter('\u200d');
+      terminal.putCharacter(' ');
+      terminal.moveCursor(size.getColumns()-5,6);
+      terminal.putCharacter(' ');
+      terminal.putCharacter(' ');
+      terminal.putCharacter(' ');
+      terminal.putCharacter(' ');
+      terminal.applyBackgroundColor(Terminal.Color.DEFAULT);
+      terminal.applyForegroundColor(Terminal.Color.DEFAULT);
+
+      Key key = terminal.readInput();
+
+      if (key != null) {
+        if (key.getKind() == Key.Kind.Escape) {
+          terminal.exitPrivateMode();
+          running = false;
+        }
+      }
 
     }
 

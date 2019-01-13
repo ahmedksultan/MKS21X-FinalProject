@@ -121,7 +121,7 @@ public class Battle{
     String firstname;
 
     if (one.allDead()){
-      System.out.println("Your pokemon," + active1 + " has fainted!");
+      System.out.println("Your pokemon, " + active1 + " has fainted!");
       over = true;
       winner = two.getName();
     }
@@ -161,6 +161,8 @@ public class Battle{
 
   public void move(String a, String b){
     if (!active1.isDead() && !active2.isDead()){
+      System.out.println(active1.getName() + " " + active1.getSpeed());
+      System.out.println(active2.getName() + " " + active2.getSpeed());
       if (active1.getSpeed() > active2.getSpeed()){
         active1.attack(active2, a);
         if (!active2.isDead()){
@@ -172,7 +174,7 @@ public class Battle{
       }
       else{
         active2.attack(active1, b);
-        if (!active2.isDead()){
+        if (!active1.isDead()){
           active1.attack(active2, b);
         }
         else if (active2.isDead()) {

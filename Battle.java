@@ -76,10 +76,12 @@ public class Battle{
 
   public void escape(){
     if (one.allDead()){
+      System.out.println("hereee");
       over = true;
       winner = two.getName();
     }
     if (two.allDead()){
+      System.out.println("here");
       over = true;
       winner = one.getName();
     }
@@ -102,11 +104,11 @@ public class Battle{
     Scanner user_input = new Scanner( System.in );
     String firstname;
 
-    if (one.outofMons()){
+    if (one.allDead()){
       over = true;
       winner = two.getName();
     }
-    else if(two.outofMons()){
+    else if(two.allDead()){
       over = true;
       winner = one.getName();
     }

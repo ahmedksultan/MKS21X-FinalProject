@@ -20,9 +20,9 @@ public class Trainer extends Player{
     // for (int i = 0; i < party1.size(); i++){
     //   party.add(party1.get(i));
     // }
-    name = name1; 
+    name = name1;
     len = party.size();
-    System.out.println("heree");
+    // System.out.println("heree");
     catchable = false;
   }
 
@@ -31,7 +31,7 @@ public class Trainer extends Player{
   }
 
   public ArrayList<Pokemon> getParty(){
-    System.out.println("here");
+    // System.out.println("here");
     return party;
   }
 

@@ -31,7 +31,7 @@ public class Map{
     }
   }
 
-  private static void initTest() {
+  public static void initTest() {
     //(((note: coords are in y-x format)))
     test = new String[20][20];
     makeBorders(test);
@@ -57,18 +57,16 @@ public class Map{
       test[y][4] = "d";
     }
 
-    System.out.println(toString(test));
   }
 
   public static String[][] getTest() {
-    System.out.println(test);
     return test;
   }
 
-  private static void initTown1(){
+  public static void initTown1(){
     //note: coords are in y-x format
 
-    //Initializing town1 map
+    //initializing town1 map
     town1 = new String[20][40];
     makeBorders(town1);
 
@@ -93,8 +91,8 @@ public class Map{
       town1[y][4] = "d";
     }
 
-
     System.out.println(toString(town1));
+
   }
 
   public static String[][] getTown1(){

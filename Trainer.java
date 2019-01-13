@@ -44,7 +44,7 @@ public class Trainer extends Player{
 
   public int pokemonLeft(){
     int x = 0;
-    for (int i = 0; x < party.size(); i++){
+    for (int i = 0; x < party.size() - 1; i++){
       if (!(party.get(i).isDead())){
         x++;
       }

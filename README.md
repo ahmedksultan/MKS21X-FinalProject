@@ -48,3 +48,7 @@ Fixed an error that caused a 2x effective move to return 1x effective.
 Began working on the Player abstract class that will be used for the main character themselves as well as the NPCs.
 
 Added a file full of Pokemon sprites to be used for the battleSystem. Also trimmed the Pokemon.csv file to only have Pokemon that we have the sprites for.
+
+**Jan 8, 2019** - Again, continued to work on map-making. Started working more with lanterna.
+
+Begun creating processes to put the maps in Java.

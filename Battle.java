@@ -12,6 +12,7 @@ public class Battle{
     Pokemon chari = new Pokemon("Charizard");
     Pokemon mew2 = new Pokemon("Mewtwo");
     Pokemon mew = new Pokemon("Mew");
+    Pokemon venusaur = new Pokemon("Venusaur");
     // System.out.println("here2");
 
     team.add(bulb);
@@ -21,7 +22,7 @@ public class Battle{
 
     ArrayList<Pokemon> team1 = new ArrayList<Pokemon>(1);
     // System.out.println("here4");
-    team1.add(mew);
+    team1.add(venusaur);
 
 
 // System.out.println("here5");

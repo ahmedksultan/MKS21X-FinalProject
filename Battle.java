@@ -36,7 +36,7 @@ public class Battle{
     Scanner user_input = new Scanner( System.in );
     String firstname;
     // System.out.println("Here");
-    System.out.println("Your enemy is " + enemy.getName() + "! Their first pokemon is " + battle.getActive1());
+    System.out.println("Your enemy is " + enemy.getName() + "! Their first pokemon is " + battle.getActive2());
     System.out.println(battle.getOne().getParty());
     System.out.println(battle.getTwo().getParty());
 
@@ -44,7 +44,7 @@ public class Battle{
       System.out.println(battle.getActive1() + " and " + battle.getActive2() + " are battling!");
       System.out.println("Choose next move");
       firstname = user_input.next();
-      System.out.println(firstname);
+      // System.out.println(firstname);
       battle.move(firstname, "absorb");
       battle.forceSwitch();
     }
@@ -121,19 +121,22 @@ public class Battle{
     String firstname;
 
     if (one.allDead()){
+      System.out.println("Your pokemon," + active1 + " has fainted!");
       over = true;
       winner = two.getName();
     }
     else if(two.allDead()){
+      System.out.println("Enemy pokemon, " + active2 + " has fainted!");
       over = true;
       winner = one.getName();
     }
 
     if (active1.isDead() && over != true){
-      System.out.println("Your pokemon has fainted! Choose your next pokemon!");
+      System.out.println("Your pokemon," + active1 + " has fainted! Choose your next pokemon!");
       chooseSwitch(user_input.nextInt());
     }
     if (active2.isDead() && over != true){
+      System.out.println("Enemy pokemon, " + active2 + " has fainted!");
       autoSwitch();
     }
   }

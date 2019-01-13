@@ -163,12 +163,20 @@ public class Battle{
         if (!active2.isDead()){
           active2.attack(active1, b);
         }
-        else{
-          forceSwitch()
+        else if (active2.isDead()){
+          autoSwitch();
         }
       }
       else{
         active2.attack(active1, b);
+        if (!active2.isDead()){
+          active1.attack(active2, b);
+        }
+        else if (active2.isDead()) {
+          Scanner user_input = new Scanner( System.in );
+          String firstname;
+          chooseSwitch(user_input.nextInt());
+        }
       }
     }
   }

@@ -20,6 +20,7 @@ public class Trainer extends Player{
     //   party.add(party1.get(i));
     // }
     len = party.size();
+    System.out.println("heree");
     catchable = false;
   }
 

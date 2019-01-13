@@ -5,28 +5,41 @@ public class Battle{
   public static void main(String[] args) {
 
     ArrayList<Pokemon> team = new ArrayList<Pokemon>(3);
+    System.out.println("here1");
+
 
     Pokemon bulb = new Pokemon("Bulbasaur");
     Pokemon chari = new Pokemon("Charizard");
     Pokemon mew2 = new Pokemon("Mewtwo");
     Pokemon mew = new Pokemon("Mew");
+    System.out.println("here2");
 
     team.add(bulb);
     team.add(chari);
     team.add(mew2);
+    System.out.println("here3");
 
     ArrayList<Pokemon> team1 = new ArrayList<Pokemon>(1);
+    System.out.println("here4");
     team1.add(mew);
 
+
+System.out.println("here5");
     Player one = new Trainer("Al", team);
+    System.out.println("here6");
     Player enemy = new Enemy("Jo", team1);
+    System.out.println("here7");
     Battle battle = new Battle(one, enemy);
+    System.out.println("here8");
 
+
+    Scanner user_input = new Scanner( System.in );
+    String firstname;
+    System.out.println("Here");
     while (!battle.isOver()){
-      Console console = System.console();
-      String input = console.readLine("Choose your next move!");
-
-      battle.move(input, "fire-punch");
+      System.out.println("Choose next move");
+      firstname = user_input.next();
+      battle.move(firstname, "fire-punch");
 
     }
     System.out.println("The Battle is over! " + battle.getWinner().getName() + " has won!");

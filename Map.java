@@ -1,10 +1,14 @@
 public class Map{
   //routing: pkmnlab > hometown > route1a-1e > city > gym
-  String[][] test;
-  String[][] menu;
-  String[][] hometown;
-  String[][] pkmnlab;
-  String[][] route1a;
+  private static String[][] test;
+  private static String[][] menu;
+  private static String[][] hometown;
+  private static String[][] pkmnlab;
+  private static String[][] route1a;
+
+  public static void main(String[] args) {
+    initTest();
+  }
 
   private static void makeBorders(String[][] x) {
     //uses techniques created in testmapbbb
@@ -23,28 +27,43 @@ public class Map{
     }
   }
 
-  private void initTest() {
-
+  private static void initTest() {
+    test = new String[20][20];
+    makeBorders(test);
+    System.out.println(toString(test));
   }
 
-  private void initHome(){
+  private static void initHome(){
     // Initialize homeTown
   }
 
-  public void getHome(){
+  public static void getHome(){
     // print out String[][] hometown;
   }
 
-  private void initPkmnLab(){
+  private static void initPkmnLab(){
     // Initialize pkmnlab;
   }
 
-  public void getPkmnLab() {
+  public static void getPkmnLab() {
 
   }
 
-  private void initRoute1a(){
+  private static void initRoute1a(){
     // Initialize route1a
+  }
+
+  public static String toString(String[][] x) {
+    String result = "";
+
+    for (int i = 0; i < x.length; i++) {
+      for (int j = 0; j < x[i].length; j++) {
+        result = result + " " + x[i][j];
+      }
+      result = result + "\n";
+    }
+
+    return result;
   }
 
 }

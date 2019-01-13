@@ -34,7 +34,7 @@ public class tl {
 
     while (running) {
       String[][] tmapaaa;
-      tmapaaa = Map.getMapAAA();
+      tmapaaa = Map.getTest();
       System.out.println(tmapaaa);
 
     }

@@ -1,13 +1,21 @@
+import java.util.*; //array lists
+
 public class Map{
   //routing: pkmnlab > hometown > route1a-1e > city > gym
-  String[][] test;
-  String[][] menu;
-  String[][] hometown;
-  String[][] pkmnlab;
-  String[][] route1a;
+  private static String[][] test;
+  private static String[][] menu;
+  private static String[][] town1;
+  private static String[][] pkmnlab;
+  private static String[][] route1a;
+
+  public static void main(String[] args) {
+    initTest();
+    initTown1();
+    getTest();
+    getTown1();
+  }
 
   private static void makeBorders(String[][] x) {
-    //uses techniques created in testmapbbb
     for (int i = 0; i < x.length; i++) {
       for (int j = 0; j < x[i].length; j++) {
         if (i == 0 || i == x.length - 1) {
@@ -23,28 +31,100 @@ public class Map{
     }
   }
 
-  private void initTest() {
+  private static void initTest() {
+    //(((note: coords are in y-x format)))
+    test = new String[20][20];
+    makeBorders(test);
 
+    //taking structure from town1 map to test in Lanterna
+    for (int y = 2; y < 5; y++) {
+      for (int x = 2; x < 6; x++) {
+        test[y][x] = "r";
+      }
+    }
+
+    for (int x = 2; x < 6; x++) {
+      test[5][x] = "b";
+    }
+
+    for (int y = 6; y < 8; y++) {
+      //creating rest of house
+      test[y][2] = "b";
+      test[y][5] = "b";
+
+      //creating door
+      test[y][3] = "d";
+      test[y][4] = "d";
+    }
+
+    System.out.println(toString(test));
   }
 
-  private void initHome(){
-    // Initialize homeTown
+  public static String[][] getTest() {
+    System.out.println(test);
+    return test;
   }
 
-  public void getHome(){
-    // print out String[][] hometown;
+  private static void initTown1(){
+    //note: coords are in y-x format
+
+    //Initializing town1 map
+    town1 = new String[20][40];
+    makeBorders(town1);
+
+    //placing stuff
+    for (int y = 2; y < 5; y++) {
+      for (int x = 2; x < 6; x++) {
+        town1[y][x] = "r";
+      }
+    }
+
+    for (int x = 2; x < 6; x++) {
+      town1[5][x] = "b";
+    }
+
+    for (int y = 6; y < 8; y++) {
+      //creating rest of house
+      town1[y][2] = "b";
+      town1[y][5] = "b";
+
+      //creating door
+      town1[y][3] = "d";
+      town1[y][4] = "d";
+    }
+
+
+    System.out.println(toString(town1));
   }
 
-  private void initPkmnLab(){
+  public static String[][] getTown1(){
+    System.out.println(town1);
+    return town1;
+  }
+
+  private static void initPkmnLab(){
     // Initialize pkmnlab;
   }
 
-  public void getPkmnLab() {
+  public static void getPkmnLab() {
 
   }
 
-  private void initRoute1a(){
+  private static void initRoute1a(){
     // Initialize route1a
+  }
+
+  public static String toString(String[][] x) {
+    String result = "\n";
+
+    for (int i = 0; i < x.length; i++) {
+      for (int j = 0; j < x[i].length; j++) {
+        result = result + " " + x[i][j];
+      }
+      result = result + "\n";
+    }
+
+    return result;
   }
 
 }

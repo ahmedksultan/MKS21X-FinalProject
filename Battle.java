@@ -40,14 +40,8 @@ public class Battle{
     one = one1;
     two = two2;
 
-    ArrayList<Pokemon> par = one.getParty();
-    ArrayList<Pokemon> par1 = two.getParty();
-
-    System.out.println(par);
-    System.out.println(par1);
-
-    active1 = par.get(0);
-    active2 = par1.get(0);
+    active1 = one.getMon(0);
+    active2 = two.getMon(0);
     over = false;
   }
 

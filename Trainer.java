@@ -12,10 +12,13 @@ public class Trainer extends Player{
       throw new Error();
     }
 
-    ArrayList<Pokemon> party = new ArrayList<Pokemon>(party1.size());
-    for (int i = 0; i < party1.size(); i++){
-      party.add(party1.get(i));
-    }
+    party = new ArrayList<Pokemon>(party1.size());
+
+    party = party1;
+    System.out.println(party);
+    // for (int i = 0; i < party1.size(); i++){
+    //   party.add(party1.get(i));
+    // }
     len = party.size();
     catchable = false;
   }
@@ -49,7 +52,6 @@ public class Trainer extends Player{
   }
 
   public Pokemon getMon(int index){
-
     return party.get(index);
   }
 

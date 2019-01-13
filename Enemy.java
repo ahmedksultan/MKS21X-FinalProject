@@ -14,7 +14,10 @@ public class Enemy extends Player{
       throw new Error();
     }
 
-    ArrayList<Pokemon> party = new ArrayList<Pokemon>(party1.size());
+    party = new ArrayList<Pokemon>(party1.size());
+
+    party = party1;
+
     for (int i = 0; i < party1.size(); i++){
       party.add(party1.get(i));
     }
@@ -46,6 +49,7 @@ public class Enemy extends Player{
       return party.get(0);
     }
     else{
+      System.out.println("HEEERE");
       throw new IndexOutOfBoundsException();
     }
   }

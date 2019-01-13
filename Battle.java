@@ -111,7 +111,7 @@ public class Battle{
   public void autoSwitch(){
     for (int x = 0; x < two.getParty().size(); x++){
       if (!two.getParty().get(x).isDead()){
-        chooseSwitch(2, x);
+        active2 = two.getParty().get(x);
       }
     }
   }
@@ -131,7 +131,7 @@ public class Battle{
 
     if (active1.isDead() && over != true){
       System.out.println("Your pokemon has fainted! Choose your next pokemon!");
-      chooseSwitch(1, user_input.nextInt());
+      chooseSwitch(user_input.nextInt());
     }
     if (active2.isDead() && over != true){
       autoSwitch();

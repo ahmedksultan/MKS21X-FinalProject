@@ -43,25 +43,34 @@ public class Pokemon {
    "Rock", "Bug", "Ghost", "Steel", "Fire", "Water",
    "Grass", "Electric", "Psychic", "Ice", "Dragon", "Dark", "Fairy"};
 
+   private void create(String name1){
+     name = name1;
+
+     String[] data = organizeData(name1);
+
+     type1 = data[2];
+     type2 = data[3];
+
+     for (int x = 0; x < types.length; x++){
+       if (types[x].equals(type1)) typeID1 = x+1;
+       if (types[x].equals(type2)) typeID2 = x+1;
+     }
+
+     setWeakandRes();
+
+     hp = Integer.parseInt(data[5]);
+     attack = Integer.parseInt(data[6]);
+     defense = Integer.parseInt(data[7]);
+     speed = Integer.parseInt(data[10]);
+   }
+
+  public Pokemon(String name1, ArrayList<Move> selectedAttacks){
+    create(name1);
+    setAttacks(selectedAttacks);
+  }
+
   public Pokemon(String name1){
-    name = name1;
-
-    String[] data = organizeData(name1);
-
-    type1 = data[2];
-    type2 = data[3];
-
-    for (int x = 0; x < types.length; x++){
-      if (types[x].equals(type1)) typeID1 = x+1;
-      if (types[x].equals(type2)) typeID2 = x+1;
-    }
-
-    setWeakandRes();
-
-    hp = Integer.parseInt(data[5]);
-    attack = Integer.parseInt(data[6]);
-    defense = Integer.parseInt(data[7]);
-    speed = Integer.parseInt(data[10]);
+    create(name1);
   }
 
   public String toString(){

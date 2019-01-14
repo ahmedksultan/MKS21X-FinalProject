@@ -7,7 +7,7 @@ public class Battle{
     ArrayList<Pokemon> team = new ArrayList<Pokemon>(3);
     ArrayList<Pokemon> team1 = new ArrayList<Pokemon>(1);
 
-    Pokemon Bulb = new Pokemon("Bulbasaur");
+    Pokemon Mewtwo = new Pokemon("Mewtwo");
     Pokemon Chari = new Pokemon("Charizard");
     Pokemon Mew2 = new Pokemon("Mewtwo");
     Pokemon Mew = new Pokemon("Mew");
@@ -19,8 +19,9 @@ public class Battle{
     Pokemon Electabuzz = new Pokemon("Electabuzz");
     Pokemon Lapras = new Pokemon("Lapras");
 
-    team.add(Bulb);
     team.add(Chari);
+    team.add(Mewtwo);
+
     team.add(Mew2);
     team.add(Venusaur);
     team.add(Rattata);
@@ -40,6 +41,9 @@ public class Battle{
     String firstname;
     String enemyattack;
 
+    ArrayList<String> moves3 = battle.getOne().getMon(1).getAttacks();
+    System.out.println(moves3);
+
     System.out.println("Your enemy is " + enemy.getName() + "! Their first pokemon is " + battle.getActive2());
     System.out.println("Your team is " + battle.getOne().getParty().toString());
     ArrayList<String> moves1 = battle.getTwo().getMon(3).getAttacks();
@@ -57,14 +61,21 @@ public class Battle{
       System.out.println("Choose your move");
       firstname = user_input.next();
       enemyattack = "absorb";
-      try{
-        battle.move(firstname, enemyattack);
-        System.out.println("You used " + firstname + "! Your opponent used" + enemyattack + "." );
+      if (firstname.equals("switch")){
+        battle.chooseSwitch(user_input.nextInt());
+        System.out.println("You switched Pokemon to " + battle.getActive1());
+        // battle.move("dummyValue", enemyattack);
       }
-      catch(Error e){
-        System.out.println("Your pokemon can't use that move! Try again!");
+      else{
+        try{
+          battle.move(firstname, enemyattack);
+          System.out.println("You used " + firstname + "! Your opponent used" + enemyattack + "." );
+        }
+        catch(Error e){
+          System.out.println("Your pokemon can't use that move! Try again!");
+        }
+        battle.forceSwitch();
       }
-      battle.forceSwitch();
     }
     System.out.println("The Battle is over! " + battle.getWinner()  + " has won!");
   }

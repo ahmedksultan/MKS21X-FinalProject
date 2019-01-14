@@ -9,7 +9,6 @@ public abstract class Player{
 
   public abstract int pokemonLeft();
 
-
   public abstract boolean outofMons();
 
   public abstract Pokemon getMon(int index);

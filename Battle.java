@@ -72,25 +72,14 @@ public class Battle{
     over = false;
   }
 
+//Accessor methods
+
   public Pokemon getActive1(){
     return active1;
   }
 
   public Pokemon getActive2(){
     return active2;
-  }
-
-  public void escape(){
-    if (one.allDead()){
-      System.out.println("hereee");
-      over = true;
-      winner = two.getName();
-    }
-    if (two.allDead()){
-      System.out.println("here");
-      over = true;
-      winner = one.getName();
-    }
   }
 
   public Player getOne(){
@@ -103,6 +92,21 @@ public class Battle{
 
   public String getWinner(){
     return winner.toString();
+  }
+
+//////////////////////////////////////////
+
+  public void escape(){
+    if (one.allDead()){
+      System.out.println("hereee");
+      over = true;
+      winner = two.getName();
+    }
+    if (two.allDead()){
+      System.out.println("here");
+      over = true;
+      winner = one.getName();
+    }
   }
 
   public void chooseSwitch(int index){

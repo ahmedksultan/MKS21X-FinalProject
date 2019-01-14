@@ -41,8 +41,8 @@ public class Battle{
     String firstname;
 
     System.out.println("Your enemy is " + enemy.getName() + "! Their first pokemon is " + battle.getActive2());
-    System.out.println(battle.getOne().getParty().toString());
-    System.out.println(battle.getTwo().getParty().toString());
+    System.out.println("Your team is " + battle.getOne().getParty().toString());
+    System.out.println("Your opponent's team is " + battle.getTwo().getParty().toString());
 
     while (!battle.isOver()){
 
@@ -143,11 +143,11 @@ public class Battle{
 
   public void move(String a, String b){
     if (!active1.isDead() && !active2.isDead()){
-      System.out.println(active1.getName() + " " + active1.getSpeed());
-      System.out.println(active2.getName() + " " + active2.getSpeed());
       if (active1.getSpeed() > active2.getSpeed()){
+        System.out.println("Your ");
         active1.attack(active2, a);
         if (!active2.isDead()){
+          System.out.println("Enemy's ");
           active2.attack(active1, b);
         }
         else if (active2.isDead()){
@@ -155,8 +155,10 @@ public class Battle{
         }
       }
       else{
+        System.out.println("Enemy's ");
         active2.attack(active1, b);
         if (!active1.isDead()){
+          System.out.println("Your ");
           active1.attack(active2, a);
         }
         else if (active2.isDead()) {

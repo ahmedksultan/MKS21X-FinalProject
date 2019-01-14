@@ -258,7 +258,7 @@ public class Pokemon {
            (attack / enemy.getDefense()+2)
            / 50 * mod);
 
-    System.out.println("Attack was " + mod + "x effective. " + enemy.getName() + " took " + dmg + " damage!");
+    System.out.println("attack was " + mod + "x effective. " + enemy.getName() + " took " + dmg + " damage!");
 
     if (enemy.getHP() - dmg > 0) enemy.setHP(enemy.getHP() - dmg);
     else enemy.setHP(0);

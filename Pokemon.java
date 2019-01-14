@@ -29,6 +29,8 @@ public class Pokemon {
 
     bulb.attack(ivy, "flamethrower");
     System.out.println(ivy.getHP());
+    System.out.println(bulb.getAttacks());
+    System.out.println(bulb.getPossibleAttacks());
   }
 
   private String name, type1, type2;
@@ -66,18 +68,21 @@ public class Pokemon {
 
   public Pokemon(String name1, ArrayList<Move> selectedAttacks){
     create(name1);
-    setAttacks(selectedAttacks);
+    possibleAttacks(name1);
+    setAttacks(name1, selectedAttacks);
   }
 
   public Pokemon(String name1){
     create(name1);
+    possibleAttacks(name1);
+    setAttacks(name1);
   }
 
   public String toString(){
     return name;
   }
 
-  public void possibleAttacks(){
+  public void possibleAttacks(String name1){
     possibleAttacks = new ArrayList<Move>();
     try{
       File f = new File("movesets.csv");
@@ -86,9 +91,12 @@ public class Pokemon {
       while (in.hasNext()){
         String line = in.nextLine();
         String[] stats = line.split(",");
-        if (stats[0].equals(name)){
-          possibleAttacks.add(new Move(stats[1]));
-          possibleAttacks.add(new Move(stats[2]));
+        if (stats[0].equals(name1)){
+          Move one = new Move(stats[1]);
+          Move two = new Move(stats[2]);
+          possibleAttacks.add(one);
+          possibleAttacks.add(two);
+          System.out.println(possibleAttacks);
         }
       }
     }
@@ -98,14 +106,16 @@ public class Pokemon {
     }
   }
 
-  public void setAttacks(){
+  public void setAttacks(String name1){
+    possibleAttacks(name1);
     attacks = new ArrayList<Move>();
-    for (int x = 0; x < possibleAttacks.size() - 2; x++){
-      attacks.add(possibleAttacks.get(x+2));
+    for (int x = 0; x < possibleAttacks.size(); x++){
+      attacks.add(possibleAttacks.get(x));
     }
   }
 
-  public void setAttacks(ArrayList<Move> selectedAttacks){
+  public void setAttacks(String name1, ArrayList<Move> selectedAttacks){
+    possibleAttacks(name1);
     attacks = new ArrayList<Move>();
     for (int x = 0; x < selectedAttacks.size(); x++){
       if (possibleAttacks.contains(selectedAttacks.get(x))){
@@ -192,6 +202,10 @@ public class Pokemon {
 
   public int getTypeID2(){
     return typeID2;
+  }
+
+  public ArrayList<Move> getPossibleAttacks(){
+    return possibleAttacks;
   }
 
   /////////////////////////////////

@@ -15,18 +15,10 @@ public class Enemy extends Player{
     }
 
     party = new ArrayList<Pokemon>(party1.size());
-    // System.out.println("1here");
-    party = party1;
-    // System.out.println("2here");
 
-    // // System.out.println(party1.size() + "really?");
-    // for (int i = 0; i < party1.size(); i++){
-    //   // System.out.println("1here1");
-    //   party.add(party1.get(i));
-    // }
-    // System.out.println("3here");
+    party = party1;
+
     poke = party.get(0);
-    // System.out.println("4here");
     name = name1;
   }
 

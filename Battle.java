@@ -47,15 +47,10 @@ public class Battle{
     System.out.println(battle.getTwo().getParty());
 
     while (!battle.isOver()){
-      // System.out.println(battle.getActive1().getTypeWeakness());
-      // System.out.println(battle.getActive2().getTypeWeakness());
-      // System.out.println(battle.getOne().getParty().get(1).getTypeWeakness());
-      // System.out.println(battle.getTwo().getParty().get(1).getTypeWeakness());
 
       System.out.println(battle.getActive1().toString() + " and " + battle.getActive2() + " are battling!");
       System.out.println("Choose your move");
       firstname = user_input.next();
-      // System.out.println(firstname);
       battle.move(firstname, "absorb");
       System.out.println("You used " + firstname + "! Your opponent used absorb");
       battle.forceSwitch();
@@ -76,12 +71,6 @@ public class Battle{
     active2 = two.getMon(0);
     over = false;
   }
-
-  // public boolean run(){
-  //
-  //   }
-  // }
-  //   while (!run){
 
   public Pokemon getActive1(){
     return active1;
@@ -154,24 +143,6 @@ public class Battle{
     }
   }
 
-  // public void ifDead(){
-  //   Console console = System.console();
-  //
-  //   if (active1.getHP() <= 0){
-  //     String input = console.readLine("Your pokemon has fainted! Choose a number from 1-6 corresponding to the next Pokemon you wish to use");
-  //     active1 = one.getMon(Integer.parseInt(input));
-  //   }
-  //
-  //   if (active2.getHP() <= 0){
-  //     int len = two.getParty().size();
-  //     for (int x = 0; x < len; x++){     // COULD EDIT THIS SO THAT IT'S RANDOM
-  //       if (!(two.getMon(x).isDead())){
-  //         active2 = two.getMon(x);
-  //       }
-  //     }
-  //   }
-  // }
-
   public void move(String a, String b){
     if (!active1.isDead() && !active2.isDead()){
       System.out.println(active1.getName() + " " + active1.getSpeed());
@@ -202,8 +173,6 @@ public class Battle{
   public boolean isOver(){
     return over;
   }
-
-  // public void
 
   public boolean canCatch(){
     Random rand = new Random();

@@ -41,7 +41,7 @@ public class Pokemon {
   private String[] types =
   {"Normal", "Fighting", "Flying", "Poison", "Ground",
    "Rock", "Bug", "Ghost", "Steel", "Fire", "Water",    //Have to convert this way
-   "Grass", "Electric", "Psychic", "Ice", "Dragon", "Dark", "Fairy"};
+   "Grass", "Electric", "Psychic", "Ice", "Dragon", "Dark", "Fairy"}; // Because CSV gives in names
 
   public Pokemon(String name1){
     name = name1;

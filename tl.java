@@ -81,7 +81,7 @@ public class tl {
 
       terminal.applyForegroundColor(Terminal.Color.BLACK);
       putString(44,2,terminal,"Welcome to Javamon!");
-      putString(44,4,terminal, "Created by Ahmed Sultan and Ali Taoube.");
+      putString(44,4,terminal, "Created by Ahmed Sultan & Ali Taoube.");
       putString(44,6,terminal,"PLAYER INFORMATION");
       putString(44,8,terminal,"Party:" + pparty);
 
@@ -224,6 +224,9 @@ public class tl {
           while (!johnbattle.isOver()){
 
             System.out.println(johnbattle.getActive1().toString() + " and " + johnbattle.getActive2() + " are battling!");
+            /*
+            Random randomgen = new Random(Random.nextInt());
+            int randattk = randomgen % 72; */
             System.out.println("Choose your move");
             firstname = user_input.next();
             johnbattle.move(firstname, "absorb");

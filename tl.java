@@ -217,7 +217,7 @@ public class tl {
           Scanner user_input = new Scanner( System.in );
           String firstname;
 
-          System.out.println("Your enemy is " + johnbattle.enemy.getName() + "! Their first pokemon is " + johnbattle.getActive2());
+          System.out.println("Your enemy is " + John.getName() + "! Their first pokemon is " + johnbattle.getActive2());
           System.out.println("Your team is " + johnbattle.getOne().getParty().toString());
           System.out.println("Your opponent's team is " + johnbattle.getTwo().getParty().toString());
 

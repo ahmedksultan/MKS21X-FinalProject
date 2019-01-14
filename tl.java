@@ -14,6 +14,7 @@ import com.googlecode.lanterna.input.Key;
 import com.googlecode.lanterna.input.KeyMappingProfile;
 
 import java.util.*;
+import java.io.*; //file, filenotfoundexception
 
 public class tl {
 
@@ -51,7 +52,8 @@ public class tl {
 		int x = 2;
 		int y = 15;
 
-    boolean istown1 = true;
+    boolean choosepkmn = true;
+    boolean istown1 = false;
     boolean isroute1 = false;
     boolean iscity = false;
 
@@ -72,6 +74,8 @@ public class tl {
     Map.initRoute1();
     route1 = Map.getRoute1();
 
+    ArrayList<Pokemon> pparty = new ArrayList<Pokemon>();
+    Trainer player = new Trainer("Player", pparty);
 
 		while (running) {
 
@@ -79,6 +83,14 @@ public class tl {
       putString(44,2,terminal,"Welcome to Javamon!");
       putString(44,4,terminal, "Created by Ahmed Sultan and Ali Taoube.");
       putString(44,6,terminal,"PLAYER INFORMATION");
+      putString(44,8,terminal,"Party:" + pparty);
+
+      if (choosepkmn == true) {
+        putString(2, 2, terminal, "Choose your starter Pokemon!");
+        putString(2, 4, terminal, "[S] for Squirtle.");
+        putString(2, 5, terminal, "[B] for Bulbasaur.");
+        putString(2, 6, terminal, "[C] for Charmander.");
+      }
 
       //player
 			terminal.moveCursor(x,y);
@@ -194,7 +206,31 @@ public class tl {
           }
         }
         if (y == 8 && tbattles == 0) {
-          
+          ArrayList<Pokemon> johnparty = new ArrayList<Pokemon>();
+          Pokemon blastoise = new Pokemon("Blastoise");
+          Pokemon eevee = new Pokemon("Eevee");
+          johnparty.add(blastoise);
+          johnparty.add(eevee);
+          Player John = new Trainer("John", johnparty);
+          Battle johnbattle = new Battle(player, John);
+
+          Scanner user_input = new Scanner( System.in );
+          String firstname;
+
+          System.out.println("Your enemy is " + johnbattle.enemy.getName() + "! Their first pokemon is " + johnbattle.getActive2());
+          System.out.println("Your team is " + johnbattle.getOne().getParty().toString());
+          System.out.println("Your opponent's team is " + johnbattle.getTwo().getParty().toString());
+
+          while (!johnbattle.isOver()){
+
+            System.out.println(johnbattle.getActive1().toString() + " and " + johnbattle.getActive2() + " are battling!");
+            System.out.println("Choose your move");
+            firstname = user_input.next();
+            johnbattle.move(firstname, "absorb");
+            System.out.println("You used " + firstname + "! Your opponent used absorb");
+            johnbattle.forceSwitch();
+          }
+          System.out.println("The Battle is over! " + johnbattle.getWinner()  + " has won!");
         }
       }
 
@@ -250,6 +286,24 @@ public class tl {
 					terminal.putCharacter(' ');
 					y++;
 				}
+        if (key.getCharacter() == 's' && choosepkmn == true) {
+          Pokemon Squirtle = new Pokemon("Squirtle");
+          pparty.add(Squirtle);
+          choosepkmn = false;
+          istown1 = true;
+        }
+        if (key.getCharacter() == 'b' && choosepkmn == true) {
+          Pokemon Bulbasaur = new Pokemon("Bulbasaur");
+          pparty.add(Bulbasaur);
+          choosepkmn = false;
+          istown1 = true;
+        }
+        if (key.getCharacter() == 'c' && choosepkmn == true) {
+          Pokemon Charmander = new Pokemon("Charmander");
+          pparty.add(Charmander);
+          choosepkmn = false;
+          istown1 = true;
+        }
 			}
     try {
       Thread.sleep(20);

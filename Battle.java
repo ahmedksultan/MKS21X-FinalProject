@@ -36,7 +36,6 @@ public class Battle{
 
     Battle battle = new Battle(one, enemy);
 
-
     Scanner user_input = new Scanner( System.in );
     String firstname;
 

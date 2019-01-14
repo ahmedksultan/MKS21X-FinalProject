@@ -10,9 +10,9 @@ public class Map{
 
   public static void main(String[] args) {
     initTest();
-    initTown1();
+    //initTown1();
     getTest();
-    getTown1();
+    //getTown1();
   }
 
   private static void makeBorders(String[][] x) {
@@ -33,21 +33,21 @@ public class Map{
 
   public static void initTest() {
     //(((note: coords are in y-x format)))
-    test = new String[20][20];
+    test = new String[40][40];
     makeBorders(test);
 
     //taking structure from town1 map to test in Lanterna
-    for (int y = 2; y < 5; y++) {
-      for (int x = 2; x < 6; x++) {
+    for (int y = 2; y < 8; y++) {
+      for (int x = 2; x < 10; x++) {
         test[y][x] = "r";
       }
     }
 
-    for (int x = 2; x < 6; x++) {
-      test[5][x] = "b";
+    for (int x = 2; x < 10; x++) {
+      test[8][x] = "b";
     }
 
-    for (int y = 6; y < 8; y++) {
+    for (int y = 8; y < 12; y++) {
       //creating rest of house
       test[y][2] = "b";
       test[y][5] = "b";
@@ -56,6 +56,8 @@ public class Map{
       test[y][3] = "d";
       test[y][4] = "d";
     }
+
+    System.out.println(toString(test));
 
   }
 

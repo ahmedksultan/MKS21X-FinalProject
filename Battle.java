@@ -6,8 +6,6 @@ public class Battle{
 
     ArrayList<Pokemon> team = new ArrayList<Pokemon>(3);
     ArrayList<Pokemon> team1 = new ArrayList<Pokemon>(1);
-    // System.out.println("here1");
-
 
     Pokemon Bulb = new Pokemon("Bulbasaur");
     Pokemon Chari = new Pokemon("Charizard");
@@ -96,6 +94,12 @@ public class Battle{
 
 //////////////////////////////////////////
 
+
+  // chooseSwitch allows the player to switch to another pokemon, autoSwitch
+  // makes the enemy switch out when their pokemon has fainted. forceSwitch
+  // encompasses these, as it forces an autoSwitch if needed, or make the player
+  // switch if necessary.
+
   public void chooseSwitch(int index){
     active1 = one.getMon(index);
   }
@@ -134,6 +138,9 @@ public class Battle{
     }
   }
 
+  // move is the method that makes players choose their next move, and checks if
+  // the game is over.
+
   public void move(String a, String b){
     if (!active1.isDead() && !active2.isDead()){
       System.out.println(active1.getName() + " " + active1.getSpeed());
@@ -164,6 +171,9 @@ public class Battle{
   public boolean isOver(){
     return over;
   }
+
+  // This method allows the player to attempt to catch an enemy pokemon through
+  // a percent chance that can be easily adjusted.
 
   public boolean canCatch(){
     Random rand = new Random();

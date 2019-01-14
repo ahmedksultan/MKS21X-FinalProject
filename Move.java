@@ -39,6 +39,29 @@ public class Move{
     }
   }
 
+  public Move(int index){
+    try{
+      File f = new File("moves.csv");
+      Scanner in = new Scanner(f);
+
+      while (in.hasNext()){
+        String line = in.nextLine();
+        String[] stats = line.split(",");
+
+        if (stats[0].equals(index)){
+          name = stats[1];
+          typeID = Integer.parseInt(stats[3]);
+          power = Integer.parseInt(stats[4]);
+          break;
+        }
+      }
+    }
+    catch(FileNotFoundException e){
+      System.out.println("Error");
+      System.exit(1);
+    }
+  }
+
   //Accessor Methods//
   public int getPower(){
     return power;

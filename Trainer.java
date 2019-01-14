@@ -46,6 +46,10 @@ public class Trainer extends Player{
   // allDead and pokemonLeft go hand in hand - one returns a boolean, but the
   // other just returns an integer value.
   public boolean allDead(){
+    if (party.size() == 1){
+      return party.get(0).isDead();
+    }
+
     int count = 0;
     for (int i = 0; i < party.size(); i++){
       if (party.get(i).isDead()){

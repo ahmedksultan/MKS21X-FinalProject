@@ -51,6 +51,10 @@ public class tl {
 		int x = 2;
 		int y = 15;
 
+    boolean istown1 = true;
+    boolean isroute1 = false;
+    boolean iscity = false;
+
 		Terminal terminal = TerminalFacade.createTextTerminal();
 		terminal.enterPrivateMode();
 		TerminalSize size = terminal.getTerminalSize();
@@ -61,7 +65,11 @@ public class tl {
     String[][] test;
     Map.initTown1();
     test = Map.getTown1();
-    //System.out.println(Map.toString(test));
+
+    String[][] route1;
+    Map.initRoute1();
+    route1 = Map.getRoute1();
+
 
 		while (running) {
 
@@ -76,39 +84,104 @@ public class tl {
 			terminal.applyForegroundColor(Terminal.Color.DEFAULT);
 			terminal.applySGR(Terminal.SGR.RESET_ALL);
 
-      for (int b = 0; b < test.length; b++) {
-        for (int a = 0; a < test[b].length; a++) {
-          terminal.moveCursor(b,a);
-          if (test[a][b] == "r") {
-            terminal.applyBackgroundColor(Terminal.Color.RED);
-            terminal.putCharacter('.');
-          }
-          if (test[a][b] == "b") {
-            terminal.applyBackgroundColor(Terminal.Color.YELLOW);
-            terminal.putCharacter(' ');
-          }
-          if (test[a][b] == "d") {
-            terminal.applyBackgroundColor(Terminal.Color.BLACK);
-            terminal.putCharacter(' ');
-          }
-          if (test[a][b] == "g") {
-            terminal.applyBackgroundColor(Terminal.Color.GREEN);
-            terminal.putCharacter('^');
-          }
-          if (test[a][b] == "|" || test[a][b] == "_") {
-            terminal.applyBackgroundColor(Terminal.Color.BLACK);
-            terminal.putCharacter(' ');
-          }
-          else {
-            terminal.applyBackgroundColor(Terminal.Color.DEFAULT);
-            terminal.putCharacter(' ');
+
+      if (istown1 == true ) {
+        //town1 stuff...
+        for (int b = 0; b < test.length; b++) {
+          for (int a = 0; a < test[b].length; a++) {
+            terminal.moveCursor(b,a);
+            //r = roof
+            //b = building
+            //d = door
+            //g = grass
+            //| = border
+            //p = path
+            if (test[a][b] == "r") {
+              terminal.applyBackgroundColor(Terminal.Color.RED);
+              terminal.putCharacter('.');
+            }
+            if (test[a][b] == "b") {
+              terminal.applyBackgroundColor(Terminal.Color.WHITE);
+              terminal.putCharacter(' ');
+            }
+            if (test[a][b] == "d") {
+              terminal.applyBackgroundColor(Terminal.Color.BLACK);
+              terminal.putCharacter(' ');
+            }
+            if (test[a][b] == "g") {
+              terminal.applyBackgroundColor(Terminal.Color.GREEN);
+              terminal.putCharacter('^');
+            }
+            if (test[a][b] == "|") {
+              terminal.applyBackgroundColor(Terminal.Color.BLACK);
+              terminal.putCharacter(' ');
+            }
+            if (test[a][b] == "p") {
+              terminal.applyBackgroundColor(Terminal.Color.YELLOW);
+              terminal.putCharacter(' ');
+            }
+            else {
+              terminal.applyBackgroundColor(Terminal.Color.DEFAULT);
+              terminal.putCharacter(' ');
+            }
           }
         }
       }
 
-      putString(44,2,terminal,"Welcome to Javamon!");
-      putString(44,4,terminal, "Created by Ahmed Sultan and Ali Taoube");
-      putString(44,6,terminal,"PLAYER INFORMATION");
+      if (y == 22 && istown1 == true) {
+        istown1 = false;
+        isroute1 = true;
+        y = 3;
+      }
+
+      if (y == 2 && isroute1 == true) {
+        isroute1 = false;
+        istown1 = true;
+        y = 21;
+      }
+
+      if (isroute1 == true) {
+        //town1 stuff...
+        for (int b = 0; b < route1.length; b++) {
+          for (int a = 0; a < route1[b].length; a++) {
+            terminal.moveCursor(b,a);
+            //r = roof
+            //b = building
+            //d = door
+            //g = grass
+            //| = border
+            //p = path
+            if (route1[a][b] == "r") {
+              terminal.applyBackgroundColor(Terminal.Color.RED);
+              terminal.putCharacter('.');
+            }
+            if (route1[a][b] == "b") {
+              terminal.applyBackgroundColor(Terminal.Color.WHITE);
+              terminal.putCharacter(' ');
+            }
+            if (route1[a][b] == "d") {
+              terminal.applyBackgroundColor(Terminal.Color.BLACK);
+              terminal.putCharacter(' ');
+            }
+            if (route1[a][b] == "g") {
+              terminal.applyBackgroundColor(Terminal.Color.GREEN);
+              terminal.putCharacter('^');
+            }
+            if (route1[a][b] == "|") {
+              terminal.applyBackgroundColor(Terminal.Color.BLACK);
+              terminal.putCharacter(' ');
+            }
+            if (route1[a][b] == "p") {
+              terminal.applyBackgroundColor(Terminal.Color.YELLOW);
+              terminal.putCharacter(' ');
+            }
+            else {
+              terminal.applyBackgroundColor(Terminal.Color.DEFAULT);
+              terminal.putCharacter(' ');
+            }
+          }
+        }
+      }
 
       /*
 			terminal.moveCursor(size.getColumns()-5,1);

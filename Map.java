@@ -2,9 +2,9 @@ import java.util.*; //array lists
 
 public class Map{
   //routing: pkmnlab > hometown > route1a-1e > city > gym
-  private static String[][] test;
+  private static String[][] test; //functions as town1, because i am lazy lol
   private static String[][] menu;
-  private static String[][] town1;
+  private static String[][] route1;
   private static String[][] pkmnlab;
   private static String[][] route1a;
 
@@ -86,6 +86,19 @@ public class Map{
       test[y][16] = "d";
     }
 
+    //creating a pathway
+    for (int y = 14; y < 19; y++) {
+      for (int x = 2; x < 18; x++ ) {
+        test[y][x] = "p";
+      }
+    }
+
+    for (int y = 14; y < 25; y++) {
+      for (int x = 18; x < 30; x++) {
+        test[y][x] = "p";
+      }
+    }
+
     //creating grass
     for (int y = 20; y < 25; y++) {
       for (int x = 2; x < 15; x++) {
@@ -99,6 +112,33 @@ public class Map{
     return test;
   }
 
+  public static void initRoute1(){
+    route1 = new String[40][40];
+    makeBorders(route1);
+
+    String[][] test = route1;
+
+    for (int y = 2; y < 25; y++) {
+      for (int x = 18; x < 30; x++) {
+        test[y][x] = "p";
+      }
+    }
+
+    //creating grass
+    for (int y = 20; y < 25; y++) {
+      for (int x = 2; x < 15; x++) {
+        test[y][x] = "g";
+      }
+    }
+
+    route1 = test;
+
+  }
+
+  public static String[][] getRoute1() {
+    return route1;
+  }
+
   private static void initPkmnLab(){
     // Initialize pkmnlab;
   }
@@ -107,9 +147,7 @@ public class Map{
 
   }
 
-  private static void initRoute1a(){
-    // Initialize route1a
-  }
+
 
   public static String toString(String[][] x) {
     String result = "\n";

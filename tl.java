@@ -26,7 +26,7 @@ public class tl {
 
 	public static void main (String[] args) {
 
-		int x = 50;
+		int x = 2;
 		int y = 20;
 
 		Terminal terminal = TerminalFacade.createTextTerminal();
@@ -46,13 +46,11 @@ public class tl {
 
       //player
 			terminal.moveCursor(x,y);
-			terminal.applyBackgroundColor(Terminal.Color.BLACK);
+			terminal.applyBackgroundColor(Terminal.Color.BLUE);
 			terminal.applyForegroundColor(Terminal.Color.WHITE);
-			//applySGR(a,b) for multiple modifiers (bold,blink) etc.
 			terminal.applySGR(Terminal.SGR.ENTER_UNDERLINE);
-      terminal.applySGR(Terminal.SGR.ENTER_BLINK);
       terminal.applySGR(Terminal.SGR.ENTER_BOLD);
-			terminal.putCharacter('@');
+			terminal.putCharacter('\uFE0F');
 			terminal.applyBackgroundColor(Terminal.Color.DEFAULT);
 			terminal.applyForegroundColor(Terminal.Color.DEFAULT);
 			terminal.applySGR(Terminal.SGR.RESET_ALL);
@@ -71,6 +69,10 @@ public class tl {
           if (test[a][b] == "d") {
             terminal.applyBackgroundColor(Terminal.Color.BLACK);
             terminal.putCharacter(' ');
+          }
+          if (test[a][b] == "g") {
+            terminal.applyBackgroundColor(Terminal.Color.GREEN);
+            terminal.putCharacter('^');
           }
           else {
             terminal.applyBackgroundColor(Terminal.Color.DEFAULT);

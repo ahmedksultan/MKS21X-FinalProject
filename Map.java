@@ -45,19 +45,29 @@ public class Map{
 
     for (int x = 2; x < 10; x++) {
       test[8][x] = "b";
+      test[9][x] = "b";
     }
 
-    for (int y = 8; y < 12; y++) {
+    for (int y = 10; y < 13; y++) {
       //creating rest of house
       test[y][2] = "b";
-      test[y][5] = "b";
+      test[y][3] = "b";
+      test[y][4] = "b";
+      test[y][7] = "b";
+      test[y][8] = "b";
+      test[y][9] = "b";
 
       //creating door
-      test[y][3] = "d";
-      test[y][4] = "d";
+      test[y][5] = "d";
+      test[y][6] = "d";
     }
 
-    System.out.println(toString(test));
+    //creating grass
+    for (int y = 20; y < 21; y++) {
+      for (int x = 2; x < 15; x++) {
+        test[y][x] = "g";
+      }
+    }
 
   }
 

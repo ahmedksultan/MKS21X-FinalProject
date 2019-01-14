@@ -228,8 +228,12 @@ public class Pokemon {
           count++;
         }
       }
-      x += count;
-      return x;
+      if (count == 2){
+        return 4;
+      }
+      if (count == 1){
+        return 2;
+      }
     }
 
     else if (typeResistance.contains(String.valueOf(typeID))) {
@@ -239,14 +243,10 @@ public class Pokemon {
           count++;
         }
       }
-      if (count == 2) x = .25;
-      if (count == 1) x = .5;
-      return x;
+      if (count == 2) return .25;
+      if (count == 1) return .5;
     }
-
-    else{
       return 1;
-    }
   }
 
   public void attack(Pokemon enemy, String move1){

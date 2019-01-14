@@ -31,7 +31,7 @@ public class Battle{
     team1.add(Electabuzz);
     team1.add(Lapras);
 
-    Player one = new Trainer("Al", team);
+    Trainer one = new Trainer("Al", team);
     Player enemy = new Trainer("Jo", team1);
 
     Battle battle = new Battle(one, enemy);
@@ -61,7 +61,7 @@ public class Battle{
   private boolean over;
   private String winner;
 
-  public Battle(Player one1, Player two2){
+  public Battle(Trainer one1, Player two2){
     one = one1;
     two = two2;
 
@@ -105,12 +105,18 @@ public class Battle{
   }
 
   public void autoSwitch(){
-    for (int x = 0; x < two.getParty().size(); x++){
-      if (!two.getParty().get(x).isDead()){
-        active2 = two.getParty().get(x);
+    if (two.allDead()){
+      over = true;
+      winner = one.getName();
+      System.out.println(two.getName() + " has switched to " + active2);
+    }
+    else{
+      for (int x = 0; x < two.getParty().size(); x++){
+        if (!two.getParty().get(x).isDead()){
+          active2 = two.getParty().get(x);
+        }
       }
     }
-    System.out.println(two.getName() + " has switched to " + active2);
   }
 
   public void forceSwitch(){
@@ -167,6 +173,14 @@ public class Battle{
           chooseSwitch(user_input.nextInt());
         }
       }
+    }
+    if (two.allDead()){
+      over = true;
+      winner = one.getName();
+    }
+    else if (one.allDead()){
+      over = true;
+      winner = two.getName();
     }
   }
 

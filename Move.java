@@ -60,7 +60,6 @@ public class Move{
       System.out.println("Error");
       System.exit(1);
     }
-
   }
 
   //Accessor Methods//

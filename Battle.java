@@ -96,19 +96,6 @@ public class Battle{
 
 //////////////////////////////////////////
 
-  public void escape(){
-    if (one.allDead()){
-      System.out.println("hereee");
-      over = true;
-      winner = two.getName();
-    }
-    if (two.allDead()){
-      System.out.println("here");
-      over = true;
-      winner = one.getName();
-    }
-  }
-
   public void chooseSwitch(int index){
     active1 = one.getMon(index);
   }

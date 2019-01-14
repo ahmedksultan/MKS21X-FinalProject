@@ -174,6 +174,7 @@ public class Battle{
         }
       }
     }
+
     if (two.allDead()){
       over = true;
       winner = one.getName();

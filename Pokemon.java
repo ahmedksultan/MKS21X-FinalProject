@@ -216,38 +216,23 @@ public class Pokemon {
     // This calculates the proper modifier, based on if the type exists in the
     // typeWeakness or typeResistance array, and returns .25, .5, 1, 2, or 4
     // based on which array it exists in, and how many times.
-  private double modifier(Move move, Pokemon enemy){
-    double x = 1;
 
-    int typeID = move.getTypeID();
+private double modifier(Move move, Pokemon enemy){
+  int typeID = move.getTypeID();
 
-    if (typeWeakness.contains(String.valueOf(typeID))) {
-      int count = 0;
-      for (int i = 0; i < typeWeakness.size(); i++){
-        if (Integer.parseInt(typeWeakness.get(i)) == typeID){
-          count++;
-        }
-      }
-      if (count == 2){
-        return 4;
-      }
-      if (count == 1){
-        return 2;
-      }
-    }
-
-    else if (typeResistance.contains(String.valueOf(typeID))) {
-      int count = 0;
-      for (int i = 0; i < typeResistance.size(); i++){
-        if (Integer.parseInt(typeResistance.get(i)) == typeID){
-          count++;
-        }
-      }
-      if (count == 2) return .25;
-      if (count == 1) return .5;
-    }
-      return 1;
+  if (enemy.getTypeWeakness().contains(String.valueOf(typeID))) {
+    int num = Collections.frequency(enemy.getTypeWeakness(), String.valueOf(typeID));
+    if (num == 1) return 2;
+    if (num == 2) return 4;
   }
+  if (enemy.getTypeResistance().contains(String.valueOf(typeID))) {
+    int num = Collections.frequency(enemy.getTypeResistance(), String.valueOf(typeID));
+    System.out.println(num + "here");
+    if (num == 1) return .5;
+    if (num == 2) return .25;
+  }
+  return 1;
+}
 
   public void attack(Pokemon enemy, String move1){
     Move move = new Move(move1);

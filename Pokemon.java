@@ -82,6 +82,26 @@ public class Pokemon {
     return name;
   }
 
+  private String evolutionID(int index){
+    try{
+      File f = new File("evolutions.csv");
+      Scanner in = new Scanner(f);
+
+      while (in.hasNext()){
+        String line = in.nextLine();
+        String[] stats = line.split(",");
+
+        if (String.valueOf(index).equals(stats[0])){
+          return stats[1];
+        }
+      }
+    }
+    catch(FileNotFoundException e){
+      System.out.println("ERROR evolutionID");
+      throw new Error();
+    }
+  }
+
   public void possibleAttacks(String name1){
     possibleAttacks = new ArrayList<String>(50);
     try{
@@ -100,6 +120,18 @@ public class Pokemon {
     catch(FileNotFoundException e){
       System.out.println("Error in possibleAttacks");
       throw new Error();
+    }
+
+    if (possibleAttacks.isEmpty()){
+      try{
+        File f = new File("movesets.csv");
+        Scanner in = new Scanner(f);
+
+
+      }
+      catch(FileNotFoundException e){
+
+      }
     }
     // System.out.println(possibleAttacks);
   }

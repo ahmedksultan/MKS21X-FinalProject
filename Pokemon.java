@@ -227,7 +227,6 @@ private double modifier(Move move, Pokemon enemy){
   }
   if (enemy.getTypeResistance().contains(String.valueOf(typeID))) {
     int num = Collections.frequency(enemy.getTypeResistance(), String.valueOf(typeID));
-    System.out.println(num + "here");
     if (num == 1) return .5;
     if (num == 2) return .25;
   }

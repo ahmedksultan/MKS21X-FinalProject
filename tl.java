@@ -55,6 +55,8 @@ public class tl {
     boolean isroute1 = false;
     boolean iscity = false;
 
+    int tbattles = 0;
+
 		Terminal terminal = TerminalFacade.createTextTerminal();
 		terminal.enterPrivateMode();
 		TerminalSize size = terminal.getTerminalSize();
@@ -72,6 +74,11 @@ public class tl {
 
 
 		while (running) {
+
+      terminal.applyForegroundColor(Terminal.Color.BLACK);
+      putString(44,2,terminal,"Welcome to Javamon!");
+      putString(44,4,terminal, "Created by Ahmed Sultan and Ali Taoube.");
+      putString(44,6,terminal,"PLAYER INFORMATION");
 
       //player
 			terminal.moveCursor(x,y);
@@ -141,7 +148,7 @@ public class tl {
       }
 
       if (isroute1 == true) {
-        //town1 stuff...
+        //route1 stuff...
         for (int b = 0; b < route1.length; b++) {
           for (int a = 0; a < route1[b].length; a++) {
             terminal.moveCursor(b,a);
@@ -175,11 +182,19 @@ public class tl {
               terminal.applyBackgroundColor(Terminal.Color.YELLOW);
               terminal.putCharacter(' ');
             }
+            if (route1[a][b] == "!t") {
+              terminal.applyBackgroundColor(Terminal.Color.MAGENTA);
+              terminal.applyForegroundColor(Terminal.Color.YELLOW);
+              terminal.putCharacter('!');
+            }
             else {
               terminal.applyBackgroundColor(Terminal.Color.DEFAULT);
               terminal.putCharacter(' ');
             }
           }
+        }
+        if (y == 8 && tbattles == 0) {
+          
         }
       }
 

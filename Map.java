@@ -125,11 +125,14 @@ public class Map{
     }
 
     //creating grass
-    for (int y = 20; y < 25; y++) {
-      for (int x = 2; x < 15; x++) {
+    for (int y = 10; y < 25; y++) {
+      for (int x = 2; x < 16; x++) {
         test[y][x] = "g";
       }
     }
+
+    //placing trainer
+    test[8][31] = "!t";
 
     route1 = test;
 

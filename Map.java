@@ -2,17 +2,15 @@ import java.util.*; //array lists
 
 public class Map{
   //routing: pkmnlab > hometown > route1a-1e > city > gym
-  private static String[][] test;
+  private static String[][] test; //functions as town1, because i am lazy lol
   private static String[][] menu;
-  private static String[][] town1;
+  private static String[][] route1;
   private static String[][] pkmnlab;
   private static String[][] route1a;
 
   public static void main(String[] args) {
-    initTest();
-    //initTown1();
-    getTest();
-    //getTown1();
+    initTown1();
+    getTown1();
   }
 
   private static void makeBorders(String[][] x) {
@@ -31,8 +29,9 @@ public class Map{
     }
   }
 
-  public static void initTest() {
+  public static void initTown1() {
     //(((note: coords are in y-x format)))
+    //renamed test to town1
     test = new String[40][40];
     makeBorders(test);
 
@@ -62,6 +61,44 @@ public class Map{
       test[y][6] = "d";
     }
 
+    for (int y = 2; y < 8; y++) {
+      for (int x = 12; x < 20; x++) {
+        test[y][x] = "r";
+      }
+    }
+
+    for (int x = 12; x < 20; x++) {
+      test[8][x] = "b";
+      test[9][x] = "b";
+    }
+
+    for (int y = 10; y < 13; y++) {
+      //creating rest of house
+      test[y][12] = "b";
+      test[y][13] = "b";
+      test[y][14] = "b";
+      test[y][17] = "b";
+      test[y][18] = "b";
+      test[y][19] = "b";
+
+      //creating door
+      test[y][15] = "d";
+      test[y][16] = "d";
+    }
+
+    //creating a pathway
+    for (int y = 14; y < 19; y++) {
+      for (int x = 2; x < 18; x++ ) {
+        test[y][x] = "p";
+      }
+    }
+
+    for (int y = 14; y < 25; y++) {
+      for (int x = 18; x < 30; x++) {
+        test[y][x] = "p";
+      }
+    }
+
     //creating grass
     for (int y = 20; y < 25; y++) {
       for (int x = 2; x < 15; x++) {
@@ -71,45 +108,38 @@ public class Map{
 
   }
 
-  public static String[][] getTest() {
+  public static String[][] getTown1() {
     return test;
   }
 
-  public static void initTown1(){
-    //note: coords are in y-x format
+  public static void initRoute1(){
+    route1 = new String[40][40];
+    makeBorders(route1);
 
-    //initializing town1 map
-    town1 = new String[20][40];
-    makeBorders(town1);
+    String[][] test = route1;
 
-    //placing stuff
-    for (int y = 2; y < 5; y++) {
-      for (int x = 2; x < 6; x++) {
-        town1[y][x] = "r";
+    for (int y = 2; y < 25; y++) {
+      for (int x = 18; x < 30; x++) {
+        test[y][x] = "p";
       }
     }
 
-    for (int x = 2; x < 6; x++) {
-      town1[5][x] = "b";
+    //creating grass
+    for (int y = 10; y < 25; y++) {
+      for (int x = 2; x < 16; x++) {
+        test[y][x] = "g";
+      }
     }
 
-    for (int y = 6; y < 8; y++) {
-      //creating rest of house
-      town1[y][2] = "b";
-      town1[y][5] = "b";
+    //placing trainer
+    test[8][31] = "!t";
 
-      //creating door
-      town1[y][3] = "d";
-      town1[y][4] = "d";
-    }
-
-    System.out.println(toString(town1));
+    route1 = test;
 
   }
 
-  public static String[][] getTown1(){
-    System.out.println(town1);
-    return town1;
+  public static String[][] getRoute1() {
+    return route1;
   }
 
   private static void initPkmnLab(){
@@ -120,9 +150,7 @@ public class Map{
 
   }
 
-  private static void initRoute1a(){
-    // Initialize route1a
-  }
+
 
   public static String toString(String[][] x) {
     String result = "\n";

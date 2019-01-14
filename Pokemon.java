@@ -34,7 +34,7 @@ public class Pokemon {
   private String name, type1, type2;
   private int attack, speed, defense, typeID1, typeID2;
   private double hp;
-  private ArrayList<Move> attacks;
+  private ArrayList<Move> attacks, possibleAttacks;
   private ArrayList<String> typeWeakness, typeResistance;
   //Have to convert this way because CSV file gives IDs for types, not names, so
   //we can match them up.
@@ -68,6 +68,46 @@ public class Pokemon {
     return name;
   }
 
+  public void possibleAttacks(){
+    possibleAttacks = new ArrayList<Move>();
+    try{
+      File f = new File("movesets.csv");
+      Scanner in = new Scanner(f);
+
+      while (in.hasNext()){
+        String line = in.nextLine();
+        String[] stats = line.split(",");
+        if (stats[0].equals(name)){
+          possibleAttacks.add(new Move(stats[1]));
+          possibleAttacks.add(new Move(stats[2]));
+        }
+      }
+    }
+    catch(FileNotFoundException e){
+      System.out.println("Error in possibleAttacks");
+      throw new Error();
+    }
+  }
+
+  public void setAttacks(){
+    attacks = new ArrayList<Move>();
+    for (int x = 0; x < possibleAttacks.size() - 2; x++){
+      attacks.add(possibleAttacks.get(x+2));
+    }
+  }
+
+  public void setAttacks(ArrayList<Move> selectedAttacks){
+    attacks = new ArrayList<Move>();
+    for (int x = 0; x < selectedAttacks.size(); x++){
+      if (possibleAttacks.contains(selectedAttacks.get(x))){
+        attacks.add(selectedAttacks.get(x));
+      }
+      else{
+        System.out.println("Error in setAttacks");
+        throw new Error();
+      }
+    }
+  }
 
   // organizeData reads through the moves.csv file and returns a String with all
   // the data from the corresponding move.

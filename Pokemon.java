@@ -102,6 +102,26 @@ public class Pokemon {
     }
   }
 
+  private String idToName(int index){
+    try{
+      File f = new File("evolutions.csv");
+      Scanner in = new Scanner(f);
+
+      while (in.hasNext()){
+        String line = in.nextLine();
+        String[] stats = line.split(",");
+
+        if (String.valueOf(index).equals(stats[1])){
+          return stats[1];
+        }
+      }
+    }
+    catch(FileNotFoundException e){
+      System.out.println("Error in idToName");
+      throw new Error();
+    }
+  }
+
   public void possibleAttacks(String name1){
     possibleAttacks = new ArrayList<String>(50);
     try{

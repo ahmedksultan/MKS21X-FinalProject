@@ -91,7 +91,7 @@ public class tl {
         putString(2, 4, terminal, "[S] for Squirtle.");
         putString(2, 5, terminal, "[B] for Bulbasaur.");
         putString(2, 6, terminal, "[C] for Charmander.");
-				//putString(2, 8, terminal, "//DEMO PURPOSES ONLY [D] for Demo.");
+				putString(2, 8, terminal, "//DEMO PURPOSES ONLY [D] for Demo.");
       }
 
       //player
@@ -307,6 +307,12 @@ public class tl {
 	          System.out.println("Your team is " + wildmeowth.getOne().getParty().toString());
 	          System.out.println("Your opponent's team is " + wildmeowth.getTwo().getParty().toString());
 
+						try {
+							TimeUnit.SECONDS.sleep(2);
+						} catch (InterruptedException e) {
+							System.exit(1);
+						}
+
 	          while (!wildmeowth.isOver()){
 	            System.out.println("\n" + wildmeowth.getActive1().toString() + " and " + wildmeowth.getActive2() + " are battling!\n");
 							System.out.println("Choose your move!");
@@ -399,7 +405,6 @@ public class tl {
           choosepkmn = false;
           istown1 = true;
         }
-				/*
 				if (key.getCharacter() == 'd' && choosepkmn == true) {
 					Pokemon Charmander = new Pokemon("Charmander");
 					pparty.add(Charmander);
@@ -409,10 +414,10 @@ public class tl {
           pparty.add(Squirtle);
 					choosepkmn = false;
           istown1 = true;
-				} */
+				}
 			}
     try {
-      Thread.sleep(20);
+      Thread.sleep(50);
     } catch (InterruptedException e) {
       System.exit(1);
     }

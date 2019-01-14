@@ -12,8 +12,8 @@ import com.googlecode.lanterna.input.InputDecoder;
 import com.googlecode.lanterna.input.InputProvider;
 import com.googlecode.lanterna.input.Key;
 import com.googlecode.lanterna.input.KeyMappingProfile;
-import java.util.Arrays;
 
+import java.util.*;
 
 public class tl {
 
@@ -27,12 +27,11 @@ public class tl {
 	public static void main (String[] args) {
 
 		int x = 2;
-		int y = 20;
+		int y = 15;
 
 		Terminal terminal = TerminalFacade.createTextTerminal();
 		terminal.enterPrivateMode();
 		TerminalSize size = terminal.getTerminalSize();
-    System.out.println(size);
 		terminal.setCursorVisible(false);
 
 		boolean running = true;
@@ -50,7 +49,7 @@ public class tl {
 			terminal.applyForegroundColor(Terminal.Color.WHITE);
 			terminal.applySGR(Terminal.SGR.ENTER_UNDERLINE);
       terminal.applySGR(Terminal.SGR.ENTER_BOLD);
-			terminal.putCharacter('\uFE0F');
+			terminal.putCharacter('@');
 			terminal.applyBackgroundColor(Terminal.Color.DEFAULT);
 			terminal.applyForegroundColor(Terminal.Color.DEFAULT);
 			terminal.applySGR(Terminal.SGR.RESET_ALL);
@@ -60,7 +59,7 @@ public class tl {
           terminal.moveCursor(b,a);
           if (test[a][b] == "r") {
             terminal.applyBackgroundColor(Terminal.Color.RED);
-            terminal.putCharacter(' ');
+            terminal.putCharacter('.');
           }
           if (test[a][b] == "b") {
             terminal.applyBackgroundColor(Terminal.Color.YELLOW);
@@ -73,6 +72,10 @@ public class tl {
           if (test[a][b] == "g") {
             terminal.applyBackgroundColor(Terminal.Color.GREEN);
             terminal.putCharacter('^');
+          }
+          if (test[a][b] == "|" || test[a][b] == "_") {
+            terminal.applyBackgroundColor(Terminal.Color.BLACK);
+            terminal.putCharacter(' ');
           }
           else {
             terminal.applyBackgroundColor(Terminal.Color.DEFAULT);
@@ -133,16 +136,7 @@ public class tl {
 					terminal.putCharacter(' ');
 					y++;
 				}
-				//space moves it diagonally
-				if (key.getCharacter() == ' ') {
-					terminal.moveCursor(x,y);
-					terminal.putCharacter(' ');
-					y++;
-					x++;
-				}
 			}
-
-
 		}
 	}
 }

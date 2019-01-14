@@ -63,7 +63,7 @@ public class Map{
     }
 
     //creating grass
-    for (int y = 20; y < 21; y++) {
+    for (int y = 20; y < 25; y++) {
       for (int x = 2; x < 15; x++) {
         test[y][x] = "g";
       }

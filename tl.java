@@ -17,12 +17,34 @@ import java.util.*;
 
 public class tl {
 
+  //credit to Mr. K, from TerminalDemo.java
 	public static void putString(int r, int c, Terminal t, String s) {
 		t.moveCursor(r,c);
 		for (int i = 0; i < s.length(); i++) {
 			t.putCharacter(s.charAt(i));
 		}
 	}
+
+  /* dont work - will figure out some other time
+
+  //modified version of Mr. K's putString method, from TerminalDemo
+  public static void putStringBold(int r, int c, Terminal t, String s) {
+		t.moveCursor(r,c);
+		for (int i = 0; i < s.length(); i++) {
+      terminal.applySGR(Terminal.SGR.Enter_BOLD);
+			t.putCharacter(s.charAt(i));
+		}
+	}
+
+  //modified version of Mr. K's putString
+  public static void putStringUL(int r, int c, Terminal t, String s) {
+		t.moveCursor(r,c);
+		for (int i = 0; i < s.length(); i++) {
+      terminal.applySGR(Terminal.SGR.Enter_UNDERLINE);
+			t.putCharacter(s.charAt(i));
+		}
+	}
+  */
 
 	public static void main (String[] args) {
 
@@ -37,8 +59,8 @@ public class tl {
 		boolean running = true;
 
     String[][] test;
-    Map.initTest();
-    test = Map.getTest();
+    Map.initTown1();
+    test = Map.getTown1();
     //System.out.println(Map.toString(test));
 
 		while (running) {
@@ -83,6 +105,10 @@ public class tl {
           }
         }
       }
+
+      putString(44,2,terminal,"Welcome to Javamon!");
+      putString(44,4,terminal, "Created by Ahmed Sultan and Ali Taoube");
+      putString(44,6,terminal,"PLAYER INFORMATION");
 
       /*
 			terminal.moveCursor(size.getColumns()-5,1);
@@ -137,6 +163,11 @@ public class tl {
 					y++;
 				}
 			}
+    try {
+      Thread.sleep(20);
+    } catch (InterruptedException e) {
+      System.exit(1);
+    }
 		}
 	}
 }

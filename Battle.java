@@ -42,8 +42,11 @@ public class Battle{
 
     System.out.println("Your enemy is " + enemy.getName() + "! Their first pokemon is " + battle.getActive2());
     System.out.println("Your team is " + battle.getOne().getParty().toString());
-    ArrayList<String> moves1 = battle.getOne().getMon(3).getAttacks();
-    System.out.println("Your pokemon's moves are here: " + moves1);
+    ArrayList<String> moves1 = battle.getTwo().getMon(3).getAttacks();
+    ArrayList<String> moves2 = battle.getOne().getMon(0).getAttacks();
+    System.out.println("Your pokemon's moves are here: " + moves2);
+    System.out.println("Enemy pokemon moves are here: " + moves1);
+
     // System.out.println("Your pokemon's moves are here: " + battle.getOne().getMon(4).attackstoString(1));
 
     System.out.println("Your opponent's team is " + battle.getTwo().getParty().toString());
@@ -54,8 +57,13 @@ public class Battle{
       System.out.println("Choose your move");
       firstname = user_input.next();
       enemyattack = "absorb";
-      battle.move(firstname, enemyattack);
-      System.out.println("You used " + firstname + "! Your opponent used" + enemyattack + "." );
+      try{
+        battle.move(firstname, enemyattack);
+        System.out.println("You used " + firstname + "! Your opponent used" + enemyattack + "." );
+      }
+      catch(Error e){
+        System.out.println("Your pokemon can't use that move! Try again!");
+      }
       battle.forceSwitch();
     }
     System.out.println("The Battle is over! " + battle.getWinner()  + " has won!");
@@ -162,6 +170,10 @@ public class Battle{
   // the game is over.
 
   public void move(String a, String b){
+    if (!checkValid(a)){
+      throw new Error();
+    }
+
     if (!active1.isDead() && !active2.isDead()){
       if (active1.getSpeed() > active2.getSpeed()){
         System.out.println("Your ");
@@ -201,6 +213,12 @@ public class Battle{
 
   public boolean isOver(){
     return over;
+  }
+
+
+// Helper method to check if inputted move is valid.
+  private boolean checkValid(String movename1){
+    return (active1.getAttacks().contains(movename1));
   }
 
   // This method allows the player to attempt to catch an enemy pokemon through

@@ -83,7 +83,7 @@ public class Pokemon {
   }
 
   public void possibleAttacks(String name1){
-    possibleAttacks = new ArrayList<Move>();
+    possibleAttacks = new ArrayList<Move>(50);
     try{
       File f = new File("movesets.csv");
       Scanner in = new Scanner(f);
@@ -96,7 +96,7 @@ public class Pokemon {
           Move two = new Move(stats[2]);
           possibleAttacks.add(one);
           possibleAttacks.add(two);
-          System.out.println(possibleAttacks);
+          // System.out.println(possibleAttacks);
         }
       }
     }
@@ -104,14 +104,44 @@ public class Pokemon {
       System.out.println("Error in possibleAttacks");
       throw new Error();
     }
+    // System.out.println(possibleAttacks);
   }
 
   public void setAttacks(String name1){
     possibleAttacks(name1);
-    attacks = new ArrayList<Move>();
-    for (int x = 0; x < possibleAttacks.size(); x++){
+    attacks = new ArrayList<Move>(4);
+    for (int x = 0; x < possibleAttacks.size() && attacks.size() < 4; x++){
       attacks.add(possibleAttacks.get(x));
     }
+  }
+
+  // public String attackstoString(int index){ // One for possibleAttacks, two for just attacks
+  //   String output ="";
+  //   if (index == 1){
+  //     for (int x = 0; x < possibleAttacks.size(); x++){
+  //       output += possibleAttacks.get(x).getName();
+  //       // System.out.println(possibleAttacks.get(x).getName());
+  //       if (x + 1 != possibleAttacks.size()) output += ", ";
+  //     }
+  //   }
+  //   else{
+  //     for (int x = 0; x < attacks.size(); x++){
+  //       output += attacks.get(x).getName();
+  //       if (x + 1 != attacks.size()) output += ", ";
+  //     }
+  //   }
+  //   return output;
+  // }
+
+  public static String arrayToString(ArrayList<Move> input){
+    String output = "";
+    for (int x = 0; x < input.size(); x++){
+      // System.out.println(input.get(x));
+      // System.out.println(input.get(x).getName());
+      output += input.get(x);
+      if (x+1 != input.size()) output += ", ";
+    }
+    return output;
   }
 
   public void setAttacks(String name1, ArrayList<Move> selectedAttacks){

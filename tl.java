@@ -15,6 +15,7 @@ import com.googlecode.lanterna.input.KeyMappingProfile;
 
 import java.util.*;
 import java.io.*; //file, filenotfoundexception
+import java.util.concurrent.TimeUnit; //time
 
 public class tl {
 
@@ -90,6 +91,7 @@ public class tl {
         putString(2, 4, terminal, "[S] for Squirtle.");
         putString(2, 5, terminal, "[B] for Bulbasaur.");
         putString(2, 6, terminal, "[C] for Charmander.");
+				putString(2, 8, terminal, "//DEMO PURPOSES ONLY [D] for Demo.");
       }
 
       //player
@@ -216,24 +218,32 @@ public class tl {
 
           Scanner user_input = new Scanner( System.in );
           String firstname;
+					String enemyattack;
 
+					terminal.exitPrivateMode();
+
+					System.out.println("\n---A BATTLE HAS BEGUN!---");
           System.out.println("Your enemy is " + John.getName() + "! Their first pokemon is " + johnbattle.getActive2());
           System.out.println("Your team is " + johnbattle.getOne().getParty().toString());
           System.out.println("Your opponent's team is " + johnbattle.getTwo().getParty().toString());
 
           while (!johnbattle.isOver()){
-
-            System.out.println(johnbattle.getActive1().toString() + " and " + johnbattle.getActive2() + " are battling!");
-            /*
-            Random randomgen = new Random(Random.nextInt());
-            int randattk = randomgen % 72; */
-            System.out.println("Choose your move");
-            firstname = user_input.next();
-            johnbattle.move(firstname, "absorb");
-            System.out.println("You used " + firstname + "! Your opponent used absorb");
+            System.out.println("\n" + johnbattle.getActive1().toString() + " and " + johnbattle.getActive2() + " are battling!\n");
+						System.out.println("Choose your move!");
+						firstname = user_input.next();
+						enemyattack = "absorb";
+						System.out.println("You used " + firstname + "! Your opponent used " + enemyattack + ".");
+            johnbattle.move(firstname, enemyattack);
             johnbattle.forceSwitch();
           }
-          System.out.println("The Battle is over! " + johnbattle.getWinner()  + " has won!");
+          System.out.println("\nThe battle is over! " + johnbattle.getWinner()  + " has won!");
+					try {
+						TimeUnit.SECONDS.sleep(2);
+					} catch (InterruptedException e) {
+						System.exit(1);
+					}
+					tbattles = 1;
+					terminal.enterPrivateMode();
         }
       }
 
@@ -307,6 +317,16 @@ public class tl {
           choosepkmn = false;
           istown1 = true;
         }
+				if (key.getCharacter() == 'd' && choosepkmn == true) {
+					Pokemon Charmander = new Pokemon("Charmander");
+					pparty.add(Charmander);
+					Pokemon Bulbasaur = new Pokemon("Bulbasaur");
+          pparty.add(Bulbasaur);
+					Pokemon Squirtle = new Pokemon("Squirtle");
+          pparty.add(Squirtle);
+					choosepkmn = false;
+          istown1 = true;
+				}
 			}
     try {
       Thread.sleep(20);

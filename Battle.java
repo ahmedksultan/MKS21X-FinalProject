@@ -38,6 +38,7 @@ public class Battle{
 
     Scanner user_input = new Scanner( System.in );
     String firstname;
+    String enemyattack;
 
     System.out.println("Your enemy is " + enemy.getName() + "! Their first pokemon is " + battle.getActive2());
     System.out.println("Your team is " + battle.getOne().getParty().toString());
@@ -48,8 +49,9 @@ public class Battle{
       System.out.println(battle.getActive1().toString() + " and " + battle.getActive2() + " are battling!");
       System.out.println("Choose your move");
       firstname = user_input.next();
-      battle.move(firstname, "absorb");
-      System.out.println("You used " + firstname + "! Your opponent used absorb");
+      enemyattack = "absorb";
+      battle.move(firstname, enemyattack);
+      System.out.println("You used " + firstname + "! Your opponent used" + enemyattack + "." );
       battle.forceSwitch();
     }
     System.out.println("The Battle is over! " + battle.getWinner()  + " has won!");

@@ -104,7 +104,7 @@ public class Pokemon {
 
   private String idToName(int index){
     try{
-      File f = new File("evolutions.csv");
+      File f = new File("Pokemon.csv");
       Scanner in = new Scanner(f);
 
       while (in.hasNext()){
@@ -113,6 +113,26 @@ public class Pokemon {
 
         if (String.valueOf(index).equals(stats[1])){
           return stats[1];
+        }
+      }
+    }
+    catch(FileNotFoundException e){
+      System.out.println("Error in idToName");
+      throw new Error();
+    }
+  }
+
+  private String nameToID(String names){
+    try{
+      File f = new File("Pokemon.csv");
+      Scanner in = new Scanner(f);
+
+      while (in.hasNext()){
+        String line = in.nextLine();
+        String[] stats = line.split(",");
+
+        if (names.equals(stats[0])){
+          return stats[0];
         }
       }
     }
@@ -143,15 +163,7 @@ public class Pokemon {
     }
 
     if (possibleAttacks.isEmpty()){
-      try{
-        File f = new File("movesets.csv");
-        Scanner in = new Scanner(f);
-
-
-      }
-      catch(FileNotFoundException e){
-
-      }
+      possibleAttacks()
     }
     // System.out.println(possibleAttacks);
   }

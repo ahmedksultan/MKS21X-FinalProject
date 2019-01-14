@@ -5,48 +5,52 @@ public class Battle{
   public static void main(String[] args) {
 
     ArrayList<Pokemon> team = new ArrayList<Pokemon>(3);
-    // System.out.println("here1");
-
-
-    Pokemon bulb = new Pokemon("Bulbasaur");
-    Pokemon chari = new Pokemon("Charizard");
-    Pokemon mew2 = new Pokemon("Mewtwo");
-    Pokemon mew = new Pokemon("Mew");
-    Pokemon venusaur = new Pokemon("Venusaur");
-    // System.out.println("here2");
-
-    team.add(bulb);
-    team.add(chari);
-    team.add(mew2);
-    // System.out.println("here3");
-
     ArrayList<Pokemon> team1 = new ArrayList<Pokemon>(1);
-    // System.out.println("here4");
-    team1.add(venusaur);
 
+    Pokemon Bulb = new Pokemon("Bulbasaur");
+    Pokemon Chari = new Pokemon("Charizard");
+    Pokemon Mew2 = new Pokemon("Mewtwo");
+    Pokemon Mew = new Pokemon("Mew");
+    Pokemon Venusaur = new Pokemon("Venusaur");
+    Pokemon Rattata = new Pokemon("Rattata");
+    Pokemon Tentacruel = new Pokemon("Tentacruel");
+    Pokemon Weezing = new Pokemon("Weezing");
+    Pokemon Starmie = new Pokemon("Starmie");
+    Pokemon Electabuzz = new Pokemon("Electabuzz");
+    Pokemon Lapras = new Pokemon("Lapras");
 
-// System.out.println("here5");
+    team.add(Bulb);
+    team.add(Chari);
+    team.add(Mew2);
+    team.add(Venusaur);
+    team.add(Rattata);
+    team.add(Tentacruel);
+
+    team1.add(Weezing);
+    team1.add(Starmie);
+    team1.add(Electabuzz);
+    team1.add(Lapras);
+
     Player one = new Trainer("Al", team);
-    // System.out.println("here6");
-    Player enemy = new Enemy("Jo", team1);
-    // System.out.println("here7");
+    Player enemy = new Trainer("Jo", team1);
+
     Battle battle = new Battle(one, enemy);
-    // System.out.println("here8");
 
 
     Scanner user_input = new Scanner( System.in );
     String firstname;
-    // System.out.println("Here");
+
     System.out.println("Your enemy is " + enemy.getName() + "! Their first pokemon is " + battle.getActive2());
     System.out.println(battle.getOne().getParty());
     System.out.println(battle.getTwo().getParty());
 
     while (!battle.isOver()){
-      System.out.println(battle.getActive1() + " and " + battle.getActive2() + " are battling!");
-      System.out.println("Choose next move");
+
+      System.out.println(battle.getActive1().toString() + " and " + battle.getActive2() + " are battling!");
+      System.out.println("Choose your move");
       firstname = user_input.next();
-      // System.out.println(firstname);
       battle.move(firstname, "absorb");
+      System.out.println("You used " + firstname + "! Your opponent used absorb");
       battle.forceSwitch();
     }
     System.out.println("The Battle is over! " + battle.getWinner()  + " has won!");
@@ -66,31 +70,14 @@ public class Battle{
     over = false;
   }
 
-  // public boolean run(){
-  //
-  //   }
-  // }
-  //   while (!run){
+//Accessor methods
 
-  public String getActive1(){
-    return active1.toString();
+  public Pokemon getActive1(){
+    return active1;
   }
 
-  public String getActive2(){
-    return active2.toString();
-  }
-
-  public void escape(){
-    if (one.allDead()){
-      System.out.println("hereee");
-      over = true;
-      winner = two.getName();
-    }
-    if (two.allDead()){
-      System.out.println("here");
-      over = true;
-      winner = one.getName();
-    }
+  public Pokemon getActive2(){
+    return active2;
   }
 
   public Player getOne(){
@@ -105,6 +92,14 @@ public class Battle{
     return winner.toString();
   }
 
+//////////////////////////////////////////
+
+
+  // chooseSwitch allows the player to switch to another pokemon, autoSwitch
+  // makes the enemy switch out when their pokemon has fainted. forceSwitch
+  // encompasses these, as it forces an autoSwitch if needed, or make the player
+  // switch if necessary.
+
   public void chooseSwitch(int index){
     active1 = one.getMon(index);
   }
@@ -115,6 +110,7 @@ public class Battle{
         active2 = two.getParty().get(x);
       }
     }
+    System.out.println(two.getName() + " has switched to " + active2);
   }
 
   public void forceSwitch(){
@@ -142,23 +138,8 @@ public class Battle{
     }
   }
 
-  // public void ifDead(){
-  //   Console console = System.console();
-  //
-  //   if (active1.getHP() <= 0){
-  //     String input = console.readLine("Your pokemon has fainted! Choose a number from 1-6 corresponding to the next Pokemon you wish to use");
-  //     active1 = one.getMon(Integer.parseInt(input));
-  //   }
-  //
-  //   if (active2.getHP() <= 0){
-  //     int len = two.getParty().size();
-  //     for (int x = 0; x < len; x++){     // COULD EDIT THIS SO THAT IT'S RANDOM
-  //       if (!(two.getMon(x).isDead())){
-  //         active2 = two.getMon(x);
-  //       }
-  //     }
-  //   }
-  // }
+  // move is the method that makes players choose their next move, and checks if
+  // the game is over.
 
   public void move(String a, String b){
     if (!active1.isDead() && !active2.isDead()){
@@ -176,7 +157,7 @@ public class Battle{
       else{
         active2.attack(active1, b);
         if (!active1.isDead()){
-          active1.attack(active2, b);
+          active1.attack(active2, a);
         }
         else if (active2.isDead()) {
           Scanner user_input = new Scanner( System.in );
@@ -191,7 +172,8 @@ public class Battle{
     return over;
   }
 
-  // public void
+  // This method allows the player to attempt to catch an enemy pokemon through
+  // a percent chance that can be easily adjusted.
 
   public boolean canCatch(){
     Random rand = new Random();

@@ -15,20 +15,13 @@ public class Enemy extends Player{
     }
 
     party = new ArrayList<Pokemon>(party1.size());
-    // System.out.println("1here");
     party = party1;
-    // System.out.println("2here");
 
-    // // System.out.println(party1.size() + "really?");
-    // for (int i = 0; i < party1.size(); i++){
-    //   // System.out.println("1here1");
-    //   party.add(party1.get(i));
-    // }
-    // System.out.println("3here");
     poke = party.get(0);
-    // System.out.println("4here");
     name = name1;
   }
+
+  // Accessor methods
 
   public String getName(){
     return name;
@@ -37,6 +30,19 @@ public class Enemy extends Player{
   public ArrayList<Pokemon> getParty(){
     return party;
   }
+
+  // Only one Pokemon, so you don't have to go through the list.
+  public Pokemon getMon(){
+    if (party.size() > 0){
+      return party.get(0);
+    }
+    else{
+      System.out.println("Error with enemy class");
+      throw new IndexOutOfBoundsException();
+    }
+  }
+
+////////////////////////////////
 
   public boolean canCatch(){
     return catchable;
@@ -53,18 +59,8 @@ public class Enemy extends Player{
     return 1;
   }
 
-  public Pokemon getMon(int index){
-    if (party.size() > 0){
-      return party.get(0);
-    }
-    else{
-      System.out.println("HEEERE");
-      throw new IndexOutOfBoundsException();
-    }
-  }
-
+  // Can just return allDead since there is only one Pokemon
   public boolean outofMons(){
     return allDead();
   }
-
 }

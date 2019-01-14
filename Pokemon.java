@@ -6,8 +6,8 @@ public class Pokemon {
   public static void main(String[] args) {
     Pokemon bulb = new Pokemon("Bulbasaur");
     Pokemon ivy = new Pokemon("Ivysaur");
+    Pokemon weeze = new Pokemon("Weezing");
 
-/*
     System.out.println("Testing Bulbasaur properties");
     System.out.println(bulb.getHP());
     System.out.println(bulb.getAttack());
@@ -19,11 +19,13 @@ public class Pokemon {
     System.out.println(bulb.getTypeID2());
     System.out.println(ivy.getTypeWeakness());
     System.out.println(ivy.getTypeResistance());
-*/
+
+    bulb.attack(weeze, "earthquake");
     System.out.println();
     System.out.println(ivy.getHP());
     bulb.attack(ivy, "absorb");
     System.out.println(ivy.getHP());
+    bulb.attack(ivy, "fly");
 
     bulb.attack(ivy, "flamethrower");
     System.out.println(ivy.getHP());
@@ -34,9 +36,11 @@ public class Pokemon {
   private double hp;
   private ArrayList<Move> attacks;
   private ArrayList<String> typeWeakness, typeResistance;
+  //Have to convert this way because CSV file gives IDs for types, not names, so
+  //we can match them up.
   private String[] types =
   {"Normal", "Fighting", "Flying", "Poison", "Ground",
-   "Rock", "Bug", "Ghost", "Steel", "Fire", "Water",    //Have to convert this way
+   "Rock", "Bug", "Ghost", "Steel", "Fire", "Water",
    "Grass", "Electric", "Psychic", "Ice", "Dragon", "Dark", "Fairy"};
 
   public Pokemon(String name1){
@@ -64,19 +68,17 @@ public class Pokemon {
     return name;
   }
 
+
+  // organizeData reads through the moves.csv file and returns a String with all
+  // the data from the corresponding move.
   private String[] organizeData(String name1){
     try{
-
       File f = new File("Pokemon.csv");
       Scanner in = new Scanner(f);
 
       while (in.hasNext()){
         String line = in.nextLine();
         String[] stats = line.split(",");
-
-        // for (int x = 0; x < stats.length; x++){
-          // System.out.println(stats[1]);
-        // }
 
         if (stats[1].equals(name)) {
           return stats;
@@ -86,7 +88,6 @@ public class Pokemon {
     catch (FileNotFoundException e){
       System.out.println("Error");
     }
-
     throw new Error();
   }
 
@@ -95,6 +96,7 @@ public class Pokemon {
   }
 
   //Accessor Methods///////////////////
+  //This essentially returns every property that a Pokemon has.
   public String getName(){
     return name;
   }
@@ -145,15 +147,16 @@ public class Pokemon {
 
   /////////////////////////////////
 
-  // Mutator Methods
+  // Mutator  and Helper Methods
 
   private void setHP(double num){
     hp = num;
   }
 
-  private void checkFile(int ID){
+  /////////////////////////////
 
-  }
+  // Goes through type_efficacy.csv and checks to align the weaknesses and
+  // resistances - easier to do this in one function.
 
   private void setWeakandRes(){
     typeWeakness = new ArrayList<String>(10);
@@ -191,17 +194,13 @@ public class Pokemon {
       catch(FileNotFoundException e){
         System.out.println("error");
       }
-      //
-      // for (int x = 0; x < typeWeakness.size() && x < typeResistance.size(); x++){
-      //   if (typeResistance.contains(typeWeakness.get(x))){
-      //     typeResistance.remove(typeWeakness.get(x));
-      //     typeWeakness.remove(x);
-      //   }
-      // }
-
       removeRepeats();
     }
 
+
+    // There can be a type in the typeWeakness array, and the same type in the
+    // typeResistance array due to the fact there some Pokemon have more than
+    // one type. This removes the type from both arrays if they exist.
     private void removeRepeats(){
       int count = 0;
       for (int x = 0; x < typeResistance.size(); x++){
@@ -213,8 +212,10 @@ public class Pokemon {
       }
     }
 
-  ///////////////////////////////
 
+    // This calculates the proper modifier, based on if the type exists in the
+    // typeWeakness or typeResistance array, and returns .25, .5, 1, 2, or 4
+    // based on which array it exists in, and how many times.
   private double modifier(Move move, Pokemon enemy){
     double x = 1;
 
@@ -252,8 +253,9 @@ public class Pokemon {
     Move move = new Move(move1);
     double mod = modifier(move, enemy);
 
+    // Formula found online - it's the actual formula used to calculate damage
     double dmg = ((42 * move.getPower()) *
-           (attack / enemy.getDefense()+2) // Formula found online - it's the actual formula used to calculate damage )
+           (attack / enemy.getDefense()+2)
            / 50 * mod);
 
     System.out.println("Attack was " + mod + "x effective. " + enemy.getName() + " took " + dmg + " damage!");

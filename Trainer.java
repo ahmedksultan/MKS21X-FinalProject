@@ -16,29 +16,34 @@ public class Trainer extends Player{
     party = new ArrayList<Pokemon>(party1.size());
 
     party = party1;
-    // System.out.println(party);
-    // for (int i = 0; i < party1.size(); i++){
-    //   party.add(party1.get(i));
-    // }
     name = name1;
     len = party.size();
-    // System.out.println("heree");
     catchable = false;
   }
+
+  // Accessor methods
 
   public String getName(){
     return name;
   }
 
   public ArrayList<Pokemon> getParty(){
-    // System.out.println("here");
     return party;
   }
 
+  public Pokemon getMon(int index){
+    return party.get(index);
+  }
+
+  /////////////////////////
+
+  // Cannot catch a trainer, so it returns false.
   public boolean canCatch(){
     return catchable;
   }
 
+  // allDead and pokemonLeft go hand in hand - one returns a boolean, but the
+  // other just returns an integer value.
   public boolean allDead(){
     for (int i = 0; i < party.size(); i++){
       if (!party.get(i).isDead()){
@@ -56,13 +61,5 @@ public class Trainer extends Player{
       }
     }
     return x;
-  }
-
-  public Pokemon getMon(int index){
-    return party.get(index);
-  }
-
-  public boolean outofMons(){
-    return pokemonLeft() > 0;
   }
 }

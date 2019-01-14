@@ -41,8 +41,8 @@ public class Battle{
     String firstname;
 
     System.out.println("Your enemy is " + enemy.getName() + "! Their first pokemon is " + battle.getActive2());
-    System.out.println(battle.getOne().getParty());
-    System.out.println(battle.getTwo().getParty());
+    System.out.println(battle.getOne().getParty().toString());
+    System.out.println(battle.getTwo().getParty().toString());
 
     while (!battle.isOver()){
 

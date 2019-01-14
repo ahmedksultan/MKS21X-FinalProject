@@ -32,7 +32,7 @@ public class Enemy extends Player{
   }
 
   // Only one Pokemon, so you don't have to go through the list.
-  public Pokemon getMon(){
+  public Pokemon getMon(int index){
     if (party.size() > 0){
       return party.get(0);
     }

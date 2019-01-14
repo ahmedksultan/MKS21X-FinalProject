@@ -91,7 +91,7 @@ public class tl {
         putString(2, 4, terminal, "[S] for Squirtle.");
         putString(2, 5, terminal, "[B] for Bulbasaur.");
         putString(2, 6, terminal, "[C] for Charmander.");
-				putString(2, 8, terminal, "//DEMO PURPOSES ONLY [D] for Demo.");
+				//putString(2, 8, terminal, "//DEMO PURPOSES ONLY [D] for Demo.");
       }
 
       //player
@@ -285,6 +285,48 @@ public class tl {
 					tbattles = 1;
 					terminal.enterPrivateMode();
         }
+
+				if ((y >= 10 && y < 25) && (x >= 2 && x < 16)) {
+					Random randgen = new Random();
+					int rno = randgen.nextInt() % 20;
+					if (rno == 0) {
+						ArrayList<Pokemon> wild = new ArrayList<Pokemon>();
+	          Pokemon pidgey = new Pokemon("Pidgey");
+	          wild.add(pidgey);
+	          Player Meowth = new Enemy("Pidgey", wild);
+	          Battle wildmeowth = new Battle(player, Meowth);
+
+	          Scanner user_input = new Scanner( System.in );
+	          String firstname;
+						String enemyattack;
+
+						terminal.exitPrivateMode();
+
+						System.out.println("\n---A BATTLE HAS BEGUN!---");
+	          System.out.println("Your enemy is " + Meowth.getName() + "! Their first pokemon is " + wildmeowth.getActive2());
+	          System.out.println("Your team is " + wildmeowth.getOne().getParty().toString());
+	          System.out.println("Your opponent's team is " + wildmeowth.getTwo().getParty().toString());
+
+	          while (!wildmeowth.isOver()){
+	            System.out.println("\n" + wildmeowth.getActive1().toString() + " and " + wildmeowth.getActive2() + " are battling!\n");
+							System.out.println("Choose your move!");
+							firstname = user_input.next();
+							enemyattack = "gust";
+							System.out.println("You used " + firstname + "! Your opponent used " + enemyattack + ".");
+	            wildmeowth.move(firstname, enemyattack);
+	            wildmeowth.forceSwitch();
+	          }
+	          System.out.println("\nThe battle is over! " + wildmeowth.getWinner()  + " has won!");
+						try {
+							TimeUnit.SECONDS.sleep(2);
+						} catch (InterruptedException e) {
+							System.exit(1);
+						}
+						tbattles = 1;
+						terminal.enterPrivateMode();
+					}
+				}
+
       }
 
       /*

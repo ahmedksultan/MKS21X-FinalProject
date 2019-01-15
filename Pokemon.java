@@ -202,6 +202,7 @@ public class Pokemon {
       if (possibleAttacks(newName).isEmpty()) {
         String newerName = evolve(Integer.parseInt(nameToID(newName)));
         possibleAttacks(newerName);
+        setAttacks(newerName);
       }
     }
 

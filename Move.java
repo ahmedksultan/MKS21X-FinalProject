@@ -77,5 +77,9 @@ public class Move{
   public int getTypeID(){
     return typeID;
   }
+
+  public String getName(){
+    return name;
+  }
   //////////////////////////
 }

@@ -42,6 +42,10 @@ public class Battle{
 
     System.out.println("Your enemy is " + enemy.getName() + "! Their first pokemon is " + battle.getActive2());
     System.out.println("Your team is " + battle.getOne().getParty().toString());
+    ArrayList<String> moves1 = battle.getOne().getMon(3).getAttacks();
+    System.out.println("Your pokemon's moves are here: " + moves1);
+    // System.out.println("Your pokemon's moves are here: " + battle.getOne().getMon(4).attackstoString(1));
+
     System.out.println("Your opponent's team is " + battle.getTwo().getParty().toString());
 
     while (!battle.isOver()){
@@ -102,6 +106,15 @@ public class Battle{
   // switch if necessary.
 
   public void chooseSwitch(int index){
+    try{
+      if (one.getMon(index).isDead()){
+      throw new Error();
+      }
+    }
+    catch(Error e){
+      System.out.println("That Pokemon has fainted! Choose another!");
+      forceSwitch();
+    }
     active1 = one.getMon(index);
   }
 

@@ -1,4 +1,0 @@
-Fix Pokemon being able to come back after KO'd
-Fix flickering issues?
-Finish map
-Set moves for pokemon, using movesets.csv

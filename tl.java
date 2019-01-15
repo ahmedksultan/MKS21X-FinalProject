@@ -64,6 +64,11 @@ public class tl {
 		terminal.enterPrivateMode();
 		TerminalSize size = terminal.getTerminalSize();
 		terminal.setCursorVisible(false);
+		try {
+			Screen screen = new Screen(terminal);
+		} catch (LanternaException e){
+			System.exit(1);
+		}
 
 		boolean running = true;
 

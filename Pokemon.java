@@ -26,6 +26,7 @@ public class Pokemon {
     bulb.attack(ivy, "absorb");
     System.out.println(ivy.getHP());
     bulb.attack(ivy, "fly");
+    System.out.println(bulb.evolutionID(bulb.getID()));
 
     bulb.attack(ivy, "flamethrower");
     System.out.println(ivy.getHP());
@@ -34,7 +35,7 @@ public class Pokemon {
   }
 
   private String name, type1, type2;
-  private int attack, speed, defense, typeID1, typeID2;
+  private int attack, speed, defense, ID, typeID1, typeID2;
   private double hp;
   private ArrayList<String> attacks, possibleAttacks;
   private ArrayList<String> typeWeakness, typeResistance;
@@ -50,6 +51,7 @@ public class Pokemon {
 
      String[] data = organizeData(name1);
 
+     ID = Integer.parseInt(data[0]);
      type1 = data[2];
      type2 = data[3];
 
@@ -82,7 +84,7 @@ public class Pokemon {
     return name;
   }
 
-  private String evolutionID(int index){
+  private int evolutionID(int index){
     try{
       File f = new File("evolutions.csv");
       Scanner in = new Scanner(f);
@@ -92,7 +94,7 @@ public class Pokemon {
         String[] stats = line.split(",");
 
         if (String.valueOf(index).equals(stats[0])){
-          return stats[1];
+          return Integer.parseInt(stats[1]);
         }
       }
     }
@@ -100,47 +102,48 @@ public class Pokemon {
       System.out.println("ERROR evolutionID");
       throw new Error();
     }
+    throw new Error();
   }
 
-  private String idToName(int index){
-    try{
-      File f = new File("Pokemon.csv");
-      Scanner in = new Scanner(f);
-
-      while (in.hasNext()){
-        String line = in.nextLine();
-        String[] stats = line.split(",");
-
-        if (String.valueOf(index).equals(stats[1])){
-          return stats[1];
-        }
-      }
-    }
-    catch(FileNotFoundException e){
-      System.out.println("Error in idToName");
-      throw new Error();
-    }
-  }
-
-  private String nameToID(String names){
-    try{
-      File f = new File("Pokemon.csv");
-      Scanner in = new Scanner(f);
-
-      while (in.hasNext()){
-        String line = in.nextLine();
-        String[] stats = line.split(",");
-
-        if (names.equals(stats[0])){
-          return stats[0];
-        }
-      }
-    }
-    catch(FileNotFoundException e){
-      System.out.println("Error in idToName");
-      throw new Error();
-    }
-  }
+  // private String idToName(int index){
+  //   try{
+  //     File f = new File("Pokemon.csv");
+  //     Scanner in = new Scanner(f);
+  //
+  //     while (in.hasNext()){
+  //       String line = in.nextLine();
+  //       String[] stats = line.split(",");
+  //
+  //       if (String.valueOf(index).equals(stats[1])){
+  //         return stats[1];
+  //       }
+  //     }
+  //   }
+  //   catch(FileNotFoundException e){
+  //     System.out.println("Error in idToName");
+  //     throw new Error();
+  //   }
+  // }
+  //
+  // private String nameToID(String names){
+  //   try{
+  //     File f = new File("Pokemon.csv");
+  //     Scanner in = new Scanner(f);
+  //
+  //     while (in.hasNext()){
+  //       String line = in.nextLine();
+  //       String[] stats = line.split(",");
+  //
+  //       if (names.equals(stats[0])){
+  //         return stats[0];
+  //       }
+  //     }
+  //   }
+  //   catch(FileNotFoundException e){
+  //     System.out.println("Error in idToName");
+  //     throw new Error();
+  //   }
+  // }
 
   public void possibleAttacks(String name1){
     possibleAttacks = new ArrayList<String>(50);
@@ -162,9 +165,9 @@ public class Pokemon {
       throw new Error();
     }
 
-    if (possibleAttacks.isEmpty()){
-      possibleAttacks()
-    }
+    // if (possibleAttacks.isEmpty()){
+      // possibleAttacks(idToName(evolutionID(ID)));
+    // }
     // System.out.println(possibleAttacks);
   }
 
@@ -249,6 +252,10 @@ public class Pokemon {
   //This essentially returns every property that a Pokemon has.
   public String getName(){
     return name;
+  }
+
+  public int getID(){
+    return ID;
   }
 
   public String getType1(){

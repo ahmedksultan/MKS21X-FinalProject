@@ -53,15 +53,37 @@ Added a file full of Pokemon sprites to be used for the battleSystem. Also trimm
 
 Begun creating processes to put the maps in Java.
 
+Converted the sprites file into a textfile rather than a java file, and removed the previous one.
+
 **Jan 9, 2019** - practiced lanterna to get a better understanding of how it works.
+
+Continued working on abstract Player class by finishing the Constructor. Then, extended Player class through Trainer.
 
 **Jan 10, 2019** - restarted maps, as we were not getting anywhere with the current version.
 
+Created an Enemy class that also extends Player, just like the Trainer class. Implemented the constructor for Enemy.
+
 Created a method we would stick to when creating maps.
+
+Began working on the Battle class. Implemented a simple constructor that sets both Players. Also, two functions that update the turn.
+
+Added a get function to retrieve the pokemon corresponding to the input index.
 
 **Jan 11, 2019** - continued working on maps.
 
+Completely reworked the Turn System. Got rid of all appropriate accessor methods. Implemented a catchable abstract method to get whether or not the Pokemon can be caught, and then implemented it in the subclasses.
+
+Created a Sprites class to read through the previously implemented Sprites.txt file. Added the constructor for this class.
+
 **Jan 12, 2019** - continued working on maps. Restarted work again.
+
+Added a method to check whether all Pokemon in the Trainer's party are dead.
+
+Now that all necessary functions are added, began working on a driver to make sure the Driver class works properly.
+
+Completely reworked the Player class. Instead of having a lot of actual functions, we replaced them all with abstract methods, and then implemented them in subclasses.
+
+Continued updating the driver for the Battle class.
 
 **Jan 13, 2019** - continued working on maps, and the RPG element of the game. Restarted work again at the end of the night (third time thus far).
 

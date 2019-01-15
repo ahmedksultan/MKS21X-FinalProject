@@ -279,13 +279,20 @@ public class Pokemon {
     // System.out.println(possibleAttacks);
 
   public void setAttacks(String name1){
-    // ArrayList<String> temp = new ArrayList<String>();
+    ArrayList<String> temp = new ArrayList<String>();
     possibleAttacks(name1);
     attacks = new ArrayList<String>(4);
     for (int x = 0; x < possibleAttacks.size() && attacks.size() < 4; x++){
       attacks.add(possibleAttacks.get(x));
     }
-
+    for (String element: attacks){
+      if (!temp.contains(element)){
+        temp.add(element);
+      }
+    }
+    if (!temp.isEmpty()){
+      attacks = temp;
+    }
   }
 
   // public String attackstoString(int index){ // One for possibleAttacks, two for just attacks

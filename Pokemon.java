@@ -82,6 +82,71 @@ public class Pokemon {
     return name;
   }
 
+  private String evolutionID(int index){
+    try{
+      File f = new File("evolutions.csv");
+      Scanner in = new Scanner(f);
+
+      while (in.hasNext()){
+        String line = in.nextLine();
+        String[] stats = line.split(",");
+
+        if (String.valueOf(index).equals(stats[0])){
+          return stats[1];
+        }
+      }
+    }
+    catch(FileNotFoundException e){
+      System.out.println("ERROR evolutionID");
+      throw new Error();
+    }
+    throw new Error();
+  }
+
+  private String idToName(int index){
+    try{
+      File f = new File("Pokemon.csv");
+      Scanner in = new Scanner(f);
+
+      while (in.hasNext()){
+        String line = in.nextLine();
+        String[] stats = line.split(",");
+
+        if (String.valueOf(index).equals(stats[1])){
+          return stats[1];
+        }
+      }
+    }
+    catch(FileNotFoundException e){
+      System.out.println("Error in idToName");
+      throw new Error();
+    }
+    throw new Error();
+  }
+
+  private int nameToID(String names){
+    try{
+      File f = new File("Pokemon.csv");
+      Scanner in = new Scanner(f);
+
+      while (in.hasNext()){
+        String line = in.nextLine();
+        String[] stats = line.split(",");
+
+        System.out.println(names);
+        // System.out.println(stats[1]);
+        if (names.equals(stats[1])){
+          return Integer.parseInt(stats[0]);
+        }
+      }
+    }
+    catch(FileNotFoundException e){
+      System.out.println("Error in idToName");
+      throw new Error();
+    }
+    throw new Error();
+  }
+
   public void possibleAttacks(String name1){
     possibleAttacks = new ArrayList<String>(50);
     try{
@@ -100,6 +165,10 @@ public class Pokemon {
     catch(FileNotFoundException e){
       System.out.println("Error in possibleAttacks");
       throw new Error();
+    }
+
+    while (possibleAttacks.isEmpty()){
+      possibleAttacks(idToName(nameToID(evolutionID(nameToID(name1)))));
     }
     // System.out.println(possibleAttacks);
   }

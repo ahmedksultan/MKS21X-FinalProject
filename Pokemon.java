@@ -7,6 +7,7 @@ public class Pokemon {
     Pokemon bulb = new Pokemon("Bulbasaur");
     Pokemon ivy = new Pokemon("Ivysaur");
     // Pokemon weeze = new Pokemon("Weezing");
+    Pokemon mewtwo = new Pokemon("Mewtwo");
 
     System.out.println("Testing Bulbasaur properties");
     System.out.println(bulb.getHP());
@@ -40,6 +41,8 @@ public class Pokemon {
   private double hp;
   private ArrayList<String> attacks, possibleAttacks;
   private ArrayList<String> typeWeakness, typeResistance;
+  private boolean evolve;
+
   //Have to convert this way because CSV file gives IDs for types, not names, so
   //we can match them up.
   private String[] types =
@@ -62,6 +65,7 @@ public class Pokemon {
      }
 
      setWeakandRes();
+     haveEvolve(name1);
 
      hp = Integer.parseInt(data[5]);
      attack = Integer.parseInt(data[6]);
@@ -73,19 +77,46 @@ public class Pokemon {
     create(name1);
     possibleAttacks(name1);
     setAttacks(name1, selectedAttacks);
-    evolvedMoves(name1);
+    // haveEvolve(name1);
+    if (evolve){
+      evolvedMoves(name1);
+    }
   }
 
   public Pokemon(String name1){
     create(name1);
     possibleAttacks(name1);
     setAttacks(name1);
-    evolvedMoves(name1);
+    // haveEvolve(name1);
+    if (evolve){
+      evolvedMoves(name1);
+    }
 
   }
 
   public String toString(){
     return name;
+  }
+
+  private void haveEvolve(String named){
+    try{
+      File f = new File("evolutions.csv");
+      Scanner in = new Scanner(f);
+
+      while (in.hasNext()){
+        String line = in.nextLine();
+        String[] stats = line.split(",");
+        if (stats[0].equals(named)){
+          evolve = false;
+        }
+      }
+      evolve = false;
+    }
+    catch(FileNotFoundException e){
+      System.out.println("In haveEvolve");
+      throw new Error();
+    }
+    evolve = true;
   }
 
   private static int evolutionID(int index){
@@ -110,6 +141,9 @@ public class Pokemon {
   }
 
   private static String idToName(int index){
+    if (index < 0 || index > 151){
+      throw new Error();
+    }
     try{
       File f = new File("Pokemon.csv");
       Scanner in = new Scanner(f);
@@ -118,7 +152,7 @@ public class Pokemon {
         String line = in.nextLine();
         String[] stats = line.split(",");
 
-        System.out.println(index + ", " + stats[0]);
+        // System.out.println(index + ", " + stats[0]);
         if (String.valueOf(index).equals(stats[0])){
           return stats[1];
         }

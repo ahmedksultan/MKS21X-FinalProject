@@ -100,7 +100,6 @@ public class Pokemon {
       System.out.println("ERROR evolutionID");
       throw new Error();
     }
-    throw new Error();
   }
 
   private String idToName(int index){
@@ -121,10 +120,9 @@ public class Pokemon {
       System.out.println("Error in idToName");
       throw new Error();
     }
-    throw new Error();
   }
 
-  private int nameToID(String names){
+  private String nameToID(String names){
     try{
       File f = new File("Pokemon.csv");
       Scanner in = new Scanner(f);
@@ -133,10 +131,8 @@ public class Pokemon {
         String line = in.nextLine();
         String[] stats = line.split(",");
 
-        System.out.println(names);
-        // System.out.println(stats[1]);
-        if (names.equals(stats[1])){
-          return Integer.parseInt(stats[0]);
+        if (names.equals(stats[0])){
+          return stats[0];
         }
       }
     }
@@ -144,7 +140,6 @@ public class Pokemon {
       System.out.println("Error in idToName");
       throw new Error();
     }
-    throw new Error();
   }
 
   public void possibleAttacks(String name1){
@@ -167,8 +162,8 @@ public class Pokemon {
       throw new Error();
     }
 
-    while (possibleAttacks.isEmpty()){
-      possibleAttacks(idToName(nameToID(evolutionID(nameToID(name1)))));
+    if (possibleAttacks.isEmpty()){
+      possibleAttacks()
     }
     // System.out.println(possibleAttacks);
   }

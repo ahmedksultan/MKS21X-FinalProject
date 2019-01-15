@@ -26,7 +26,7 @@ public class Pokemon {
     bulb.attack(ivy, "absorb");
     System.out.println(ivy.getHP());
     bulb.attack(ivy, "fly");
-    System.out.println(bulb.evolutionID(bulb.getID()));
+    System.out.println(Pokemon.idToName(bulb.evolutionID(bulb.getID())));
 
     bulb.attack(ivy, "flamethrower");
     System.out.println(ivy.getHP());
@@ -105,26 +105,27 @@ public class Pokemon {
     throw new Error();
   }
 
-  // private String idToName(int index){
-  //   try{
-  //     File f = new File("Pokemon.csv");
-  //     Scanner in = new Scanner(f);
-  //
-  //     while (in.hasNext()){
-  //       String line = in.nextLine();
-  //       String[] stats = line.split(",");
-  //
-  //       if (String.valueOf(index).equals(stats[1])){
-  //         return stats[1];
-  //       }
-  //     }
-  //   }
-  //   catch(FileNotFoundException e){
-  //     System.out.println("Error in idToName");
-  //     throw new Error();
-  //   }
-  // }
-  //
+  private static String idToName(int index){
+    try{
+      File f = new File("Pokemon.csv");
+      Scanner in = new Scanner(f);
+
+      while (in.hasNext()){
+        String line = in.nextLine();
+        String[] stats = line.split(",");
+
+        if (String.valueOf(index).equals(stats[0])){
+          return stats[1];
+        }
+      }
+    }
+    catch(FileNotFoundException e){
+      System.out.println("Error in idToName");
+      throw new Error();
+    }
+    throw new Error();
+  }
+
   // private String nameToID(String names){
   //   try{
   //     File f = new File("Pokemon.csv");

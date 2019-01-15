@@ -6,7 +6,7 @@ public class Pokemon {
   public static void main(String[] args) {
     Pokemon bulb = new Pokemon("Bulbasaur");
     Pokemon ivy = new Pokemon("Ivysaur");
-    Pokemon weeze = new Pokemon("Weezing");
+    // Pokemon weeze = new Pokemon("Weezing");
 
     System.out.println("Testing Bulbasaur properties");
     System.out.println(bulb.getHP());
@@ -20,13 +20,14 @@ public class Pokemon {
     System.out.println(ivy.getTypeWeakness());
     System.out.println(ivy.getTypeResistance());
 
-    bulb.attack(weeze, "earthquake");
+    // bulb.attack(weeze, "earthquake");
     System.out.println();
     System.out.println(ivy.getHP());
     bulb.attack(ivy, "absorb");
     System.out.println(ivy.getHP());
     bulb.attack(ivy, "fly");
-    System.out.println(Pokemon.idToName(bulb.evolutionID(bulb.getID())));
+    // System.out.println(Pokemon.evolutionID(3));
+    // System.out.println(Pokemon.idToName(bulb.evolutionID(bulb.getID())));
 
     bulb.attack(ivy, "flamethrower");
     System.out.println(ivy.getHP());
@@ -72,19 +73,22 @@ public class Pokemon {
     create(name1);
     possibleAttacks(name1);
     setAttacks(name1, selectedAttacks);
+    evolvedMoves(name1);
   }
 
   public Pokemon(String name1){
     create(name1);
     possibleAttacks(name1);
     setAttacks(name1);
+    evolvedMoves(name1);
+
   }
 
   public String toString(){
     return name;
   }
 
-  private int evolutionID(int index){
+  private static int evolutionID(int index){
     try{
       File f = new File("evolutions.csv");
       Scanner in = new Scanner(f);
@@ -114,6 +118,7 @@ public class Pokemon {
         String line = in.nextLine();
         String[] stats = line.split(",");
 
+        System.out.println(index + ", " + stats[0]);
         if (String.valueOf(index).equals(stats[0])){
           return stats[1];
         }
@@ -126,27 +131,33 @@ public class Pokemon {
     throw new Error();
   }
 
-  // private String nameToID(String names){
-  //   try{
-  //     File f = new File("Pokemon.csv");
-  //     Scanner in = new Scanner(f);
-  //
-  //     while (in.hasNext()){
-  //       String line = in.nextLine();
-  //       String[] stats = line.split(",");
-  //
-  //       if (names.equals(stats[0])){
-  //         return stats[0];
-  //       }
-  //     }
-  //   }
-  //   catch(FileNotFoundException e){
-  //     System.out.println("Error in idToName");
-  //     throw new Error();
-  //   }
-  // }
+  private static String nameToID(String names){
+    try{
+      File f = new File("Pokemon.csv");
+      Scanner in = new Scanner(f);
 
-  public void possibleAttacks(String name1){
+      while (in.hasNext()){
+        String line = in.nextLine();
+        String[] stats = line.split(",");
+
+        if (names.equals(stats[1])){
+          return stats[0];
+        }
+      }
+    }
+    catch(FileNotFoundException e){
+      System.out.println("Error in idToName");
+      throw new Error();
+    }
+    throw new Error();
+  }
+
+  public String evolve(int index){
+    // System.out.println("here" + idToName(evolutionID(index)));
+    return idToName(evolutionID(index));
+  }
+
+  public ArrayList<String> possibleAttacks(String name1){
     possibleAttacks = new ArrayList<String>(50);
     try{
       File f = new File("movesets.csv");
@@ -155,6 +166,9 @@ public class Pokemon {
       while (in.hasNext()){
         String line = in.nextLine();
         String[] stats = line.split(",");
+        // System.out.println(stats[0]);
+        // System.out.println(name1);
+        // System.out.println(stats[0].equals(name1));
         if (stats[0].equals(name1)){
           possibleAttacks.add(stats[1]);
           possibleAttacks.add(stats[2]);
@@ -166,11 +180,56 @@ public class Pokemon {
       throw new Error();
     }
 
+    return possibleAttacks;
+    // if (possibleAttacks.isEmpty()){
+    //   // System.out.println("HERE");
+    //   String name = evolve(ID);
+    //   possibleAttacks(name);
+    // }
+
+    // Pokemon poke;
+    // System.out.println(evolve(ID));
+    // while (possibleAttacks.isEmpty()){
+    //   // System.out.println("HERE");
+    //   String name2 = evolve(poke.getID());
+    //   poke = new Pokemon(name2);
+    //   possibleAttacks(poke.getName());
+
+}
+
+    public void evolvedMoves(String name){
+      String newName = evolve(Integer.parseInt(nameToID(name)));
+      if (possibleAttacks(newName).isEmpty()) {
+        String newerName = evolve(Integer.parseInt(nameToID(newName)));
+        possibleAttacks(newerName);
+      }
+    }
+
+    // String evo1 = idToName(evolutionID(ID));
+    // Pokemon evoPoke = new Pokemon(evo1);
+    //
+    //
+    // // Can just run this process twice, evolving each time because no Pokemon
+    // // has more than 2 evolutions.
+    // if (possibleAttacks.isEmpty()){
+    //   possibleAttacks(evo1);
+    // }
+    //
+    // String evo2 = idToName(evolutionID(evoPoke.getID()));
+    // if (possibleAttacks.isEmpty()){
+    //   possibleAttacks(evo2);
+    // }
+
+    // while (possibleAttacks.isEmpty()){
+    //   System.out.println(idToName(evolutionID(ID))) ;
+    //   Pokemon next = new Pokemon(idToName(evolutionID(ID)));
+    //   possibleAttacks(next.getName());
+    // }
+
     // if (possibleAttacks.isEmpty()){
       // possibleAttacks(idToName(evolutionID(ID)));
     // }
     // System.out.println(possibleAttacks);
-  }
 
   public void setAttacks(String name1){
     possibleAttacks(name1);

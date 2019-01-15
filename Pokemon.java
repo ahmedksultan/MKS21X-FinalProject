@@ -6,8 +6,13 @@ public class Pokemon {
   public static void main(String[] args) {
     Pokemon bulb = new Pokemon("Bulbasaur");
     Pokemon ivy = new Pokemon("Ivysaur");
-    // Pokemon weeze = new Pokemon("Weezing");
-    Pokemon mewtwo = new Pokemon("Mewtwo");
+    // System.out.println("HEHEHEHHRE" + ivy.getEvolve());
+    Pokemon weeze = new Pokemon("Weezing");
+    System.out.println(weeze.getEvolve());
+    // Pokemon mewtwo = new Pokemon("Mewtwo");
+    // System.out.println(mewtwo.getName());
+
+    System.out.println(weeze.getAttacks());
 
     System.out.println("Testing Bulbasaur properties");
     System.out.println(bulb.getHP());
@@ -41,7 +46,7 @@ public class Pokemon {
   private double hp;
   private ArrayList<String> attacks, possibleAttacks;
   private ArrayList<String> typeWeakness, typeResistance;
-  private boolean evolve;
+  private boolean evolve = true;
 
   //Have to convert this way because CSV file gives IDs for types, not names, so
   //we can match them up.
@@ -65,7 +70,6 @@ public class Pokemon {
      }
 
      setWeakandRes();
-     haveEvolve(name1);
 
      hp = Integer.parseInt(data[5]);
      attack = Integer.parseInt(data[6]);
@@ -77,6 +81,8 @@ public class Pokemon {
     create(name1);
     possibleAttacks(name1);
     setAttacks(name1, selectedAttacks);
+    haveEvolve(name1);
+
     // haveEvolve(name1);
     if (evolve){
       evolvedMoves(name1);
@@ -87,6 +93,9 @@ public class Pokemon {
     create(name1);
     possibleAttacks(name1);
     setAttacks(name1);
+    haveEvolve(name1);
+
+    // System.out.println(getEvolve());
     // haveEvolve(name1);
     if (evolve){
       evolvedMoves(name1);
@@ -100,23 +109,26 @@ public class Pokemon {
 
   private void haveEvolve(String named){
     try{
-      File f = new File("evolutions.csv");
+      File f = new File("movesets.csv");
       Scanner in = new Scanner(f);
 
       while (in.hasNext()){
         String line = in.nextLine();
         String[] stats = line.split(",");
+        // System.out.println(stats[0] + ", " + named);
         if (stats[0].equals(named)){
+          // System.out.println("We in");
           evolve = false;
+          break;
         }
+        // System.out.println(evolve);
       }
-      evolve = false;
+      // evolve = true;
     }
     catch(FileNotFoundException e){
       System.out.println("In haveEvolve");
       throw new Error();
     }
-    evolve = true;
   }
 
   private static int evolutionID(int index){
@@ -267,11 +279,13 @@ public class Pokemon {
     // System.out.println(possibleAttacks);
 
   public void setAttacks(String name1){
+    // ArrayList<String> temp = new ArrayList<String>();
     possibleAttacks(name1);
     attacks = new ArrayList<String>(4);
     for (int x = 0; x < possibleAttacks.size() && attacks.size() < 4; x++){
       attacks.add(possibleAttacks.get(x));
     }
+
   }
 
   // public String attackstoString(int index){ // One for possibleAttacks, two for just attacks
@@ -367,6 +381,10 @@ public class Pokemon {
 
   public int getAttack(){
     return attack;
+  }
+
+  public boolean getEvolve(){
+    return evolve;
   }
 
   public int getDefense(){

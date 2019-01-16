@@ -10,6 +10,7 @@ public class Pokemon {
     Pokemon weeze = new Pokemon("Weezing");
     System.out.println(weeze.getEvolve());
     Pokemon mewtwo = new Pokemon("Mewtwo");
+    Pokemon chara = new Pokemon("Charizard");
     System.out.println(mewtwo.getName());
 
     System.out.println(weeze.getAttacks());
@@ -28,11 +29,12 @@ public class Pokemon {
 
     // bulb.attack(weeze, "earthquake");
     System.out.println();
-    System.out.println(ivy.getHP());
-    bulb.attack(ivy);
-    System.out.println(ivy.getHP());
-    bulb.attack(ivy);
-    ivy.attack(bulb);
+    // chara.attack(ivy, chara.getAttacks().get(0));
+    // System.out.println(ivy.getHP());
+    // bulb.attack(ivy);
+    // System.out.println(ivy.getHP());
+    // bulb.attack(ivy);
+    // ivy.attack(bulb);
     // System.out.println(Pokemon.evolutionID(3));
     // System.out.println(Pokemon.idToName(bulb.evolutionID(bulb.getID())));
 
@@ -286,7 +288,7 @@ public class Pokemon {
     ArrayList<String> temp = new ArrayList<String>();
     possibleAttacks(name1);
     attacks = new ArrayList<String>(4);
-    for (int x = 0; x < possibleAttacks.size() && attacks.size() < 4; x++){
+    for (int x = 0; x < possibleAttacks.size() && attacks.size() < 5; x++){
       attacks.add(possibleAttacks.get(x));
     }
     for (String element: attacks){
@@ -294,9 +296,19 @@ public class Pokemon {
         temp.add(element);
       }
     }
-    if (!temp.isEmpty()){
-      attacks = temp;
-    }
+
+    // while (attacks.size() != 4){
+    //   Random temp1 = new Random();
+    //   // System.out.println(temp1);
+    //   int x = temp1.nextInt(4);
+    //   System.out.println(x);
+    // }
+    // for (int x = possibleAttacks.size(); x > 0  && attacks.size() < 5; x--){
+    //   attacks.add(possibleAttacks.get(x));
+    // }
+    // if (!temp.isEmpty()){
+    //   attacks = temp;
+    // }
   }
 
   // public String attackstoString(int index){ // One for possibleAttacks, two for just attacks
@@ -538,9 +550,16 @@ public class Pokemon {
       }
     }
 
-    else if (fourTimes.isEmpty() && twoTimes.isEmpty()){
-      int x = rand.nextInt(attacks.size());
-      attack(enemy, attacks.get(x));
+    // else if (fourTimes.isEmpty() && twoTimes.isEmpty()){
+    //   int x = rand.nextInt(attacks.size());
+    //   System.out.println(x + ", " + attacks.size());
+    //   // System.out.println(attacks.size() + "HERE");
+    //   attack(enemy, attacks.get(x));
+    // }
+    else{
+      setAttacks(name);
+      System.out.println(attacks.get(0));
+      attack(enemy, attacks.get(0));
     }
   }
 

@@ -25,10 +25,15 @@ public class Move{
         String line = in.nextLine();
         String[] stats = line.split(",");
 
-        if (stats[1].equals(moveName)){
+        System.out.println(stats[1].toLowerCase());
+        System.out.println(moveName.toLowerCase());
+        if (stats[1].toLowerCase().equals(moveName.toLowerCase()  )){
+          System.out.println("IN");
           name = moveName;
           typeID = Integer.parseInt(stats[3]);
           power = Integer.parseInt(stats[4]);
+          System.out.println(power + "OVERHERE");
+
           break;
         }
       }

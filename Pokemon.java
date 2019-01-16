@@ -29,14 +29,13 @@ public class Pokemon {
     // bulb.attack(weeze, "earthquake");
     System.out.println();
     System.out.println(ivy.getHP());
-    bulb.attack(ivy, "absorb");
+    bulb.attack(ivy);
     System.out.println(ivy.getHP());
-    bulb.attack(ivy, "fly");
+    bulb.attack(ivy);
     // System.out.println(Pokemon.evolutionID(3));
     // System.out.println(Pokemon.idToName(bulb.evolutionID(bulb.getID())));
 
-    bulb.attack(ivy, "flamethrower");
-    System.out.println(ivy.getHP());
+    bulb.attack(ivy, bulb.getAttacks().get(0));
     System.out.println(bulb.getAttacks());
     System.out.println(bulb.getPossibleAttacks());
   }
@@ -216,6 +215,10 @@ public class Pokemon {
         // System.out.println(name1);
         // System.out.println(stats[0].equals(name1));
         if (stats[0].equals(name1)){
+          Move temp = new Move(name1);
+
+          System.out.println(temp.getPower());
+
           possibleAttacks.add(stats[1]);
           possibleAttacks.add(stats[2]);
         }
@@ -502,6 +505,7 @@ public class Pokemon {
 
     for (int x = 0; x < attacks.size(); x++){
       double mod = modifier(new Move(attacks.get(x)), enemy);
+      // System.out.println("HERE" + mod);
       if (mod == 4){
         fourTimes.add(attacks.get(x));
       }
@@ -568,9 +572,12 @@ private double modifier(Move move, Pokemon enemy){
     }
 
     // Formula found online - it's the actual formula used to calculate damage
+
     double dmg = ((42 * move.getPower()) *
            (attack / enemy.getDefense()+2)
            / 50 * mod);
+
+           System.out.println(dmg + "HEY");
 
     System.out.println("attack was " + mod + "x effective. " + enemy.getName() + " took " + dmg + " damage!");
 

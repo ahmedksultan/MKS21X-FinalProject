@@ -9,8 +9,8 @@ public class Pokemon {
     // System.out.println("HEHEHEHHRE" + ivy.getEvolve());
     Pokemon weeze = new Pokemon("Weezing");
     System.out.println(weeze.getEvolve());
-    // Pokemon mewtwo = new Pokemon("Mewtwo");
-    // System.out.println(mewtwo.getName());
+    Pokemon mewtwo = new Pokemon("Mewtwo");
+    System.out.println(mewtwo.getName());
 
     System.out.println(weeze.getAttacks());
 
@@ -494,6 +494,51 @@ public class Pokemon {
     }
 
 
+  public void attack(Pokemon enemy){
+    Random rand = new Random();
+
+    ArrayList<String> twoTimes = new ArrayList<String>();
+    ArrayList<String> fourTimes = new ArrayList<String>();
+
+    for (int x = 0; x < attacks.size(); x++){
+      double mod = modifier(new Move(attacks.get(x)), enemy);
+      if (mod == 4){
+        fourTimes.add(attacks.get(x));
+      }
+      if (mod == 2){
+        twoTimes.add(attacks.get(x));
+      }
+    }
+
+    if (!fourTimes.isEmpty() && twoTimes.isEmpty()){
+      int x = rand.nextInt(fourTimes.size());
+
+      attack(enemy, attacks.get(x));
+    }
+
+    else if (fourTimes.isEmpty() && !twoTimes.isEmpty()){
+      int x = rand.nextInt(fourTimes.size());
+
+      attack(enemy, attacks.get(x));
+    }
+
+    else if (!fourTimes.isEmpty() && !twoTimes.isEmpty()){
+      if (rand.nextInt(100) < 70){
+        int x = rand.nextInt(fourTimes.size());
+        attack(enemy, fourTimes.get(x));
+      }
+      else{
+        int x = rand.nextInt(twoTimes.size());
+        attack(enemy, twoTimes.get(x));
+      }
+    }
+
+    else if (fourTimes.isEmpty() && twoTimes.isEmpty()){
+      int x = rand.nextInt(attacks.size());
+      attack(enemy, attacks.get(x));
+    }
+  }
+
     // This calculates the proper modifier, based on if the type exists in the
     // typeWeakness or typeResistance array, and returns .25, .5, 1, 2, or 4
     // based on which array it exists in, and how many times.
@@ -517,6 +562,10 @@ private double modifier(Move move, Pokemon enemy){
   public void attack(Pokemon enemy, String move1){
     Move move = new Move(move1);
     double mod = modifier(move, enemy);
+
+    if (!attacks.contains(move1)){
+      throw new NumberFormatException();
+    }
 
     // Formula found online - it's the actual formula used to calculate damage
     double dmg = ((42 * move.getPower()) *

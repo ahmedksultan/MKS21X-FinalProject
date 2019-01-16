@@ -1,0 +1,3 @@
+Make it so that you cant switch into a Pokemon that has fainted.
+
+Ahmed fix screens by end of today

@@ -6,7 +6,13 @@ public class Pokemon {
   public static void main(String[] args) {
     Pokemon bulb = new Pokemon("Bulbasaur");
     Pokemon ivy = new Pokemon("Ivysaur");
+    // System.out.println("HEHEHEHHRE" + ivy.getEvolve());
     Pokemon weeze = new Pokemon("Weezing");
+    System.out.println(weeze.getEvolve());
+    Pokemon mewtwo = new Pokemon("Mewtwo");
+    System.out.println(mewtwo.getName());
+
+    System.out.println(weeze.getAttacks());
 
     System.out.println("Testing Bulbasaur properties");
     System.out.println(bulb.getHP());
@@ -20,12 +26,14 @@ public class Pokemon {
     System.out.println(ivy.getTypeWeakness());
     System.out.println(ivy.getTypeResistance());
 
-    bulb.attack(weeze, "earthquake");
+    // bulb.attack(weeze, "earthquake");
     System.out.println();
     System.out.println(ivy.getHP());
     bulb.attack(ivy, "absorb");
     System.out.println(ivy.getHP());
     bulb.attack(ivy, "fly");
+    // System.out.println(Pokemon.evolutionID(3));
+    // System.out.println(Pokemon.idToName(bulb.evolutionID(bulb.getID())));
 
     bulb.attack(ivy, "flamethrower");
     System.out.println(ivy.getHP());
@@ -34,10 +42,12 @@ public class Pokemon {
   }
 
   private String name, type1, type2;
-  private int attack, speed, defense, typeID1, typeID2;
+  private int attack, speed, defense, ID, typeID1, typeID2;
   private double hp;
   private ArrayList<String> attacks, possibleAttacks;
   private ArrayList<String> typeWeakness, typeResistance;
+  private boolean evolve = true;
+
   //Have to convert this way because CSV file gives IDs for types, not names, so
   //we can match them up.
   private String[] types =
@@ -50,6 +60,7 @@ public class Pokemon {
 
      String[] data = organizeData(name1);
 
+     ID = Integer.parseInt(data[0]);
      type1 = data[2];
      type2 = data[3];
 
@@ -70,19 +81,57 @@ public class Pokemon {
     create(name1);
     possibleAttacks(name1);
     setAttacks(name1, selectedAttacks);
+    haveEvolve(name1);
+
+    // haveEvolve(name1);
+    if (evolve){
+      evolvedMoves(name1);
+    }
   }
 
   public Pokemon(String name1){
     create(name1);
     possibleAttacks(name1);
     setAttacks(name1);
+    haveEvolve(name1);
+
+    // System.out.println(getEvolve());
+    // haveEvolve(name1);
+    if (evolve){
+      evolvedMoves(name1);
+    }
+
   }
 
   public String toString(){
     return name;
   }
 
-  private String evolutionID(int index){
+  private void haveEvolve(String named){
+    try{
+      File f = new File("movesets.csv");
+      Scanner in = new Scanner(f);
+
+      while (in.hasNext()){
+        String line = in.nextLine();
+        String[] stats = line.split(",");
+        // System.out.println(stats[0] + ", " + named);
+        if (stats[0].equals(named)){
+          // System.out.println("We in");
+          evolve = false;
+          break;
+        }
+        // System.out.println(evolve);
+      }
+      // evolve = true;
+    }
+    catch(FileNotFoundException e){
+      System.out.println("In haveEvolve");
+      throw new Error();
+    }
+  }
+
+  private static int evolutionID(int index){
     try{
       File f = new File("evolutions.csv");
       Scanner in = new Scanner(f);
@@ -92,7 +141,7 @@ public class Pokemon {
         String[] stats = line.split(",");
 
         if (String.valueOf(index).equals(stats[0])){
-          return stats[1];
+          return Integer.parseInt(stats[1]);
         }
       }
     }
@@ -100,9 +149,13 @@ public class Pokemon {
       System.out.println("ERROR evolutionID");
       throw new Error();
     }
+    throw new Error();
   }
 
-  private String idToName(int index){
+  private static String idToName(int index){
+    if (index < 0 || index > 151){
+      throw new Error();
+    }
     try{
       File f = new File("Pokemon.csv");
       Scanner in = new Scanner(f);
@@ -111,7 +164,8 @@ public class Pokemon {
         String line = in.nextLine();
         String[] stats = line.split(",");
 
-        if (String.valueOf(index).equals(stats[1])){
+        // System.out.println(index + ", " + stats[0]);
+        if (String.valueOf(index).equals(stats[0])){
           return stats[1];
         }
       }
@@ -120,9 +174,10 @@ public class Pokemon {
       System.out.println("Error in idToName");
       throw new Error();
     }
+    throw new Error();
   }
 
-  private String nameToID(String names){
+  private static String nameToID(String names){
     try{
       File f = new File("Pokemon.csv");
       Scanner in = new Scanner(f);
@@ -131,7 +186,7 @@ public class Pokemon {
         String line = in.nextLine();
         String[] stats = line.split(",");
 
-        if (names.equals(stats[0])){
+        if (names.equals(stats[1])){
           return stats[0];
         }
       }
@@ -140,9 +195,15 @@ public class Pokemon {
       System.out.println("Error in idToName");
       throw new Error();
     }
+    throw new Error();
   }
 
-  public void possibleAttacks(String name1){
+  public String evolve(int index){
+    // System.out.println("here" + idToName(evolutionID(index)));
+    return idToName(evolutionID(index));
+  }
+
+  public ArrayList<String> possibleAttacks(String name1){
     possibleAttacks = new ArrayList<String>(50);
     try{
       File f = new File("movesets.csv");
@@ -151,6 +212,9 @@ public class Pokemon {
       while (in.hasNext()){
         String line = in.nextLine();
         String[] stats = line.split(",");
+        // System.out.println(stats[0]);
+        // System.out.println(name1);
+        // System.out.println(stats[0].equals(name1));
         if (stats[0].equals(name1)){
           possibleAttacks.add(stats[1]);
           possibleAttacks.add(stats[2]);
@@ -162,17 +226,72 @@ public class Pokemon {
       throw new Error();
     }
 
-    if (possibleAttacks.isEmpty()){
-      possibleAttacks()
+    return possibleAttacks;
+    // if (possibleAttacks.isEmpty()){
+    //   // System.out.println("HERE");
+    //   String name = evolve(ID);
+    //   possibleAttacks(name);
+    // }
+
+    // Pokemon poke;
+    // System.out.println(evolve(ID));
+    // while (possibleAttacks.isEmpty()){
+    //   // System.out.println("HERE");
+    //   String name2 = evolve(poke.getID());
+    //   poke = new Pokemon(name2);
+    //   possibleAttacks(poke.getName());
+
+}
+
+    public void evolvedMoves(String name){
+      String newName = evolve(Integer.parseInt(nameToID(name)));
+      if (possibleAttacks(newName).isEmpty()) {
+        String newerName = evolve(Integer.parseInt(nameToID(newName)));
+        possibleAttacks(newerName);
+        setAttacks(newerName);
+      }
     }
+
+    // String evo1 = idToName(evolutionID(ID));
+    // Pokemon evoPoke = new Pokemon(evo1);
+    //
+    //
+    // // Can just run this process twice, evolving each time because no Pokemon
+    // // has more than 2 evolutions.
+    // if (possibleAttacks.isEmpty()){
+    //   possibleAttacks(evo1);
+    // }
+    //
+    // String evo2 = idToName(evolutionID(evoPoke.getID()));
+    // if (possibleAttacks.isEmpty()){
+    //   possibleAttacks(evo2);
+    // }
+
+    // while (possibleAttacks.isEmpty()){
+    //   System.out.println(idToName(evolutionID(ID))) ;
+    //   Pokemon next = new Pokemon(idToName(evolutionID(ID)));
+    //   possibleAttacks(next.getName());
+    // }
+
+    // if (possibleAttacks.isEmpty()){
+      // possibleAttacks(idToName(evolutionID(ID)));
+    // }
     // System.out.println(possibleAttacks);
-  }
 
   public void setAttacks(String name1){
+    ArrayList<String> temp = new ArrayList<String>();
     possibleAttacks(name1);
     attacks = new ArrayList<String>(4);
     for (int x = 0; x < possibleAttacks.size() && attacks.size() < 4; x++){
       attacks.add(possibleAttacks.get(x));
+    }
+    for (String element: attacks){
+      if (!temp.contains(element)){
+        temp.add(element);
+      }
+    }
+    if (!temp.isEmpty()){
+      attacks = temp;
     }
   }
 
@@ -251,6 +370,10 @@ public class Pokemon {
     return name;
   }
 
+  public int getID(){
+    return ID;
+  }
+
   public String getType1(){
     return type1;
   }
@@ -265,6 +388,10 @@ public class Pokemon {
 
   public int getAttack(){
     return attack;
+  }
+
+  public boolean getEvolve(){
+    return evolve;
   }
 
   public int getDefense(){
@@ -367,6 +494,51 @@ public class Pokemon {
     }
 
 
+  public void attack(Pokemon enemy){
+    Random rand = new Random();
+
+    ArrayList<String> twoTimes = new ArrayList<String>();
+    ArrayList<String> fourTimes = new ArrayList<String>();
+
+    for (int x = 0; x < attacks.size(); x++){
+      double mod = modifier(new Move(attacks.get(x)), enemy);
+      if (mod == 4){
+        fourTimes.add(attacks.get(x));
+      }
+      if (mod == 2){
+        twoTimes.add(attacks.get(x));
+      }
+    }
+
+    if (!fourTimes.isEmpty() && twoTimes.isEmpty()){
+      int x = rand.nextInt(fourTimes.size());
+
+      attack(enemy, attacks.get(x));
+    }
+
+    else if (fourTimes.isEmpty() && !twoTimes.isEmpty()){
+      int x = rand.nextInt(fourTimes.size());
+
+      attack(enemy, attacks.get(x));
+    }
+
+    else if (!fourTimes.isEmpty() && !twoTimes.isEmpty()){
+      if (rand.nextInt(100) < 70){
+        int x = rand.nextInt(fourTimes.size());
+        attack(enemy, fourTimes.get(x));
+      }
+      else{
+        int x = rand.nextInt(twoTimes.size());
+        attack(enemy, twoTimes.get(x));
+      }
+    }
+
+    else if (fourTimes.isEmpty() && twoTimes.isEmpty()){
+      int x = rand.nextInt(attacks.size());
+      attack(enemy, attacks.get(x));
+    }
+  }
+
     // This calculates the proper modifier, based on if the type exists in the
     // typeWeakness or typeResistance array, and returns .25, .5, 1, 2, or 4
     // based on which array it exists in, and how many times.
@@ -390,6 +562,10 @@ private double modifier(Move move, Pokemon enemy){
   public void attack(Pokemon enemy, String move1){
     Move move = new Move(move1);
     double mod = modifier(move, enemy);
+
+    if (!attacks.contains(move1)){
+      throw new NumberFormatException();
+    }
 
     // Formula found online - it's the actual formula used to calculate damage
     double dmg = ((42 * move.getPower()) *

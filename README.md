@@ -87,7 +87,7 @@ Continued updating the driver for the Battle class.
 
 **Jan 13, 2019** - continued working on maps, and the RPG element of the game. Restarted work again at the end of the night (third time thus far).
 
-Worked on bringing all the map data into Lanterna, and transferring the 2d array data into visual graphics.
+Worked on bringing all the map data into Lanterna, and transferring the 2d array data into visual graphics. 
 
 **Jan 14, 2019** - continued working on maps, and implemented trainer and random battles into the game.
 

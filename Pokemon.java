@@ -32,6 +32,7 @@ public class Pokemon {
     bulb.attack(ivy);
     System.out.println(ivy.getHP());
     bulb.attack(ivy);
+    ivy.attack(bulb);
     // System.out.println(Pokemon.evolutionID(3));
     // System.out.println(Pokemon.idToName(bulb.evolutionID(bulb.getID())));
 
@@ -217,7 +218,7 @@ public class Pokemon {
         if (stats[0].equals(name1)){
           Move temp = new Move(name1);
 
-          System.out.println(temp.getPower());
+          // System.out.println(temp.getPower());
 
           possibleAttacks.add(stats[1]);
           possibleAttacks.add(stats[2]);
@@ -577,9 +578,9 @@ private double modifier(Move move, Pokemon enemy){
            (attack / enemy.getDefense()+2)
            / 50 * mod);
 
-           System.out.println(dmg + "HEY");
+           // System.out.println(dmg + "HEY");
 
-    System.out.println("attack was " + mod + "x effective. " + enemy.getName() + " took " + dmg + " damage!");
+    System.out.println(move1 + " was " + mod + "x effective. " + enemy.getName() + " took " + dmg + " damage!");
 
     if (enemy.getHP() - dmg > 0) enemy.setHP(enemy.getHP() - dmg);
     else enemy.setHP(0);

@@ -583,7 +583,7 @@ private double modifier(Move move, Pokemon enemy){
   return 1;
 }
 
-  public void attack(Pokemon enemy, String move1){
+  public double attack(Pokemon enemy, String move1){
     Move move = new Move(move1);
     double mod = modifier(move, enemy);
 
@@ -599,9 +599,9 @@ private double modifier(Move move, Pokemon enemy){
 
            // System.out.println(dmg + "HEY");
 
-    System.out.println(move1 + " was " + mod + "x effective. " + enemy.getName() + " took " + dmg + " damage!");
-
     if (enemy.getHP() - dmg > 0) enemy.setHP(enemy.getHP() - dmg);
     else enemy.setHP(0);
+
+    return dmg;
   }
 }

@@ -12,6 +12,7 @@ import com.googlecode.lanterna.input.InputDecoder;
 import com.googlecode.lanterna.input.InputProvider;
 import com.googlecode.lanterna.input.Key;
 import com.googlecode.lanterna.input.KeyMappingProfile;
+import com.googlecode.lanterna.screen.Screen;
 
 import java.util.*;
 import java.io.*; //file, filenotfoundexception
@@ -20,12 +21,14 @@ import java.util.concurrent.TimeUnit; //time
 public class tl {
 
   //credit to Mr. K, from TerminalDemo.java
+
 	public static void putString(int r, int c, Terminal t, String s) {
 		t.moveCursor(r,c);
 		for (int i = 0; i < s.length(); i++) {
 			t.putCharacter(s.charAt(i));
 		}
 	}
+
 
   /* dont work - will figure out some other time
 
@@ -64,11 +67,11 @@ public class tl {
 		terminal.enterPrivateMode();
 		TerminalSize size = terminal.getTerminalSize();
 		terminal.setCursorVisible(false);
-		try {
-			Screen screen = new Screen(terminal);
-		} catch (LanternaException e) {
-			System.exit(1);
-		}
+
+		Screen screen = new Screen(terminal);
+		screen.startScreen();
+
+		terminal.setTitle("Testing");
 
 		boolean running = true;
 
@@ -85,11 +88,10 @@ public class tl {
 
 		while (running) {
 
-      terminal.applyForegroundColor(Terminal.Color.BLACK);
-      putString(44,2,terminal,"Welcome to Javamon!");
-      putString(44,4,terminal, "Created by Ahmed Sultan & Ali Taoube.");
-      putString(44,6,terminal,"PLAYER INFORMATION");
-      putString(44,8,terminal,"Party:" + pparty);
+      screen.putString(44,2, "Welcome to Javamon!", Terminal.Color.DEFAULT, Terminal.Color.DEFAULT, ScreenCharacterStyle(Bold));
+      screen.putString(44,4, "Created by Ahmed Sultan & Ali Taoube.");
+      screen.putString(44,6, "PLAYER INFORMATION");
+      screen.putString(44,8, "Party:" + pparty);
 
       if (choosepkmn == true) {
         putString(2, 2, terminal, "Choose your starter Pokemon!");
@@ -105,10 +107,11 @@ public class tl {
 			terminal.applyForegroundColor(Terminal.Color.WHITE);
 			terminal.applySGR(Terminal.SGR.ENTER_UNDERLINE);
       terminal.applySGR(Terminal.SGR.ENTER_BOLD);
-			terminal.putCharacter('@');
+			screen.putString(x, y, "@", Terminal.Color.WHITE, Terminal.Color.BLUE);
 			terminal.applyBackgroundColor(Terminal.Color.DEFAULT);
 			terminal.applyForegroundColor(Terminal.Color.DEFAULT);
 			terminal.applySGR(Terminal.SGR.RESET_ALL);
+			refresh();
 
 
       if (istown1 == true ) {

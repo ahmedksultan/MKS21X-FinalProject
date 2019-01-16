@@ -66,7 +66,7 @@ public class tl {
 		terminal.setCursorVisible(false);
 		try {
 			Screen screen = new Screen(terminal);
-		} catch (LanternaException e){
+		} catch (LanternaException e) {
 			System.exit(1);
 		}
 

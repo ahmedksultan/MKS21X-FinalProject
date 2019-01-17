@@ -183,7 +183,7 @@ public class Pokemon {
     throw new Error();
   }
 
-  private static String nameToID(String names){
+  public static String nameToID(String names){
     try{
       File f = new File("Pokemon.csv");
       Scanner in = new Scanner(f);

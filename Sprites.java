@@ -3,24 +3,35 @@ import java.io.*; //file, filenotfoundexception
 
 public class Sprites{
   public static void main(String[] args) {
-    getArray(150);
+    ArrayList<Character> test = getArray(1);
+    String output = "";
+    for (int x = 0; x < test.size(); x++){
+      output += test.get(x);
+    }
+    System.out.println(output);
   }
 
   private static ArrayList<Character> data;
 
 
   public static ArrayList<Character> getArray(int x){
+    data = new ArrayList<Character>();
     try{
       File f = new File("Sprites.txt");
       Scanner in = new Scanner(f);
 
       while (in.hasNext()){
         String line = in.nextLine();
-        while (!line.equals("break;")){
+        if (line.equals(x+":")){
           line = in.nextLine();
-          if (line.equals(x+":")){
-            for (int i = 0; x < line.length(); i++){
+        while (!line.contains("break;")){
+          line = in.nextLine();
+          // System.out.println(line);
+            System.out.println("IN");
+            for (int i = 0; i < line.length(); i++){
+              // System.out.println("doubleIN");
               data.add(line.charAt(i));
+              // System.out.println(line.charAt(i));
             }
           }
         }
@@ -30,6 +41,7 @@ public class Sprites{
       System.out.println("Error at getArray");
       throw new Error();
     }
+    System.out.println(data);
     return data;
   }
 }

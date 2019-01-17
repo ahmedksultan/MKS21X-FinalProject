@@ -28,6 +28,9 @@ public class Sprites{
           line = in.nextLine();
           // System.out.println(line);
             System.out.println("IN");
+            if (line.contains("break;")){
+              break;
+            }
             for (int i = 0; i < line.length(); i++){
               // System.out.println("doubleIN");
               data.add(line.charAt(i));
@@ -41,7 +44,7 @@ public class Sprites{
       System.out.println("Error at getArray");
       throw new Error();
     }
-    System.out.println(data);
+    // System.out.println(data);
     return data;
   }
 }

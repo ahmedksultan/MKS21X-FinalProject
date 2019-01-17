@@ -524,29 +524,39 @@ private double modifier(Move move, Pokemon enemy){
   return 1;
 }
 
-public double attack(Pokemon enemy){
-  Random rand = new Random();
+// public double attack(Pokemon enemy){
+//   Random rand = new Random();
+//
+//   System.out.println(attacks);
+//   int calc = rand.nextInt((3 - 0) + 1) + 0;
+//
+//   Move move = new Move(attacks.get(calc));
+//   double mod = modifier(move, enemy);
+//
+//
+//   double dmg = ((42 * move.getPower()) *
+//          (attack / enemy.getDefense()+2)
+//          / 50 * mod);
+//
+//   return attack(enemy, attacks.get(calc));
+// }
 
-  System.out.println(attacks);
-  int calc = rand.nextInt((3 - 0) + 1) + 0;
 
-  Move move = new Move(attacks.get(calc));
-  double mod = modifier(move, enemy);
+  public double attack(Pokemon enemy){
+    Random rand = new Random();
+    int x = rand.nextInt((3-0)+1);
 
-
-  double dmg = ((42 * move.getPower()) *
-         (attack / enemy.getDefense()+2)
-         / 50 * mod);
-
-  return attack(enemy, attacks.get(calc));
-}
-
+    return attack(enemy, attacks.get(x));
+  }
 
   public double attack(Pokemon enemy, String move1){
+
+      System.out.println(attacks.size() + " test");
 
       Move move = new Move(move1);
       double mod = modifier(move, enemy);
 
+      System.out.println("We're in");
       if (!attacks.contains(move1)){
         throw new NumberFormatException();
       }
@@ -560,6 +570,7 @@ public double attack(Pokemon enemy){
       if (enemy.getHP() - dmg > 0) enemy.setHP(enemy.getHP() - dmg);
       else enemy.setHP(0);
 
+      System.out.println("This is the damage: " + dmg);
       return dmg;
   }
 }

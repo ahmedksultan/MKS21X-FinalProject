@@ -47,9 +47,10 @@ public class Sprites{
             if (line.contains("break;")){
               break;
             }
-            for (int i = 0; i < line.length(); i++){
+            for (int i = 0; i < line.length() - 1; i++){
               data.add(line.charAt(i));
             }
+            data.add('\n');
           }
         }
       }

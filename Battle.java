@@ -10,7 +10,8 @@ public class Battle{
     Pokemon Bulb = new Pokemon("Bulbasaur");
     Pokemon Chari = new Pokemon("Charizard");
     Pokemon Mew2 = new Pokemon("Mewtwo");
-    Pokemon Mew = new Pokemon("Mew");
+    // Pokemon Drago = new Pokemon("Dragonair");
+    // Pokemon Mew = new Pokemon("Mew");
     Pokemon Venusaur = new Pokemon("Venusaur");
     Pokemon Rattata = new Pokemon("Rattata");
     Pokemon Tentacruel = new Pokemon("Tentacruel");
@@ -53,7 +54,6 @@ public class Battle{
       System.out.println(battle.getActive1().toString() + " and " + battle.getActive2() + " are battling!");
       System.out.println("Choose your move");
       firstname = user_input.next();
-      enemyattack = "absorb";
       battle.move(firstname, enemyattack);
       System.out.println("You used " + firstname + "! Your opponent used" + enemyattack + "." );
       battle.forceSwitch();
@@ -161,14 +161,42 @@ public class Battle{
   // move is the method that makes players choose their next move, and checks if
   // the game is over.
 
-  public void move(String a, String b){
+  // public void move(String a, String b){
+  //   if (!active1.isDead() && !active2.isDead()){
+  //     if (active1.getSpeed() > active2.getSpeed()){
+  //       System.out.println("Your ");
+  //       active1.attack(active2, a);
+  //       if (!active2.isDead()){
+  //         System.out.println("Enemy's ");
+  //         active2.attack(active1, b);
+  //       }
+  //       else if (active2.isDead()){
+  //         autoSwitch();
+  //       }
+  //     }
+  //     else{
+  //       System.out.println("Enemy's ");
+  //       active2.attack(active1, b);
+  //       if (!active1.isDead()){
+  //         System.out.println("Your ");
+  //         active1.attack(active2, a);
+  //       }
+  //       else if (active2.isDead()) {
+  //         Scanner user_input = new Scanner( System.in );
+  //         String firstname;
+  //         chooseSwitch(user_input.nextInt());
+  //       }
+  //     }
+  //   }
+
+  public void move(String a){
     if (!active1.isDead() && !active2.isDead()){
       if (active1.getSpeed() > active2.getSpeed()){
         System.out.println("Your ");
         active1.attack(active2, a);
         if (!active2.isDead()){
           System.out.println("Enemy's ");
-          active2.attack(active1, b);
+          active2.attack(active1);
         }
         else if (active2.isDead()){
           autoSwitch();
@@ -176,7 +204,7 @@ public class Battle{
       }
       else{
         System.out.println("Enemy's ");
-        active2.attack(active1, b);
+        active2.attack(active1);
         if (!active1.isDead()){
           System.out.println("Your ");
           active1.attack(active2, a);
@@ -188,6 +216,7 @@ public class Battle{
         }
       }
     }
+
 
     if (two.allDead()){
       over = true;

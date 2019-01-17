@@ -6,7 +6,6 @@ public class Pokemon {
   public static void main(String[] args) {
     Pokemon bulb = new Pokemon("Bulbasaur");
     Pokemon ivy = new Pokemon("Ivysaur");
-    // System.out.println("HEHEHEHHRE" + ivy.getEvolve());
     Pokemon weeze = new Pokemon("Weezing");
     System.out.println(weeze.getEvolve());
     Pokemon mewtwo = new Pokemon("Mewtwo");
@@ -37,8 +36,7 @@ public class Pokemon {
     Random rand = new Random();
     int x = rand.nextInt(3 - 0)+1;
     bulb.attack(ivy, bulb.getAttacks().get(x));
-    // bulb.attack(ivy, "");
-    // ivy.attack(bulb, "");
+
     System.out.println(Pokemon.evolutionID(3));
     System.out.println(Pokemon.idToName(Pokemon.evolutionID(bulb.getID())));
 
@@ -89,7 +87,6 @@ public class Pokemon {
     setAttacks(name1, selectedAttacks);
     haveEvolve(name1);
 
-    // haveEvolve(name1);
     if (evolve){
       evolvedMoves(name1);
     }
@@ -101,8 +98,6 @@ public class Pokemon {
     setAttacks(name1);
     haveEvolve(name1);
 
-    // System.out.println(getEvolve());
-    // haveEvolve(name1);
     if (evolve){
       evolvedMoves(name1);
     }
@@ -121,15 +116,11 @@ public class Pokemon {
       while (in.hasNext()){
         String line = in.nextLine();
         String[] stats = line.split(",");
-        // System.out.println(stats[0] + ", " + named);
         if (stats[0].equals(named)){
-          // System.out.println("We in");
           evolve = false;
           break;
         }
-        // System.out.println(evolve);
       }
-      // evolve = true;
     }
     catch(FileNotFoundException e){
       System.out.println("In haveEvolve");
@@ -170,7 +161,6 @@ public class Pokemon {
         String line = in.nextLine();
         String[] stats = line.split(",");
 
-        // System.out.println(index + ", " + stats[0]);
         if (String.valueOf(index).equals(stats[0])){
           return stats[1];
         }
@@ -205,7 +195,6 @@ public class Pokemon {
   }
 
   public String evolve(int index){
-    // System.out.println("here" + idToName(evolutionID(index)));
     return idToName(evolutionID(index));
   }
 
@@ -218,13 +207,9 @@ public class Pokemon {
       while (in.hasNext()){
         String line = in.nextLine();
         String[] stats = line.split(",");
-        // System.out.println(stats[0]);
-        // System.out.println(name1);
-        // System.out.println(stats[0].equals(name1));
+
         if (stats[0].equals(name1)){
           Move temp = new Move(name1);
-
-          // System.out.println(temp.getPower());
 
           possibleAttacks.add(stats[1]);
           possibleAttacks.add(stats[2]);
@@ -237,20 +222,6 @@ public class Pokemon {
     }
 
     return possibleAttacks;
-    // if (possibleAttacks.isEmpty()){
-    //   // System.out.println("HERE");
-    //   String name = evolve(ID);
-    //   possibleAttacks(name);
-    // }
-
-    // Pokemon poke;
-    // System.out.println(evolve(ID));
-    // while (possibleAttacks.isEmpty()){
-    //   // System.out.println("HERE");
-    //   String name2 = evolve(poke.getID());
-    //   poke = new Pokemon(name2);
-    //   possibleAttacks(poke.getName());
-
 }
 
     public void evolvedMoves(String name){
@@ -300,44 +271,11 @@ public class Pokemon {
         temp.add(element);
       }
     }
-
-    // while (attacks.size() != 4){
-    //   Random temp1 = new Random();
-    //   // System.out.println(temp1);
-    //   int x = temp1.nextInt(4);
-    //   System.out.println(x);
-    // }
-    // for (int x = possibleAttacks.size(); x > 0  && attacks.size() < 5; x--){
-    //   attacks.add(possibleAttacks.get(x));
-    // }
-    // if (!temp.isEmpty()){
-    //   attacks = temp;
-    // }
   }
-
-  // public String attackstoString(int index){ // One for possibleAttacks, two for just attacks
-  //   String output ="";
-  //   if (index == 1){
-  //     for (int x = 0; x < possibleAttacks.size(); x++){
-  //       output += possibleAttacks.get(x).getName();
-  //       // System.out.println(possibleAttacks.get(x).getName());
-  //       if (x + 1 != possibleAttacks.size()) output += ", ";
-  //     }
-  //   }
-  //   else{
-  //     for (int x = 0; x < attacks.size(); x++){
-  //       output += attacks.get(x).getName();
-  //       if (x + 1 != attacks.size()) output += ", ";
-  //     }
-  //   }
-  //   return output;
-  // }
 
   public static String arrayToString(ArrayList<Move> input){
     String output = "";
     for (int x = 0; x < input.size(); x++){
-      // System.out.println(input.get(x));
-      // System.out.println(input.get(x).getName());
       output += input.get(x);
       if (x+1 != input.size()) output += ", ";
     }
@@ -590,7 +528,6 @@ public double attack(Pokemon enemy){
   Random rand = new Random();
 
   System.out.println(attacks);
-  // int calc = rand.nextInt(attacks.size());
   int calc = rand.nextInt((3 - 0) + 1) + 0;
 
   Move move = new Move(attacks.get(calc));
@@ -607,7 +544,6 @@ public double attack(Pokemon enemy){
 
   public double attack(Pokemon enemy, String move1){
 
-    // else{
       Move move = new Move(move1);
       double mod = modifier(move, enemy);
 
@@ -621,15 +557,9 @@ public double attack(Pokemon enemy){
              (attack / enemy.getDefense()+2)
              / 50 * mod);
 
-             // System.out.println(dmg + "HEY");
-
       if (enemy.getHP() - dmg > 0) enemy.setHP(enemy.getHP() - dmg);
       else enemy.setHP(0);
 
       return dmg;
-
-    // }
-
-
   }
 }

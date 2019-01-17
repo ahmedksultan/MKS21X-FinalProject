@@ -9,11 +9,6 @@ public class Enemy extends Player{
 
   public Enemy(String name1, ArrayList<Pokemon> party1){
 
-    /*if (party1.size() != 1){
-      System.out.println("LENGTH ERROR CHECK ENEMY CONSTRUCTOR");
-      throw new Error();
-    }*/
-
     party = new ArrayList<Pokemon>(party1.size());
     party = party1;
 

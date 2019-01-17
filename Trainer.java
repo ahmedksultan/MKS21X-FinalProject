@@ -8,12 +8,6 @@ public class Trainer extends Player{
 
   public Trainer(String name1, ArrayList<Pokemon> party1){
 
-    /*
-    if (party1.size() > 6 || party1.size() < 1){
-      System.out.println("LENGTH ERROR CHECK TRAINER CONSTRUCTOR");
-      throw new Error();
-    } */
-
     party = new ArrayList<Pokemon>(party1.size());
 
     party = party1;

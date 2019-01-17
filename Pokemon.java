@@ -549,14 +549,32 @@ private double modifier(Move move, Pokemon enemy){
     return attack(enemy, attacks.get(x));
   }
 
-  public double attack(Pokemon enemy, String move1){
+  // public double attack1(Pokemon enemy){
+  //   ArrayList<String> fourTimes = new ArrayList<String>();
+  //   ArrayList<String> twoTimes = new ArrayList<String>();
+  //
+  //   Random rand = new Random();
+  //
+  //   for (int x = 0; x < attacks.size(); x++){
+  //     if (modifier(new Move(attacks.get(x)), enemy) == 4.0){
+  //       fourTimes.add(attacks.get(x));
+  //     }
+  //     if (modifier(new Move(attacks.get(x)), enemy) == 2.0){
+  //       fourTimes.add(attacks.get(x));
+  //     }
+  //   }
+  //
+  //   if (!fourTimes.size().isEmpty()){
+  //
+  //   }
+  //   if ((rand.nextInt(100-1)+1) >= 70)
+  // }
 
-      System.out.println(attacks.size() + " test");
+  public double attack(Pokemon enemy, String move1){
 
       Move move = new Move(move1);
       double mod = modifier(move, enemy);
 
-      System.out.println("We're in");
       if (!attacks.contains(move1)){
         throw new NumberFormatException();
       }

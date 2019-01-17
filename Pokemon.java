@@ -1,4 +1,4 @@
-import java.util.*; //scanner, ArrayList, Map
+import java.util.*; //scanner, ArrayList, Map, HashMap
 import java.io.*; //file, filenotfoundexception
 
 public class Pokemon {
@@ -29,14 +29,18 @@ public class Pokemon {
 
     // bulb.attack(weeze, "earthquake");
     System.out.println();
-    // chara.attack(ivy, chara.getAttacks().get(0));
-    // System.out.println(ivy.getHP());
-    // bulb.attack(ivy);
-    // System.out.println(ivy.getHP());
-    // bulb.attack(ivy);
-    // ivy.attack(bulb);
-    // System.out.println(Pokemon.evolutionID(3));
-    // System.out.println(Pokemon.idToName(bulb.evolutionID(bulb.getID())));
+    chara.attack(ivy, chara.getAttacks().get(0));
+      System.out.println(ivy.getHP());
+    bulb.attack(ivy);
+    System.out.println(ivy.getHP());
+
+    Random rand = new Random();
+    int x = rand.nextInt(3 - 0)+1;
+    bulb.attack(ivy, bulb.getAttacks().get(x));
+    // bulb.attack(ivy, "");
+    // ivy.attack(bulb, "");
+    System.out.println(Pokemon.evolutionID(3));
+    System.out.println(Pokemon.idToName(Pokemon.evolutionID(bulb.getID())));
 
     bulb.attack(ivy, bulb.getAttacks().get(0));
     System.out.println(bulb.getAttacks());
@@ -509,46 +513,45 @@ public class Pokemon {
       }
     }
 
-
-  public void attack(Pokemon enemy){
-    Random rand = new Random();
-
-    ArrayList<String> twoTimes = new ArrayList<String>();
-    ArrayList<String> fourTimes = new ArrayList<String>();
-
-    for (int x = 0; x < attacks.size(); x++){
-      double mod = modifier(new Move(attacks.get(x)), enemy);
-      // System.out.println("HERE" + mod);
-      if (mod == 4){
-        fourTimes.add(attacks.get(x));
-      }
-      if (mod == 2){
-        twoTimes.add(attacks.get(x));
-      }
-    }
-
-    if (!fourTimes.isEmpty() && twoTimes.isEmpty()){
-      int x = rand.nextInt(fourTimes.size());
-
-      attack(enemy, attacks.get(x));
-    }
-
-    else if (fourTimes.isEmpty() && !twoTimes.isEmpty()){
-      int x = rand.nextInt(fourTimes.size());
-
-      attack(enemy, attacks.get(x));
-    }
-
-    else if (!fourTimes.isEmpty() && !twoTimes.isEmpty()){
-      if (rand.nextInt(100) < 70){
-        int x = rand.nextInt(fourTimes.size());
-        attack(enemy, fourTimes.get(x));
-      }
-      else{
-        int x = rand.nextInt(twoTimes.size());
-        attack(enemy, twoTimes.get(x));
-      }
-    }
+  // public void attack(Pokemon enemy){
+  //   Random rand = new Random();
+  //
+  //   ArrayList<String> twoTimes = new ArrayList<String>();
+  //   ArrayList<String> fourTimes = new ArrayList<String>();
+  //
+  //   for (int x = 0; x < attacks.size(); x++){
+  //     double mod = modifier(new Move(attacks.get(x)), enemy);
+  //     // System.out.println("HERE" + mod);
+  //     if (mod == 4){
+  //       fourTimes.add(attacks.get(x));
+  //     }
+  //     if (mod == 2){
+  //       twoTimes.add(attacks.get(x));
+  //     }
+  //   }
+  //
+  //   if (!fourTimes.isEmpty() && twoTimes.isEmpty()){
+  //     int x = rand.nextInt(fourTimes.size());
+  //
+  //     attack(enemy, attacks.get(x));
+  //   }
+  //
+  //   else if (fourTimes.isEmpty() && !twoTimes.isEmpty()){
+  //     int x = rand.nextInt(fourTimes.size());
+  //
+  //     attack(enemy, attacks.get(x));
+  //   }
+  //
+  //   else if (!fourTimes.isEmpty() && !twoTimes.isEmpty()){
+  //     if (rand.nextInt(100) < 70){
+  //       int x = rand.nextInt(fourTimes.size());
+  //       attack(enemy, fourTimes.get(x));
+  //     }
+  //     else{
+  //       int x = rand.nextInt(twoTimes.size());
+  //       attack(enemy, twoTimes.get(x));
+  //     }
+  //   }
 
     // else if (fourTimes.isEmpty() && twoTimes.isEmpty()){
     //   int x = rand.nextInt(attacks.size());
@@ -556,12 +559,12 @@ public class Pokemon {
     //   // System.out.println(attacks.size() + "HERE");
     //   attack(enemy, attacks.get(x));
     // }
-    else{
-      setAttacks(name);
-      System.out.println(attacks.get(0));
-      attack(enemy, attacks.get(0));
-    }
-  }
+  //   else{
+  //     setAttacks(name);
+  //     System.out.println(attacks.get(0));
+  //     attack(enemy, attacks.get(0));
+  //   }
+  // }
 
     // This calculates the proper modifier, based on if the type exists in the
     // typeWeakness or typeResistance array, and returns .25, .5, 1, 2, or 4
@@ -583,25 +586,50 @@ private double modifier(Move move, Pokemon enemy){
   return 1;
 }
 
+public double attack(Pokemon enemy){
+  Random rand = new Random();
+
+  System.out.println(attacks);
+  // int calc = rand.nextInt(attacks.size());
+  int calc = rand.nextInt((3 - 0) + 1) + 0;
+
+  Move move = new Move(attacks.get(calc));
+  double mod = modifier(move, enemy);
+
+
+  double dmg = ((42 * move.getPower()) *
+         (attack / enemy.getDefense()+2)
+         / 50 * mod);
+
+  return attack(enemy, attacks.get(calc));
+}
+
+
   public double attack(Pokemon enemy, String move1){
-    Move move = new Move(move1);
-    double mod = modifier(move, enemy);
 
-    if (!attacks.contains(move1)){
-      throw new NumberFormatException();
-    }
+    // else{
+      Move move = new Move(move1);
+      double mod = modifier(move, enemy);
 
-    // Formula found online - it's the actual formula used to calculate damage
+      if (!attacks.contains(move1)){
+        throw new NumberFormatException();
+      }
 
-    double dmg = ((42 * move.getPower()) *
-           (attack / enemy.getDefense()+2)
-           / 50 * mod);
+      // Formula found online - it's the actual formula used to calculate damage
 
-           // System.out.println(dmg + "HEY");
+      double dmg = ((42 * move.getPower()) *
+             (attack / enemy.getDefense()+2)
+             / 50 * mod);
 
-    if (enemy.getHP() - dmg > 0) enemy.setHP(enemy.getHP() - dmg);
-    else enemy.setHP(0);
+             // System.out.println(dmg + "HEY");
 
-    return dmg;
+      if (enemy.getHP() - dmg > 0) enemy.setHP(enemy.getHP() - dmg);
+      else enemy.setHP(0);
+
+      return dmg;
+
+    // }
+
+
   }
 }

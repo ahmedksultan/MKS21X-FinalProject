@@ -5,14 +5,31 @@ public class Sprites{
   public static void main(String[] args) {
     ArrayList<Character> test = getArray(1);
     String output = "";
+    String output1 = "";
     for (int x = 0; x < test.size(); x++){
       output += test.get(x);
     }
     System.out.println(output);
+
+    ArrayList<Character> test1 = getArray("Charizard");
+
+    for (int x = 0; x < test1.size(); x++){
+      output1 += test1.get(x);
+    }
+
+    System.out.println();
+
+    System.out.println(output1);
+
   }
 
   private static ArrayList<Character> data;
 
+
+  public static ArrayList<Character> getArray(String name){
+    int ID = Integer.parseInt(Pokemon.nameToID(name));
+    return getArray(ID);
+  }
 
   public static ArrayList<Character> getArray(int x){
     data = new ArrayList<Character>();
@@ -27,14 +44,11 @@ public class Sprites{
         while (!line.contains("break;")){
           line = in.nextLine();
           // System.out.println(line);
-            System.out.println("IN");
             if (line.contains("break;")){
               break;
             }
             for (int i = 0; i < line.length(); i++){
-              // System.out.println("doubleIN");
               data.add(line.charAt(i));
-              // System.out.println(line.charAt(i));
             }
           }
         }
@@ -44,7 +58,6 @@ public class Sprites{
       System.out.println("Error at getArray");
       throw new Error();
     }
-    // System.out.println(data);
     return data;
   }
 }

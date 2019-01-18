@@ -11,7 +11,7 @@ public class Sprites{
     }
     System.out.println(output);
 
-    ArrayList<Character> test1 = getArray("Charizard");
+    ArrayList<Character> test1 = getArray("Mewtwo");
 
     for (int x = 0; x < test1.size(); x++){
       output1 += test1.get(x);
@@ -21,6 +21,14 @@ public class Sprites{
 
     System.out.println(output1);
 
+
+    ArrayList<Character> test3 = flipArray(2);
+
+    String output3 = "";
+    for (int x = 0; x < test3.size(); x++){
+      output += test3.get(x);
+    }
+    System.out.println(output);
   }
 
   private static ArrayList<Character> data;
@@ -60,5 +68,26 @@ public class Sprites{
       throw new Error();
     }
     return data;
+  }
+
+  public static ArrayList<Character> flipArray(String name){
+    int ID = Integer.parseInt(Pokemon.nameToID(name));
+    return flipArray(ID);
+
+  }
+
+  public static ArrayList<Character> flipArray(int x){
+    data = getArray(x);
+    ArrayList<Character> temp = new ArrayList<Character>();
+
+    for (int y = 0; y < data.size(); y++){
+      if (data.get(x) == '\n'){
+        for (int i = y; i > data.size() - y; i--){
+          temp.add(data.get(i));
+        }
+        temp.add('\n');
+      }
+    }
+    return temp;
   }
 }

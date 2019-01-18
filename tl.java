@@ -71,8 +71,6 @@ public class tl {
 		Screen screen = new Screen(terminal);
 		screen.startScreen();
 
-		terminal.setTitle("Testing");
-
 		boolean running = true;
 
     String[][] test;
@@ -88,17 +86,17 @@ public class tl {
 
 		while (running) {
 
-      screen.putString(44,2, "Welcome to Javamon!", Terminal.Color.DEFAULT, Terminal.Color.DEFAULT, ScreenCharacterStyle(Bold));
-      screen.putString(44,4, "Created by Ahmed Sultan & Ali Taoube.");
-      screen.putString(44,6, "PLAYER INFORMATION");
-      screen.putString(44,8, "Party:" + pparty);
+      screen.putString(44,2, "Welcome to Javamon!", Terminal.Color.DEFAULT, Terminal.Color.DEFAULT);
+      screen.putString(44,4, "Created by Ahmed Sultan & Ali Taoube.", Terminal.Color.DEFAULT, Terminal.Color.DEFAULT);
+      screen.putString(44,6, "PLAYER INFORMATION", Terminal.Color.DEFAULT, Terminal.Color.DEFAULT);
+      screen.putString(44,8, "Party:" + pparty, Terminal.Color.DEFAULT, Terminal.Color.DEFAULT);
 
       if (choosepkmn == true) {
-        putString(2, 2, terminal, "Choose your starter Pokemon!");
-        putString(2, 4, terminal, "[S] for Squirtle.");
-        putString(2, 5, terminal, "[B] for Bulbasaur.");
-        putString(2, 6, terminal, "[C] for Charmander.");
-				putString(2, 8, terminal, "//DEMO PURPOSES ONLY [D] for Demo.");
+        screen.putString(2, 2, "Choose your starter Pokemon!", Terminal.Color.DEFAULT, Terminal.Color.DEFAULT);
+      	screen.putString(2, 4, "[S] for Squirtle.", Terminal.Color.DEFAULT, Terminal.Color.DEFAULT);
+        screen.putString(2, 5, "[B] for Bulbasaur.", Terminal.Color.DEFAULT, Terminal.Color.DEFAULT);
+        screen.putString(2, 6, "[C] for Charmander.", Terminal.Color.DEFAULT, Terminal.Color.DEFAULT);
+				screen.putString(2, 8, "//DEMO PURPOSES ONLY [D] for Demo.", Terminal.Color.DEFAULT, Terminal.Color.DEFAULT);
       }
 
       //player
@@ -111,7 +109,7 @@ public class tl {
 			terminal.applyBackgroundColor(Terminal.Color.DEFAULT);
 			terminal.applyForegroundColor(Terminal.Color.DEFAULT);
 			terminal.applySGR(Terminal.SGR.RESET_ALL);
-			refresh();
+			screen.refresh();
 
 
       if (istown1 == true ) {
@@ -127,34 +125,35 @@ public class tl {
             //p = path
             if (test[a][b] == "r") {
               terminal.applyBackgroundColor(Terminal.Color.RED);
-              terminal.putCharacter('.');
+              screen.putString(b, a, " ", Terminal.Color.DEFAULT, Terminal.Color.DEFAULT);
             }
             if (test[a][b] == "b") {
               terminal.applyBackgroundColor(Terminal.Color.WHITE);
-              terminal.putCharacter(' ');
+              screen.putString(b, a, " ", Terminal.Color.DEFAULT, Terminal.Color.DEFAULT);
             }
             if (test[a][b] == "d") {
               terminal.applyBackgroundColor(Terminal.Color.BLACK);
-              terminal.putCharacter(' ');
+              screen.putString(b, a, " ", Terminal.Color.DEFAULT, Terminal.Color.DEFAULT);
             }
             if (test[a][b] == "g") {
               terminal.applyBackgroundColor(Terminal.Color.GREEN);
-              terminal.putCharacter('^');
+              screen.putString(b, a, " ", Terminal.Color.DEFAULT, Terminal.Color.DEFAULT);
             }
             if (test[a][b] == "|") {
               terminal.applyBackgroundColor(Terminal.Color.BLACK);
-              terminal.putCharacter(' ');
+              screen.putString(b, a, " ", Terminal.Color.DEFAULT, Terminal.Color.DEFAULT);
             }
             if (test[a][b] == "p") {
               terminal.applyBackgroundColor(Terminal.Color.YELLOW);
-              terminal.putCharacter(' ');
+              screen.putString(b, a, " ", Terminal.Color.DEFAULT, Terminal.Color.DEFAULT);
             }
             else {
               terminal.applyBackgroundColor(Terminal.Color.DEFAULT);
-              terminal.putCharacter(' ');
+              screen.putString(b, a, " ", Terminal.Color.DEFAULT, Terminal.Color.DEFAULT);
             }
           }
         }
+
 				if ((y >= 20 && y < 25) && (x >= 2 && x < 15)) {
 					Random randgen = new Random();
 					int rno = randgen.nextInt() % 20;
@@ -400,18 +399,21 @@ public class tl {
           pparty.add(Squirtle);
           choosepkmn = false;
           istown1 = true;
+					screen.refresh();
         }
         if (key.getCharacter() == 'b' && choosepkmn == true) {
           Pokemon Bulbasaur = new Pokemon("Bulbasaur");
           pparty.add(Bulbasaur);
           choosepkmn = false;
           istown1 = true;
+					screen.refresh();
         }
         if (key.getCharacter() == 'c' && choosepkmn == true) {
           Pokemon Charmander = new Pokemon("Charmander");
           pparty.add(Charmander);
           choosepkmn = false;
           istown1 = true;
+					screen.refresh();
         }
 				if (key.getCharacter() == 'd' && choosepkmn == true) {
 					Pokemon Charmander = new Pokemon("Charmander");
@@ -422,13 +424,9 @@ public class tl {
           pparty.add(Squirtle);
 					choosepkmn = false;
           istown1 = true;
+					screen.refresh();
 				}
 			}
-    try {
-      Thread.sleep(50);
-    } catch (InterruptedException e) {
-      System.exit(1);
-    }
 		}
 	}
 }

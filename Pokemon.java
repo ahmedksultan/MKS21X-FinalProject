@@ -233,32 +233,6 @@ public class Pokemon {
       }
     }
 
-    // String evo1 = idToName(evolutionID(ID));
-    // Pokemon evoPoke = new Pokemon(evo1);
-    //
-    //
-    // // Can just run this process twice, evolving each time because no Pokemon
-    // // has more than 2 evolutions.
-    // if (possibleAttacks.isEmpty()){
-    //   possibleAttacks(evo1);
-    // }
-    //
-    // String evo2 = idToName(evolutionID(evoPoke.getID()));
-    // if (possibleAttacks.isEmpty()){
-    //   possibleAttacks(evo2);
-    // }
-
-    // while (possibleAttacks.isEmpty()){
-    //   System.out.println(idToName(evolutionID(ID))) ;
-    //   Pokemon next = new Pokemon(idToName(evolutionID(ID)));
-    //   possibleAttacks(next.getName());
-    // }
-
-    // if (possibleAttacks.isEmpty()){
-      // possibleAttacks(idToName(evolutionID(ID)));
-    // }
-    // System.out.println(possibleAttacks);
-
   public void setAttacks(String name1){
     ArrayList<String> temp = new ArrayList<String>();
     possibleAttacks(name1);
@@ -451,59 +425,6 @@ public class Pokemon {
       }
     }
 
-  // public void attack(Pokemon enemy){
-  //   Random rand = new Random();
-  //
-  //   ArrayList<String> twoTimes = new ArrayList<String>();
-  //   ArrayList<String> fourTimes = new ArrayList<String>();
-  //
-  //   for (int x = 0; x < attacks.size(); x++){
-  //     double mod = modifier(new Move(attacks.get(x)), enemy);
-  //     // System.out.println("HERE" + mod);
-  //     if (mod == 4){
-  //       fourTimes.add(attacks.get(x));
-  //     }
-  //     if (mod == 2){
-  //       twoTimes.add(attacks.get(x));
-  //     }
-  //   }
-  //
-  //   if (!fourTimes.isEmpty() && twoTimes.isEmpty()){
-  //     int x = rand.nextInt(fourTimes.size());
-  //
-  //     attack(enemy, attacks.get(x));
-  //   }
-  //
-  //   else if (fourTimes.isEmpty() && !twoTimes.isEmpty()){
-  //     int x = rand.nextInt(fourTimes.size());
-  //
-  //     attack(enemy, attacks.get(x));
-  //   }
-  //
-  //   else if (!fourTimes.isEmpty() && !twoTimes.isEmpty()){
-  //     if (rand.nextInt(100) < 70){
-  //       int x = rand.nextInt(fourTimes.size());
-  //       attack(enemy, fourTimes.get(x));
-  //     }
-  //     else{
-  //       int x = rand.nextInt(twoTimes.size());
-  //       attack(enemy, twoTimes.get(x));
-  //     }
-  //   }
-
-    // else if (fourTimes.isEmpty() && twoTimes.isEmpty()){
-    //   int x = rand.nextInt(attacks.size());
-    //   System.out.println(x + ", " + attacks.size());
-    //   // System.out.println(attacks.size() + "HERE");
-    //   attack(enemy, attacks.get(x));
-    // }
-  //   else{
-  //     setAttacks(name);
-  //     System.out.println(attacks.get(0));
-  //     attack(enemy, attacks.get(0));
-  //   }
-  // }
-
     // This calculates the proper modifier, based on if the type exists in the
     // typeWeakness or typeResistance array, and returns .25, .5, 1, 2, or 4
     // based on which array it exists in, and how many times.
@@ -524,51 +445,12 @@ private double modifier(Move move, Pokemon enemy){
   return 1;
 }
 
-// public double attack(Pokemon enemy){
-//   Random rand = new Random();
-//
-//   System.out.println(attacks);
-//   int calc = rand.nextInt((3 - 0) + 1) + 0;
-//
-//   Move move = new Move(attacks.get(calc));
-//   double mod = modifier(move, enemy);
-//
-//
-//   double dmg = ((42 * move.getPower()) *
-//          (attack / enemy.getDefense()+2)
-//          / 50 * mod);
-//
-//   return attack(enemy, attacks.get(calc));
-// }
-
-
   public double attack(Pokemon enemy){
     Random rand = new Random();
     int x = rand.nextInt((3-0)+1);
 
     return attack(enemy, attacks.get(x));
   }
-
-  // public double attack1(Pokemon enemy){
-  //   ArrayList<String> fourTimes = new ArrayList<String>();
-  //   ArrayList<String> twoTimes = new ArrayList<String>();
-  //
-  //   Random rand = new Random();
-  //
-  //   for (int x = 0; x < attacks.size(); x++){
-  //     if (modifier(new Move(attacks.get(x)), enemy) == 4.0){
-  //       fourTimes.add(attacks.get(x));
-  //     }
-  //     if (modifier(new Move(attacks.get(x)), enemy) == 2.0){
-  //       fourTimes.add(attacks.get(x));
-  //     }
-  //   }
-  //
-  //   if (!fourTimes.size().isEmpty()){
-  //
-  //   }
-  //   if ((rand.nextInt(100-1)+1) >= 70)
-  // }
 
   public double getMod(String move1, Pokemon enemy){
     return modifier(new Move(move1), enemy);

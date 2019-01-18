@@ -570,6 +570,10 @@ private double modifier(Move move, Pokemon enemy){
   //   if ((rand.nextInt(100-1)+1) >= 70)
   // }
 
+  public double getMod(String move1, Pokemon enemy){
+    return modifier(new Move(move1), enemy);
+  }
+
   public double attack(Pokemon enemy, String move1){
 
       Move move = new Move(move1);

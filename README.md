@@ -87,8 +87,65 @@ Continued updating the driver for the Battle class.
 
 **Jan 13, 2019** - continued working on maps, and the RPG element of the game. Restarted work again at the end of the night (third time thus far).
 
-Worked on bringing all the map data into Lanterna, and transferring the 2d array data into visual graphics. 
+Worked on bringing all the map data into Lanterna, and transferring the 2d array data into visual graphics.
 
 **Jan 14, 2019** - continued working on maps, and implemented trainer and random battles into the game.
 
 "Working" demo completed.
+
+Modified the modifier function using Collections.frequency in order to cut down on the length of the code.
+
+Added a constructor in the Move class that allows you to choos a move based on the index of a move rather than the name.
+
+Fixed error that caused the game to never end when you only had a single Pokemon left. Added a setMoves function that automatically assigns four moves when none are input - this is to auto generate Pokemon.
+
+Reworked Pokemon constructor. Created a function called create that assigns all the values, like attack, defense, etc. Then, we made two constructors. One of which took an ArrayList of Moves as an input. In this case, it used the setAttacks function that manually assigned moves, while the other constructor auto-assigned moves.
+
+Made it so that attempting to use a non-existent move will now throw and catch the error.
+
+Ran into an error that caused any Pokemon that had an evolutionary state to not have any moves. Discovered this was a result of the movesets.csv file not having these Pokemon. To fix this, we added a csv file that has all the evolutions of any Pokemon. Then, we made a function that finds the evolutionary ID of any Pokemon ID by using this new csv file. Then, introduced an idToName function that converts this ID to a name. Also implemented an nameToID function that does the opposite. Afterwards, we can run the setAttacks on the evolutionary state.
+
+**Jan 15, 2019** -
+
+Edited the Pokemon constructor to now assign the ID of the Pokemon.
+
+Fixed the idToName function.
+
+Overloaded the attack function to allow for a function that chooses a Move based on a percent chance and the type efficacies of each move.
+
+**Jan 16, 2019** -
+
+Fixed an error that was causing all moves to do damage - the issue was the move names in the movesets.csv file and the moves.csv file were not matching up in case. To fix this, we used .toLowerCase(). Also, removed all hyphens in the movesets.csv file to allow for more uniformity.
+
+The overloaded attack method does not work as expected, decided to just choose a random move in the Driver when actually running the battle.
+
+Began to work on the Sprites class - implemented two functions. One to get the length of the necessary array, and one to get the width.
+
+Realized that previously implemented functions in the Sprites class were unnecessary. Instead, replaced it with a single getArray function that gets the necessary array.
+
+Fixed an infinite loop in the getArray function.
+
+Introduced another constructor that takes in a Pokemon name rather than an ID, using the nameToID function.
+
+**Jan 17, 2019** -
+
+Began to work on formatting the array that was returned by the getArray function by removing all \n and "" that were not necessary for printing.
+
+Removed unnecessary comments throughout all files.
+
+Added a function for Pokemon that randomly chooses a move for a Pokemon.
+
+Changed the move function in the Battle class to no longer require two moves, as only one is needed - the Player's, as the NPCs is auto-chosen.
+
+
+**Jan 18, 2019** -
+
+Added a function that gets the modifier for a move and enemy.
+
+Removed unnecessary comments in the Pokemon class.
+
+Attempted to introduce a function that flips the array given by getArray in the Sprites class.
+
+**Jan 20, 2019** -
+
+Abandoned flipArray function in the Sprites class.

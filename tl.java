@@ -124,34 +124,28 @@ public class tl {
             //| = border
             //p = path
             if (test[a][b] == "r") {
-              terminal.applyBackgroundColor(Terminal.Color.RED);
-              screen.putString(b, a, " ", Terminal.Color.DEFAULT, Terminal.Color.DEFAULT);
+              screen.putString(b, a, " ", Terminal.Color.DEFAULT, Terminal.Color.RED);
             }
             if (test[a][b] == "b") {
-              terminal.applyBackgroundColor(Terminal.Color.WHITE);
-              screen.putString(b, a, " ", Terminal.Color.DEFAULT, Terminal.Color.DEFAULT);
+              screen.putString(b, a, " ", Terminal.Color.DEFAULT, Terminal.Color.WHITE);
             }
             if (test[a][b] == "d") {
-              terminal.applyBackgroundColor(Terminal.Color.BLACK);
-              screen.putString(b, a, " ", Terminal.Color.DEFAULT, Terminal.Color.DEFAULT);
+              screen.putString(b, a, " ", Terminal.Color.DEFAULT, Terminal.Color.BLACK);
             }
             if (test[a][b] == "g") {
-              terminal.applyBackgroundColor(Terminal.Color.GREEN);
-              screen.putString(b, a, " ", Terminal.Color.DEFAULT, Terminal.Color.DEFAULT);
+              screen.putString(b, a, " ", Terminal.Color.DEFAULT, Terminal.Color.GREEN);
             }
             if (test[a][b] == "|") {
-              terminal.applyBackgroundColor(Terminal.Color.BLACK);
-              screen.putString(b, a, " ", Terminal.Color.DEFAULT, Terminal.Color.DEFAULT);
+              screen.putString(b, a, " ", Terminal.Color.DEFAULT, Terminal.Color.BLACK);
             }
             if (test[a][b] == "p") {
-              terminal.applyBackgroundColor(Terminal.Color.YELLOW);
-              screen.putString(b, a, " ", Terminal.Color.DEFAULT, Terminal.Color.DEFAULT);
+              screen.putString(b, a, " ", Terminal.Color.DEFAULT, Terminal.Color.YELLOW);
             }
             else {
-              terminal.applyBackgroundColor(Terminal.Color.DEFAULT);
-              screen.putString(b, a, " ", Terminal.Color.DEFAULT, Terminal.Color.DEFAULT);
+	            screen.putString(b, a, " ", Terminal.Color.DEFAULT, Terminal.Color.DEFAULT);
             }
           }
+					screen.refresh();
         }
 
 				if ((y >= 20 && y < 25) && (x >= 2 && x < 15)) {

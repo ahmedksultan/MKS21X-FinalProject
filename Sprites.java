@@ -3,38 +3,16 @@ import java.io.*; //file, filenotfoundexception
 
 public class Sprites{
   public static void main(String[] args) {
-    ArrayList<Character> test = getArray(1);
-    String output = "";
-    String output1 = "";
-    for (int x = 0; x < test.size(); x++){
-      output += test.get(x);
-    }
-    System.out.println(output);
+    System.out.println(Sprites.toString(getArray("Bulbasaur")));
 
-    ArrayList<Character> test1 = getArray("Mewtwo");
-
-    for (int x = 0; x < test1.size(); x++){
-      output1 += test1.get(x);
-    }
-
-    System.out.println();
-
-    System.out.println(output1);
-
-
-    ArrayList<Character> test3 = flipArray(2);
-
-    String output3 = "";
-    for (int x = 0; x < test3.size(); x++){
-      output += test3.get(x);
-    }
-    System.out.println(output);
+    System.out.println(Sprites.toString(getArray("Mewtwo")));
   }
 
   private static ArrayList<Character> data;
 
 
   public static ArrayList<Character> getArray(String name){
+    // Can just convert from the name to ID and use the next function.
     int ID = Integer.parseInt(Pokemon.nameToID(name));
     return getArray(ID);
   }
@@ -51,13 +29,15 @@ public class Sprites{
           line = in.nextLine();
         while (!line.contains("break;")){
           line = in.nextLine();
-          // System.out.println(line);
+          // Once it reaches break, that signals that we've reached the end of the character sprite,
+          // afterwards, it reaches the next Pokemon sprite.
             if (line.contains("break;")){
               break;
             }
             for (int i = 0; i < line.length() - 1; i++){
               data.add(line.charAt(i));
             }
+            // Need to add a new line to properly format it.
             data.add('\n');
           }
         }
@@ -72,30 +52,11 @@ public class Sprites{
 
   public static String toString(ArrayList<Character> input){
     String output = "";
-    for (int x = 0; x < input.size() && x < 15; x++){
+    // Have to cut it off at approximately 1200 characters because otherwise the Sprites
+    // are way too large
+    for (int x = 0; x < input.size() && x < 1200; x++){
       output += input.get(x);
     }
     return output;
-  }
-
-  public static ArrayList<Character> flipArray(String name){
-    int ID = Integer.parseInt(Pokemon.nameToID(name));
-    return flipArray(ID);
-
-  }
-
-  public static ArrayList<Character> flipArray(int x){
-    data = getArray(x);
-    ArrayList<Character> temp = new ArrayList<Character>();
-
-    for (int y = 0; y < data.size(); y++){
-      if (data.get(x) == '\n'){
-        for (int i = y; i > data.size() - y; i--){
-          temp.add(data.get(i));
-        }
-        temp.add('\n');
-      }
-    }
-    return temp;
   }
 }

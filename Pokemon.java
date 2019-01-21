@@ -406,6 +406,14 @@ private double modifier(Move move, Pokemon enemy){
     Random rand = new Random();
     int x = rand.nextInt((3-0)+1);
 
+    if (enemy.isDead()){
+      throw new Error();
+    }
+
+    if (hp <= 0){
+      throw new NumberFormatException();
+    }
+
     return attack(enemy, attacks.get(x));
   }
 
@@ -421,6 +429,15 @@ private double modifier(Move move, Pokemon enemy){
       if (!attacks.contains(move1)){
         throw new NumberFormatException();
       }
+
+      if (enemy.isDead()){
+        throw new Error();
+      }
+
+      if (hp <= 0){
+        throw new NumberFormatException();
+      }
+
 
       // Formula found online - it's the actual formula used to calculate damage
 

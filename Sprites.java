@@ -70,6 +70,14 @@ public class Sprites{
     return data;
   }
 
+  public static String toString(ArrayList<Character> input){
+    String output = "";
+    for (int x = 0; x < input.size() && x < 15; x++){
+      output += input.get(x);
+    }
+    return output;
+  }
+
   public static ArrayList<Character> flipArray(String name){
     int ID = Integer.parseInt(Pokemon.nameToID(name));
     return flipArray(ID);

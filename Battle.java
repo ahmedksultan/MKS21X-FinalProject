@@ -2,65 +2,6 @@ import java.util.*; //scanner, ArrayList, Map, Random
 import java.io.*; //file, filenotfoundexception
 
 public class Battle{
-  public static void main(String[] args) {
-
-    ArrayList<Pokemon> team = new ArrayList<Pokemon>(3);
-    ArrayList<Pokemon> team1 = new ArrayList<Pokemon>(1);
-
-    Pokemon Bulb = new Pokemon("Bulbasaur");
-    Pokemon Chari = new Pokemon("Charizard");
-    Pokemon Mew2 = new Pokemon("Mewtwo");
-    // Pokemon Drago = new Pokemon("Dragonair");
-    // Pokemon Mew = new Pokemon("Mew");
-    Pokemon Venusaur = new Pokemon("Venusaur");
-    Pokemon Rattata = new Pokemon("Rattata");
-    Pokemon Tentacruel = new Pokemon("Tentacruel");
-    Pokemon Weezing = new Pokemon("Weezing");
-    Pokemon Starmie = new Pokemon("Starmie");
-    Pokemon Electabuzz = new Pokemon("Electabuzz");
-    Pokemon Lapras = new Pokemon("Lapras");
-
-    team.add(Bulb);
-    team.add(Chari);
-    team.add(Mew2);
-    team.add(Venusaur);
-    team.add(Rattata);
-    team.add(Tentacruel);
-
-    team1.add(Weezing);
-    team1.add(Starmie);
-    team1.add(Electabuzz);
-    team1.add(Lapras);
-
-    Trainer one = new Trainer("Al", team);
-    Player enemy = new Trainer("Jo", team1);
-
-    Battle battle = new Battle(one, enemy);
-
-    Scanner user_input = new Scanner( System.in );
-    String firstname;
-    String enemyattack;
-
-    System.out.println("Your enemy is " + enemy.getName() + "! Their first pokemon is " + battle.getActive2());
-    System.out.println("Your team is " + battle.getOne().getParty().toString());
-    ArrayList<String> moves1 = battle.getOne().getMon(3).getAttacks();
-    System.out.println("Your pokemon's moves are here: " + moves1);
-    // System.out.println("Your pokemon's moves are here: " + battle.getOne().getMon(4).attackstoString(1));
-
-    System.out.println("Your opponent's team is " + battle.getTwo().getParty().toString());
-
-    while (!battle.isOver()){
-
-      System.out.println(battle.getActive1().toString() + " and " + battle.getActive2() + " are battling!");
-      System.out.println("Choose your move");
-      firstname = user_input.next();
-      battle.move(firstname, enemyattack);
-      System.out.println("You used " + firstname + "! Your opponent used" + enemyattack + "." );
-      battle.forceSwitch();
-    }
-    System.out.println("The Battle is over! " + battle.getWinner()  + " has won!");
-  }
-
   private Player one, two;
   private Pokemon active1, active2;
   private boolean over;

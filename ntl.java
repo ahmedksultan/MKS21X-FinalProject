@@ -18,7 +18,7 @@ import java.util.*;
 import java.io.*; //file, filenotfoundexception
 import java.util.concurrent.TimeUnit; //time
 
-public class tl {
+public class ntl {
 
   //credit to Mr. K, from TerminalDemo.java
 

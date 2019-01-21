@@ -2,15 +2,8 @@ import java.util.*; //scanner, ArrayList, Map
 import java.io.*; //file, filenotfoundexception
 
 public class Sprites{
-  public static void main(String[] args) {
-    System.out.println(Sprites.toString(getArray("Bulbasaur")));
-
-    System.out.println(Sprites.toString(getArray("Mewtwo")));
-  }
-
   private static ArrayList<Character> data;
-
-
+  
   public static ArrayList<Character> getArray(String name){
     // Can just convert from the name to ID and use the next function.
     int ID = Integer.parseInt(Pokemon.nameToID(name));

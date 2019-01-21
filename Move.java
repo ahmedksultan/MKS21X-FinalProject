@@ -2,11 +2,6 @@ import java.util.Scanner; //scanner for .csv files
 import java.io.*; //file, filenotfoundexception
 
 public class Move{
-
-  public static void main(String[] args) {
-    Move test = new Move("pound");
-  }
-
   private String name, type;
   private int power, typeID;
   //Have to convert this way because CSV file gives IDs for types, not names, so

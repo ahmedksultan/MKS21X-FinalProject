@@ -2,49 +2,6 @@ import java.util.*; //scanner, ArrayList, Map, HashMap
 import java.io.*; //file, filenotfoundexception
 
 public class Pokemon {
-
-  public static void main(String[] args) {
-    Pokemon bulb = new Pokemon("Bulbasaur");
-    Pokemon ivy = new Pokemon("Ivysaur");
-    Pokemon weeze = new Pokemon("Weezing");
-    System.out.println(weeze.getEvolve());
-    Pokemon mewtwo = new Pokemon("Mewtwo");
-    Pokemon chara = new Pokemon("Charizard");
-    System.out.println(mewtwo.getName());
-
-    System.out.println(weeze.getAttacks());
-
-    System.out.println("Testing Bulbasaur properties");
-    System.out.println(bulb.getHP());
-    System.out.println(bulb.getAttack());
-    System.out.println(bulb.getDefense());
-    System.out.println(bulb.getSpeed());
-    System.out.println(bulb.getType1());
-    System.out.println(bulb.getTypeID1());
-    System.out.println(bulb.getType2());
-    System.out.println(bulb.getTypeID2());
-    System.out.println(ivy.getTypeWeakness());
-    System.out.println(ivy.getTypeResistance());
-
-    // bulb.attack(weeze, "earthquake");
-    System.out.println();
-    chara.attack(ivy, chara.getAttacks().get(0));
-      System.out.println(ivy.getHP());
-    bulb.attack(ivy);
-    System.out.println(ivy.getHP());
-
-    Random rand = new Random();
-    int x = rand.nextInt(3 - 0)+1;
-    bulb.attack(ivy, bulb.getAttacks().get(x));
-
-    System.out.println(Pokemon.evolutionID(3));
-    System.out.println(Pokemon.idToName(Pokemon.evolutionID(bulb.getID())));
-
-    bulb.attack(ivy, bulb.getAttacks().get(0));
-    System.out.println(bulb.getAttacks());
-    System.out.println(bulb.getPossibleAttacks());
-  }
-
   private String name, type1, type2;
   private int attack, speed, defense, ID, typeID1, typeID2;
   private double hp;
@@ -449,6 +406,14 @@ private double modifier(Move move, Pokemon enemy){
     Random rand = new Random();
     int x = rand.nextInt((3-0)+1);
 
+    if (enemy.isDead()){
+      throw new Error();
+    }
+
+    if (hp <= 0){
+      throw new NumberFormatException();
+    }
+
     return attack(enemy, attacks.get(x));
   }
 
@@ -464,6 +429,15 @@ private double modifier(Move move, Pokemon enemy){
       if (!attacks.contains(move1)){
         throw new NumberFormatException();
       }
+
+      if (enemy.isDead()){
+        throw new Error();
+      }
+
+      if (hp <= 0){
+        throw new NumberFormatException();
+      }
+
 
       // Formula found online - it's the actual formula used to calculate damage
 

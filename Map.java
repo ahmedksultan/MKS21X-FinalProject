@@ -112,7 +112,7 @@ public class Map{
     return test;
   }
 
-  public static void initRoute1(){
+  public static void initRoute1a(){
     route1 = new String[40][40];
     makeBorders(route1);
 
@@ -138,7 +138,7 @@ public class Map{
 
   }
 
-  public static String[][] getRoute1() {
+  public static String[][] getRoute1a() {
     return route1;
   }
 

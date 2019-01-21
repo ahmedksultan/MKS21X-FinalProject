@@ -100,35 +100,7 @@ public class Battle{
   }
 
   // move is the method that makes players choose their next move, and checks if
-  // the game is over.
-
-  // public void move(String a, String b){
-  //   if (!active1.isDead() && !active2.isDead()){
-  //     if (active1.getSpeed() > active2.getSpeed()){
-  //       System.out.println("Your ");
-  //       active1.attack(active2, a);
-  //       if (!active2.isDead()){
-  //         System.out.println("Enemy's ");
-  //         active2.attack(active1, b);
-  //       }
-  //       else if (active2.isDead()){
-  //         autoSwitch();
-  //       }
-  //     }
-  //     else{
-  //       System.out.println("Enemy's ");
-  //       active2.attack(active1, b);
-  //       if (!active1.isDead()){
-  //         System.out.println("Your ");
-  //         active1.attack(active2, a);
-  //       }
-  //       else if (active2.isDead()) {
-  //         Scanner user_input = new Scanner( System.in );
-  //         String firstname;
-  //         chooseSwitch(user_input.nextInt());
-  //       }
-  //     }
-  //   }
+  // the game is over. Also automatically chooses the move for the NPCs.
 
   public void move(String a){
     if (!active1.isDead() && !active2.isDead()){
@@ -157,7 +129,6 @@ public class Battle{
         }
       }
     }
-
 
     if (two.allDead()){
       over = true;

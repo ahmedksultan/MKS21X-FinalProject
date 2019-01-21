@@ -100,8 +100,8 @@ public class Battle{
   }
 
 
-  public void move(boolean catchable){
-    if (catchable){
+  public void move(){
+    if (two.canCatch()){
       try{
         if (active1.getSpeed() > active2.getSpeed()){
           if (!canCatch()){

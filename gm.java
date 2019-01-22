@@ -186,7 +186,7 @@ public class gm {
         if (town[a][b] == "p") {
           x.putString(b,a, " ", Terminal.Color.DEFAULT, Terminal.Color.YELLOW);
         }
-
+        
         else {
           x.putString(b,a, " ", Terminal.Color.DEFAULT, Terminal.Color.DEFAULT);
         }

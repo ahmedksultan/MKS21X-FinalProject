@@ -2,6 +2,7 @@ import java.util.*; //scanner, ArrayList, Map, HashMap
 import java.io.*; //file, filenotfoundexception
 
 public class Pokemon {
+
   private String name, type1, type2;
   private int attack, speed, defense, ID, typeID1, typeID2;
   private double hp;
@@ -408,7 +409,6 @@ private double modifier(Move move, Pokemon enemy){
 }
 
   public double attack(Pokemon enemy){
-    enemyattack = "";
     Random rand = new Random();
     int x = rand.nextInt((3-0)+1);
 

@@ -447,7 +447,7 @@ private double modifier(Move move, Pokemon enemy){
 
       // Formula found online - it's the actual formula used to calculate damage
 
-      double dmg = ((2/5 * move.getPower()) *
+      double dmg = ((2.0/5 * move.getPower()) *
              (attack / enemy.getDefense()+2)
              / 50 * mod);
 

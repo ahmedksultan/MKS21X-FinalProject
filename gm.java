@@ -30,6 +30,7 @@ public class gm {
     boolean isroute1a = false;
     boolean iscity = false;
 
+    //tbattles track how many trainer battles have occurred
     int tbattles = 0;
 
     //creates a new, private terminal, puts screen overlay over it
@@ -134,6 +135,49 @@ public class gm {
       if (isroute1a == true) {
         route1a(screen, route1a, pparty);
         screen.refresh();
+
+        //FIRST TRAINER BATTLE GOES HERE...
+        if (y == 8 && tbattles == 0) {
+          //creating new trainer battle, "John"
+          //first tbattle, hence tbattles = 0
+          ArrayList<Pokemon> johnparty = new ArrayList<Pokemon>();
+
+          Pokemon Mewtwo = new Pokemon("Mewtwo");
+          //Pokemon Eevee = new Pokemon("Eevee");
+
+          johnparty.add(Mewtwo);
+          //johnparty.add(Eevee);
+
+          Player John = new Trainer("John", johnparty);
+          Battle johnbattle = new Battle(player, John);
+
+          Scanner user_input = new Scanner(System.in);
+          String yourattack;
+          String enemyattack = "";
+
+          System.out.println("Your enemy is " + John.getName() + "! Their first pokemon is " + johnbattle.getActive2() + ".");
+          System.out.println("Your team is " + johnbattle.getOne().getParty().toString());
+
+          ArrayList<String> moves1 = johnbattle.getOne().getMon(0).getAttacks();
+
+          System.out.println("Your pokemon's moves are here: " + johnbattle.getActive1().getAttacks());
+          // System.out.println("Your pokemon's moves are here: " + battle.getOne().getMon(4).attackstoString(1));
+
+          System.out.println("Your opponent's team is " + johnbattle.getTwo().getParty().toString());
+
+          while (!johnbattle.isOver()){
+
+            System.out.println(johnbattle.getActive1().toString() + " and " + johnbattle.getActive2() + " are battling!");
+            System.out.println("Choose your move");
+            yourattack = user_input.next();
+            johnbattle.move(yourattack);
+            System.out.println("You used " + yourattack + "! Your opponent used" + enemyattack + "." );
+            johnbattle.forceSwitch();
+          }
+
+          System.out.println("The battle is over! " + johnbattle.getWinner()  + " has won!");
+        }
+
       }
 
 
@@ -153,7 +197,7 @@ public class gm {
 
 
 
-      //player icon 
+      //player icon
       screen.putString(oldx, oldy, " ", Terminal.Color.DEFAULT, Terminal.Color.DEFAULT);
       screen.putString(x, y, "@", Terminal.Color.WHITE, Terminal.Color.BLUE);
 

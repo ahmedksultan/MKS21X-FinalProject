@@ -8,6 +8,7 @@ public class Pokemon {
   private ArrayList<String> attacks, possibleAttacks;
   private ArrayList<String> typeWeakness, typeResistance;
   private boolean evolve = true;
+  private String enemyattack;
 
   //Have to convert this way because CSV file gives IDs for types, not names, so
   //we can match them up.
@@ -267,6 +268,10 @@ public class Pokemon {
     return type1;
   }
 
+  public String getEnemyAttack() {
+    return enemyattack;
+  }
+
   public String getType2(){
     return type2;
   }
@@ -403,6 +408,7 @@ private double modifier(Move move, Pokemon enemy){
 }
 
   public double attack(Pokemon enemy){
+    enemyattack = "";
     Random rand = new Random();
     int x = rand.nextInt((3-0)+1);
 
@@ -413,7 +419,7 @@ private double modifier(Move move, Pokemon enemy){
     if (hp <= 0){
       throw new NumberFormatException();
     }
-
+    enemyattack = attacks.get(x);
     return attack(enemy, attacks.get(x));
   }
 

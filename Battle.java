@@ -7,6 +7,8 @@ public class Battle{
   private boolean over;
   private String winner;
 
+  //PLAYER COMES FIRST, ENEMY COMES SECOND
+
   public Battle(Trainer one1, Player two2){
     one = one1;
     two = two2;

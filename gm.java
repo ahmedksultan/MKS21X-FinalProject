@@ -119,9 +119,14 @@ public class gm {
       //NOTE: only exception is when there is a battle going on!
       playerinfo(screen, pparty);
 
+      //choosepkmn appears when the code starts
       //
       if (choosepkmn = true) {
         choosepkmn(screen);
+      }
+
+      if (istown1 == true) {
+        town1(screen);
       }
 
       screen.refresh();
@@ -144,6 +149,45 @@ public class gm {
     x.putString(2,4, "[S] for Squirtle.", Terminal.Color.BLUE, Terminal.Color.DEFAULT);
     x.putString(2,5, "[B] for Bulbasaur.", Terminal.Color.GREEN, Terminal.Color.DEFAULT);
     x.putString(2,6, "[C] for Charmander.", Terminal.Color.RED, Terminal.Color.DEFAULT);
+  }
+
+  public static void town1(Screen x) {
+    for (int b = 0; b < town.length; b++) {
+      for (int a = 0; a < town[b].length; a++) {
+
+        //r = roof -- RED
+        //b = building -- WHITE
+        //d = door -- BLACK
+        //g = grass -- GREEN
+        //| = border -- BLACK
+        //p = path -- YELLOW
+
+        if (town[a][b] = "r") {
+          x.putString(b,a, " ", Terminal.Color.DEFAULT, Terminal.Color.RED);
+        }
+
+        if (town[a][b] = "b") {
+          x.putString(b,a, " ", Terminal.Color.DEFAULT, Terminal.Color.WHITE);
+        }
+
+        if (town[a][b] = "d") {
+          x.putString(b,a, " ", Terminal.Color.DEFAULT, Terminal.Color.BLACK);
+        }
+
+        if (town[a][b] = "g") {
+          x.putString(b,a, " ", Terminal.Color.DEFAULT, Terminal.Color.GREEN);
+        }
+
+        if (town[a][b] = "p") {
+          x.putString(b,a, " ", Terminal.Color.DEFAULT, Terminal.Color.YELLOW);
+        }
+
+        else {
+          x.putString(b,a, " ", Terminal.Color.DEFAULT, Terminal.Color.DEFAULT);
+        }
+
+      }
+    }
   }
 
 }

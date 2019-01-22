@@ -97,18 +97,21 @@ public class gm {
           Pokemon Squirtle = new Pokemon("Squirtle");
           pparty.add(Squirtle);
           choosepkmn = false;
+          terminal.clearScreen();
           istown1 = true;
         }
         if (key.getCharacter() == 'b' && choosepkmn == true) {
           Pokemon Bulbasaur = new Pokemon("Bulbasaur");
           pparty.add(Bulbasaur);
           choosepkmn = false;
+          terminal.clearScreen();
           istown1 = true;
         }
         if (key.getCharacter() == 'c' && choosepkmn == true) {
           Pokemon Charmander = new Pokemon("Charmander");
           pparty.add(Charmander);
           choosepkmn = false;
+          terminal.clearScreen();
           istown1 = true;
         }
       }
@@ -126,7 +129,8 @@ public class gm {
       }
 
       if (istown1 == true) {
-        town1(screen);
+        town1(screen, town);
+        screen.refresh();
       }
 
       screen.refresh();
@@ -151,7 +155,8 @@ public class gm {
     x.putString(2,6, "[C] for Charmander.", Terminal.Color.RED, Terminal.Color.DEFAULT);
   }
 
-  public static void town1(Screen x) {
+  public static void town1(Screen x, String[][] town) {
+
     for (int b = 0; b < town.length; b++) {
       for (int a = 0; a < town[b].length; a++) {
 
@@ -162,23 +167,23 @@ public class gm {
         //| = border -- BLACK
         //p = path -- YELLOW
 
-        if (town[a][b] = "r") {
+        if (town[a][b] == "r") {
           x.putString(b,a, " ", Terminal.Color.DEFAULT, Terminal.Color.RED);
         }
 
-        if (town[a][b] = "b") {
+        if (town[a][b] == "b") {
           x.putString(b,a, " ", Terminal.Color.DEFAULT, Terminal.Color.WHITE);
         }
 
-        if (town[a][b] = "d") {
+        if (town[a][b] == "d") {
           x.putString(b,a, " ", Terminal.Color.DEFAULT, Terminal.Color.BLACK);
         }
 
-        if (town[a][b] = "g") {
+        if (town[a][b] == "g") {
           x.putString(b,a, " ", Terminal.Color.DEFAULT, Terminal.Color.GREEN);
         }
 
-        if (town[a][b] = "p") {
+        if (town[a][b] == "p") {
           x.putString(b,a, " ", Terminal.Color.DEFAULT, Terminal.Color.YELLOW);
         }
 

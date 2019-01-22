@@ -147,14 +147,22 @@ public class Map{
 
     String[][] test = route1b;
 
+    //creating main path, going toward route 1d > city > pkmngym
     for (int y = 2; y < 25; y++) {
       for (int x = 18; x < 30; x++) {
         test[y][x] = "p";
       }
     }
 
+    //creating splitting path going into route1c
+    for (int y = 5; y < 10; y++) {
+      for (int x = 2; x < 18; x++) {
+        test[y][x] = "p";
+      }
+    }
+
     //creating grass
-    for (int y = 10; y < 25; y++) {
+    for (int y = 11; y < 25; y++) {
       for (int x = 2; x < 16; x++) {
         test[y][x] = "g";
       }

@@ -57,6 +57,10 @@ public class gm {
     Map.initRoute1b();
     route1b = Map.getRoute1b();
 
+    String[][] route1c;
+    Map.initRoute1c();
+    route1c = Map.getRoute1c();
+
     //STORES INFORMATION ABOUT THE PLAYER:
 
     ArrayList<Pokemon> pparty = new ArrayList<Pokemon>();

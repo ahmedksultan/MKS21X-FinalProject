@@ -156,7 +156,7 @@ public class Map{
 
     //creating splitting path going into route1c
     for (int y = 5; y < 10; y++) {
-      for (int x = 2; x < 18; x++) {
+      for (int x = 2; x < 25; x++) {
         test[y][x] = "p";
       }
     }
@@ -176,7 +176,19 @@ public class Map{
   }
 
   public static void initRoute1c() {
+    route1c = new String[40][40];
+    makeBorders(route1c);
 
+    String[][] test = route1c;
+
+    //creating pathway
+    for (int y = 5; y < 10; y++) {
+      for (int x = 20; x > 15; x--) {
+        test[y][x] = "p";
+      }
+    }
+
+    route1c = test;
   }
 
   public static String[][] getRoute1c() {

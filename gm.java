@@ -93,21 +93,35 @@ public class gm {
           //terminal.clearScreen();
 					y++;
 				}
+        if (key.getCharacter() == 's' && choosepkmn == true) {
+          Pokemon Squirtle = new Pokemon("Squirtle");
+          pparty.add(Squirtle);
+          choosepkmn = false;
+          istown1 = true;
+        }
+        if (key.getCharacter() == 'b' && choosepkmn == true) {
+          Pokemon Bulbasaur = new Pokemon("Bulbasaur");
+          pparty.add(Bulbasaur);
+          choosepkmn = false;
+          istown1 = true;
+        }
+        if (key.getCharacter() == 'c' && choosepkmn == true) {
+          Pokemon Charmander = new Pokemon("Charmander");
+          pparty.add(Charmander);
+          choosepkmn = false;
+          istown1 = true;
+        }
       }
       screen.putString(oldx, oldy, " ", Terminal.Color.DEFAULT, Terminal.Color.DEFAULT);
       screen.putString(x, y, "@", Terminal.Color.WHITE, Terminal.Color.BLUE);
 
-      //playerinfo(screen, pparty);
-      screen.putString(44,2, "Welcome to Javamon!", Terminal.Color.DEFAULT, Terminal.Color.DEFAULT);
-      screen.putString(44,4, "Created by Ahmed Sultan & Ali Taoube.", Terminal.Color.DEFAULT, Terminal.Color.DEFAULT);
-      screen.putString(44,6, "PLAYER INFORMATION", Terminal.Color.DEFAULT, Terminal.Color.DEFAULT);
-      screen.putString(44,8, "Party:" + pparty, Terminal.Color.DEFAULT, Terminal.Color.DEFAULT);
+      //playerinfo displayers information about the player at all times
+      //NOTE: only exception is when there is a battle going on!
+      playerinfo(screen, pparty);
 
+      //
       if (choosepkmn = true) {
-        screen.putString(2,2, "Choose your starter Pokemon!", Terminal.Color.DEFAULT, Terminal.Color.DEFAULT);
-        screen.putString(2,4, "[S] for Squirtle.", Terminal.Color.BLUE, Terminal.Color.DEFAULT);
-        screen.putString(2,5, "[B] for Bulbasaur.", Terminal.Color.GREEN, Terminal.Color.DEFAULT);
-        screen.putString(2,6, "[C] for Charmander.", Terminal.Color.RED, Terminal.Color.DEFAULT);
+        choosepkmn(screen);
       }
 
       screen.refresh();
@@ -118,15 +132,18 @@ public class gm {
   }
   //end of main ^^^
 
-  //playerinfo displayers information about the player at all times
-  //NOTE: only exception is when there is a battle going on!
-  /*
   public static void playerinfo(Screen x, ArrayList<Pokemon> p) {
-    x.putString(2,2, "Welcome to Javamon!", Terminal.Color.DEFAULT, Terminal.Color.DEFAULT);
-    x.putString(2,4, "Created by Ahmed Sultan & Ali Taoube.", Terminal.Color.DEFAULT, Terminal.Color.DEFAULT);
-    x.putString(2,6, "PLAYER INFORMATION", Terminal.Color.DEFAULT, Terminal.Color.DEFAULT);
-    x.putString(2,8, "Party:" + p, Terminal.Color.DEFAULT, Terminal.Color.DEFAULT);
+    x.putString(44,2, "Welcome to Javamon!", Terminal.Color.DEFAULT, Terminal.Color.DEFAULT);
+    x.putString(44,4, "Created by Ahmed Sultan & Ali Taoube.", Terminal.Color.DEFAULT, Terminal.Color.DEFAULT);
+    x.putString(44,6, "PLAYER INFORMATION", Terminal.Color.DEFAULT, Terminal.Color.DEFAULT);
+    x.putString(44,8, "Party:" + p, Terminal.Color.DEFAULT, Terminal.Color.DEFAULT);
   }
-  */
+
+  public static void choosepkmn(Screen x) {
+    x.putString(2,2, "Choose your starter Pokemon!", Terminal.Color.DEFAULT, Terminal.Color.DEFAULT);
+    x.putString(2,4, "[S] for Squirtle.", Terminal.Color.BLUE, Terminal.Color.DEFAULT);
+    x.putString(2,5, "[B] for Bulbasaur.", Terminal.Color.GREEN, Terminal.Color.DEFAULT);
+    x.putString(2,6, "[C] for Charmander.", Terminal.Color.RED, Terminal.Color.DEFAULT);
+  }
 
 }

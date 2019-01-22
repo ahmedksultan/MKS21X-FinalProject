@@ -196,7 +196,7 @@ public class Pokemon {
     ArrayList<String> temp = new ArrayList<String>();
     possibleAttacks(name1);
     attacks = new ArrayList<String>(4);
-    for (int x = 0; x < possibleAttacks.size() && attacks.size() < 5; x++){
+    for (int x = 0; x < possibleAttacks.size() && attacks.size() < 4; x++){
       attacks.add(possibleAttacks.get(x));
     }
     for (String element: attacks){

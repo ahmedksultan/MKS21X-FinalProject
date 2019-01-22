@@ -28,6 +28,7 @@ public class gm {
     boolean choosepkmn = true;
     boolean istown1 = false;
     boolean isroute1a = false;
+    boolean isroute1b = false;
     boolean iscity = false;
 
     //tbattles track how many trainer battles have occurred
@@ -51,6 +52,10 @@ public class gm {
     String[][] route1a;
     Map.initRoute1a();
     route1a = Map.getRoute1a();
+
+    String[][] route1b;
+    Map.initRoute1b();
+    route1b = Map.getRoute1b();
 
     //STORES INFORMATION ABOUT THE PLAYER:
 
@@ -136,6 +141,7 @@ public class gm {
         route1a(screen, route1a, pparty);
         screen.refresh();
 
+        /* removing battle functionality for now because it doesn't even work
         //FIRST TRAINER BATTLE GOES HERE...
         if (y == 8 && tbattles == 0) {
           //creating new trainer battle, "John"
@@ -153,8 +159,11 @@ public class gm {
 
           Scanner user_input = new Scanner(System.in);
           String yourattack;
-          String enemyattack = "";
+          String enemyattack;
 
+          terminal.exitPrivateMode();
+
+          System.out.println("\n---A BATTLE HAS BEGUN!---");
           System.out.println("Your enemy is " + John.getName() + "! Their first pokemon is " + johnbattle.getActive2() + ".");
           System.out.println("Your team is " + johnbattle.getOne().getParty().toString());
 
@@ -168,22 +177,40 @@ public class gm {
           while (!johnbattle.isOver()){
 
             System.out.println(johnbattle.getActive1().toString() + " and " + johnbattle.getActive2() + " are battling!");
-            System.out.println("Choose your move");
+            System.out.println("Choose your move!");
             yourattack = user_input.next();
+            enemyattack = johnbattle.getActive2().getEnemyAttack();
+
+            for (int i = 0; i < moves1.size(); i++) {
+              if (moves1.get(i).equals(user_input.next())) {
+                yourattack = moves1.get(i);
+              }
+              else {
+                yourattack = "IMPOSSIBLE MOVE";
+              }
+            }
+
             johnbattle.move(yourattack);
             System.out.println("You used " + yourattack + "! Your opponent used" + enemyattack + "." );
             johnbattle.forceSwitch();
           }
 
           System.out.println("The battle is over! " + johnbattle.getWinner()  + " has won!");
+          tbattles = 1;
         }
+        */
 
+      }
+
+      if (isroute1b == true) {
+        route1b(screen, route1b, pparty);
+        screen.refresh();
       }
 
 
 
       //screen switchers - this creates the "scrolling effect"
-      if (y == 24 && istown1 == true) {
+      if (y == 23 && istown1 == true) {
         istown1 = false;
         isroute1a = true;
         y = 3;
@@ -192,10 +219,14 @@ public class gm {
       if (y == 2 && isroute1a == true) {
         isroute1a = false;
         istown1 = true;
-        y = 24;
+        y = 22 ;
       }
 
-
+      if (y == 23 && isroute1a == true) {
+        isroute1a = false;
+        isroute1b = true;
+        y = 2;
+      }
 
       //player icon
       screen.putString(oldx, oldy, " ", Terminal.Color.DEFAULT, Terminal.Color.DEFAULT);
@@ -210,10 +241,16 @@ public class gm {
   //end of main ^^^
 
   public static void playerinfo(Screen x, ArrayList<Pokemon> p) {
-    x.putString(44,2, "Welcome to Javamon!", Terminal.Color.DEFAULT, Terminal.Color.DEFAULT);
-    x.putString(44,4, "Created by Ahmed Sultan & Ali Taoube.", Terminal.Color.DEFAULT, Terminal.Color.DEFAULT);
-    x.putString(44,6, "PLAYER INFORMATION", Terminal.Color.DEFAULT, Terminal.Color.DEFAULT);
-    x.putString(44,8, "Party:" + p, Terminal.Color.DEFAULT, Terminal.Color.DEFAULT);
+    x.putString(43,2, "Welcome to Javamon!", Terminal.Color.DEFAULT, Terminal.Color.DEFAULT);
+    x.putString(43,4, "Created by Ahmed Sultan & Ali Taoube.", Terminal.Color.DEFAULT, Terminal.Color.DEFAULT);
+    x.putString(43,6, "PLAYER INFORMATION", Terminal.Color.DEFAULT, Terminal.Color.DEFAULT);
+    x.putString(43,8, "Party: " + p, Terminal.Color.DEFAULT, Terminal.Color.DEFAULT);
+
+    x.putString(43, 10, "--------------", Terminal.Color.DEFAULT, Terminal.Color.DEFAULT);
+
+    x.putString(43, 12, "[[[INSTRUCTIONS]]]", Terminal.Color.DEFAULT, Terminal.Color.DEFAULT);
+    x.putString(43, 14, "Use directional keys to move.", Terminal.Color.DEFAULT, Terminal.Color.DEFAULT);
+    x.putString(43, 15, "Use [I] to interact.", Terminal.Color.DEFAULT, Terminal.Color.DEFAULT);
   }
 
   public static void choosepkmn(Screen x) {
@@ -280,6 +317,38 @@ public class gm {
   }
 
   public static void route1a(Screen x, String[][] map, ArrayList<Pokemon> p) {
+    for (int b = 0; b < map.length; b++) {
+      for (int a = 0; a < map[b].length; a++) {
+
+        //r = roof -- RED
+        //b = building -- WHITE
+        //d = door -- BLACK
+        //g = grass -- GREEN
+        //| = border -- BLACK
+        //p = path -- YELLOW
+
+        switch(map[a][b]) {
+          case "r": x.putString(b,a, " ", Terminal.Color.DEFAULT, Terminal.Color.RED);
+          break;
+          case "b": x.putString(b,a, " ", Terminal.Color.DEFAULT, Terminal.Color.WHITE);
+          break;
+          case "d": x.putString(b,a, " ", Terminal.Color.DEFAULT, Terminal.Color.BLACK);
+          break;
+          case "g": x.putString(b,a, "^", Terminal.Color.DEFAULT, Terminal.Color.GREEN);
+          break;
+          case "p": x.putString(b,a, " ", Terminal.Color.DEFAULT, Terminal.Color.YELLOW);
+          break;
+          case "!t": x.putString(b,a, "!", Terminal.Color.YELLOW, Terminal.Color.MAGENTA);
+          break;
+          default: x.putString(b,a, " ", Terminal.Color.DEFAULT, Terminal.Color.DEFAULT);
+        }
+
+        playerinfo(x, p);
+      }
+    }
+  }
+
+  public static void route1b(Screen x, String[][] map, ArrayList<Pokemon> p) {
     for (int b = 0; b < map.length; b++) {
       for (int a = 0; a < map[b].length; a++) {
 

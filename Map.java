@@ -1,11 +1,11 @@
 import java.util.*; //array lists
 
 public class Map{
-  //routing: pkmnlab > hometown > route1a-1e > city > gym
-  private static String[][] test; //functions as town1, because i am lazy lol
-  private static String[][] menu;
+  //routing: hometown > route1a-1e > city > gym
+  private static String[][] test; //functions as town1
   private static String[][] route1a;
   private static String[][] route1b;
+  private static String[][] route1c;
 
   public static void main(String[] args) {
     initTown1();
@@ -112,10 +112,10 @@ public class Map{
   }
 
   public static void initRoute1a(){
-    route1 = new String[40][40];
-    makeBorders(route1);
+    route1a = new String[40][40];
+    makeBorders(route1a);
 
-    String[][] test = route1;
+    String[][] test = route1a;
 
     for (int y = 2; y < 25; y++) {
       for (int x = 18; x < 30; x++) {
@@ -141,7 +141,39 @@ public class Map{
     return route1a;
   }
 
+  public static void initRoute1b() {
+    route1b = new String[40][40];
+    makeBorders(route1b);
 
+    String[][] test = route1b;
+
+    for (int y = 2; y < 25; y++) {
+      for (int x = 18; x < 30; x++) {
+        test[y][x] = "p";
+      }
+    }
+
+    //creating grass
+    for (int y = 10; y < 25; y++) {
+      for (int x = 2; x < 16; x++) {
+        test[y][x] = "g";
+      }
+    }
+
+    route1b = test;
+  }
+
+  public static String[][] getRoute1b() {
+    return route1b;
+  }
+
+  public static void initRoute1c() {
+
+  }
+
+  public static String[][] getRoute1c() {
+    return route1c;
+  }
 
   public static String toString(String[][] x) {
     String result = "\n";

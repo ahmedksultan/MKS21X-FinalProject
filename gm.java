@@ -61,6 +61,8 @@ public class gm {
     //game loop starts here
     while (running) {
       screen.refresh();
+      int oldx = x;
+      int oldy = y;
 
       //reading key inputs happens HERE!
       Key key = screen.readInput();
@@ -73,27 +75,27 @@ public class gm {
 				}
 
 				if (key.getKind() == Key.Kind.ArrowLeft) {
-          terminal.clearScreen();
+          //terminal.clearScreen();
 					x--;
 				}
 
 				if (key.getKind() == Key.Kind.ArrowRight) {
-          terminal.clearScreen();
+          //terminal.clearScreen();
 					x++;
 				}
 
 				if (key.getKind() == Key.Kind.ArrowUp) {
-          terminal.clearScreen();
+          //terminal.clearScreen();
 					y--;
 				}
 
 				if (key.getKind() == Key.Kind.ArrowDown) {
-          terminal.clearScreen();
+          //terminal.clearScreen();
 					y++;
 				}
       }
+      screen.putString(oldx, oldy, " ", Terminal.Color.DEFAULT, Terminal.Color.DEFAULT);
       screen.putString(x, y, "@", Terminal.Color.WHITE, Terminal.Color.BLUE);
-      screen.refresh();
 
       //playerinfo(screen, pparty);
       screen.putString(44,2, "Welcome to Javamon!", Terminal.Color.DEFAULT, Terminal.Color.DEFAULT);

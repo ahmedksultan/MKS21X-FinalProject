@@ -4,9 +4,8 @@ public class Map{
   //routing: pkmnlab > hometown > route1a-1e > city > gym
   private static String[][] test; //functions as town1, because i am lazy lol
   private static String[][] menu;
-  private static String[][] route1;
-  private static String[][] pkmnlab;
   private static String[][] route1a;
+  private static String[][] route1b;
 
   public static void main(String[] args) {
     initTown1();
@@ -134,20 +133,12 @@ public class Map{
     //placing trainer
     test[8][31] = "!t";
 
-    route1 = test;
+    route1a = test;
 
   }
 
   public static String[][] getRoute1a() {
-    return route1;
-  }
-
-  private static void initPkmnLab(){
-    // Initialize pkmnlab;
-  }
-
-  public static void getPkmnLab() {
-
+    return route1a;
   }
 
 

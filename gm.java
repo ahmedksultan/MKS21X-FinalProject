@@ -136,7 +136,9 @@ public class gm {
         screen.refresh();
       }
 
-      //screen switchers
+
+
+      //screen switchers - this creates the "scrolling effect"
       if (y == 24 && istown1 == true) {
         istown1 = false;
         isroute1a = true;
@@ -149,6 +151,9 @@ public class gm {
         y = 24;
       }
 
+
+
+      //player icon 
       screen.putString(oldx, oldy, " ", Terminal.Color.DEFAULT, Terminal.Color.DEFAULT);
       screen.putString(x, y, "@", Terminal.Color.WHITE, Terminal.Color.BLUE);
 

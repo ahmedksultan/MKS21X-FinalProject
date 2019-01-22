@@ -27,7 +27,7 @@ public class gm {
 
     boolean choosepkmn = true;
     boolean istown1 = false;
-    boolean isroute1 = false;
+    boolean isroute1a = false;
     boolean iscity = false;
 
     int tbattles = 0;
@@ -97,41 +97,60 @@ public class gm {
           Pokemon Squirtle = new Pokemon("Squirtle");
           pparty.add(Squirtle);
           choosepkmn = false;
-          terminal.clearScreen();
+          screen.clear();
           istown1 = true;
         }
         if (key.getCharacter() == 'b' && choosepkmn == true) {
           Pokemon Bulbasaur = new Pokemon("Bulbasaur");
           pparty.add(Bulbasaur);
           choosepkmn = false;
-          terminal.clearScreen();
+          screen.clear();
           istown1 = true;
         }
         if (key.getCharacter() == 'c' && choosepkmn == true) {
           Pokemon Charmander = new Pokemon("Charmander");
           pparty.add(Charmander);
           choosepkmn = false;
-          terminal.clearScreen();
+          screen.clear();
           istown1 = true;
         }
       }
-      screen.putString(oldx, oldy, " ", Terminal.Color.DEFAULT, Terminal.Color.DEFAULT);
-      screen.putString(x, y, "@", Terminal.Color.WHITE, Terminal.Color.BLUE);
 
       //playerinfo displayers information about the player at all times
       //NOTE: only exception is when there is a battle going on!
       playerinfo(screen, pparty);
 
       //choosepkmn appears when the code starts
-      //
+      //disappears when a starter pokemon is chosen
       if (choosepkmn = true) {
         choosepkmn(screen);
       }
 
       if (istown1 == true) {
-        town1(screen, town);
+        town1(screen, town, pparty);
         screen.refresh();
       }
+
+      if (isroute1a == true) {
+        route1a(screen, route1a, pparty);
+        screen.refresh();
+      }
+
+      //screen switchers
+      if (y == 24 && istown1 == true) {
+        istown1 = false;
+        isroute1a = true;
+        y = 3;
+      }
+
+      if (y == 2 && isroute1a == true) {
+        isroute1a = false;
+        istown1 = true;
+        y = 24;
+      }
+
+      screen.putString(oldx, oldy, " ", Terminal.Color.DEFAULT, Terminal.Color.DEFAULT);
+      screen.putString(x, y, "@", Terminal.Color.WHITE, Terminal.Color.BLUE);
 
       screen.refresh();
     }
@@ -155,8 +174,7 @@ public class gm {
     x.putString(2,6, "[C] for Charmander.", Terminal.Color.RED, Terminal.Color.DEFAULT);
   }
 
-  public static void town1(Screen x, String[][] town) {
-
+  public static void town1(Screen x, String[][] town, ArrayList<Pokemon> p) {
     for (int b = 0; b < town.length; b++) {
       for (int a = 0; a < town[b].length; a++) {
 
@@ -167,6 +185,23 @@ public class gm {
         //| = border -- BLACK
         //p = path -- YELLOW
 
+        //Tejas helped me with this switch case!
+        switch(town[a][b]) {
+          case "r": x.putString(b,a, " ", Terminal.Color.DEFAULT, Terminal.Color.RED);
+          break;
+          case "b": x.putString(b,a, " ", Terminal.Color.DEFAULT, Terminal.Color.WHITE);
+          break;
+          case "d": x.putString(b,a, " ", Terminal.Color.DEFAULT, Terminal.Color.BLACK);
+          break;
+          case "g": x.putString(b,a, "^", Terminal.Color.DEFAULT, Terminal.Color.GREEN);
+          break;
+          case "p": x.putString(b,a, " ", Terminal.Color.DEFAULT, Terminal.Color.YELLOW);
+          break;
+          default: x.putString(b,a, " ", Terminal.Color.DEFAULT, Terminal.Color.DEFAULT);
+        }
+
+        playerinfo(x, p);
+        /*
         if (town[a][b] == "r") {
           x.putString(b,a, " ", Terminal.Color.DEFAULT, Terminal.Color.RED);
         }
@@ -186,11 +221,43 @@ public class gm {
         if (town[a][b] == "p") {
           x.putString(b,a, " ", Terminal.Color.DEFAULT, Terminal.Color.YELLOW);
         }
-        
+
         else {
           x.putString(b,a, " ", Terminal.Color.DEFAULT, Terminal.Color.DEFAULT);
         }
+        */
+      }
+    }
+  }
 
+  public static void route1a(Screen x, String[][] map, ArrayList<Pokemon> p) {
+    for (int b = 0; b < map.length; b++) {
+      for (int a = 0; a < map[b].length; a++) {
+
+        //r = roof -- RED
+        //b = building -- WHITE
+        //d = door -- BLACK
+        //g = grass -- GREEN
+        //| = border -- BLACK
+        //p = path -- YELLOW
+
+        switch(map[a][b]) {
+          case "r": x.putString(b,a, " ", Terminal.Color.DEFAULT, Terminal.Color.RED);
+          break;
+          case "b": x.putString(b,a, " ", Terminal.Color.DEFAULT, Terminal.Color.WHITE);
+          break;
+          case "d": x.putString(b,a, " ", Terminal.Color.DEFAULT, Terminal.Color.BLACK);
+          break;
+          case "g": x.putString(b,a, "^", Terminal.Color.DEFAULT, Terminal.Color.GREEN);
+          break;
+          case "p": x.putString(b,a, " ", Terminal.Color.DEFAULT, Terminal.Color.YELLOW);
+          break;
+          case "!t": x.putString(b,a, "!", Terminal.Color.YELLOW, Terminal.Color.MAGENTA);
+          break;
+          default: x.putString(b,a, " ", Terminal.Color.DEFAULT, Terminal.Color.DEFAULT);
+        }
+
+        playerinfo(x, p);
       }
     }
   }

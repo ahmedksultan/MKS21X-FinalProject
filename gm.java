@@ -22,13 +22,18 @@ public class gm {
   public static void main(String[] args) {
 
     //starting position
-    int x = 2;
-    int y = 15;
+    int x = 3;
+    int y = 16;
+
+    int maxstarter = 0;
 
     boolean choosepkmn = true;
     boolean istown1 = false;
+    boolean ishouse1 = false;
+    boolean ishouse2 = false;
     boolean isroute1a = false;
     boolean isroute1b = false;
+    boolean isroute1c = false;
     boolean iscity = false;
 
     //tbattles track how many trainer battles have occurred
@@ -48,6 +53,10 @@ public class gm {
     String[][] town;
     Map.initTown1();
     town = Map.getTown1();
+
+    String[][] house1;
+    Map.initHouse1();
+    house1 = Map.getHouse1();
 
     String[][] route1a;
     Map.initRoute1a();
@@ -70,6 +79,7 @@ public class gm {
 
     //game loop starts here
     while (running) {
+
       screen.refresh();
       int oldx = x;
       int oldy = y;
@@ -103,27 +113,50 @@ public class gm {
           //terminal.clearScreen();
 					y++;
 				}
-        if (key.getCharacter() == 's' && choosepkmn == true) {
+
+        //choose pokemon stuff goes here
+        if (key.getCharacter() == 's' && choosepkmn == true && maxstarter < 1) {
           Pokemon Squirtle = new Pokemon("Squirtle");
           pparty.add(Squirtle);
           choosepkmn = false;
+          maxstarter++;
           screen.clear();
           istown1 = true;
         }
-        if (key.getCharacter() == 'b' && choosepkmn == true) {
+        if (key.getCharacter() == 'b' && choosepkmn == true && maxstarter < 1) {
           Pokemon Bulbasaur = new Pokemon("Bulbasaur");
           pparty.add(Bulbasaur);
           choosepkmn = false;
+          maxstarter++;
           screen.clear();
           istown1 = true;
         }
-        if (key.getCharacter() == 'c' && choosepkmn == true) {
+        if (key.getCharacter() == 'c' && choosepkmn == true && maxstarter < 1) {
+          maxstarter++; //^^doesn't matter where it goes in the code, as its just an int value
           Pokemon Charmander = new Pokemon("Charmander");
           pparty.add(Charmander);
           choosepkmn = false;
           screen.clear();
           istown1 = true;
         }
+        /* Locked until further use is necessary //DEMO VERSION
+        if (key.getCharacter() == 'd' && choosepkmn == true && maxstarter < 1) {
+          maxstarter++;
+          Pokemon Bulbasaur = new Pokemon("Bulbasaur");
+          Pokemon Charmander = new Pokemon("Charmander");
+          Pokemon Squirtle = new Pokemon("Squirtle");
+          Pokemon Mewtwo = new Pokemon("Mewtwo");
+          Pokemon Pikachu = new Pokemon("Pikachu");
+          Pokemon Ditto = new Pokemon("Ditto");
+          pparty.add(Bulbasaur);
+          pparty.add(Charmander);
+          pparty.add(Squirtle);
+          pparty.add(Mewtwo);
+          pparty.add(Pikachu);
+          pparty.add(Ditto);
+          screen.clear();
+          istown1 = true;
+        } */
       }
 
       //playerinfo displayers information about the player at all times
@@ -141,24 +174,28 @@ public class gm {
         screen.refresh();
       }
 
+      if (ishouse1 == true) {
+        house1(screen, house1, pparty);
+        screen.refresh();
+      }
+
       if (isroute1a == true) {
         route1a(screen, route1a, pparty);
         screen.refresh();
 
-        /* removing battle functionality for now because it doesn't even work
         //FIRST TRAINER BATTLE GOES HERE...
         if (y == 8 && tbattles == 0) {
           //creating new trainer battle, "John"
-          //first tbattle, hence tbattles = 0
+          //first trainer battle (tbattles), hence tbattles = 0
           ArrayList<Pokemon> johnparty = new ArrayList<Pokemon>();
 
           Pokemon Mewtwo = new Pokemon("Mewtwo");
-          //Pokemon Eevee = new Pokemon("Eevee");
+          Pokemon Eevee = new Pokemon("Eevee");
 
           johnparty.add(Mewtwo);
-          //johnparty.add(Eevee);
+          johnparty.add(Eevee);
 
-          Player John = new Trainer("John", johnparty);
+          Player John = new Trainer("JOHN", johnparty);
           Battle johnbattle = new Battle(player, John);
 
           Scanner user_input = new Scanner(System.in);
@@ -168,7 +205,11 @@ public class gm {
           terminal.exitPrivateMode();
 
           System.out.println("\n---A BATTLE HAS BEGUN!---");
+          System.out.println("\n[MSG] JOHN: I'M SURE TO WIN!\n");
+
           System.out.println("Your enemy is " + John.getName() + "! Their first pokemon is " + johnbattle.getActive2() + ".");
+          System.out.println("Your opponent's team is " + johnbattle.getTwo().getParty().toString() + "\n");
+
           System.out.println("Your team is " + johnbattle.getOne().getParty().toString());
 
           ArrayList<String> moves1 = johnbattle.getOne().getMon(0).getAttacks();
@@ -176,15 +217,21 @@ public class gm {
           System.out.println("Your pokemon's moves are here: " + johnbattle.getActive1().getAttacks());
           // System.out.println("Your pokemon's moves are here: " + battle.getOne().getMon(4).attackstoString(1));
 
-          System.out.println("Your opponent's team is " + johnbattle.getTwo().getParty().toString());
-
           while (!johnbattle.isOver()){
 
-            System.out.println(johnbattle.getActive1().toString() + " and " + johnbattle.getActive2() + " are battling!");
-            System.out.println("Choose your move!");
-            yourattack = user_input.next();
-            enemyattack = johnbattle.getActive2().getEnemyAttack();
+            System.out.println(johnbattle.getActive1() + " and " + johnbattle.getActive2() + " are battling!");
+            System.out.println("\n" + johnbattle.getActive1() + "'s HP: " + johnbattle.getActive1().getHP());
+            System.out.println(johnbattle.getActive2() + "'s HP: " + johnbattle.getActive2().getHP());
+            System.out.println("Choose your move!\n");
+            for (int i = 0; i < johnbattle.getActive1().getAttacks().size(); i++) {
+              System.out.println("[" + i + "] for " + johnbattle.getActive1().getAttacks().get(i).toUpperCase());
+            }
+            System.out.println("");
 
+            yourattack = johnbattle.getActive1().getAttacks().get(Integer.parseInt(user_input.next()));
+            enemyattack = johnbattle.getActive2().getEnemyAttack();
+            
+            /*
             for (int i = 0; i < moves1.size(); i++) {
               if (moves1.get(i).equals(user_input.next())) {
                 yourattack = moves1.get(i);
@@ -193,21 +240,26 @@ public class gm {
                 yourattack = "IMPOSSIBLE MOVE";
               }
             }
+            */
 
-            johnbattle.move(yourattack);
-            System.out.println("You used " + yourattack + "! Your opponent used" + enemyattack + "." );
+            System.out.println("\nYou used " + yourattack.toUpperCase() + "! Your opponent used " + enemyattack + "." );
             johnbattle.forceSwitch();
           }
 
-          System.out.println("The battle is over! " + johnbattle.getWinner()  + " has won!");
+          System.out.println("[MSG] The battle is over! " + johnbattle.getWinner()  + " has won!");
           tbattles = 1;
         }
-        */
+
 
       }
 
       if (isroute1b == true) {
         route1b(screen, route1b, pparty);
+        screen.refresh();
+      }
+
+      if (isroute1c == true) {
+        route1c(screen, route1c, pparty);
         screen.refresh();
       }
 
@@ -220,16 +272,44 @@ public class gm {
         y = 3;
       }
 
+      //house stuff - buggy for now, better to not waste time
+      /*
+      if ((x == 5 || x == 6 ) && (y == 12) && istown1 == true ) {
+        istown1 = false;
+        ishouse1 = true;
+        y = 2;
+        x = 2;
+      }
+      */
+
       if (y == 2 && isroute1a == true) {
         isroute1a = false;
         istown1 = true;
-        y = 22 ;
+        y = 22;
       }
 
       if (y == 23 && isroute1a == true) {
         isroute1a = false;
         isroute1b = true;
-        y = 2;
+        y = 3;
+      }
+
+      if (x == 2 && isroute1b == true) {
+        isroute1b = false;
+        isroute1c = true;
+        x = 28;
+      }
+
+      if (y == 2 && isroute1b == true) {
+        isroute1b = false;
+        isroute1a = true;
+        y = 22;
+      }
+
+      if (x == 29 && isroute1c == true) {
+        isroute1c = false;
+        isroute1b = true;
+        x = 3;
       }
 
       //player icon
@@ -346,10 +426,9 @@ public class gm {
           break;
           default: x.putString(b,a, " ", Terminal.Color.DEFAULT, Terminal.Color.DEFAULT);
         }
-
-        playerinfo(x, p);
       }
     }
+    playerinfo(x, p);
   }
 
   public static void route1b(Screen x, String[][] map, ArrayList<Pokemon> p) {
@@ -378,10 +457,70 @@ public class gm {
           break;
           default: x.putString(b,a, " ", Terminal.Color.DEFAULT, Terminal.Color.DEFAULT);
         }
-
-        playerinfo(x, p);
       }
     }
+    playerinfo(x, p);
   }
+
+    public static void route1c(Screen x, String[][] map, ArrayList<Pokemon> p) {
+      for (int b = 0; b < map.length; b++) {
+        for (int a = 0; a < map[b].length; a++) {
+
+          //r = roof -- RED
+          //b = building -- WHITE
+          //d = door -- BLACK
+          //g = grass -- GREEN
+          //| = border -- BLACK
+          //p = path -- YELLOW
+
+          switch(map[a][b]) {
+            case "r": x.putString(b,a, " ", Terminal.Color.DEFAULT, Terminal.Color.RED);
+            break;
+            case "b": x.putString(b,a, " ", Terminal.Color.DEFAULT, Terminal.Color.WHITE);
+            break;
+            case "d": x.putString(b,a, " ", Terminal.Color.DEFAULT, Terminal.Color.BLACK);
+            break;
+            case "g": x.putString(b,a, "^", Terminal.Color.DEFAULT, Terminal.Color.GREEN);
+            break;
+            case "p": x.putString(b,a, " ", Terminal.Color.DEFAULT, Terminal.Color.YELLOW);
+            break;
+            case "!t": x.putString(b,a, "!", Terminal.Color.YELLOW, Terminal.Color.MAGENTA);
+            break;
+            default: x.putString(b,a, " ", Terminal.Color.DEFAULT, Terminal.Color.DEFAULT);
+          }
+
+          playerinfo(x, p);
+        }
+      }
+  }
+
+  public static void house1(Screen x, String[][] map, ArrayList<Pokemon> p) {
+    for (int b = 0; b < map.length; b++) {
+      for (int a = 0; a < map[b].length; a++) {
+        switch(map[b][a]) {
+          case "-": x.putString(b, a, " ", Terminal.Color.DEFAULT, Terminal.Color.BLACK);
+          break;
+          case "|": x.putString(b, a, " ", Terminal.Color.DEFAULT, Terminal.Color.BLACK);
+          break;
+        }
+      }
+    }
+    playerinfo(x, p);
+  }
+
+  public static void house2(Screen x, String[][] map, ArrayList<Pokemon> p) {
+    for (int b = 0; b < map.length; b++) {
+      for (int a = 0; a < map[b].length; a++) {
+        switch(map[b][a]) {
+          case "-": x.putString(b, a, " ", Terminal.Color.DEFAULT, Terminal.Color.BLACK);
+          break;
+          case "|": x.putString(b, a, " ", Terminal.Color.DEFAULT, Terminal.Color.BLACK);
+          break;
+        }
+      }
+    }
+    playerinfo(x, p);
+  }
+
 
 }

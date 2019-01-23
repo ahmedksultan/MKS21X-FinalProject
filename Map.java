@@ -1,15 +1,18 @@
 import java.util.*; //array lists
 
-public class Map{
+public class Map {
   //routing: hometown > route1a-1e > city > gym
   private static String[][] test; //functions as town1
+  private static String[][] house1; //left house in town1
+  private static String[][] house2; //right house in town1
   private static String[][] route1a;
   private static String[][] route1b;
-  private static String[][] route1c;
+  private static String[][] route1c; //branches off to the left of route 1b!
+  private static String[][] route1d;
 
   public static void main(String[] args) {
     initTown1();
-    getTown1();
+    System.out.println(toString(getTown1()));
   }
 
   private static void makeBorders(String[][] x) {
@@ -28,6 +31,7 @@ public class Map{
     }
   }
 
+  //town1 has two houses, house1 & house2
   public static void initTown1() {
     //(((note: coords are in y-x format)))
     //renamed test to town1
@@ -104,11 +108,28 @@ public class Map{
         test[y][x] = "g";
       }
     }
-
   }
 
   public static String[][] getTown1() {
     return test;
+  }
+
+  public static void initHouse1() {
+    house1 = new String[10][20];
+    makeBorders(house1);
+  }
+
+  public static String[][] getHouse1() {
+    return house1;
+  }
+
+  public static void initHouse2() {
+    house2 = new String[20][10];
+    makeBorders(house2);
+  }
+
+  public static String[][] getHouse2() {
+    return house2;
   }
 
   public static void initRoute1a(){
@@ -183,7 +204,7 @@ public class Map{
 
     //creating pathway
     for (int y = 5; y < 10; y++) {
-      for (int x = 20; x > 15; x--) {
+      for (int x = 30; x > 2; x--) {
         test[y][x] = "p";
       }
     }

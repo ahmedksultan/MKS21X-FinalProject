@@ -190,10 +190,10 @@ public class gm {
           ArrayList<Pokemon> johnparty = new ArrayList<Pokemon>();
 
           Pokemon Mewtwo = new Pokemon("Mewtwo");
-          //Pokemon Eevee = new Pokemon("Eevee");
+          Pokemon Eevee = new Pokemon("Eevee");
 
           johnparty.add(Mewtwo);
-          //johnparty.add(Eevee);
+          johnparty.add(Eevee);
 
           Player John = new Trainer("JOHN", johnparty);
           Battle johnbattle = new Battle(player, John);
@@ -205,9 +205,11 @@ public class gm {
           terminal.exitPrivateMode();
 
           System.out.println("\n---A BATTLE HAS BEGUN!---");
-          System.out.println("\nJOHN: I'M SURE TO WIN!\n");
+          System.out.println("\n[MSG] JOHN: I'M SURE TO WIN!\n");
 
           System.out.println("Your enemy is " + John.getName() + "! Their first pokemon is " + johnbattle.getActive2() + ".");
+          System.out.println("Your opponent's team is " + johnbattle.getTwo().getParty().toString() + "\n");
+
           System.out.println("Your team is " + johnbattle.getOne().getParty().toString());
 
           ArrayList<String> moves1 = johnbattle.getOne().getMon(0).getAttacks();
@@ -215,16 +217,19 @@ public class gm {
           System.out.println("Your pokemon's moves are here: " + johnbattle.getActive1().getAttacks());
           // System.out.println("Your pokemon's moves are here: " + battle.getOne().getMon(4).attackstoString(1));
 
-          System.out.println("Your opponent's team is " + johnbattle.getTwo().getParty().toString());
-
           while (!johnbattle.isOver()){
 
-            System.out.println(johnbattle.getActive1().toString() + " and " + johnbattle.getActive2() + " are battling!");
+            System.out.println(johnbattle.getActive1() + " and " + johnbattle.getActive2() + " are battling!");
+            System.out.println("\n" + johnbattle.getActive1() + "'s HP: " + johnbattle.getActive1().getHP());
+            System.out.println(johnbattle.getActive2() + "'s HP: " + johnbattle.getActive2().getHP());
             System.out.println("Choose your move!\n");
             for (int i = 0; i < johnbattle.getActive1().getAttacks().size(); i++) {
               System.out.println("[" + i + "] for " + johnbattle.getActive1().getAttacks().get(i).toUpperCase());
             }
-            yourattack = user_input.next();
+            System.out.println("");
+
+
+            yourattack = johnbattle.getActive1().getAttacks().get(Integer.parseInt(user_input.next()));
             enemyattack = johnbattle.getActive2().getEnemyAttack();
 
 
@@ -240,12 +245,11 @@ public class gm {
             }
             */
 
-            johnbattle.move(yourattack);
-            System.out.println("You used " + yourattack + "! Your opponent used" + enemyattack + "." );
+            System.out.println("\nYou used " + yourattack.toUpperCase() + "! Your opponent used " + enemyattack + "." );
             johnbattle.forceSwitch();
           }
 
-          System.out.println("The battle is over! " + johnbattle.getWinner()  + " has won!");
+          System.out.println("[MSG] The battle is over! " + johnbattle.getWinner()  + " has won!");
           tbattles = 1;
         }
 

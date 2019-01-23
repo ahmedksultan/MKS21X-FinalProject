@@ -2,6 +2,11 @@ import java.util.*; //scanner, ArrayList, Map, HashMap
 import java.io.*; //file, filenotfoundexception
 
 public class Pokemon {
+  public static void main(String[] args) {
+    Pokemon chara = new Pokemon("Charmander");
+    System.out.println(chara.getAttacks());
+  }
+
 
   private String name, type1, type2;
   private int attack, speed, defense, ID, typeID1, typeID2;
@@ -65,6 +70,10 @@ public class Pokemon {
 
   public String toString(){
     return name;
+  }
+
+  public boolean evolves(){
+    return evolve;
   }
 
   private void haveEvolve(String named){
@@ -185,10 +194,18 @@ public class Pokemon {
 
     public void evolvedMoves(String name){
       String newName = evolve(Integer.parseInt(nameToID(name)));
-      if (possibleAttacks(newName).isEmpty()) {
-        String newerName = evolve(Integer.parseInt(nameToID(newName)));
-        possibleAttacks(newerName);
-        setAttacks(newerName);
+      System.out.println(newName);
+
+      if (possibleAttacks(newName).isEmpty()){
+        while (possibleAttacks(newName).isEmpty()) {
+          String newerName = evolve(Integer.parseInt(nameToID(newName)));
+          System.out.println(newerName);
+          possibleAttacks(newerName);
+          setAttacks(newerName);
+        }
+      }
+      else{
+        setAttacks(newName);
       }
     }
 

@@ -7,10 +7,11 @@ public class Pokemon {
     Pokemon hey = new Pokemon("Charmander");
     System.out.println(chara.getAttacks());
 
-    System.out.println(hey.getAttacks());
 
-    chara.attack(hey);
-    hey.attack(chara);
+
+    // System.out.println(hey.getAttacks());
+    chara.attack(chara, chara.getAttacks().get(1));
+    // hey.attack(chara);
   }
 
 
@@ -19,7 +20,6 @@ public class Pokemon {
   private double hp;
   private ArrayList<String> attacks, possibleAttacks;
   private ArrayList<String> typeWeakness, typeResistance;
-  private boolean evolve = true;
   private String enemyattack;
 
   //Have to convert this way because CSV file gives IDs for types, not names, so
@@ -51,100 +51,13 @@ public class Pokemon {
      speed = Integer.parseInt(data[10]);
    }
 
-  public Pokemon(String name1, ArrayList<String> selectedAttacks){
-    create(name1);
-    possibleAttacks(name1);
-    setAttacks(name1, selectedAttacks);
-    haveEvolve(name1);
-
-    if (evolve){
-      evolvedMoves(name1);
-    }
-  }
-
   public Pokemon(String name1){
     create(name1);
-    possibleAttacks(name1);
-    setAttacks(name1);
-    haveEvolve(name1);
-
-    if (evolve){
-      evolvedMoves(name1);
-    }
-
+    setAttacks();
   }
 
   public String toString(){
     return name;
-  }
-
-  public boolean evolves(){
-    return evolve;
-  }
-
-  private void haveEvolve(String named){
-    try{
-      File f = new File("movesets.csv");
-      Scanner in = new Scanner(f);
-
-      while (in.hasNext()){
-        String line = in.nextLine();
-        String[] stats = line.split(",");
-        if (stats[0].equals(named)){
-          evolve = false;
-          break;
-        }
-      }
-    }
-    catch(FileNotFoundException e){
-      System.out.println("In haveEvolve");
-      throw new Error();
-    }
-  }
-
-  private static int evolutionID(int index){
-    try{
-      File f = new File("evolutions.csv");
-      Scanner in = new Scanner(f);
-
-      while (in.hasNext()){
-        String line = in.nextLine();
-        String[] stats = line.split(",");
-
-        if (String.valueOf(index).equals(stats[0])){
-          return Integer.parseInt(stats[1]);
-        }
-      }
-    }
-    catch(FileNotFoundException e){
-      System.out.println("ERROR evolutionID");
-      throw new Error();
-    }
-    throw new Error();
-  }
-
-  private static String idToName(int index){
-    if (index < 0 || index > 151){
-      throw new Error();
-    }
-    try{
-      File f = new File("Pokemon.csv");
-      Scanner in = new Scanner(f);
-
-      while (in.hasNext()){
-        String line = in.nextLine();
-        String[] stats = line.split(",");
-
-        if (String.valueOf(index).equals(stats[0])){
-          return stats[1];
-        }
-      }
-    }
-    catch(FileNotFoundException e){
-      System.out.println("Error in idToName");
-      throw new Error();
-    }
-    throw new Error();
   }
 
   public static String nameToID(String names){
@@ -156,6 +69,8 @@ public class Pokemon {
         String line = in.nextLine();
         String[] stats = line.split(",");
 
+        System.out.println(stats[1] + "stats");
+        System.out.println(names);
         if (names.equals(stats[1])){
           return stats[0];
         }
@@ -168,64 +83,24 @@ public class Pokemon {
     throw new Error();
   }
 
-  public String evolve(int index){
-    return idToName(evolutionID(index));
-  }
-
-  public ArrayList<String> possibleAttacks(String name1){
-    possibleAttacks = new ArrayList<String>(50);
+  public void setAttacks(){
+    attacks = new ArrayList<String>();
     try{
-      File f = new File("movesets.csv");
+      File f = new File("moves.csv");
       Scanner in = new Scanner(f);
+      String line = in.nextLine();
 
-      while (in.hasNext()){
-        String line = in.nextLine();
+      while (in.hasNext() && attacks.size() < 5){
+        line = in.nextLine();
         String[] stats = line.split(",");
 
-        if (stats[0].equals(name1)){
-          Move temp = new Move(name1);
-
-          possibleAttacks.add(stats[1]);
-          possibleAttacks.add(stats[2]);
+        if (Integer.parseInt(stats[3]) == typeID1 || Integer.parseInt(stats[2]) == typeID2){
+          attacks.add(stats[1]);
         }
-      }
     }
+  }
     catch(FileNotFoundException e){
-      System.out.println("Error in possibleAttacks");
-      throw new Error();
-    }
 
-    return possibleAttacks;
-}
-
-    public void evolvedMoves(String name){
-      String newName = evolve(Integer.parseInt(nameToID(name)));
-      System.out.println(newName);
-
-      if (possibleAttacks(newName).isEmpty()){
-        while (possibleAttacks(newName).isEmpty()) {
-          String newerName = evolve(Integer.parseInt(nameToID(newName)));
-          possibleAttacks(newerName);
-          setAttacks(newerName);
-          break;
-        }
-      }
-      else{
-        setAttacks(newName);
-      }
-    }
-
-  public void setAttacks(String name1){
-    ArrayList<String> temp = new ArrayList<String>();
-    possibleAttacks(name1);
-    attacks = new ArrayList<String>(4);
-    for (int x = 0; x < possibleAttacks.size() && attacks.size() < 4; x++){
-      attacks.add(possibleAttacks.get(x));
-    }
-    for (String element: attacks){
-      if (!temp.contains(element)){
-        temp.add(element);
-      }
     }
   }
 
@@ -236,20 +111,6 @@ public class Pokemon {
       if (x+1 != input.size()) output += ", ";
     }
     return output;
-  }
-
-  public void setAttacks(String name1, ArrayList<String> selectedAttacks){
-    possibleAttacks(name1);
-    attacks = new ArrayList<String>();
-    for (int x = 0; x < selectedAttacks.size(); x++){
-      if (possibleAttacks.contains(selectedAttacks.get(x))){
-        attacks.add(selectedAttacks.get(x));
-      }
-      else{
-        System.out.println("Error in setAttacks");
-        throw new Error();
-      }
-    }
   }
 
   // organizeData reads through the moves.csv file and returns a String with all
@@ -306,10 +167,6 @@ public class Pokemon {
 
   public int getAttack(){
     return attack;
-  }
-
-  public boolean getEvolve(){
-    return evolve;
   }
 
   public int getDefense(){
@@ -443,8 +300,8 @@ private double modifier(Move move, Pokemon enemy){
       throw new NumberFormatException();
     }
 
-    System.out.println(attacks);
-    enemyattack = attacks.get(x);
+    // System.out.println(attacks);
+    // enemyattack = attacks.get(x);
 
     return attack(enemy, attacks.get(x));
   }

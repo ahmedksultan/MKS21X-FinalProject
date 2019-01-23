@@ -333,6 +333,12 @@ private double modifier(Move move, Pokemon enemy){
       else enemy.setHP(0);
 
       System.out.println("This is the damage: " + dmg);
+      System.out.println("Attack stat: " + attack);
+      System.out.println(dmg);
+      System.out.println(mod);
+      System.out.println(move.getPower());
+      System.out.println(enemy.getDefense());
+
       return dmg;
   }
 }

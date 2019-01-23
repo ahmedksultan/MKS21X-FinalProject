@@ -228,12 +228,9 @@ public class gm {
             }
             System.out.println("");
 
-
             yourattack = johnbattle.getActive1().getAttacks().get(Integer.parseInt(user_input.next()));
             enemyattack = johnbattle.getActive2().getEnemyAttack();
-
-
-
+            
             /*
             for (int i = 0; i < moves1.size(); i++) {
               if (moves1.get(i).equals(user_input.next())) {

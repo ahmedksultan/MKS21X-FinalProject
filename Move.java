@@ -22,8 +22,16 @@ public class Move{
 
         if (stats[1].toLowerCase().equals(moveName.toLowerCase()  )){
           name = moveName;
-          typeID = Integer.parseInt(stats[3]);
+          /*
+          if (stats[4].equals("")) {
+            power = 0;
+          }
+          else {
+            power = Integer.parseInt(stats[4]);
+          }
+          */
           power = Integer.parseInt(stats[4]);
+          typeID = Integer.parseInt(stats[3]);
           break;
         }
       }

@@ -298,7 +298,9 @@ private double modifier(Move move, Pokemon enemy){
       throw new NumberFormatException();
     }
 
-    return attack(enemy, attacks.get(x));
+    enemyattack = attacks.get(x);
+
+    return attack(enemy, enemyattack);
   }
 
   public double getMod(String move1, Pokemon enemy){
@@ -325,19 +327,10 @@ private double modifier(Move move, Pokemon enemy){
 
       // Formula found online - it's the actual formula used to calculate damage
 
-      double dmg = ((2.0/5 * move.getPower()) *
-             (attack / enemy.getDefense()+2)
-             / 50 * mod);
+      double dmg = ((2.0/5 * move.getPower()) * (attack / enemy.getDefense()+2) / 5 * mod);
 
       if (enemy.getHP() - dmg > 0) enemy.setHP(enemy.getHP() - dmg);
       else enemy.setHP(0);
-
-      System.out.println("This is the damage: " + dmg);
-      System.out.println("Attack stat: " + attack);
-      System.out.println(dmg);
-      System.out.println(mod);
-      System.out.println(move.getPower());
-      System.out.println(enemy.getDefense());
 
       return dmg;
   }

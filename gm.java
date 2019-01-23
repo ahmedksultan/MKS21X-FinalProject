@@ -195,7 +195,7 @@ public class gm {
           johnparty.add(Mewtwo);
           //johnparty.add(Eevee);
 
-          Player John = new Trainer("John", johnparty);
+          Player John = new Trainer("JOHN", johnparty);
           Battle johnbattle = new Battle(player, John);
 
           Scanner user_input = new Scanner(System.in);
@@ -205,6 +205,8 @@ public class gm {
           terminal.exitPrivateMode();
 
           System.out.println("\n---A BATTLE HAS BEGUN!---");
+          System.out.println("\nJOHN: I'M SURE TO WIN!\n");
+
           System.out.println("Your enemy is " + John.getName() + "! Their first pokemon is " + johnbattle.getActive2() + ".");
           System.out.println("Your team is " + johnbattle.getOne().getParty().toString());
 
@@ -222,6 +224,7 @@ public class gm {
             yourattack = user_input.next();
             enemyattack = johnbattle.getActive2().getEnemyAttack();
 
+            /*
             for (int i = 0; i < moves1.size(); i++) {
               if (moves1.get(i).equals(user_input.next())) {
                 yourattack = moves1.get(i);
@@ -230,6 +233,7 @@ public class gm {
                 yourattack = "IMPOSSIBLE MOVE";
               }
             }
+            */
 
             johnbattle.move(yourattack);
             System.out.println("You used " + yourattack + "! Your opponent used" + enemyattack + "." );

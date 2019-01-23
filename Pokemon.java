@@ -294,9 +294,11 @@ private double modifier(Move move, Pokemon enemy){
       throw new Error();
     }
 
+    /*
     if (hp <= 0){
       throw new NumberFormatException();
     }
+    */
 
     enemyattack = attacks.get(x);
 
@@ -320,10 +322,11 @@ private double modifier(Move move, Pokemon enemy){
         throw new Error();
       }
 
+      /*
       if (hp <= 0){
         throw new NumberFormatException();
       }
-
+      */
 
       // Formula found online - it's the actual formula used to calculate damage
 

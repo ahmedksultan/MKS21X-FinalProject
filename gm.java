@@ -207,19 +207,19 @@ public class gm {
           System.out.println("\n---A BATTLE HAS BEGUN!---");
           System.out.println("\n[MSG] JOHN: I'M SURE TO WIN!\n");
 
-          System.out.println("Your enemy is " + John.getName() + "! Their first pokemon is " + johnbattle.getActive2() + ".");
+          System.out.println("Your enemy is " + John.getName() + "! Their first pokemon is " + johnbattle.getActive2().getName().toUpperCase() + ".");
           System.out.println("Your opponent's team is " + johnbattle.getTwo().getParty().toString() + "\n");
 
           System.out.println("Your team is " + johnbattle.getOne().getParty().toString());
 
           ArrayList<String> moves1 = johnbattle.getOne().getMon(0).getAttacks();
 
-          System.out.println("Your pokemon's moves are here: " + johnbattle.getActive1().getAttacks());
+          System.out.println("Your Pokemon's moves are here: " + johnbattle.getActive1().getAttacks());
           // System.out.println("Your pokemon's moves are here: " + battle.getOne().getMon(4).attackstoString(1));
 
           while (!johnbattle.isOver()){
 
-            System.out.println(johnbattle.getActive1() + " and " + johnbattle.getActive2() + " are battling!");
+            System.out.println(johnbattle.getActive1().getName().toUpperCase() + " and " + johnbattle.getActive2().getName().toUpperCase() + " are battling!");
             System.out.println("\n" + johnbattle.getActive1() + "'s HP: " + johnbattle.getActive1().getHP());
             System.out.println(johnbattle.getActive2() + "'s HP: " + johnbattle.getActive2().getHP());
             System.out.println("Choose your move!\n");
@@ -244,15 +244,17 @@ public class gm {
             }
             */
 
-            System.out.println("\nYou used " + yourattack.toUpperCase() + "! Your opponent used " + enemyattack + "." );
+            System.out.println("\nYou used " + yourattack.toUpperCase() + "! Your opponent used " + enemyattack.toUpperCase() + "." );
             johnbattle.forceSwitch();
           }
 
-          System.out.println("[MSG] The battle is over! " + johnbattle.getWinner()  + " has won!");
+          System.out.println("[MSG] The battle is over! " + johnbattle.getWinner().toUpperCase()  + " has won!");
           tbattles = 1;
+
+          terminal.enterPrivateMode();
+          route1a(screen, route1a, pparty);
+          screen.refresh();
         }
-
-
       }
 
       if (isroute1b == true) {

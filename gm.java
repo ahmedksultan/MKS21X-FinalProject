@@ -186,7 +186,7 @@ public class gm {
         //FIRST TRAINER BATTLE GOES HERE...
         if (y == 8 && tbattles == 0) {
           //creating new trainer battle, "John"
-          //first tbattle, hence tbattles = 0
+          //first trainer battle (tbattles), hence tbattles = 0
           ArrayList<Pokemon> johnparty = new ArrayList<Pokemon>();
 
           Pokemon Mewtwo = new Pokemon("Mewtwo");

@@ -220,9 +220,14 @@ public class gm {
           while (!johnbattle.isOver()){
 
             System.out.println(johnbattle.getActive1().toString() + " and " + johnbattle.getActive2() + " are battling!");
-            System.out.println("Choose your move!");
+            System.out.println("Choose your move!\n");
+            for (int i = 0; i < johnbattle.getActive1().getAttacks().size(); i++) {
+              System.out.println("[" + i + "] for " + johnbattle.getActive1().getAttacks().get(i).toUpperCase());
+            }
             yourattack = user_input.next();
             enemyattack = johnbattle.getActive2().getEnemyAttack();
+
+
 
             /*
             for (int i = 0; i < moves1.size(); i++) {

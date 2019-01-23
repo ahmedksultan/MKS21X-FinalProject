@@ -90,7 +90,7 @@ public class Pokemon {
       Scanner in = new Scanner(f);
       String line = in.nextLine();
 
-      while (in.hasNext() && attacks.size() < 5){
+      while (in.hasNext() && attacks.size() < 4) {
         line = in.nextLine();
         String[] stats = line.split(",");
 

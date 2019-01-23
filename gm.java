@@ -189,10 +189,10 @@ public class gm {
           //first trainer battle (tbattles), hence tbattles = 0
           ArrayList<Pokemon> johnparty = new ArrayList<Pokemon>();
 
-          Pokemon Mewtwo = new Pokemon("Mewtwo");
+          //Pokemon Mewtwo = new Pokemon("Mewtwo");
           Pokemon Eevee = new Pokemon("Eevee");
 
-          johnparty.add(Mewtwo);
+          //johnparty.add(Mewtwo);
           johnparty.add(Eevee);
 
           Player John = new Trainer("JOHN", johnparty);
@@ -229,8 +229,10 @@ public class gm {
             System.out.println("");
 
             yourattack = johnbattle.getActive1().getAttacks().get(Integer.parseInt(user_input.next()));
+            johnbattle.getActive1().attack(johnbattle.getActive2(), yourattack);
+            johnbattle.getActive2().attack(johnbattle.getActive1());
             enemyattack = johnbattle.getActive2().getEnemyAttack();
-            
+
             /*
             for (int i = 0; i < moves1.size(); i++) {
               if (moves1.get(i).equals(user_input.next())) {

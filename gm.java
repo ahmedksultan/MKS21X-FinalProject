@@ -190,10 +190,12 @@ public class gm {
           ArrayList<Pokemon> johnparty = new ArrayList<Pokemon>();
 
           //Pokemon Mewtwo = new Pokemon("Mewtwo");
-          Pokemon Eevee = new Pokemon("Eevee");
+          Pokemon eeveejohn = new Pokemon("Eevee");
+          Pokemon oddishjohn = new Pokemon("Oddish");
 
           //johnparty.add(Mewtwo);
-          johnparty.add(Eevee);
+          johnparty.add(eeveejohn);
+          johnparty.add(oddishjohn);
 
           Player John = new Trainer("JOHN", johnparty);
           Battle johnbattle = new Battle(player, John);
@@ -220,8 +222,8 @@ public class gm {
           while (!johnbattle.isOver()){
 
             System.out.println(johnbattle.getActive1().getName().toUpperCase() + " and " + johnbattle.getActive2().getName().toUpperCase() + " are battling!");
-            System.out.println("\n" + johnbattle.getActive1() + "'s HP: " + johnbattle.getActive1().getHP());
-            System.out.println(johnbattle.getActive2() + "'s HP: " + johnbattle.getActive2().getHP());
+            System.out.println("\n" + johnbattle.getActive1() + "'s HP: " + johnbattle.getActive1().getHP() + "/" + johnbattle.getActive1().getTotalHP());
+            System.out.println(johnbattle.getActive2() + "'s HP: " + johnbattle.getActive2().getHP() + "/" + johnbattle.getActive2().getTotalHP());
             System.out.println("Choose your move!\n");
             for (int i = 0; i < johnbattle.getActive1().getAttacks().size(); i++) {
               System.out.println("[" + i + "] for " + johnbattle.getActive1().getAttacks().get(i).toUpperCase());
@@ -252,8 +254,9 @@ public class gm {
           tbattles = 1;
 
           terminal.enterPrivateMode();
-          route1a(screen, route1a, pparty);
-          screen.refresh();
+          //using completeRefresh() instead of refresh() as nothing new is actually getting placed - thus, force repaint of the screen is necessary
+          screen.completeRefresh();
+
         }
       }
 

@@ -11,7 +11,7 @@ public class Pokemon {
 
     // System.out.println(hey.getAttacks());
     chara.attack(chara, chara.getAttacks().get(1));
-    // hey.attack(chara);
+    hey.attack(chara);
   }
 
 
@@ -69,8 +69,6 @@ public class Pokemon {
         String line = in.nextLine();
         String[] stats = line.split(",");
 
-        System.out.println(stats[1] + "stats");
-        System.out.println(names);
         if (names.equals(stats[1])){
           return stats[0];
         }
@@ -300,9 +298,6 @@ private double modifier(Move move, Pokemon enemy){
       throw new NumberFormatException();
     }
 
-    // System.out.println(attacks);
-    // enemyattack = attacks.get(x);
-
     return attack(enemy, attacks.get(x));
   }
 
@@ -333,10 +328,6 @@ private double modifier(Move move, Pokemon enemy){
       double dmg = ((2.0/5 * move.getPower()) *
              (attack / enemy.getDefense()+2)
              / 50 * mod);
-
-      System.out.println(move.getPower() + " power");
-      System.out.println(enemy.getDefense() + " defense");
-      System.out.println(mod + " mod");
 
       if (enemy.getHP() - dmg > 0) enemy.setHP(enemy.getHP() - dmg);
       else enemy.setHP(0);

@@ -3,8 +3,14 @@ import java.io.*; //file, filenotfoundexception
 
 public class Pokemon {
   public static void main(String[] args) {
-    Pokemon chara = new Pokemon("Charmander");
+    Pokemon chara = new Pokemon("Squirtle");
+    Pokemon hey = new Pokemon("Charmander");
     System.out.println(chara.getAttacks());
+
+    System.out.println(hey.getAttacks());
+
+    chara.attack(hey);
+    hey.attack(chara);
   }
 
 
@@ -199,9 +205,9 @@ public class Pokemon {
       if (possibleAttacks(newName).isEmpty()){
         while (possibleAttacks(newName).isEmpty()) {
           String newerName = evolve(Integer.parseInt(nameToID(newName)));
-          System.out.println(newerName);
           possibleAttacks(newerName);
           setAttacks(newerName);
+          break;
         }
       }
       else{
@@ -436,7 +442,10 @@ private double modifier(Move move, Pokemon enemy){
     if (hp <= 0){
       throw new NumberFormatException();
     }
+
+    System.out.println(attacks);
     enemyattack = attacks.get(x);
+
     return attack(enemy, attacks.get(x));
   }
 
@@ -464,9 +473,13 @@ private double modifier(Move move, Pokemon enemy){
 
       // Formula found online - it's the actual formula used to calculate damage
 
-      double dmg = ((2/5 * move.getPower()) *
+      double dmg = ((2.0/5 * move.getPower()) *
              (attack / enemy.getDefense()+2)
              / 50 * mod);
+
+      System.out.println(move.getPower() + " power");
+      System.out.println(enemy.getDefense() + " defense");
+      System.out.println(mod + " mod");
 
       if (enemy.getHP() - dmg > 0) enemy.setHP(enemy.getHP() - dmg);
       else enemy.setHP(0);

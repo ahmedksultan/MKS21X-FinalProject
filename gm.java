@@ -142,6 +142,7 @@ public class gm {
           istown1 = true;
         }
         //Locked until further use is necessary //DEMO VERSION
+        //Need to figure out: How to print Pokemon list on more than one line?
         if (key.getCharacter() == 'd' && choosepkmn == true && maxstarter < 1) {
           maxstarter++;
           Pokemon Bulbasaur = new Pokemon("Bulbasaur");
@@ -228,7 +229,7 @@ public class gm {
             System.out.println(johnbattle.getActive2() + "'s HP: " + johnbattle.getActive2().getHP() + "/" + johnbattle.getActive2().getTotalHP());
             System.out.println("Choose your move!\n");
             for (int i = 0; i < johnbattle.getActive1().getAttacks().size(); i++) {
-              System.out.println("[" + i + "] for " + johnbattle.getActive1().getAttacks().get(i).toUpperCase());
+              System.out.println("[" + (i + 1) + "] for " + johnbattle.getActive1().getAttacks().get(i).toUpperCase());
             }
             System.out.println("[H] to use a Potion.");
             System.out.println("");
@@ -245,11 +246,11 @@ public class gm {
                 johnbattle.getActive1().setHP(johnbattle.getActive1().getHP() + 15);
               }
               enemyattack = johnbattle.getActive2().getEnemyAttack();
-              System.out.println("\nYour opponent used " + enemyattack.toUpperCase() + "." );
+              System.out.println("\nYou used a POTION! Your opponent used " + enemyattack.toUpperCase() + "." );
 
             }
             else {
-              yourattack = johnbattle.getActive1().getAttacks().get(Integer.parseInt(userinput));
+              yourattack = johnbattle.getActive1().getAttacks().get(Integer.parseInt(userinput) - 1);
               johnbattle.getActive1().attack(johnbattle.getActive2(), yourattack);
               johnbattle.getActive2().attack(johnbattle.getActive1());
               enemyattack = johnbattle.getActive2().getEnemyAttack();

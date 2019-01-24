@@ -1,3 +1,6 @@
-Make it so that you cant switch into a Pokemon that has fainted.
+All the hard stuff is done, just need to finish!
 
-Ahmed fix screens by end of today
+> printing out party so it is not cut off by screen
+> why don't houses work
+> wild pokemon! (already implemented in demo, just have to modify to work with current version, updated battle system)
+  > catchable!

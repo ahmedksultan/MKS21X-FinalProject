@@ -141,7 +141,7 @@ public class gm {
           screen.clear();
           istown1 = true;
         }
-        /* Locked until further use is necessary //DEMO VERSION
+        //Locked until further use is necessary //DEMO VERSION
         if (key.getCharacter() == 'd' && choosepkmn == true && maxstarter < 1) {
           maxstarter++;
           Pokemon Bulbasaur = new Pokemon("Bulbasaur");
@@ -158,7 +158,7 @@ public class gm {
           pparty.add(Ditto);
           screen.clear();
           istown1 = true;
-        } */
+        }
       }
 
       //playerinfo displayers information about the player at all times
@@ -298,8 +298,6 @@ public class gm {
         screen.refresh();
       }
 
-
-
       //screen switchers - this creates the "scrolling effect"
       if (y == 23 && istown1 == true) {
         istown1 = false;
@@ -307,15 +305,13 @@ public class gm {
         y = 3;
       }
 
-      //house stuff - buggy for now, better to not waste time
-      /*
       if ((x == 5 || x == 6 ) && (y == 12) && istown1 == true ) {
         istown1 = false;
+        choosepkmn = false;
         ishouse1 = true;
         y = 2;
         x = 2;
       }
-      */
 
       if (y == 2 && isroute1a == true) {
         isroute1a = false;
@@ -360,30 +356,25 @@ public class gm {
   //end of main ^^^
 
   public static void playerinfo(Screen x, ArrayList<Pokemon> p, int q) {
-    x.putString(43,2, "Welcome to Javamon!", Terminal.Color.DEFAULT, Terminal.Color.DEFAULT);
-    x.putString(43,4, "Created by Ahmed Sultan & Ali Taoube.", Terminal.Color.DEFAULT, Terminal.Color.DEFAULT);
-    x.putString(43,6, "PLAYER INFORMATION", Terminal.Color.DEFAULT, Terminal.Color.DEFAULT);
-    x.putString(43,8, "Party: " + p, Terminal.Color.DEFAULT, Terminal.Color.DEFAULT);
+    x.putString(43,1, "Welcome to Javamon!", Terminal.Color.DEFAULT, Terminal.Color.DEFAULT);
+    x.putString(43,2, "Created by Ahmed Sultan & Ali Taoube.", Terminal.Color.DEFAULT, Terminal.Color.DEFAULT);
+    x.putString(43,4, "[[[INSTRUCTIONS]]]", Terminal.Color.DEFAULT, Terminal.Color.DEFAULT);
+    x.putString(43,6, "Use directional keys to move.", Terminal.Color.DEFAULT, Terminal.Color.DEFAULT);
+    x.putString(43,7, "Use [I] to interact.", Terminal.Color.DEFAULT, Terminal.Color.DEFAULT);
 
-    x.putString(43, 10, "--------------", Terminal.Color.DEFAULT, Terminal.Color.DEFAULT);
+    x.putString(43, 9, "--------------", Terminal.Color.DEFAULT, Terminal.Color.DEFAULT);
 
-    x.putString(43, 12, "[[[INSTRUCTIONS]]]", Terminal.Color.DEFAULT, Terminal.Color.DEFAULT);
-    x.putString(43, 14, "Use directional keys to move.", Terminal.Color.DEFAULT, Terminal.Color.DEFAULT);
-    x.putString(43, 15, "Use [I] to interact.", Terminal.Color.DEFAULT, Terminal.Color.DEFAULT);
+    x.putString(43,11, "PLAYER INFORMATION", Terminal.Color.DEFAULT, Terminal.Color.DEFAULT);
+    x.putString(43,13, "Party: " + p, Terminal.Color.DEFAULT, Terminal.Color.DEFAULT);
 
-    x.putString(43, 17, "--------------", Terminal.Color.DEFAULT, Terminal.Color.DEFAULT);
-
-    x.putString(43, 19, "[[[INVENTORY]]]", Terminal.Color.DEFAULT, Terminal.Color.DEFAULT);
-    x.putString(43, 20, "Potions: " + q + " ", Terminal.Color.DEFAULT, Terminal.Color.DEFAULT);
-
-
+    x.putString(43, 17, "Potions: " + q + " ", Terminal.Color.DEFAULT, Terminal.Color.DEFAULT);
   }
 
   public static void choosepkmn(Screen x) {
-    x.putString(2,2, "Choose your starter Pokemon!", Terminal.Color.DEFAULT, Terminal.Color.DEFAULT);
-    x.putString(2,4, "[S] for Squirtle.", Terminal.Color.BLUE, Terminal.Color.DEFAULT);
-    x.putString(2,5, "[B] for Bulbasaur.", Terminal.Color.GREEN, Terminal.Color.DEFAULT);
-    x.putString(2,6, "[C] for Charmander.", Terminal.Color.RED, Terminal.Color.DEFAULT);
+    x.putString(2,1, "Choose your starter Pokemon!", Terminal.Color.DEFAULT, Terminal.Color.DEFAULT);
+    x.putString(2,3, "[S] for Squirtle.", Terminal.Color.BLUE, Terminal.Color.DEFAULT);
+    x.putString(2,4, "[B] for Bulbasaur.", Terminal.Color.GREEN, Terminal.Color.DEFAULT);
+    x.putString(2,5, "[C] for Charmander.", Terminal.Color.RED, Terminal.Color.DEFAULT);
   }
 
   public static void town1(Screen x, String[][] town, ArrayList<Pokemon> p, int q) {
@@ -540,10 +531,11 @@ public class gm {
     for (int b = 0; b < map.length; b++) {
       for (int a = 0; a < map[b].length; a++) {
         switch(map[b][a]) {
-          case "-": x.putString(b, a, " ", Terminal.Color.DEFAULT, Terminal.Color.BLACK);
+          case "-": x.putString(b + 1, a + 1, " ", Terminal.Color.DEFAULT, Terminal.Color.BLACK);
           break;
-          case "|": x.putString(b, a, " ", Terminal.Color.DEFAULT, Terminal.Color.BLACK);
+          case "|": x.putString(b + 1, a + 1, " ", Terminal.Color.DEFAULT, Terminal.Color.BLACK);
           break;
+          default: x.putString(b + 1, a + 1, " ", Terminal.Color.DEFAULT, Terminal.Color.DEFAULT);
         }
       }
     }

@@ -208,7 +208,7 @@ public class Pokemon {
 
   // Mutator  and Helper Methods
 
-  private void setHP(int num){
+  public void setHP(int num){
     hp = num;
   }
 

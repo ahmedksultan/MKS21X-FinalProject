@@ -19,7 +19,7 @@ import java.util.concurrent.TimeUnit; //time
 
 public class gm {
 
-  public static void main(String[] args) {
+  public static void main (String[] args) {
 
     //starting position
     int x = 3;
@@ -35,6 +35,8 @@ public class gm {
     boolean isroute1b = false;
     boolean isroute1c = false;
     boolean iscity = false;
+
+    int potions = 10;
 
     //tbattles track how many trainer battles have occurred
     int tbattles = 0;
@@ -161,7 +163,7 @@ public class gm {
 
       //playerinfo displayers information about the player at all times
       //NOTE: only exception is when there is a battle going on!
-      playerinfo(screen, pparty);
+      playerinfo(screen, pparty, potions);
 
       //choosepkmn appears when the code starts
       //disappears when a starter pokemon is chosen
@@ -170,17 +172,17 @@ public class gm {
       }
 
       if (istown1 == true) {
-        town1(screen, town, pparty);
+        town1(screen, town, pparty, potions);
         screen.refresh();
       }
 
       if (ishouse1 == true) {
-        house1(screen, house1, pparty);
+        house1(screen, house1, pparty, potions);
         screen.refresh();
       }
 
       if (isroute1a == true) {
-        route1a(screen, route1a, pparty);
+        route1a(screen, route1a, pparty, potions);
         screen.refresh();
 
         //FIRST TRAINER BATTLE GOES HERE...
@@ -228,12 +230,31 @@ public class gm {
             for (int i = 0; i < johnbattle.getActive1().getAttacks().size(); i++) {
               System.out.println("[" + i + "] for " + johnbattle.getActive1().getAttacks().get(i).toUpperCase());
             }
+            System.out.println("[H] to use a Potion.");
             System.out.println("");
 
-            yourattack = johnbattle.getActive1().getAttacks().get(Integer.parseInt(user_input.next()));
-            johnbattle.getActive1().attack(johnbattle.getActive2(), yourattack);
-            johnbattle.getActive2().attack(johnbattle.getActive1());
-            enemyattack = johnbattle.getActive2().getEnemyAttack();
+            String userinput = user_input.next();
+
+            if (userinput.equals("h") && potions >= 0) {
+              johnbattle.getActive2().attack(johnbattle.getActive1());
+              potions--;
+              if (johnbattle.getActive1().getHP() + 15 > johnbattle.getActive1().getTotalHP()) {
+                johnbattle.getActive1().setHP(johnbattle.getActive1().getTotalHP());
+              }
+              else {
+                johnbattle.getActive1().setHP(johnbattle.getActive1().getHP() + 15);
+              }
+              enemyattack = johnbattle.getActive2().getEnemyAttack();
+              System.out.println("\nYour opponent used " + enemyattack.toUpperCase() + "." );
+
+            }
+            else {
+              yourattack = johnbattle.getActive1().getAttacks().get(Integer.parseInt(userinput));
+              johnbattle.getActive1().attack(johnbattle.getActive2(), yourattack);
+              johnbattle.getActive2().attack(johnbattle.getActive1());
+              enemyattack = johnbattle.getActive2().getEnemyAttack();
+              System.out.println("\nYou used " + yourattack.toUpperCase() + "! Your opponent used " + enemyattack.toUpperCase() + "." );
+            }
 
             /*
             for (int i = 0; i < moves1.size(); i++) {
@@ -246,12 +267,19 @@ public class gm {
             }
             */
 
-            System.out.println("\nYou used " + yourattack.toUpperCase() + "! Your opponent used " + enemyattack.toUpperCase() + "." );
             johnbattle.forceSwitch();
           }
 
-          System.out.println("[MSG] The battle is over! " + johnbattle.getWinner().toUpperCase()  + " has won!");
+          System.out.println("\n[MSG] The battle is over! " + johnbattle.getWinner().toUpperCase()  + " has won! Returning to the game...");
           tbattles = 1;
+
+          //https://stackoverflow.com/questions/26388527/how-do-i-make-my-system-wait-5-seconds-before-continuing
+          //Thread.sleep() to keep the game waiting for three seconds so the player can process the battle's result
+          try {
+            Thread.sleep(3000); //1000 milliseconds is one second. (3000ms is three seconds)
+          } catch (InterruptedException ex) {
+            Thread.currentThread().interrupt();
+          }
 
           terminal.enterPrivateMode();
           //using completeRefresh() instead of refresh() as nothing new is actually getting placed - thus, force repaint of the screen is necessary
@@ -261,12 +289,12 @@ public class gm {
       }
 
       if (isroute1b == true) {
-        route1b(screen, route1b, pparty);
+        route1b(screen, route1b, pparty, potions);
         screen.refresh();
       }
 
       if (isroute1c == true) {
-        route1c(screen, route1c, pparty);
+        route1c(screen, route1c, pparty, potions);
         screen.refresh();
       }
 
@@ -331,7 +359,7 @@ public class gm {
   }
   //end of main ^^^
 
-  public static void playerinfo(Screen x, ArrayList<Pokemon> p) {
+  public static void playerinfo(Screen x, ArrayList<Pokemon> p, int q) {
     x.putString(43,2, "Welcome to Javamon!", Terminal.Color.DEFAULT, Terminal.Color.DEFAULT);
     x.putString(43,4, "Created by Ahmed Sultan & Ali Taoube.", Terminal.Color.DEFAULT, Terminal.Color.DEFAULT);
     x.putString(43,6, "PLAYER INFORMATION", Terminal.Color.DEFAULT, Terminal.Color.DEFAULT);
@@ -342,6 +370,13 @@ public class gm {
     x.putString(43, 12, "[[[INSTRUCTIONS]]]", Terminal.Color.DEFAULT, Terminal.Color.DEFAULT);
     x.putString(43, 14, "Use directional keys to move.", Terminal.Color.DEFAULT, Terminal.Color.DEFAULT);
     x.putString(43, 15, "Use [I] to interact.", Terminal.Color.DEFAULT, Terminal.Color.DEFAULT);
+
+    x.putString(43, 17, "--------------", Terminal.Color.DEFAULT, Terminal.Color.DEFAULT);
+
+    x.putString(43, 19, "[[[INVENTORY]]]", Terminal.Color.DEFAULT, Terminal.Color.DEFAULT);
+    x.putString(43, 20, "Potions: " + q + " ", Terminal.Color.DEFAULT, Terminal.Color.DEFAULT);
+
+
   }
 
   public static void choosepkmn(Screen x) {
@@ -351,7 +386,7 @@ public class gm {
     x.putString(2,6, "[C] for Charmander.", Terminal.Color.RED, Terminal.Color.DEFAULT);
   }
 
-  public static void town1(Screen x, String[][] town, ArrayList<Pokemon> p) {
+  public static void town1(Screen x, String[][] town, ArrayList<Pokemon> p, int q) {
     for (int b = 0; b < town.length; b++) {
       for (int a = 0; a < town[b].length; a++) {
 
@@ -377,7 +412,7 @@ public class gm {
           default: x.putString(b,a, " ", Terminal.Color.DEFAULT, Terminal.Color.DEFAULT);
         }
 
-        playerinfo(x, p);
+        playerinfo(x, p, q);
         /*
         if (town[a][b] == "r") {
           x.putString(b,a, " ", Terminal.Color.DEFAULT, Terminal.Color.RED);
@@ -407,7 +442,7 @@ public class gm {
     }
   }
 
-  public static void route1a(Screen x, String[][] map, ArrayList<Pokemon> p) {
+  public static void route1a(Screen x, String[][] map, ArrayList<Pokemon> p, int q) {
     for (int b = 0; b < map.length; b++) {
       for (int a = 0; a < map[b].length; a++) {
 
@@ -435,10 +470,10 @@ public class gm {
         }
       }
     }
-    playerinfo(x, p);
+    playerinfo(x, p, q);
   }
 
-  public static void route1b(Screen x, String[][] map, ArrayList<Pokemon> p) {
+  public static void route1b(Screen x, String[][] map, ArrayList<Pokemon> p, int q) {
     for (int b = 0; b < map.length; b++) {
       for (int a = 0; a < map[b].length; a++) {
 
@@ -466,10 +501,10 @@ public class gm {
         }
       }
     }
-    playerinfo(x, p);
+    playerinfo(x, p, q);
   }
 
-    public static void route1c(Screen x, String[][] map, ArrayList<Pokemon> p) {
+    public static void route1c(Screen x, String[][] map, ArrayList<Pokemon> p, int q) {
       for (int b = 0; b < map.length; b++) {
         for (int a = 0; a < map[b].length; a++) {
 
@@ -496,12 +531,12 @@ public class gm {
             default: x.putString(b,a, " ", Terminal.Color.DEFAULT, Terminal.Color.DEFAULT);
           }
 
-          playerinfo(x, p);
+          playerinfo(x, p, q);
         }
       }
   }
 
-  public static void house1(Screen x, String[][] map, ArrayList<Pokemon> p) {
+  public static void house1(Screen x, String[][] map, ArrayList<Pokemon> p, int q) {
     for (int b = 0; b < map.length; b++) {
       for (int a = 0; a < map[b].length; a++) {
         switch(map[b][a]) {
@@ -512,10 +547,10 @@ public class gm {
         }
       }
     }
-    playerinfo(x, p);
+    playerinfo(x, p, q);
   }
 
-  public static void house2(Screen x, String[][] map, ArrayList<Pokemon> p) {
+  public static void house2(Screen x, String[][] map, ArrayList<Pokemon> p, int q) {
     for (int b = 0; b < map.length; b++) {
       for (int a = 0; a < map[b].length; a++) {
         switch(map[b][a]) {
@@ -526,7 +561,7 @@ public class gm {
         }
       }
     }
-    playerinfo(x, p);
+    playerinfo(x, p, q);
   }
 
 

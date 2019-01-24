@@ -151,12 +151,23 @@ public class gm {
           Pokemon Mewtwo = new Pokemon("Mewtwo");
           Pokemon Pikachu = new Pokemon("Pikachu");
           Pokemon Ditto = new Pokemon("Ditto");
+          choosepkmn = false;
           pparty.add(Bulbasaur);
           pparty.add(Charmander);
           pparty.add(Squirtle);
           pparty.add(Mewtwo);
           pparty.add(Pikachu);
           pparty.add(Ditto);
+          screen.clear();
+          istown1 = true;
+        }
+
+        //just messing around! Mewtwo mode (coolest pokemon)
+        if (key.getCharacter() == 'm' && maxstarter < 1) {
+          maxstarter++;
+          Pokemon Mewtwo = new Pokemon("Mewtwo");
+          pparty.add(Mewtwo);
+          choosepkmn = false;
           screen.clear();
           istown1 = true;
         }
@@ -536,7 +547,7 @@ public class gm {
           break;
           case "|": x.putString(b + 1, a + 1, " ", Terminal.Color.DEFAULT, Terminal.Color.BLACK);
           break;
-          default: x.putString(b + 1, a + 1, " ", Terminal.Color.DEFAULT, Terminal.Color.DEFAULT);
+          default: x.putString(b + 1, a + 1, " ", Terminal.Color.DEFAULT, Terminal.Color.YELLOW);
         }
       }
     }

@@ -187,6 +187,9 @@ public class Map {
     //trainer @(y, x) 4,5
     test[3][9] = "!t";
 
+    //placing interactable NPC that will give you a Pidgey
+    test[8][31] = "?";
+
     //creating grass
     for (int y = 11; y < 25; y++) {
       for (int x = 2; x < 16; x++) {

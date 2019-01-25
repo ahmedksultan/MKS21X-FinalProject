@@ -9,13 +9,15 @@ Created by Ahmed Sultan and Ali Taoube, for Mr. K's Fall Semester APCS class.
 javac -cp lanterna.jar:. gm.java
 java -cp lanterna.jar:. gm
 
+By pressing the respective key on the first screen, the player may choose what Pokemon they'd like to use for the game. For a less challenging experience, we suggest Mewtwo.
+
 **Using the program** - The objective of the game is to move around the world, battle enemy Trainers and wild Pokemon, and beat the Gym Leader at the end of the experience.
 
-[WHILE IN THE GAME WORLD] use the directional keys to move around, and [I] to interact with NPCs.
+[WHILE IN THE GAME WORLD] use the directional keys to move around.
 
-Walking in front of an *enemy Pokemon trainer* (indicated by a yellow and magenta ! icon) will initiate a *TRAINER BATTLE*.
+Walking in front of an **enemy Pokemon trainer** (indicated by a yellow and magenta ! icon) will initiate a **TRAINER BATTLE**.
 
-Walking in patches of *tall grass* (indicated by ^ with a bright green background) will initiate a *WILD POKEMON BATTLE*.
+Walking in patches of **tall grass** (indicated by ^ with a bright green background) will initiate a **WILD POKEMON BATTLE**.
 
 While in battle, the player may input a numerical value from 1 - 4 to attack the enemy. In addition, pressing the [H] key allows the player to use a potion, which heals their Pokemon for 15 HP.
 

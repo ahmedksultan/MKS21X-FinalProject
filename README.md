@@ -195,3 +195,11 @@ Continued on creating the screen code for Lanterna.
 **Jan 22, 2019** -
 
 Continued working on maps, and the game file.
+
+Began fixing the battle system.
+
+**Jan 23, 2019** -
+
+Fixed an error in the battle system that caused the game to crash when the enemy Pokemon's HP reached 0.
+
+Fixed an error in the battle system that allowed Pokemon to attack if they have been KO'd.

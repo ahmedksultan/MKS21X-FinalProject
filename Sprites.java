@@ -58,8 +58,4 @@ public class Sprites{
     }
     return output;
   }
-
-  // public static String twoSprites(String mon1, String mon2){
-  //   for (int x =)
-  // }
 }

@@ -33,7 +33,7 @@ public class Sprites{
               break;
             }
             // Increment by two to compress the Sprite horizontally
-            for (int i = 0; i < line.length() - 1; i+2){
+            for (int i = 0; i < line.length() - 1; i+=2){
               data.add(line.charAt(i));
             }
             // Need to add a new line to properly format it.

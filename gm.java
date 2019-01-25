@@ -303,6 +303,106 @@ public class gm {
       if (isroute1b == true) {
         route1b(screen, route1b, pparty, potions);
         screen.refresh();
+
+        if (x == 9 && tbattles == 1) {
+          //creating new trainer battle, "Nina"
+          ArrayList<Pokemon> ninaparty = new ArrayList<Pokemon>();
+
+          Pokemon metapodnina = new Pokemon("Metapod");
+          Pokemon staryunina = new Pokemon("Staryu");
+
+          //ninaparty.add(Mewtwo);
+          ninaparty.add(metapodnina);
+          ninaparty.add(staryunina);
+
+          Player Nina = new Trainer("NINA", ninaparty);
+          Battle ninabattle = new Battle(player, Nina);
+
+          Scanner user_input = new Scanner(System.in);
+          String yourattack;
+          String enemyattack;
+
+          terminal.exitPrivateMode();
+
+          System.out.println("\n---A BATTLE HAS BEGUN!---");
+          System.out.println("\n[MSG] NINA: YOU'RE GONNA HAVE A BAD TIME!\n");
+
+          System.out.println("Your enemy is " + Nina.getName() + "! Their first pokemon is " + ninabattle.getActive2().getName().toUpperCase() + ".");
+          System.out.println("Your opponent's team is " + ninabattle.getTwo().getParty().toString() + "\n");
+
+          System.out.println("Your team is " + ninabattle.getOne().getParty().toString());
+
+          ArrayList<String> moves1 = ninabattle.getOne().getMon(0).getAttacks();
+
+          System.out.println("Your Pokemon's moves are here: " + ninabattle.getActive1().getAttacks());
+          // System.out.println("Your pokemon's moves are here: " + battle.getOne().getMon(4).attackstoString(1));
+
+          while (!ninabattle.isOver()){
+
+            System.out.println(ninabattle.getActive1().getName().toUpperCase() + " and " + ninabattle.getActive2().getName().toUpperCase() + " are battling!");
+            System.out.println("\n" + ninabattle.getActive1() + "'s HP: " + ninabattle.getActive1().getHP() + "/" + ninabattle.getActive1().getTotalHP());
+            System.out.println(ninabattle.getActive2() + "'s HP: " + ninabattle.getActive2().getHP() + "/" + ninabattle.getActive2().getTotalHP());
+            System.out.println("Choose your move!\n");
+            for (int i = 0; i < ninabattle.getActive1().getAttacks().size(); i++) {
+              System.out.println("[" + (i + 1) + "] for " + ninabattle.getActive1().getAttacks().get(i).toUpperCase());
+            }
+            System.out.println("[H] to use a Potion.");
+            System.out.println("");
+
+            String userinput = user_input.next();
+
+            if (userinput.equals("h") && potions >= 0) {
+              ninabattle.getActive2().attack(ninabattle.getActive1());
+              potions--;
+              if (ninabattle.getActive1().getHP() + 15 > ninabattle.getActive1().getTotalHP()) {
+                ninabattle.getActive1().setHP(ninabattle.getActive1().getTotalHP());
+              }
+              else {
+                ninabattle.getActive1().setHP(ninabattle.getActive1().getHP() + 15);
+              }
+              enemyattack = ninabattle.getActive2().getEnemyAttack();
+              System.out.println("\nYou used a POTION! Your opponent used " + enemyattack.toUpperCase() + "." );
+
+            }
+            else {
+              yourattack = ninabattle.getActive1().getAttacks().get(Integer.parseInt(userinput) - 1);
+              ninabattle.getActive1().attack(ninabattle.getActive2(), yourattack);
+              ninabattle.getActive2().attack(ninabattle.getActive1());
+              enemyattack = ninabattle.getActive2().getEnemyAttack();
+              System.out.println("\nYou used " + yourattack.toUpperCase() + "! Your opponent used " + enemyattack.toUpperCase() + "." );
+            }
+
+            /*
+            for (int i = 0; i < moves1.size(); i++) {
+              if (moves1.get(i).equals(user_input.next())) {
+                yourattack = moves1.get(i);
+              }
+              else {
+                yourattack = "IMPOSSIBLE MOVE";
+              }
+            }
+            */
+
+            ninabattle.forceSwitch();
+          }
+
+          System.out.println("\n[MSG] The battle is over! " + ninabattle.getWinner().toUpperCase()  + " has won! Returning to the game...");
+          tbattles++;
+
+          //https://stackoverflow.com/questions/26388527/how-do-i-make-my-system-wait-5-seconds-before-continuing
+          //Thread.sleep() to keep the game waiting for three seconds so the player can process the battle's result
+          try {
+            Thread.sleep(3000); //1000 milliseconds is one second. (3000ms is three seconds)
+          } catch (InterruptedException ex) {
+            Thread.currentThread().interrupt();
+          }
+
+          terminal.enterPrivateMode();
+          //using completeRefresh() instead of refresh() as nothing new is actually getting placed - thus, force repaint of the screen is necessary
+          screen.completeRefresh();
+
+        }
+
       }
 
       if (isroute1c == true) {

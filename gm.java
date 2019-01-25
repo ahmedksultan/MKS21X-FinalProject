@@ -230,10 +230,12 @@ public class gm {
 
           ArrayList<String> moves1 = johnbattle.getOne().getMon(0).getAttacks();
 
-          System.out.println("Your Pokemon's moves are here: " + johnbattle.getActive1().getAttacks());
+          // System.out.println("Your Pokemon's moves are here: " + johnbattle.getActive1().getAttacks());
           // System.out.println("Your pokemon's moves are here: " + battle.getOne().getMon(4).attackstoString(1));
 
-          while (!johnbattle.isOver()){
+          while (!johnbattle.isOver()) {
+
+            System.out.println(Sprites.toString(Sprites.getArray(johnbattle.getActive1().getName())));
 
             System.out.println(johnbattle.getActive1().getName().toUpperCase() + " and " + johnbattle.getActive2().getName().toUpperCase() + " are battling!");
             System.out.println("\n" + johnbattle.getActive1() + "'s HP: " + johnbattle.getActive1().getHP() + "/" + johnbattle.getActive1().getTotalHP());

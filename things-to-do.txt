@@ -4,3 +4,5 @@ All the hard stuff is done, just need to finish!
 > why don't houses work
 > wild pokemon! (already implemented in demo, just have to modify to work with current version, updated battle system)
   > catchable!
+
+call pkmn map "java region" (kanto, johto, etc.)

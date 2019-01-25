@@ -301,7 +301,6 @@ public class gm {
           terminal.enterPrivateMode();
           //using completeRefresh() instead of refresh() as nothing new is actually getting placed - thus, force repaint of the screen is necessary
           screen.completeRefresh();
-
         }
       }
 
@@ -412,6 +411,34 @@ public class gm {
           screen.completeRefresh();
         }
 
+        /* commenting out NPC functionality
+        int npc1ticker = 0;
+        if (x >= 30 && x <= 32 && y <= 9 && y >= 7 && npc1ticker == 0) {
+          try {
+            Thread.sleep(1000); //1000 milliseconds is one second.
+          } catch (InterruptedException ex) {
+            Thread.currentThread().interrupt();
+          }
+          Key npc1 = screen.readInput();
+          if (npc1 != null) {
+            if (npc1.getCharacter() == 'i') {
+                screen.putString(43, 23, "Hey! Want a POTION? (Y/N)", Terminal.Color.DEFAULT, Terminal.Color.DEFAULT);
+                if (npc1.getCharacter() == 'y') {
+                  potions++;
+                  npc1ticker++;
+                  screen.clear();
+                  screen.completeRefresh();
+                }
+                else {
+                  npc1ticker++;
+                  screen.clear();
+                  screen.completeRefresh();
+                }
+            }
+          }
+        }
+        */
+
       }
 
       if (isroute1c == true) {
@@ -489,6 +516,10 @@ public class gm {
     x.putString(43,13, "Party: " + p, Terminal.Color.DEFAULT, Terminal.Color.DEFAULT);
 
     x.putString(43, 17, "Potions: " + q + " ", Terminal.Color.DEFAULT, Terminal.Color.DEFAULT);
+
+    x.putString(43, 19, "--------------", Terminal.Color.DEFAULT, Terminal.Color.DEFAULT);
+
+    x.putString(43,21, "STATUS", Terminal.Color.DEFAULT, Terminal.Color.DEFAULT);
   }
 
   public static void choosepkmn(Screen x) {

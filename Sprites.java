@@ -3,7 +3,7 @@ import java.io.*; //file, filenotfoundexception
 
 public class Sprites{
   private static ArrayList<Character> data;
-  
+
   public static ArrayList<Character> getArray(String name){
     // Can just convert from the name to ID and use the next function.
     int ID = Integer.parseInt(Pokemon.nameToID(name));
@@ -20,14 +20,20 @@ public class Sprites{
         String line = in.nextLine();
         if (line.equals(x+":")){
           line = in.nextLine();
-        while (!line.contains("break;")){
+          String temp = line;
+        while (!line.contains("break;") && !temp.contains("break;")){
+          // Repeat this twice to skip lines, so it'll compress the Sprite vertically.
           line = in.nextLine();
+          temp = line;
+          line = in.nextLine();
+
           // Once it reaches break, that signals that we've reached the end of the character sprite,
           // afterwards, it reaches the next Pokemon sprite.
             if (line.contains("break;")){
               break;
             }
-            for (int i = 0; i < line.length() - 1; i++){
+            // Increment by two to compress the Sprite horizontally
+            for (int i = 0; i < line.length() - 1; i+=2){
               data.add(line.charAt(i));
             }
             // Need to add a new line to properly format it.
@@ -47,9 +53,13 @@ public class Sprites{
     String output = "";
     // Have to cut it off at approximately 1200 characters because otherwise the Sprites
     // are way too large
-    for (int x = 0; x < input.size() && x < 1200; x++){
+    for (int x = 0; x < input.size(); x++){
       output += input.get(x);
     }
     return output;
   }
+
+  // public static String twoSprites(String mon1, String mon2){
+  //   for (int x =)
+  // }
 }

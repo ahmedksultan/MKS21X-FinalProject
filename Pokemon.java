@@ -17,7 +17,7 @@ public class Pokemon {
 
   private String name, type1, type2;
   private int attack, speed, defense, ID, typeID1, typeID2;
-  private double hp;
+  private int hp, totalhp;
   private ArrayList<String> attacks, possibleAttacks;
   private ArrayList<String> typeWeakness, typeResistance;
   private String enemyattack;
@@ -46,6 +46,7 @@ public class Pokemon {
      setWeakandRes();
 
      hp = Integer.parseInt(data[5]);
+     totalhp = Integer.parseInt(data[5]);
      attack = Integer.parseInt(data[6]);
      defense = Integer.parseInt(data[7]);
      speed = Integer.parseInt(data[10]);
@@ -159,8 +160,12 @@ public class Pokemon {
     return type2;
   }
 
-  public double getHP(){
+  public int getHP(){
     return hp;
+  }
+
+  public int getTotalHP() {
+    return totalhp;
   }
 
   public int getAttack(){
@@ -203,7 +208,7 @@ public class Pokemon {
 
   // Mutator  and Helper Methods
 
-  private void setHP(double num){
+  public void setHP(int num){
     hp = num;
   }
 
@@ -294,11 +299,15 @@ private double modifier(Move move, Pokemon enemy){
       throw new Error();
     }
 
+    /*
     if (hp <= 0){
       throw new NumberFormatException();
     }
+    */
 
-    return attack(enemy, attacks.get(x));
+    enemyattack = attacks.get(x);
+
+    return attack(enemy, enemyattack);
   }
 
   public double getMod(String move1, Pokemon enemy){
@@ -318,26 +327,18 @@ private double modifier(Move move, Pokemon enemy){
         throw new Error();
       }
 
+      /*
       if (hp <= 0){
         throw new NumberFormatException();
       }
-
+      */
 
       // Formula found online - it's the actual formula used to calculate damage
 
-      double dmg = ((2.0/5 * move.getPower()) *
-             (attack / enemy.getDefense()+2)
-             / 50 * mod);
+      int dmg = (int)((2.0/5 * move.getPower()) * (attack / enemy.getDefense()+2) / 5 * mod);
 
       if (enemy.getHP() - dmg > 0) enemy.setHP(enemy.getHP() - dmg);
       else enemy.setHP(0);
-
-      System.out.println("This is the damage: " + dmg);
-      System.out.println("Attack stat: " + attack);
-      System.out.println(dmg);
-      System.out.println(mod);
-      System.out.println(move.getPower());
-      System.out.println(enemy.getDefense());
 
       return dmg;
   }

@@ -8,7 +8,9 @@ public class Map {
   private static String[][] route1a;
   private static String[][] route1b;
   private static String[][] route1c; //branches off to the left of route 1b!
-  private static String[][] route1d;
+  private static String[][] city;
+  private static String[][] house3;
+  private static String[][] house4;
 
   public static void main(String[] args) {
     initTown1();
@@ -181,6 +183,12 @@ public class Map {
         test[y][x] = "p";
       }
     }
+
+    //trainer @(y, x) 4,5
+    test[3][9] = "!t";
+
+    //placing interactable NPC that will give you a Pidgey
+    test[8][31] = "?";
 
     //creating grass
     for (int y = 11; y < 25; y++) {

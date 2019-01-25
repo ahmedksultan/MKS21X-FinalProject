@@ -4,11 +4,20 @@ Created by Ahmed Sultan and Ali Taoube, for Mr. K's Fall Semester APCS class.
 
 ## instructions
 
-**Starting the game:** - run javac -cp lanterna.jar:. gm.java, and then java -cp lanterna.jar:. gm to run the program.
+**Starting the game:** - User must run the following commands:
 
-**Using the program** - use the directional keys to move around the game world, and [I] to interact with NPCs.
+javac -cp lanterna.jar:. gm.java
+java -cp lanterna.jar:. gm
 
-The objective of the game is to move around the world, battle enemy Trainers and wild Pokemon, and beat the Gym Leader at the end of the experience.
+**Using the program** - The objective of the game is to move around the world, battle enemy Trainers and wild Pokemon, and beat the Gym Leader at the end of the experience.
+
+[WHILE IN THE GAME WORLD] use the directional keys to move around, and [I] to interact with NPCs.
+
+Walking in front of an *enemy Pokemon trainer* (indicated by a yellow and magenta ! icon) will initiate a *TRAINER BATTLE*.
+
+Walking in patches of *tall grass* (indicated by ^ with a bright green background) will initiate a *WILD POKEMON BATTLE*.
+
+While in battle, the player may input a numerical value from 1 - 4 to attack the enemy. In addition, pressing the [H] key allows the player to use a potion, which heals their Pokemon for 15 HP.
 
 ## devlog
 
@@ -165,7 +174,6 @@ Added a function for Pokemon that randomly chooses a move for a Pokemon.
 
 Changed the move function in the Battle class to no longer require two moves, as only one is needed - the Player's, as the NPCs is auto-chosen.
 
-
 **Jan 18, 2019** -
 
 Added a function that gets the modifier for a move and enemy.
@@ -186,4 +194,12 @@ Continued on creating the screen code for Lanterna.
 
 **Jan 22, 2019** -
 
-Contineud working on maps, and the game file.
+Continued working on maps, and the game file.
+
+Began fixing the battle system.
+
+**Jan 23, 2019** -
+
+Fixed an error in the battle system that caused the game to crash when the enemy Pokemon's HP reached 0.
+
+Fixed an error in the battle system that allowed Pokemon to attack if they have been KO'd.

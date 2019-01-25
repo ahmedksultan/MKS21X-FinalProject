@@ -81,22 +81,22 @@ public class Battle{
     String firstname;
 
     if (one.allDead()){
-      System.out.println("Your pokemon, " + active1 + " has fainted!");
+      System.out.println("Your Pokemon, " + active1.getName().toUpperCase() + " has fainted!");
       over = true;
       winner = two.getName();
     }
     else if(two.allDead()){
-      System.out.println("Enemy pokemon, " + active2 + " has fainted!");
+      System.out.println("Enemy Pokemon, " + active2.getName().toUpperCase() + " has fainted!");
       over = true;
       winner = one.getName();
     }
 
     if (active1.isDead() && over != true){
-      System.out.println("Your pokemon," + active1 + " has fainted! Choose your next pokemon!");
+      System.out.println("Your Pokemon," + active1.getName().toUpperCase() + " has fainted! Choose your next pokemon!");
       chooseSwitch(user_input.nextInt());
     }
     if (active2.isDead() && over != true){
-      System.out.println("Enemy pokemon, " + active2 + " has fainted!");
+      System.out.println("Enemy Pokemon, " + active2.getName().toUpperCase() + " has fainted!");
       autoSwitch();
     }
   }

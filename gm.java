@@ -370,13 +370,18 @@ public class gm {
 
             }
             else {
+              //if Pokemon gets KO'd,
               yourattack = ninabattle.getActive1().getAttacks().get(Integer.parseInt(userinput) - 1);
               ninabattle.getActive1().attack(ninabattle.getActive2(), yourattack);
-              ninabattle.getActive2().attack(ninabattle.getActive1());
-              enemyattack = ninabattle.getActive2().getEnemyAttack();
-              System.out.println("\nYou used " + yourattack.toUpperCase() + "! Your opponent used " + enemyattack.toUpperCase() + "." );
+              if (ninabattle.getActive2().getHP() <= 0) {
+                System.out.println("\nYou used " + yourattack.toUpperCase() + "!");
+              }
+              else {
+                ninabattle.getActive2().attack(ninabattle.getActive1());
+                enemyattack = ninabattle.getActive2().getEnemyAttack();
+                System.out.println("\nYou used " + yourattack.toUpperCase() + "! Your opponent used " + enemyattack.toUpperCase() + "." );
+              }
             }
-
             /*
             for (int i = 0; i < moves1.size(); i++) {
               if (moves1.get(i).equals(user_input.next())) {

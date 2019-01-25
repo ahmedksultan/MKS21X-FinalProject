@@ -170,6 +170,7 @@ public class Battle{
         winner = one.getName();
       }
 
+<<<<<<< HEAD
       if (active1.isDead() && over != true){
         System.out.println("Your Pokemon, " + active1.getName().toUpperCase() + " has fainted! Choose your next pokemon!");
         chooseSwitch(user_input.nextInt());
@@ -178,6 +179,11 @@ public class Battle{
         System.out.println("Enemy Pokemon, " + active2.getName().toUpperCase() + " has fainted!");
         autoSwitch();
       }
+=======
+    if (active1.isDead() && over != true){
+      System.out.println("Your Pokemon, " + active1.getName().toUpperCase() + " has fainted! Choose your next Pokemon!");
+      chooseSwitch(user_input.nextInt());
+>>>>>>> 0fa5e004f0142473b40926cafbf3aa17d8551c1e
     }
     catch(IndexOutOfBoundsException e){
       String output = "";

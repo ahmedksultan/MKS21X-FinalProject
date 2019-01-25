@@ -68,9 +68,13 @@ public class gm {
     Map.initTown1();
     town = Map.getTown1();
 
+    /*
+
     String[][] house1;
     Map.initHouse1();
     house1 = Map.getHouse1();
+
+    */
 
     String[][] route1a;
     Map.initRoute1a();
@@ -153,6 +157,7 @@ public class gm {
           screen.clear();
           istown1 = true;
         }
+        /*
         //Locked until further use is necessary //DEMO VERSION
         //Need to figure out: How to print Pokemon list on more than one line?
         if (key.getCharacter() == 'd' && choosepkmn == true && maxstarter < 1) {
@@ -173,8 +178,8 @@ public class gm {
           screen.clear();
           istown1 = true;
         }
+        */
 
-        //just messing around! Mewtwo mode (coolest pokemon)
         if (key.getCharacter() == 'm' && maxstarter < 1) {
           maxstarter++;
           Pokemon Mewtwo = new Pokemon("Mewtwo");
@@ -200,10 +205,13 @@ public class gm {
         screen.refresh();
       }
 
+      /*
       if (ishouse1 == true) {
         house1(screen, house1, pparty, potions);
         screen.refresh();
       }
+
+      */
 
       if (isroute1a == true) {
         route1a(screen, route1a, pparty, potions);
@@ -239,8 +247,6 @@ public class gm {
           System.out.println("Your opponent's team is " + johnbattle.getTwo().getParty().toString() + "\n");
 
           System.out.println("Your team is " + johnbattle.getOne().getParty().toString() + "\n");
-
-
 
           if (johnbattle.getActive1().getName().equals("Mewtwo")) {
             System.out.println(PURPLE_BOLD + Sprites.toString(Sprites.getArray(johnbattle.getActive1().getName())) + RESET);
@@ -460,6 +466,111 @@ public class gm {
       if (isroute1c == true) {
         route1c(screen, route1c, pparty, potions);
         screen.refresh();
+
+        if (x == 20 && tbattles == 2) {
+          //creating new trainer battle, "Nina"
+          ArrayList<Pokemon> adamparty = new ArrayList<Pokemon>();
+
+          //Pokemon Mewtwo = new Pokemon("Mewtwo");
+          Pokemon f = new Pokemon("Flareon");
+
+          adamparty.add(f);
+
+          Player Adam = new Trainer("ADAM", adamparty);
+          Battle adambattle = new Battle(player, Adam);
+
+          Scanner user_input = new Scanner(System.in);
+          String yourattack;
+          String enemyattack;
+
+          terminal.exitPrivateMode();
+
+          System.out.println("\n---A BATTLE HAS BEGUN!---");
+          System.out.println("\n[MSG] ADAM: I'VE BEEN LOOKING FORWARD TO THIS!\n");
+
+          System.out.println("Your enemy is " + Adam.getName() + "! Their first pokemon is " + adambattle.getActive2().getName().toUpperCase() + ".");
+          System.out.println("Your opponent's team is " + adambattle.getTwo().getParty().toString() + "\n");
+
+          System.out.println("Your team is " + adambattle.getOne().getParty().toString() + "\n");
+
+          if (adambattle.getActive1().getName().equals("Mewtwo")) {
+            System.out.println(PURPLE_BOLD + Sprites.toString(Sprites.getArray(adambattle.getActive1().getName())) + RESET);
+          }
+          if (adambattle.getActive1().getName().equals("Squirtle")) {
+            System.out.println(CYAN_BOLD + Sprites.toString(Sprites.getArray(adambattle.getActive1().getName())) + RESET);
+          }
+          if (adambattle.getActive1().getName().equals("Charmander")) {
+            System.out.println(RED_BOLD + Sprites.toString(Sprites.getArray(adambattle.getActive1().getName())) + RESET);
+          }
+          if (adambattle.getActive1().getName().equals("Bulbasaur")) {
+            System.out.println(GREEN_BOLD + Sprites.toString(Sprites.getArray(adambattle.getActive1().getName())) + RESET);
+          }
+
+          ArrayList<String> moves1 = adambattle.getOne().getMon(0).getAttacks();
+
+          // System.out.println("Your Pokemon's moves are here: " + adambattle.getActive1().getAttacks());
+          // System.out.println("Your pokemon's moves are here: " + battle.getOne().getMon(4).attackstoString(1));
+
+          while (!adambattle.isOver()) {
+
+            System.out.println(adambattle.getActive1().getName().toUpperCase() + " and " + adambattle.getActive2().getName().toUpperCase() + " are battling!");
+            System.out.println("\n" + adambattle.getActive1() + "'s HP: " + adambattle.getActive1().getHP() + "/" + adambattle.getActive1().getTotalHP());
+            System.out.println(adambattle.getActive2() + "'s HP: " + adambattle.getActive2().getHP() + "/" + adambattle.getActive2().getTotalHP());
+            System.out.println("Choose your move!\n");
+            for (int i = 0; i < adambattle.getActive1().getAttacks().size(); i++) {
+              System.out.println("[" + (i + 1) + "] for " + adambattle.getActive1().getAttacks().get(i).toUpperCase());
+            }
+            System.out.println("[H] to use a Potion.");
+            System.out.println("");
+
+            String userinput = user_input.next();
+
+            if (userinput.equals("h") && potions >= 0) {
+              adambattle.getActive2().attack(adambattle.getActive1());
+              potions--;
+              if (adambattle.getActive1().getHP() + 15 > adambattle.getActive1().getTotalHP()) {
+                adambattle.getActive1().setHP(adambattle.getActive1().getTotalHP());
+              }
+              else {
+                adambattle.getActive1().setHP(adambattle.getActive1().getHP() + 15);
+              }
+              enemyattack = adambattle.getActive2().getEnemyAttack();
+              System.out.println("\nYou used a POTION! Your opponent used " + enemyattack.toUpperCase() + "." );
+
+            }
+            else {
+              yourattack = adambattle.getActive1().getAttacks().get(Integer.parseInt(userinput) - 1);
+              adambattle.getActive1().attack(adambattle.getActive2(), yourattack);
+              if (adambattle.getActive2().getHP() <= 0) {
+                System.out.println("\nYou used " + yourattack.toUpperCase() + "!");
+              }
+              else {
+                adambattle.getActive2().attack(adambattle.getActive1());
+                enemyattack = adambattle.getActive2().getEnemyAttack();
+                System.out.println("\nYou used " + yourattack.toUpperCase() + "! Your opponent used " + enemyattack.toUpperCase() + "." );
+              }
+            }
+
+            adambattle.forceSwitch();
+          }
+
+          System.out.println("\n[MSG] The battle is over! " + adambattle.getWinner().toUpperCase()  + " has won! Returning to the game...");
+          tbattles++;
+
+          //https://stackoverflow.com/questions/26388527/how-do-i-make-my-system-wait-5-seconds-before-continuing
+          //Thread.sleep() to keep the game waiting for three seconds so the player can process the battle's result
+          try {
+            Thread.sleep(3000); //1000 milliseconds is one second. (3000ms is three seconds)
+          } catch (InterruptedException ex) {
+            Thread.currentThread().interrupt();
+          }
+
+          terminal.enterPrivateMode();
+          //using completeRefresh() instead of refresh() as nothing new is actually getting placed - thus, force repaint of the screen is necessary
+          screen.completeRefresh();
+        }
+
+
       }
 
       //screen switchers - this creates the "scrolling effect"
@@ -469,6 +580,8 @@ public class gm {
         y = 3;
       }
 
+      /*
+
       if ((x == 5 || x == 6 ) && (y == 12) && istown1 == true ) {
         istown1 = false;
         choosepkmn = false;
@@ -476,6 +589,8 @@ public class gm {
         y = 2;
         x = 2;
       }
+
+      */
 
       if (y == 2 && isroute1a == true) {
         isroute1a = false;
@@ -524,18 +639,17 @@ public class gm {
     x.putString(43,2, "Created by Ahmed Sultan & Ali Taoube.", Terminal.Color.DEFAULT, Terminal.Color.DEFAULT);
     x.putString(43,4, "[[[INSTRUCTIONS]]]", Terminal.Color.DEFAULT, Terminal.Color.DEFAULT);
     x.putString(43,6, "Use directional keys to move.", Terminal.Color.DEFAULT, Terminal.Color.DEFAULT);
-    x.putString(43,7, "Use [I] to interact.", Terminal.Color.DEFAULT, Terminal.Color.DEFAULT);
 
-    x.putString(43, 9, "--------------", Terminal.Color.DEFAULT, Terminal.Color.DEFAULT);
+    x.putString(43, 8, "--------------", Terminal.Color.DEFAULT, Terminal.Color.DEFAULT);
 
-    x.putString(43,11, "PLAYER INFORMATION", Terminal.Color.DEFAULT, Terminal.Color.DEFAULT);
-    x.putString(43,13, "Party: " + p, Terminal.Color.DEFAULT, Terminal.Color.DEFAULT);
+    x.putString(43,10, "PLAYER INFORMATION", Terminal.Color.DEFAULT, Terminal.Color.DEFAULT);
+    x.putString(43,12, "Party: " + p, Terminal.Color.DEFAULT, Terminal.Color.DEFAULT);
 
-    x.putString(43, 17, "Potions: " + q + " ", Terminal.Color.DEFAULT, Terminal.Color.DEFAULT);
+    x.putString(43, 13, "Potions: " + q + " ", Terminal.Color.DEFAULT, Terminal.Color.DEFAULT);
 
-    x.putString(43, 19, "--------------", Terminal.Color.DEFAULT, Terminal.Color.DEFAULT);
+    x.putString(43, 15, "--------------", Terminal.Color.DEFAULT, Terminal.Color.DEFAULT);
 
-    x.putString(43,21, "STATUS", Terminal.Color.DEFAULT, Terminal.Color.DEFAULT);
+    x.putString(43,17, "STATUS", Terminal.Color.DEFAULT, Terminal.Color.DEFAULT);
   }
 
   public static void choosepkmn(Screen x) {
@@ -690,6 +804,8 @@ public class gm {
             break;
             case "!t": x.putString(b,a, "!", Terminal.Color.YELLOW, Terminal.Color.MAGENTA);
             break;
+            case "rb": x.putString(b,a, "rb", Terminal.Color.DEFAULT, Terminal.Color.BLACK);
+            break;
             default: x.putString(b,a, " ", Terminal.Color.DEFAULT, Terminal.Color.DEFAULT);
           }
 
@@ -697,6 +813,8 @@ public class gm {
         }
       }
   }
+
+  /*
 
   public static void house1(Screen x, String[][] map, ArrayList<Pokemon> p, int q) {
     for (int b = 0; b < map.length; b++) {
@@ -727,5 +845,6 @@ public class gm {
     playerinfo(x, p, q);
   }
 
+  */
 
 }

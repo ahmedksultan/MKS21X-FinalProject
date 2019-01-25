@@ -92,7 +92,7 @@ public class Battle{
     }
 
     if (active1.isDead() && over != true){
-      System.out.println("Your Pokemon," + active1.getName().toUpperCase() + " has fainted! Choose your next pokemon!");
+      System.out.println("Your Pokemon, " + active1.getName().toUpperCase() + " has fainted! Choose your next Pokemon!");
       chooseSwitch(user_input.nextInt());
     }
     if (active2.isDead() && over != true){

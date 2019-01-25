@@ -263,9 +263,14 @@ public class gm {
             else {
               yourattack = johnbattle.getActive1().getAttacks().get(Integer.parseInt(userinput) - 1);
               johnbattle.getActive1().attack(johnbattle.getActive2(), yourattack);
-              johnbattle.getActive2().attack(johnbattle.getActive1());
-              enemyattack = johnbattle.getActive2().getEnemyAttack();
-              System.out.println("\nYou used " + yourattack.toUpperCase() + "! Your opponent used " + enemyattack.toUpperCase() + "." );
+              if (johnbattle.getActive2().getHP() <= 0) {
+                System.out.println("\nYou used " + yourattack.toUpperCase() + "!");
+              }
+              else {
+                johnbattle.getActive2().attack(johnbattle.getActive1());
+                enemyattack = johnbattle.getActive2().getEnemyAttack();
+                System.out.println("\nYou used " + yourattack.toUpperCase() + "! Your opponent used " + enemyattack.toUpperCase() + "." );
+              }
             }
 
             /*
@@ -400,7 +405,6 @@ public class gm {
           terminal.enterPrivateMode();
           //using completeRefresh() instead of refresh() as nothing new is actually getting placed - thus, force repaint of the screen is necessary
           screen.completeRefresh();
-
         }
 
       }
@@ -599,6 +603,8 @@ public class gm {
           case "p": x.putString(b,a, " ", Terminal.Color.DEFAULT, Terminal.Color.YELLOW);
           break;
           case "!t": x.putString(b,a, "!", Terminal.Color.YELLOW, Terminal.Color.MAGENTA);
+          break;
+          case "?": x.putString(b,a, "?", Terminal.Color.YELLOW, Terminal.Color.RED);
           break;
           default: x.putString(b,a, " ", Terminal.Color.DEFAULT, Terminal.Color.DEFAULT);
         }

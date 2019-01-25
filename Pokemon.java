@@ -57,6 +57,27 @@ public class Pokemon {
     setAttacks();
   }
 
+  // To randomly choose a Pokemon
+  public Pokemon(){
+    Random rand = new Random();
+    int tempid = rand.nextInt(151 + 1));
+    try{
+      File f = new File("Pokemon.csv");
+      Scanner in = new Scanner(f);
+
+      while (in.hasNext()){
+        String line = in.nextLine();
+        String[] stats = line.split(",");
+        if (Integer.parseInt(stats[0]) == tempid){
+          Pokemon(stats[1]);
+        }
+      }
+    }
+    catch(FileNotFoundException e){
+      System.out.println("That file doesn't exist");
+    }
+  }
+
   public String toString(){
     return name;
   }

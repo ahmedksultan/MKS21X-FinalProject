@@ -275,17 +275,6 @@ public class gm {
               }
             }
 
-            /*
-            for (int i = 0; i < moves1.size(); i++) {
-              if (moves1.get(i).equals(user_input.next())) {
-                yourattack = moves1.get(i);
-              }
-              else {
-                yourattack = "IMPOSSIBLE MOVE";
-              }
-            }
-            */
-
             johnbattle.forceSwitch();
           }
 

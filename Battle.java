@@ -2,6 +2,84 @@ import java.util.*; //scanner, ArrayList, Map, Random
 import java.io.*; //file, filenotfoundexception
 
 public class Battle{
+  public static void main(String[] args) {
+    ArrayList<Pokemon> johnparty = new ArrayList<Pokemon>();
+    ArrayList<Pokemon> pparty = new ArrayList<Pokemon>();
+
+    //Pokemon Mewtwo = new Pokemon("Mewtwo");
+    Pokemon Bulbasaur = new Pokemon("Bulbasaur");
+    Pokemon Charmander = new Pokemon("Charmander");
+    Pokemon Squirtle = new Pokemon("Squirtle");
+    Pokemon Mewtwo = new Pokemon("Mewtwo");
+    Pokemon Pikachu = new Pokemon("Pikachu");
+    Pokemon Ditto = new Pokemon("Ditto");
+    pparty.add(Bulbasaur);
+    pparty.add(Charmander);
+    pparty.add(Squirtle);
+    pparty.add(Mewtwo);
+    pparty.add(Pikachu);
+    pparty.add(Ditto);
+
+    Trainer player = new Trainer("Player", pparty);
+
+    Pokemon eeveejohn = new Pokemon("Eevee");
+    Pokemon oddishjohn = new Pokemon("Oddish");
+
+    String yourattack;
+    String enemyattack;
+    Scanner user_input = new Scanner(System.in);
+
+
+    //johnparty.add(Mewtwo);
+    johnparty.add(eeveejohn);
+    johnparty.add(oddishjohn);
+
+    Player John = new Trainer("JOHN", johnparty);
+    Battle johnbattle = new Battle(player, John);
+
+    while (!johnbattle.isOver()) {
+
+      System.out.println(Sprites.toString(Sprites.getArray(johnbattle.getActive1().getName())));
+
+      System.out.println(johnbattle.getActive1().getName().toUpperCase() + " and " + johnbattle.getActive2().getName().toUpperCase() + " are battling!");
+      System.out.println("\n" + johnbattle.getActive1() + "'s HP: " + johnbattle.getActive1().getHP() + "/" + johnbattle.getActive1().getTotalHP());
+      System.out.println(johnbattle.getActive2() + "'s HP: " + johnbattle.getActive2().getHP() + "/" + johnbattle.getActive2().getTotalHP());
+      System.out.println("Choose your move!\n");
+      for (int i = 0; i < johnbattle.getActive1().getAttacks().size(); i++) {
+        System.out.println("[" + (i + 1) + "] for " + johnbattle.getActive1().getAttacks().get(i).toUpperCase());
+      }
+      System.out.println("[H] to use a Potion.");
+      System.out.println("");
+
+      String userinput = user_input.next();
+
+        yourattack = johnbattle.getActive1().getAttacks().get(Integer.parseInt(userinput) - 1);
+        johnbattle.getActive1().attack(johnbattle.getActive2(), yourattack);
+        if (johnbattle.getActive2().getHP() <= 0) {
+          System.out.println("\nYou used " + yourattack.toUpperCase() + "!");
+        }
+        else {
+          johnbattle.getActive2().attack(johnbattle.getActive1());
+          enemyattack = johnbattle.getActive2().getEnemyAttack();
+          System.out.println("\nYou used " + yourattack.toUpperCase() + "! Your opponent used " + enemyattack.toUpperCase() + "." );
+        }
+
+      /*
+      for (int i = 0; i < moves1.size(); i++) {
+        if (moves1.get(i).equals(user_input.next())) {
+          yourattack = moves1.get(i);
+        }
+        else {
+          yourattack = "IMPOSSIBLE MOVE";
+        }
+      }
+      */
+
+      johnbattle.forceSwitch();
+    }
+  }
+
+
   private Player one, two;
   private Pokemon active1, active2;
   private boolean over;
@@ -80,24 +158,44 @@ public class Battle{
     Scanner user_input = new Scanner( System.in );
     String firstname;
 
-    if (one.allDead()){
-      System.out.println("Your Pokemon, " + active1.getName().toUpperCase() + " has fainted!");
-      over = true;
-      winner = two.getName();
-    }
-    else if(two.allDead()){
-      System.out.println("Enemy Pokemon, " + active2.getName().toUpperCase() + " has fainted!");
-      over = true;
-      winner = one.getName();
-    }
+    try{
+      if (one.allDead()){
+        System.out.println("Your Pokemon, " + active1.getName().toUpperCase() + " has fainted!");
+        over = true;
+        winner = two.getName();
+      }
+      else if(two.allDead()){
+        System.out.println("Enemy Pokemon, " + active2.getName().toUpperCase() + " has fainted!");
+        over = true;
+        winner = one.getName();
+      }
 
+<<<<<<< HEAD
+      if (active1.isDead() && over != true){
+        System.out.println("Your Pokemon, " + active1.getName().toUpperCase() + " has fainted! Choose your next pokemon!");
+        chooseSwitch(user_input.nextInt());
+      }
+      if (active2.isDead() && over != true){
+        System.out.println("Enemy Pokemon, " + active2.getName().toUpperCase() + " has fainted!");
+        autoSwitch();
+      }
+=======
     if (active1.isDead() && over != true){
       System.out.println("Your Pokemon, " + active1.getName().toUpperCase() + " has fainted! Choose your next Pokemon!");
       chooseSwitch(user_input.nextInt());
+>>>>>>> 0fa5e004f0142473b40926cafbf3aa17d8551c1e
     }
-    if (active2.isDead() && over != true){
-      System.out.println("Enemy Pokemon, " + active2.getName().toUpperCase() + " has fainted!");
-      autoSwitch();
+    catch(IndexOutOfBoundsException e){
+      String output = "";
+      for (int x = 0; x < one.getParty().size(); x++){
+        output += one.getParty().get(x);
+        if (x+1 != one.getParty().size()){
+          output += ", ";
+        }
+      }
+      System.out.println("That Pokemon index doesn't exist");
+      System.out.println("Your party is: " + output);
+      forceSwitch();
     }
   }
 

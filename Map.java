@@ -7,10 +7,8 @@ public class Map {
   private static String[][] house2; //right house in town1
   private static String[][] route1a;
   private static String[][] route1b;
-  private static String[][] route1c; //branches off to the left of route 1b!
-  private static String[][] city;
-  private static String[][] house3;
-  private static String[][] house4;
+  private static String[][] route1c; //branches off to the left of route 1b
+  private static String[][] gym; //at the end of route 1b
 
   public static void main(String[] args) {
     initTown1();
@@ -217,11 +215,41 @@ public class Map {
       }
     }
 
+    //creating grass
+    for (int y = 11; y < 24; y++) {
+      for (int x = 30; x > 2; x--) {
+        test[y][x] = "g";
+      }
+    }
+
+    test[3][20] = "!t";
+
     route1c = test;
   }
 
   public static String[][] getRoute1c() {
     return route1c;
+  }
+
+  public static void initGym() {
+    gym = new String[40][40];
+    makeBorders(gym);
+
+    String[][] test = gym;
+
+    //creating pathway
+    for (int y = 5; y < 10; y++) {
+      for (int x = 30; x > 2; x--) {
+        test[y][x] = "p";
+      }
+    }
+
+    //need to make two trainers, one leader
+
+  }
+
+  public static String[][] getGym() {
+    return gym;
   }
 
   public static String toString(String[][] x) {

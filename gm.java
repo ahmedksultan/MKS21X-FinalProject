@@ -19,6 +19,18 @@ import java.util.concurrent.TimeUnit; //time
 
 public class gm {
 
+  //thanks stack overflow: https://stackoverflow.com/questions/5762491/how-to-print-color-in-console-using-system-out-println
+
+  public static final String RESET = "\033[0m";  // Text Reset
+  public static final String BLACK_BOLD = "\033[1;30m";  // BLACK
+  public static final String RED_BOLD = "\033[1;31m";    // RED
+  public static final String GREEN_BOLD = "\033[1;32m";  // GREEN
+  public static final String YELLOW_BOLD = "\033[1;33m"; // YELLOW
+  public static final String BLUE_BOLD = "\033[1;34m";   // BLUE
+  public static final String PURPLE_BOLD = "\033[1;35m"; // PURPLE
+  public static final String CYAN_BOLD = "\033[1;36m";   // CYAN
+  public static final String WHITE_BOLD = "\033[1;37m";  // WHITE
+
   public static void main (String[] args) {
 
     //starting position
@@ -226,7 +238,22 @@ public class gm {
           System.out.println("Your enemy is " + John.getName() + "! Their first pokemon is " + johnbattle.getActive2().getName().toUpperCase() + ".");
           System.out.println("Your opponent's team is " + johnbattle.getTwo().getParty().toString() + "\n");
 
-          System.out.println("Your team is " + johnbattle.getOne().getParty().toString());
+          System.out.println("Your team is " + johnbattle.getOne().getParty().toString() + "\n");
+
+
+
+          if (johnbattle.getActive1().getName().equals("Mewtwo")) {
+            System.out.println(PURPLE_BOLD + Sprites.toString(Sprites.getArray(johnbattle.getActive1().getName())) + RESET);
+          }
+          if (johnbattle.getActive1().getName().equals("Squirtle")) {
+            System.out.println(CYAN_BOLD + Sprites.toString(Sprites.getArray(johnbattle.getActive1().getName())) + RESET);
+          }
+          if (johnbattle.getActive1().getName().equals("Charmander")) {
+            System.out.println(RED_BOLD + Sprites.toString(Sprites.getArray(johnbattle.getActive1().getName())) + RESET);
+          }
+          if (johnbattle.getActive1().getName().equals("Bulbasaur")) {
+            System.out.println(GREEN_BOLD + Sprites.toString(Sprites.getArray(johnbattle.getActive1().getName())) + RESET);
+          }
 
           ArrayList<String> moves1 = johnbattle.getOne().getMon(0).getAttacks();
 
@@ -234,8 +261,6 @@ public class gm {
           // System.out.println("Your pokemon's moves are here: " + battle.getOne().getMon(4).attackstoString(1));
 
           while (!johnbattle.isOver()) {
-
-            System.out.println(Sprites.toString(Sprites.getArray(johnbattle.getActive1().getName())));
 
             System.out.println(johnbattle.getActive1().getName().toUpperCase() + " and " + johnbattle.getActive2().getName().toUpperCase() + " are battling!");
             System.out.println("\n" + johnbattle.getActive1() + "'s HP: " + johnbattle.getActive1().getHP() + "/" + johnbattle.getActive1().getTotalHP());
@@ -320,7 +345,7 @@ public class gm {
           terminal.exitPrivateMode();
 
           System.out.println("\n---A BATTLE HAS BEGUN!---");
-          System.out.println("\n[MSG] NINA: YOU'RE GONNA HAVE A BAD TIME!\n");
+          System.out.println("\n[MSG] NINA: GET READY!\n");
 
           System.out.println("Your enemy is " + Nina.getName() + "! Their first pokemon is " + ninabattle.getActive2().getName().toUpperCase() + ".");
           System.out.println("Your opponent's team is " + ninabattle.getTwo().getParty().toString() + "\n");
@@ -518,6 +543,7 @@ public class gm {
     x.putString(2,3, "[S] for Squirtle.", Terminal.Color.BLUE, Terminal.Color.DEFAULT);
     x.putString(2,4, "[B] for Bulbasaur.", Terminal.Color.GREEN, Terminal.Color.DEFAULT);
     x.putString(2,5, "[C] for Charmander.", Terminal.Color.RED, Terminal.Color.DEFAULT);
+    x.putString(2,7, "(EASY MODE) [M] for Mewtwo.", Terminal.Color.MAGENTA, Terminal.Color.DEFAULT);
   }
 
   public static void town1(Screen x, String[][] town, ArrayList<Pokemon> p, int q) {

@@ -104,6 +104,7 @@ public class gm {
 
       //reading key inputs happens HERE!
       Key key = screen.readInput();
+      int randnum = 10;
 			if (key != null) {
 				if (key.getKind() == Key.Kind.Escape) {
           screen.stopScreen();
@@ -113,21 +114,25 @@ public class gm {
 				}
 
 				if (key.getKind() == Key.Kind.ArrowLeft) {
+          randnum = (int) (Math.random() * 15);
           //terminal.clearScreen();
 					x--;
 				}
 
 				if (key.getKind() == Key.Kind.ArrowRight) {
+          randnum = (int) (Math.random() * 15);
           //terminal.clearScreen();
 					x++;
 				}
 
 				if (key.getKind() == Key.Kind.ArrowUp) {
+          randnum = (int) (Math.random() * 15);
           //terminal.clearScreen();
 					y--;
 				}
 
 				if (key.getKind() == Key.Kind.ArrowDown) {
+          randnum = (int) (Math.random() * 15);
           //terminal.clearScreen();
 					y++;
 				}
@@ -203,6 +208,111 @@ public class gm {
       if (istown1 == true) {
         town1(screen, town, pparty, potions);
         screen.refresh();
+
+        if (x >= 2 && x <= 15 && y >= 20 && y <= 25) {
+          if (randnum == 0) {
+
+            ArrayList<Pokemon> wildpkmn = new ArrayList<Pokemon>();
+
+            Pokemon wildp = new Pokemon();
+            wildp.setHP(wildp.getHP() / 3);
+            wildp.setTotalHP(wildp.getHP());
+
+            wildpkmn.add(wildp);
+
+            Player wild = new Enemy(wildp.getName(), wildpkmn);
+            Battle wildbattle = new Battle(player, wild);
+
+            Scanner user_input = new Scanner(System.in);
+            String yourattack;
+            String enemyattack;
+
+            terminal.exitPrivateMode();
+
+            System.out.println("\n---A BATTLE HAS BEGUN!---");
+            System.out.println("\n[MSG]" + wildp.getName().toUpperCase() + "\n");
+
+            System.out.println("Your enemy is " + wild.getName() + "! Their first pokemon is " + wildbattle.getActive2().getName().toUpperCase() + ".");
+            System.out.println("Your opponent's team is " + wildbattle.getTwo().getParty().toString() + "\n");
+
+            System.out.println("Your team is " + wildbattle.getOne().getParty().toString() + "\n");
+
+            if (wildbattle.getActive1().getName().equals("Mewtwo")) {
+              System.out.println(PURPLE_BOLD + Sprites.toString(Sprites.getArray(wildbattle.getActive1().getName())) + RESET);
+            }
+            if (wildbattle.getActive1().getName().equals("Squirtle")) {
+              System.out.println(CYAN_BOLD + Sprites.toString(Sprites.getArray(wildbattle.getActive1().getName())) + RESET);
+            }
+            if (wildbattle.getActive1().getName().equals("Charmander")) {
+              System.out.println(RED_BOLD + Sprites.toString(Sprites.getArray(wildbattle.getActive1().getName())) + RESET);
+            }
+            if (wildbattle.getActive1().getName().equals("Bulbasaur")) {
+              System.out.println(GREEN_BOLD + Sprites.toString(Sprites.getArray(wildbattle.getActive1().getName())) + RESET);
+            }
+
+            ArrayList<String> moves1 = wildbattle.getOne().getMon(0).getAttacks();
+
+            // System.out.println("Your Pokemon's moves are here: " + wildbattle.getActive1().getAttacks());
+            // System.out.println("Your pokemon's moves are here: " + battle.getOne().getMon(4).attackstoString(1));
+
+            while (!wildbattle.isOver()) {
+
+              System.out.println(wildbattle.getActive1().getName().toUpperCase() + " and " + wildbattle.getActive2().getName().toUpperCase() + " are battling!");
+              System.out.println("\n" + wildbattle.getActive1() + "'s HP: " + wildbattle.getActive1().getHP() + "/" + wildbattle.getActive1().getTotalHP());
+              System.out.println(wildbattle.getActive2() + "'s HP: " + wildbattle.getActive2().getHP() + "/" + wildbattle.getActive2().getTotalHP());
+              System.out.println("Choose your move!\n");
+              for (int i = 0; i < wildbattle.getActive1().getAttacks().size(); i++) {
+                System.out.println("[" + (i + 1) + "] for " + wildbattle.getActive1().getAttacks().get(i).toUpperCase());
+              }
+              System.out.println("[H] to use a Potion.");
+              System.out.println("");
+
+              String userinput = user_input.next();
+
+              if (userinput.equals("h") && potions >= 0) {
+                wildbattle.getActive2().attack(wildbattle.getActive1());
+                potions--;
+                if (wildbattle.getActive1().getHP() + 15 > wildbattle.getActive1().getTotalHP()) {
+                  wildbattle.getActive1().setHP(wildbattle.getActive1().getTotalHP());
+                }
+                else {
+                  wildbattle.getActive1().setHP(wildbattle.getActive1().getHP() + 15);
+                }
+                enemyattack = wildbattle.getActive2().getEnemyAttack();
+                System.out.println("\nYou used a POTION! Your opponent used " + enemyattack.toUpperCase() + "." );
+
+              }
+              else {
+                yourattack = wildbattle.getActive1().getAttacks().get(Integer.parseInt(userinput) - 1);
+                wildbattle.getActive1().attack(wildbattle.getActive2(), yourattack);
+                if (wildbattle.getActive2().getHP() <= 0) {
+                  System.out.println("\nYou used " + yourattack.toUpperCase() + "!");
+                }
+                else {
+                  wildbattle.getActive2().attack(wildbattle.getActive1());
+                  enemyattack = wildbattle.getActive2().getEnemyAttack();
+                  System.out.println("\nYou used " + yourattack.toUpperCase() + "! Your opponent used " + enemyattack.toUpperCase() + "." );
+                }
+              }
+
+              wildbattle.forceSwitch();
+            }
+
+            System.out.println("\n[MSG] The battle is over! " + wildbattle.getWinner().toUpperCase()  + " has won! Returning to the game...");
+
+            //https://stackoverflow.com/questions/26388527/how-do-i-make-my-system-wait-5-seconds-before-continuing
+            //Thread.sleep() to keep the game waiting for three seconds so the player can process the battle's result
+            try {
+              Thread.sleep(3000); //1000 milliseconds is one second. (3000ms is three seconds)
+            } catch (InterruptedException ex) {
+              Thread.currentThread().interrupt();
+            }
+
+            terminal.enterPrivateMode();
+            //using completeRefresh() instead of refresh() as nothing new is actually getting placed - thus, force repaint of the screen is necessary
+            screen.completeRefresh();
+          }
+        }
       }
 
       /*

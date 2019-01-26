@@ -64,6 +64,7 @@ public class Pokemon {
     try{
       File f = new File("Pokemon.csv");
       Scanner in = new Scanner(f);
+      in.nextLine();
 
       while (in.hasNext()){
         String line = in.nextLine();
@@ -232,6 +233,10 @@ public class Pokemon {
 
   public void setHP(int num){
     hp = num;
+  }
+
+  public void setTotalHP(int num) {
+    totalhp = num;
   }
 
   /////////////////////////////

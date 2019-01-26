@@ -11,7 +11,7 @@ java -cp lanterna.jar:. gm
 
 By pressing the respective key on the first screen, the player may choose what Pokemon they'd like to use for the game. For a less challenging experience, we suggest Mewtwo.
 
-**Using the program** - The objective of the game is to move around the world, battle enemy Trainers and wild Pokemon, and beat the Gym Leader at the end of the experience.
+**Using the program** - The objective of the game is to move around the world and battle enemy Trainers and wild Pokemon. With more time, we'd flesh out the experience to include a master Gym Leader at the end.
 
 [WHILE IN THE GAME WORLD] use the directional keys to move around.
 
@@ -205,3 +205,23 @@ Began fixing the battle system.
 Fixed an error in the battle system that caused the game to crash when the enemy Pokemon's HP reached 0.
 
 Fixed an error in the battle system that allowed Pokemon to attack if they have been KO'd.
+
+**Jan 24, 2019** -
+
+Continued working on the game.
+
+Removed party functionality.
+
+Removed NPC functionality.
+
+Continued bugfixing.
+
+**Jan 25, 2019** -
+
+Continued bugfixing.
+
+Added enemy trainers.
+
+Added wild Pokemon encounters in tall grass (implemented from demo copy).
+
+Finished project.
